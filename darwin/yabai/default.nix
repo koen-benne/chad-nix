@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  scripts = ../../scripts;
+  scripts = ./scripts;
 in
 {
   # csrutil enable --without fs --without debug --without nvram

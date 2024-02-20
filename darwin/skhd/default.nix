@@ -1,5 +1,7 @@
 { config, lib, pkgs, ... }:
-
+let
+  scripts = ./scripts;
+in
 {
   services.skhd = {
     enable = true;
@@ -45,7 +47,7 @@
       alt - 9 : yabai -m space --focus 9
       # open terminal
       alt - return : kitty -1 -d /Users/${config.my.user}
-      alt - p : ~/.scripts/popup.sh ~/.scripts/kittypass
+      alt - p : ${scripts}/popup.sh ${scripts}/kittypass.sh
       # open browser
       alt - w : sudo -u koenbenne /Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser
       # close current window
@@ -60,7 +62,7 @@
                         yabai -m window --space "$\{index}" && \
                         yabai -m space --focus "$\{index}"
 
-      alt - space : ~/.scripts/popup.sh ~/.scripts/launcher.sh
+      alt - space : ${scripts}/popup.sh ${scripts}/launcher.sh
     '';
   };
 
