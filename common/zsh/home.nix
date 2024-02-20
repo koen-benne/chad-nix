@@ -22,7 +22,7 @@ in
       enableAutosuggestions = true;
       enableCompletion = true;
       autocd = true;
-      defaultKeymap = "neovim";
+      defaultKeymap = "vicmd";
       history.extended = true;
       shellAliases = {
         c = "z";

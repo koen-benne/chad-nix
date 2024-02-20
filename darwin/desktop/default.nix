@@ -14,7 +14,6 @@ in
     hm.my.desktop.enable = true;
 
     # my.emacs.enable = true;
-    my.brave.enable = true;
     # my.rime.enable = true;
   };
 }

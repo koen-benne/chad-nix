@@ -10,7 +10,7 @@ in
     enable = mkEnableOption (mdDoc "desktop");
   };
 
-  config = mkIf cfg.enable {
-    my.mpv.enable = true;
-  };
+  # config = mkIf cfg.enable {
+    # my.mpv.enable = true;
+  # };
 }

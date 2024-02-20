@@ -15,7 +15,7 @@ let
           inherit system;
           overlays = [
             self.overlays.default
-            self.inputs.neovim-nightly-overlay.overlay
+            # self.inputs.neovim-nightly-overlay.overlay
           ] ++ overlays;
           config.allowUnfree = true;
         }

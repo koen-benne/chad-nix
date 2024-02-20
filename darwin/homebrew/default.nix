@@ -5,8 +5,8 @@
   environment.variables = { HOMEBREW_NO_ANALYTICS = "1"; };
   homebrew = {
     enable = true;
-    mutableTaps = false;
-    autoMigrate = true;
+    # mutableTaps = false;
+    # autoMigrate = true;
     onActivation = {
       # autoUpdate = true;
       cleanup = "zap";
@@ -17,7 +17,7 @@
     taps = [
       "homebrew/core"
       "homebrew/cask"
-      "homebrew/bundle"
+      # "homebrew/bundle"
       # "homebrew/homebrew-services"
     ];
     brews = [

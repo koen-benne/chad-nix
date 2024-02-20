@@ -3,8 +3,7 @@
 self: super: {
   # pkgs
   # grub-reboot-menu = self.callPackage ../pkgs/grub-reboot-menu { };
-  neovim-nightly = self.callPackage ../pkgs/neovim-nightly { };
-  jetbrains-mono-nerdfont = self.nerdfonts.override { fonts = [ "JetBrainsMonoNL" ]; };
+  jetbrains-mono-nerdfont = self.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
   nibar = self.callPackage ../pkgs/nibar { };
   scripts = self.callPackage ../pkgs/scripts { };
   sf-symbols = self.sf-symbols-minimal;

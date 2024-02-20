@@ -1,8 +1,9 @@
 { config, lib, pkgs, ... }:
 
 {
-  programs.kitty {
+  programs.kitty = {
     enable = true;
+    shellIntegration.enableFishIntegration = true;
     darwinLaunchOptions = [
       "--single-instance"
       "--directory=~"
@@ -42,7 +43,7 @@
       color7       #eee8d5
       color15      #ffffff
     '';
-  }
+  };
   programs.zsh.initExtra = ''
     # kitty shell integration
     if [[ -n $KITTY_INSTALLATION_DIR ]]; then

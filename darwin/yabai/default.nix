@@ -12,6 +12,7 @@ in
   services.yabai = {
     enable = true;
     package = pkgs.yabai;
+    config = {
       # layout
       layout = "bsp";
       auto_balance = "off";
