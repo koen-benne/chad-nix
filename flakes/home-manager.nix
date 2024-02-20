@@ -57,10 +57,6 @@ in
         {
           home.username = "koenbenne";
           home.homeDirectory = "/Users/koenbenne";
-          # my.desktop.enable = true;
-          # my.firefox.enable = true;
-          # my.rime.enable = true;
-          # my.emacs.enable = true;
         }
         ../darwin/home.nix
       ];
