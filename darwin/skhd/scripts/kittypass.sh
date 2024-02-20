@@ -21,3 +21,4 @@ if [[ -n $selected_file ]]; then
     get_password "$selected_file"
 fi
 
+exit
