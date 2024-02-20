@@ -16,6 +16,7 @@
     # nnn.enable = true;
     zsh.enable = true;
     fish.enable = true;
+    tmux.enable = true;
   };
 
   # let standalone home-manager and home-manager in nixos/nix-darwin use the same derivation
