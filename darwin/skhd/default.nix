@@ -44,7 +44,7 @@
       alt - 8 : yabai -m space --focus 8
       alt - 9 : yabai -m space --focus 9
       # open terminal
-      alt - return : kitty
+      alt - return : kitty -1 -d /Users/${config.my.user}
       alt - p : ~/.scripts/popup.sh ~/.scripts/kittypass
       # open browser
       alt - w : sudo -u koenbenne /Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser

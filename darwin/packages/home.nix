@@ -29,5 +29,30 @@
     darwin.iproute2mac
     pstree
     subfinder
+
+    browserpass
+    zbar
+    dockutil
+    btop
+    
+    nodejs
+    nodePackages.pnpm
+    nodePackages.yarn
+
+    gitui
+
+    stow
+    wakatime
+
+    mkcert
+    ddev
+
+    platformsh
+    neofetch
+    cachix
+
+    jq
+
+    ueberzugpp
   ];
 }

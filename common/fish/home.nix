@@ -18,6 +18,7 @@ in
     # programs.zoxide.enable = true;
     programs.fish = {
       enable = true;
+      package = pkgs.fish;
       shellInit = ''
         if test -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish
           source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish
