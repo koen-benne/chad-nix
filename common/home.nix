@@ -10,7 +10,7 @@
     # direnv.enable = true;
     # helix.enable = true;
     git.enable = true;
-    # lazygit.enable = true;
+    lazygit.enable = true;
     # gitui.enable = true;
     neovim.enable = true;
     # nnn.enable = true;
