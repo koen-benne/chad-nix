@@ -1,0 +1,65 @@
+#!/bin/dash
+# fast tmuxing
+
+tmux_running=$(pgrep tmux)
+
+case $1 in
+  open)
+    if [ -z $tmux_running ]; then
+      echo "No tmux sessions running"
+      exit 0
+    fi
+    sesh=$(tmux list-sessions | fzf-tmux | cut -d ":" -f 1)
+    if [ -z $sesh ]; then
+      exit 0
+    fi
+    if [ -z "${TMUX}" ]; then
+      tmux attach-session -t ${sesh}
+    else
+      tmux switch-client -t ${sesh}
+    fi
+    ;;
+  close)
+    if [ -z $tmux_running ]; then
+      echo "No tmux sessions running"
+      exit 0
+    elif [ $2 != "" ]; then
+      $(tmux kill-session -t ${2})
+    else
+      sesh=$(tmux list-sessions | fzf-tmux | cut -d ":" -f 1)
+      if [ -z $sesh ]; then
+        exit 0
+      fi
+      tmux kill-session -t ${sesh}
+    fi
+    ;;
+  new)
+    if [ -z $2 ]; then
+      echo "Please provide a name for the new session"
+      exit 1
+    fi
+    tmux new-session -s ${2}
+    ;;
+  project)
+    project=$(find ~/work/ ~/personal/ -mindepth 1 -maxdepth 1 -type d | fzf-tmux)
+    if [ -z $project ]; then
+      exit 0
+    fi
+
+    proj_name=$(basename ${project} | tr . _)
+
+    tmux new-session -s ${proj_name} -c ${project} -d
+    tmux send-keys -t ${proj_name} "nvim" C-m
+    if [ -z "${TMUX}" ]; then
+      tmux attach-session -t ${proj_name}
+    else
+      tmux switch-client -t ${proj_name}
+    fi
+    ;;
+  *)
+    echo "Usage: tmuxing [open|close|new|project]"
+    exit 1
+    ;;
+esac
+
+exit 0
