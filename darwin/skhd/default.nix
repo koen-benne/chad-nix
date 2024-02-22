@@ -48,6 +48,7 @@ in
       # open terminal
       alt - return : kitty -1 -d /Users/${config.my.user}
       alt - p : ${scripts}/popup.sh ${scripts}/kittypass.sh
+      alt - r : SHELL=/run/current-system/sw/bin/zsh alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=6 -o window.position.x=1000 -o window.position.y=48 --title=Fzf --command ${scripts}/appfzf.sh
       # open browser
       alt - w : sudo -u koenbenne /Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser
       # close current window

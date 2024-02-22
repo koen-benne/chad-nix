@@ -50,6 +50,7 @@ in
       yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
       yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Select file to save to" manage=off
       yabai -m rule --add label="kittypopup" app="kitty" title="kittypopup" manage=off
+      yabai -m rule --add label="Fzf" app="alacritty" title="Fzf" manage=off
     '';
   };
 
