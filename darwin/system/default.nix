@@ -78,7 +78,7 @@
   };
   system.keyboard = {
     enableKeyMapping = true;
-    remapCapsLockToControl = true;
+    # remapCapsLockToControl = true;
   };
   system.stateVersion = 4;
 }

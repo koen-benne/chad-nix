@@ -2,7 +2,6 @@
 
 {
   imports = [
-    inputs.agenix.darwinModules.default
     inputs.home-manager.darwinModules.home-manager
     ../common
   ] ++ lib.my.getModules [

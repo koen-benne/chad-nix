@@ -1,0 +1,232 @@
+{ config, lib, pkgs, ... }:
+
+let
+  inherit (lib) mkIf mkEnableOption mdDoc;
+  cfg = config.my.hyprland;
+  wallpaper = ../../wallpaper.jpg;
+  scripts = ./scripts;
+in
+{
+  options.my.hyprland = {
+    enable = mkEnableOption (mdDoc "hyprland");
+  };
+  config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      dunst
+      pavucontrol
+    ];
+
+    programs.fuzzel = {
+      enable = true;
+    };
+
+    programs.wpaperd = {
+      enable = true;
+      settings = {
+        default = { path = wallpaper; };
+      };
+    };
+
+    wayland.windowManager.hyprland = {
+      enable = true;
+      extraConfig = ''
+
+
+
+monitor = DP-3, addreserved, 10, 20, 20, 20, 3440x1440, 0x0,1
+
+## dont know if nix does this for me
+# exec-once = dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+# exec-once = bash /usr/libexec/polkit-mate-authentication-agent-1
+# exec-once = pipewire
+# exec-once = syncthing
+# exec-once = ~/.config/hypr/useXDPH.sh
+# exec-once = dunst
+# exec-once = gnome-keyring-daemon --start --components=secrets
+
+exec-once = foot --server
+exec-once = waybar
+exec-once = wpaperd
+
+# For all categories, see https://wiki.hyprland.org/Configuring/Variables/
+input {
+repeat_delay = 300
+repeat_rate = 50
+kb_layout = us
+
+follow_mouse = 1
+
+touchpad {
+natural_scroll = false
+}
+
+sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+}
+
+general {
+# See https://wiki.hyprland.org/Configuring/Variables/ for more
+
+cursor_inactive_timeout = 5
+gaps_in = 5
+gaps_out = 0
+border_size = 2
+col.active_border = rgba(ca714eee)
+col.inactive_border = rgba(00000000)
+
+layout = master
+}
+
+decoration {
+# See https://wiki.hyprland.org/Configuring/Variables/ for more
+
+rounding = 10
+
+drop_shadow = true
+shadow_range = 4
+shadow_render_power = 3
+col.shadow = rgba(1a1a1aee)
+
+blur {
+enabled = true
+size = 3
+passes = 1
+new_optimizations = true
+}
+}
+
+
+animations {
+enabled = true
+
+# Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
+
+bezier = myBezier, 0.05, 0.9, 0.1, 1.05
+
+animation = windows, 1, 3, myBezier
+animation = windowsOut, 1, 3, default, popin 80%
+animation = border, 1, 5, default
+animation = fade, 1, 3, default
+animation = workspaces, 1, 4, default
+}
+
+dwindle {
+# See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
+pseudotile = yes # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+preserve_split = yes # you probably want this
+}
+
+master {
+# See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
+new_is_master = true
+new_on_top = true
+}
+
+gestures {
+# See https://wiki.hyprland.org/Configuring/Variables/ for more
+workspace_swipe = off
+}
+
+# Example per-device config
+# See https://wiki.hyprland.org/Configuring/Keywords/#executing for more
+device:epic mouse V1 {
+sensitivity = -0.5
+}
+
+windowrule = float, title:(Floorp - Sharing Indicator)
+windowrule = tile, title:(Spotify)
+windowrule = workspace 9, title:(Spotify)
+
+# See https://wiki.hyprland.org/Configuring/Keywords/ for more
+$mainMod = SUPER
+
+# Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
+bind = $mainMod, Return, exec, footclient
+bind = $mainMod, W, exec, librewolf
+bind = $mainMod, Q, killactive,
+bind = $mainMod SHIFT, C, exit,
+# bind = $mainMod, E, exec, pcmanfm
+bind = $mainMod, E, exec, nautilus
+bind = $mainMod, V, togglefloating,
+bind = $mainMod, R, exec, fuzzel
+bind = $mainMod, P, pseudo, # dwindle
+bind = $mainMod, T, togglesplit, # dwindle
+bind = $mainMod, F, fullscreen,
+bind = $mainMod SHIFT, S, exec, ~/.config/hypr/sleep.sh
+bind = $mainMod, P, exec, ${scripts}/fuzzelpass.sh
+bind = $mainMod, G, exec, grim -g "$(slurp)" ~/Images/$(date +%s)_grim.png
+bind = $mainMod SHIFT, G, exec, grim ~/Images/$(date +%s)_grim.png
+
+# Playerctl binds
+bind = , XF86AudioMedia, exec, playerctl play-pause
+bind = , XF86AudioPlay,  exec, playerctl play-pause
+bind = , XF86AudioPrev,  exec, playerctl previous
+bind = , XF86AudioNext,  exec, playerctl next
+
+# Move focus with mainMod + arrow keys the standard way
+# bind = $mainMod, L, movefocus, r
+# bind = $mainMod, H, movefocus, l
+# bind = $mainMod, K, movefocus, u
+# bind = $mainMod, J, movefocus, d
+
+# Move focus the river way
+bind = $mainMod, J, layoutmsg, cyclenext
+bind = $mainMod, K, layoutmsg, cycleprev
+# Change orientation
+bind = $mainMod, H, layoutmsg, orientationleft
+bind = $mainMod, L, layoutmsg, orientationright
+
+# Switch workspaces with mainMod + [0-9]
+bind = $mainMod, 1, workspace, 1
+bind = $mainMod, 2, workspace, 2
+bind = $mainMod, 3, workspace, 3
+bind = $mainMod, 4, workspace, 4
+bind = $mainMod, 5, workspace, 5
+bind = $mainMod, 6, workspace, 6
+bind = $mainMod, 7, workspace, 7
+bind = $mainMod, 8, workspace, 8
+bind = $mainMod, 9, workspace, 9
+bind = $mainMod, 0, workspace, 10
+
+# Move active window to a workspace with mainMod + SHIFT + [0-9]
+bind = $mainMod SHIFT, 1, movetoworkspace, 1
+bind = $mainMod SHIFT, 2, movetoworkspace, 2
+bind = $mainMod SHIFT, 3, movetoworkspace, 3
+bind = $mainMod SHIFT, 4, movetoworkspace, 4
+bind = $mainMod SHIFT, 5, movetoworkspace, 5
+bind = $mainMod SHIFT, 6, movetoworkspace, 6
+bind = $mainMod SHIFT, 7, movetoworkspace, 7
+bind = $mainMod SHIFT, 8, movetoworkspace, 8
+bind = $mainMod SHIFT, 9, movetoworkspace, 9
+bind = $mainMod SHIFT, 0, movetoworkspace, 10
+
+# Master-layout specific binds
+bind = $mainMod, S, layoutmsg, swapwithmaster
+
+# Move/resize windows with keyboard
+bind = $mainMod SHIFT, H, resizeactive, -200 0
+bind = $mainMod SHIFT, L, resizeactive, 200 0
+bind = $mainMod SHIFT, K, resizeactive, 0 -100
+bind = $mainMod SHIFT, J, resizeactive, 0 100
+bind = $mainMod CTRL, H, moveactive, -200 0
+bind = $mainMod CTRL, L, moveactive, 200 0
+bind = $mainMod CTRL, K, moveactive, 0 -100
+bind = $mainMod CTRL, J, moveactive, 0 100
+
+# Move/resize windows with mainMod + LMB/RMB and dragging
+bindm = $mainMod, mouse:272, movewindow
+bindm = $mainMod, mouse:273, resizewindow
+
+# Scroll through existing workspaces with mainMod + scroll
+bind = $mainMod, mouse_down, workspace, e+1
+bind = $mainMod, mouse_up, workspace, e-1
+
+bind = $mainMod CTRL SHIFT, L, exec, swaylock
+
+# Reaload waybar
+bind = $mainMod SHIFT, W, exec, pkill waybar && waybar -c $HOME/.config/waybar/config-hyprland -s $HOME/.config/waybar/hyprland-style.css
+
+
+      '';
+    };
+  };
+}

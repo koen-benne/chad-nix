@@ -22,5 +22,6 @@
     python3
     ripgrep
     scripts
+    jetbrains-mono-nerdfont
   ];
 }
