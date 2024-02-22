@@ -47,8 +47,9 @@ in
       alt - 9 : yabai -m space --focus 9
       # open terminal
       alt - return : kitty -1 -d /Users/${config.my.user}
-      alt - p : ${scripts}/popup.sh ${scripts}/kittypass.sh
-      alt - r : SHELL=/run/current-system/sw/bin/zsh alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=6 -o window.position.x=1000 -o window.position.y=48 --title=Fzf --command ${scripts}/appfzf.sh
+      # alt - p : ${scripts}/popup.sh ${scripts}/passfzf.sh
+      alt - p : SHELL=/run/current-system/sw/bin/zsh alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --title=Fzf --command ${scripts}/passfzf.sh
+      alt - r : SHELL=/run/current-system/sw/bin/zsh alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --title=Fzf --command ${scripts}/appfzf.sh
       # open browser
       alt - w : sudo -u koenbenne /Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser
       # close current window
