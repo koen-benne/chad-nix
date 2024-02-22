@@ -1,24 +1,21 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
+
+shopt -s nullglob globstar
 
 prefix=${PASSWORD_STORE_DIR-~/.password-store}
 password_files=( "$prefix"/**/*.gpg )
 password_files=( "${password_files[@]#"$prefix"/}" )
 password_files=( "${password_files[@]%.gpg}" )
 
-get_password() {
-  [[ -n $1 ]] || exit
+password=$(printf '%s\n' "${password_files[@]}" | fzf --reverse --no-info "$@")
 
-  echo $1
-  if [[ $1 == otp* ]]; then
-    pass otp -c "$1" 2>/dev/null
-  else
-    pass show -c "$1" 2>/dev/null
-  fi
-}
+[[ -n $password ]] || exit 0;
 
-selected_file=$(printf '%s\n' "${password_files[@]}" | fzf)
-if [[ -n $selected_file ]]; then
-    get_password "$selected_file"
+if [[ $password == otp/* ]]
+then
+  pass="pass otp"
+else
+  pass="pass"
 fi
 
-exit
+$pass show -c "$password" 2>/dev/null

@@ -12,10 +12,6 @@ in
   config = mkIf cfg.enable {
     home.sessionVariables.EDITOR = "nvim";
 
-    home.packages = with pkgs; [
-	ripgrep
-    ];
-
     programs.neovim = {
       enable = true;
       package = pkgs.neovim-nightly;

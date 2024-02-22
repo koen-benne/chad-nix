@@ -20,7 +20,6 @@
       darwin-rebuild switch --flake ~/.config/nixpkgs "''$@"
     '')
     coreutils-full
-    gcc
     daemon
     darwin.iproute2mac
     pstree
@@ -29,7 +28,6 @@
     browserpass
     zbar
     dockutil
-    btop
 
     nodejs
     nodePackages.pnpm
@@ -37,7 +35,6 @@
 
     gitui
 
-    stow
     wakatime
 
     mkcert
@@ -46,8 +43,6 @@
     platformsh
     neofetch
     cachix
-
-    jq
 
     ueberzugpp
   ];
