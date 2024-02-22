@@ -45,7 +45,7 @@
        "figma"
     ];
     masApps = {
-      # Xcode = 497799835;
+      Focalboard = 1556908618;
     };
     extraConfig = ''
       #

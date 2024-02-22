@@ -19,7 +19,6 @@
     jq
     man
     openssh
-    openssl
     python3
     ripgrep
     scripts
