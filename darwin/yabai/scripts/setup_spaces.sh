@@ -49,9 +49,9 @@ yabai -m config --space 2 "${main_display_padding[@]}"
 yabai -m config --space 3 "${main_display_padding[@]}"
 
 # Set Always-Floating Spaces
-yabai -m config --space 4 layout float
+# yabai -m config --space 4 layout float
 
-yabai -m rule --add app="^(Kitty|.kitty-wrapped)$" space=1
-yabai -m rule --add app="^(Firefox|Brave)$" space=2
-yabai -m rule --add app="^(Slack|Discord|Teams)$" space=3
-yabai -m rule --add app="^(Figma|Microsoft Word)$" space=4
+# yabai -m rule --add app="^(Kitty|.kitty-wrapped)$" space=1
+# yabai -m rule --add app="^(Firefox|Brave)$" space=2
+# yabai -m rule --add app="^(Slack|Discord|Teams)$" space=3
+# yabai -m rule --add app="^(Figma|Microsoft Word)$" space=4
