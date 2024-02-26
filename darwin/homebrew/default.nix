@@ -46,7 +46,7 @@
     ];
     masApps = {
       Focalboard = 1556908618;
-      Xcode = 497799835;
+      # Xcode = 497799835;
     };
     extraConfig = ''
       #

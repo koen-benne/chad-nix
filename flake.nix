@@ -18,6 +18,7 @@
     agenix.inputs.home-manager.follows = "home-manager";
     agenix.inputs.systems.follows = "systems";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    android-nixpkgs.url = "github:tadfisher/android-nixpkgs";
   };
 
   outputs = inputs@{ flake-parts, ... }:

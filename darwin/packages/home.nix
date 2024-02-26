@@ -45,5 +45,9 @@
     cachix
 
     ueberzugpp
+
+    cocoapods
+    watchman
+    zulu17
   ];
 }
