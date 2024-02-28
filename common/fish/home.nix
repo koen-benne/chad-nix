@@ -41,8 +41,6 @@ in
         tc = "turbotmux close";
         tp = "turbotmux project";
         tn = "turbotmux new";
-        darwin-switch = "darwin-rebuild switch --flake ~/.config/chad-nix";
-        darwin-update = "nix flake update ~/.config/chad-nix";
       };
       plugins = [
         {
