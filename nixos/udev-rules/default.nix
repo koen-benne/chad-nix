@@ -1,3 +1,10 @@
+{ config, lib, pkgs, ... }:
+let
+in
+{
+  services.udev.extraRules = ''
+
+
 #---------------------------------------------------------------#
 #  OpenRGB udev rules - Git Commit: 300dcd14                    #
 #---------------------------------------------------------------#
@@ -15,19 +22,19 @@ KERNEL=="port", TAG+="uaccess"
 #---------------------------------------------------------------#
 #  ASUS TUF Laptops (faustus)                                   #
 #---------------------------------------------------------------#
-ACTION=="add", SUBSYSTEM=="platform", KERNEL=="faustus", RUN+="/run/current-system/sw/bin/chmod a+w /sys/bus/platform/devices/%k/kbbl/kbbl_flags"
-ACTION=="add", SUBSYSTEM=="platform", KERNEL=="faustus", RUN+="/run/current-system/sw/bin/chmod a+w /sys/bus/platform/devices/%k/kbbl/kbbl_blue"
-ACTION=="add", SUBSYSTEM=="platform", KERNEL=="faustus", RUN+="/run/current-system/sw/bin/chmod a+w /sys/bus/platform/devices/%k/kbbl/kbbl_green"
-ACTION=="add", SUBSYSTEM=="platform", KERNEL=="faustus", RUN+="/run/current-system/sw/bin/chmod a+w /sys/bus/platform/devices/%k/kbbl/kbbl_mode"
-ACTION=="add", SUBSYSTEM=="platform", KERNEL=="faustus", RUN+="/run/current-system/sw/bin/chmod a+w /sys/bus/platform/devices/%k/kbbl/kbbl_red"
-ACTION=="add", SUBSYSTEM=="platform", KERNEL=="faustus", RUN+="/run/current-system/sw/bin/chmod a+w /sys/bus/platform/devices/%k/kbbl/kbbl_set"
-ACTION=="add", SUBSYSTEM=="platform", KERNEL=="faustus", RUN+="/run/current-system/sw/bin/chmod a+w /sys/bus/platform/devices/%k/kbbl/kbbl_speed"
+ACTION=="add", SUBSYSTEM=="platform", KERNEL=="faustus", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/bus/platform/devices/%k/kbbl/kbbl_flags"
+ACTION=="add", SUBSYSTEM=="platform", KERNEL=="faustus", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/bus/platform/devices/%k/kbbl/kbbl_blue"
+ACTION=="add", SUBSYSTEM=="platform", KERNEL=="faustus", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/bus/platform/devices/%k/kbbl/kbbl_green"
+ACTION=="add", SUBSYSTEM=="platform", KERNEL=="faustus", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/bus/platform/devices/%k/kbbl/kbbl_mode"
+ACTION=="add", SUBSYSTEM=="platform", KERNEL=="faustus", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/bus/platform/devices/%k/kbbl/kbbl_red"
+ACTION=="add", SUBSYSTEM=="platform", KERNEL=="faustus", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/bus/platform/devices/%k/kbbl/kbbl_set"
+ACTION=="add", SUBSYSTEM=="platform", KERNEL=="faustus", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/bus/platform/devices/%k/kbbl/kbbl_speed"
 
 #---------------------------------------------------------------#
 #  ASUS TUF Laptops (asus-wmi)                                  #
 #---------------------------------------------------------------#
-ACTION=="add", SUBSYSTEM=="leds", KERNEL=="asus::kbd_backlight", RUN+="/run/current-system/sw/bin/chmod a+w /sys%p/kbd_rgb_mode"
-ACTION=="add", SUBSYSTEM=="leds", KERNEL=="asus::kbd_backlight", RUN+="/run/current-system/sw/bin/chmod a+w /sys%p/brightness"
+ACTION=="add", SUBSYSTEM=="leds", KERNEL=="asus::kbd_backlight", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys%p/kbd_rgb_mode"
+ACTION=="add", SUBSYSTEM=="leds", KERNEL=="asus::kbd_backlight", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys%p/brightness"
 
 #---------------------------------------------------------------#
 # BloodyMouse - DetectA4TechMouseControllers
@@ -1715,3 +1722,7 @@ SUBSYSTEMS=="usb|hidraw", ATTRS{idVendor}=="2ea8", ATTRS{idProduct}=="2125", TAG
 # Zalmna Z Sync - DetectZalmanZSyncControllers
 #---------------------------------------------------------------#
 SUBSYSTEMS=="usb|hidraw", ATTRS{idVendor}=="1c57", ATTRS{idProduct}=="7ed0", TAG+="uaccess", TAG+="Zalman_Z_Sync"
+
+
+  '';
+}

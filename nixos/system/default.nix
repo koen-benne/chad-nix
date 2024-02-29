@@ -1,7 +1,4 @@
 { config, lib, pkgs, ... }:
-let
-  openrgb-rules = ../udev-rules/60-openrgb.rules;
-in
 {
   boot.kernel.sysctl = {
     "net.core.default_qdisc" = "fq";
@@ -47,9 +44,6 @@ in
       PasswordAuthentication = false;
     };
   };
-
-  # Udev rules for openrgb to work
-  services.udev.extraRules = builtins.readFile openrgb-rules;
 
   # nix profile diff-closures --profile /nix/var/nix/profiles/system
   system.activationScripts.systemDiff = ''
