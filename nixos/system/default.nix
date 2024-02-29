@@ -13,10 +13,7 @@
           config.fileSystems."/boot/efi".fsType == "vfat")
         "/boot/efi";
     };
-    grub = {
-      device = "nodev";
-      efiSupport = true;
-    };
+    systemd-boot.enable = true;
   };
   # environment.systemPackages = lib.optionals (config.boot.loader.grub.enable == true) [ pkgs.grub-reboot-menu ];
   # explicitly enable nixos docs, system like wsl does not enable this
@@ -69,7 +66,7 @@
   };
   users.users.${config.my.user} = {
     # `users` is the primary group of all normal users in NixOS
-    extraGroups = [ "users" "wheel" "seat" ];
+    extraGroups = [ "users" "wheel" "seat" "power"];
     group = config.my.user;
     isNormalUser = true;
     shell = pkgs.fish;
