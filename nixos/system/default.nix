@@ -59,7 +59,7 @@
   };
   users.users.${config.my.user} = {
     # `users` is the primary group of all normal users in NixOS
-    extraGroups = [ "users" "wheel" "seat" "power"];
+    extraGroups = [ "users" "wheel" "seat" "power" ];
     group = config.my.user;
     isNormalUser = true;
     shell = pkgs.fish;
