@@ -1,6 +1,11 @@
 { config, lib, pkgs, ... }:
+let
+  inherit (lib) mkIf;
+  cfg = config.my.openrgb;
+in
 {
-  services.udev.extraRules = ''
+  config = mkIf cfg.enable {
+    services.udev.extraRules = ''
 
 
 #---------------------------------------------------------------#
@@ -1722,5 +1727,6 @@ SUBSYSTEMS=="usb|hidraw", ATTRS{idVendor}=="2ea8", ATTRS{idProduct}=="2125", TAG
 SUBSYSTEMS=="usb|hidraw", ATTRS{idVendor}=="1c57", ATTRS{idProduct}=="7ed0", TAG+="uaccess", TAG+="Zalman_Z_Sync"
 
 
-  '';
+    '';
+  };
 }

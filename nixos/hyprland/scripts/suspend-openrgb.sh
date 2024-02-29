@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-openrgb --profile ../profiles/asleep.orp
+openrgb --profile ../../openrgb/profiles/asleep.orp
 sleep 1
 systemctl suspend
 sleep 1
-openrgb --profile ../profiles/awake.orp
+openrgb --profile ../../openrgb/profiles/awake.orp
