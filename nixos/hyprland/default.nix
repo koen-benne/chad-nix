@@ -15,6 +15,7 @@ in
       xwayland
     ];
 
+    my.openrgb.enable = true;
     hm.my.hyprland.enable = true;
     hm.my.waybar.enable = true;
     my.theme.enable = true;

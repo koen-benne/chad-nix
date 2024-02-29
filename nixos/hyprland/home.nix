@@ -48,6 +48,7 @@ monitor = DP-3, addreserved, 10, 20, 20, 20, 3440x1440, 0x0,1
 exec-once = foot --server
 exec-once = waybar
 exec-once = wpaperd
+exec-once = openrgb --server
 
 # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
 input {
@@ -152,7 +153,7 @@ bind = $mainMod, R, exec, fuzzel
 bind = $mainMod, P, pseudo, # dwindle
 bind = $mainMod, T, togglesplit, # dwindle
 bind = $mainMod, F, fullscreen,
-bind = $mainMod SHIFT, S, exec, ~/.config/hypr/sleep.sh
+bind = $mainMod SHIFT, S, exec, ${scripts}/suspend-openrgb.sh
 bind = $mainMod, P, exec, ${scripts}/fuzzelpass.sh
 bind = $mainMod, G, exec, grim -g "$(slurp)" ~/Images/$(date +%s)_grim.png
 bind = $mainMod SHIFT, G, exec, grim ~/Images/$(date +%s)_grim.png

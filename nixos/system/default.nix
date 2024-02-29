@@ -12,7 +12,10 @@
           config.fileSystems."/boot/efi".fsType == "vfat")
         "/boot/efi";
     };
-    systemd-boot.enable = true;
+    grub = {
+      device = "nodev";
+      efiSupport = true;
+    };
   };
   # environment.systemPackages = lib.optionals (config.boot.loader.grub.enable == true) [ pkgs.grub-reboot-menu ];
   # explicitly enable nixos docs, system like wsl does not enable this
