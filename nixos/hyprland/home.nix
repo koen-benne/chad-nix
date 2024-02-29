@@ -14,6 +14,7 @@ in
     home.packages = with pkgs; [
       dunst
       pavucontrol
+      gnome.nautilus
     ];
 
     programs.fuzzel = {
