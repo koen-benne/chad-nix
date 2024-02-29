@@ -1,5 +1,7 @@
 { config, lib, pkgs, ... }:
-
+let
+  openrgb-rules = ../udev-rules/60-openrgb.rules;
+in
 {
   boot.kernel.sysctl = {
     "net.core.default_qdisc" = "fq";
@@ -45,13 +47,10 @@
       PasswordAuthentication = false;
     };
   };
-  # https://wiki.archlinux.org/title/map_scancodes_to_keycodes
-  # nix shell nixpkgs#evemu nixpkgs#evtest
-  # sudo evemu-describe
-  # sudo evtest | grep EV_MSC
-  # sudo udevadm trigger
-  services.udev.extraHwdb = ''
-  '';
+
+  # Udev rules for openrgb to work
+  services.udev.extraRules = builtins.readFile openrgb-rules;
+
   # nix profile diff-closures --profile /nix/var/nix/profiles/system
   system.activationScripts.systemDiff = ''
     # show upgrade diff

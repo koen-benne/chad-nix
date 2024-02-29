@@ -6,5 +6,7 @@
     nixos-option
     polkit
     wl-clipboard
+    openrgb
+    i2c-tools
   ];
 }
