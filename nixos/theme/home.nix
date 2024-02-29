@@ -11,6 +11,12 @@ in
   };
 
   config = mkIf cfg.enable {
+    dconf = {
+      enable = true;
+      settings."org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+      };
+    };
     home.pointerCursor = {
       name = "Adwaita";
       size = 16;
@@ -22,11 +28,11 @@ in
     gtk = {
       enable = true;
       iconTheme = {
-        name = "Adwaita";
-        package = pkgs.gnome.adwaita-icon-theme;
+        name = "Papirus-Dark";
+        package = pkgs.papirus-icon-theme;
       };
       theme = {
-        name = "Adwaita";
+        name = "Adwaita-Dark";
         package = pkgs.gnome.gnome-themes-extra;
       };
     };

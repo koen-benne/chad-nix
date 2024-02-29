@@ -11,8 +11,12 @@ in
   };
 
   config = mkIf cfg.enable {
-    # need by home-manager gtk.enable https://github.com/nix-community/home-manager/issues/3113
-    programs.dconf.enable = true;
+    # programs.dconf = {
+    #   enable = true;
+    #   settings."org/gnome/desktop/interface" = {
+    #     color-scheme = "prefer-dark";
+    #   };
+    # };
     hm.my.theme.enable = true;
 
     fonts = {
