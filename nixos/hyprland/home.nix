@@ -1,3 +1,4 @@
+# TODO: Create a desktop folder for this rather than dumping it all inside hyprland
 { config, lib, pkgs, ... }:
 
 let
@@ -12,9 +13,14 @@ in
   };
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
+      polkit
+      wl-clipboard
+      pinentry-gnome
       dunst
       pavucontrol
       gnome.nautilus
+      evince
+      libreoffice-qt
     ];
 
     programs.fuzzel = {
