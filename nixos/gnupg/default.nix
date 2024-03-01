@@ -5,7 +5,6 @@
   services.pcscd.enable = true;
   programs.gnupg.agent = {
     enable = true;
-    pinentryFlavour = "gnome";
-    enableSSHSupport = true;
+    pinentryFlavor = "gnome3";
   };
 }
