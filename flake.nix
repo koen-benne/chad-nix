@@ -14,6 +14,7 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     android-nixpkgs.url = "github:tadfisher/android-nixpkgs";
+    spicetify-nix.url = "github:the-argus/spicetify-nix";
   };
 
   outputs = inputs@{ flake-parts, ... }:

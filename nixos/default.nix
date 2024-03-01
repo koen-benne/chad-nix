@@ -6,5 +6,7 @@
     ../common
   ] ++ lib.my.getModules [ ./. ];
 
-  hm.imports = lib.my.getHmModules [ ./. ];
+  hm.imports = [
+    inputs.spicetify-nix.homeManagerModule
+  ] ++ lib.my.getHmModules [ ./. ];
 }
