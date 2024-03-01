@@ -4,8 +4,5 @@
     git
     man-pages
     nixos-option
-    polkit
-    wl-clipboard
-    pinentry-gnome
   ];
 }
