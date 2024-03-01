@@ -30,7 +30,6 @@
       "android-studio"
 
       # Communication Tools
-      "discord"
       "slack"
 
       # Utility Tools

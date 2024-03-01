@@ -18,5 +18,6 @@
     ripgrep
     scripts
     jetbrains-mono-nerdfont
+    discord
   ];
 }
