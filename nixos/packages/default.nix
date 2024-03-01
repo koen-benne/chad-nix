@@ -6,5 +6,6 @@
     nixos-option
     polkit
     wl-clipboard
+    pinentry-gnome
   ];
 }
