@@ -18,6 +18,7 @@ in
     my.openrgb.enable = true;
     hm.my.hyprland.enable = true;
     hm.my.waybar.enable = true;
+    my.swaylock.enable = true;
     my.theme.enable = true;
     programs.hyprland = {
       enable = true;
