@@ -19,5 +19,9 @@
     scripts
     jetbrains-mono-nerdfont
     discord
+
+    nodejs
+    nodePackages.pnpm
+    nodePackages.yarn
   ];
 }

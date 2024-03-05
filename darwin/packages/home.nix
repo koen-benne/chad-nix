@@ -29,10 +29,6 @@
     zbar
     dockutil
 
-    nodejs
-    nodePackages.pnpm
-    nodePackages.yarn
-
     gitui
 
     wakatime
