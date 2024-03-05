@@ -5,7 +5,8 @@
     ./hardware-nixos.nix
   ];
   networking.hostName = "nixos";
-  my.hyprland.enable = true;
+
+  my.desktop.enable = true;
   my.steam.enable = true;
   hm.my.zsh.enable = true;
   hm.my.foot.enable = true;

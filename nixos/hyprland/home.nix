@@ -1,10 +1,8 @@
-# TODO: Create a desktop folder for this rather than dumping it all inside hyprland
 { config, lib, pkgs, ... }:
 
 let
   inherit (lib) mkIf mkEnableOption mdDoc;
   cfg = config.my.hyprland;
-  wallpaper = ../../wallpaper.jpg;
   scripts = ./scripts;
 in
 {
@@ -12,28 +10,6 @@ in
     enable = mkEnableOption (mdDoc "hyprland");
   };
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      polkit
-      wl-clipboard
-      pinentry-gnome
-      dunst
-      pavucontrol
-      gnome.nautilus
-      evince
-      libreoffice-qt
-    ];
-
-    programs.fuzzel = {
-      enable = true;
-    };
-
-    programs.wpaperd = {
-      enable = true;
-      settings = {
-        default = { path = wallpaper; };
-      };
-    };
-
     wayland.windowManager.hyprland = {
       enable = true;
       extraConfig = ''
