@@ -19,6 +19,7 @@ in
       gnome.nautilus
       evince
       libreoffice-qt
+      prismlauncher
     ];
 
     programs.fuzzel = {
