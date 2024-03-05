@@ -13,12 +13,19 @@ in
       enable = true;
       package = pkgs.swaylock-effects;
       settings = {
-        color = "808080";
-        font-size = 24;
-        indicator-idle-visible = false;
+        screenshots = true;
+        clock = true;
+        indicator = true;
         indicator-radius = 100;
-        line-color = "ffffff";
-        show-failed-attempts = true;
+        indicator-thickness = 7;
+        effect-blur = "7x5";
+        ring-color = "00000033";
+        key-hl-color = "ffffff";
+        line-color = "00000000";
+        inside-color = "00000000";
+        separator-color = "00000000";
+        grace = 2;
+        fade-in = 0.2;
       };
     };
   };
