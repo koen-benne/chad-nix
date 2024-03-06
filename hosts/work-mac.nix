@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  networking.hostName = "MBP-KoenB";
+  networking.hostName = "RQG5XMDJF4";
   my.desktop.enable = true;
 }
