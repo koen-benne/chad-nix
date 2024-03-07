@@ -34,7 +34,6 @@
        "figma"
     ];
     masApps = {
-      Focalboard = 1556908618;
       Trello = 1278508951;
       # Xcode = 497799835;
     };
