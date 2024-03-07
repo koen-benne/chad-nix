@@ -12,5 +12,24 @@ in
 
   config = mkIf cfg.enable {
     hm.my.desktop.enable = true;
+    my.dock = {
+      enable = true;
+      entries = [
+        { path = "/Applications/Slack.app/"; }
+        { path = "${pkgs.kitty}/Applications/Kitty.app/"; }
+        { path = "/System/Applications/News.app/"; }
+        { path = "/System/Applications/Home.app/"; }
+        {
+          path = "${config.users.users."koenbenne".home}/.local/share/";
+          section = "others";
+          options = "--sort name --view grid --display folder";
+        }
+        {
+          path = "${config.users.users."koenbenne".home}/Downloads";
+          section = "others";
+          options = "--sort name --view grid --display stack";
+        }
+      ];
+    };
   };
 }
