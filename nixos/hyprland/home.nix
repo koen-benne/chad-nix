@@ -18,7 +18,7 @@ in
 
 monitor = DP-3, addreserved, 10, 20, 20, 20, 3440x1440, 0x0,1
 
-## dont know if nix does this for me
+# dont know if nix does this for me
 # exec-once = dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 # exec-once = bash /usr/libexec/polkit-mate-authentication-agent-1
 # exec-once = pipewire
@@ -112,9 +112,9 @@ workspace_swipe = off
 
 # Example per-device config
 # See https://wiki.hyprland.org/Configuring/Keywords/#executing for more
-device:epic mouse V1 {
-sensitivity = -0.5
-}
+# device:epic mouse V1 {
+#   sensitivity = -0.5
+# }
 
 windowrule = float, title:(Floorp - Sharing Indicator)
 windowrule = tile, title:(Spotify)
