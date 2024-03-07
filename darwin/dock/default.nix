@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 
-with lib;
 let
-  inherit (pkgs) stdenv dockutil mkEnableOption mkIf;
+  inherit (pkgs) stdenv dockutil ;
+  inherit (lib) mkEnableOption mkIf mkOption hasSuffix concatMapStrings mdDoc types;
   cfg = config.my.dock;
 in
 {
