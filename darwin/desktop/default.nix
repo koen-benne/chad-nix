@@ -16,11 +16,11 @@ in
       enable = true;
       entries = [
         { path = "/Applications/Slack.app/"; }
+        { path = "/Applications/Brave Browser.app/"; }
+        { path = "/Applications/Trello.app/"; }
         { path = "${pkgs.kitty}/Applications/Kitty.app/"; }
-        { path = "/System/Applications/News.app/"; }
-        { path = "/System/Applications/Home.app/"; }
         {
-          path = "${config.users.users."koenbenne".home}/.local/share/";
+          path = "${config.users.users."koenbenne".home}/stage-files/";
           section = "others";
           options = "--sort name --view grid --display folder";
         }
