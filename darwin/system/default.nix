@@ -17,6 +17,9 @@
   '';
   services.nix-daemon.enable = true;
   # nix profile diff-closures --profile /nix/var/nix/profiles/system
+  system.activationScripts.extraActivation.text = ''
+    softwareupdate --install-rosetta --agree-to-license
+  '';
   system.activationScripts.postActivation.text = ''
     # disable spotlight
     launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist >/dev/null 2>&1 || true
