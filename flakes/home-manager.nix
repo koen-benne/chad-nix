@@ -51,7 +51,7 @@ in
       }];
     };
 
-    "koenbenne@MBP-KoenB" = mkHome {
+    "koenbenne@RQG5XMDJF4" = mkHome {
       system = "x86_64-darwin";
       modules = [
         {

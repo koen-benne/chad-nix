@@ -3,22 +3,15 @@
 {
   environment.systemPath = [ "/opt/homebrew/bin" ];
   environment.variables = { HOMEBREW_NO_ANALYTICS = "1"; };
+
+
   homebrew = {
     enable = true;
-    # mutableTaps = false;
-    # autoMigrate = true;
     onActivation = {
       # autoUpdate = true;
       cleanup = "zap";
     };
-    global = {
-      brewfile = true;
-    };
     taps = [
-      "homebrew/core"
-      "homebrew/cask"
-      # "homebrew/bundle"
-      # "homebrew/homebrew-services"
     ];
     brews = [
       "mas"
@@ -49,8 +42,5 @@
       Trello = 1278508951;
       # Xcode = 497799835;
     };
-    extraConfig = ''
-      #
-    '';
   };
 }
