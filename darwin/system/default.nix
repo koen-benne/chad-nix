@@ -71,7 +71,7 @@
     };
     screencapture = {
       disable-shadow = true;
-      location = "/tmp";
+      location = "/tmp/screencapture";
     };
     trackpad = {
       Clicking = true;
