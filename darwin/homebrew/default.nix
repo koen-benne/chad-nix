@@ -20,6 +20,7 @@
 
       # Communication Tools
       "slack"
+      "microsoft-teams"
 
       # Utility Tools
       "appcleaner"
