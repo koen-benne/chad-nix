@@ -7,7 +7,7 @@
 
   my = {
     # difftastic.enable = true;
-    # direnv.enable = true;
+    direnv.enable = true;
     # helix.enable = true;
     git.enable = true;
     syncthing.enable = true;
