@@ -42,6 +42,7 @@
 
     ueberzugpp
 
+    ruby
     cocoapods
     watchman
     zulu17
