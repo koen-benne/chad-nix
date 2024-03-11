@@ -26,5 +26,7 @@ in
         end tell
       '
     '';
+
+    home.file.".hushlogin".text = "";
   };
 }
