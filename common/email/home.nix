@@ -2,21 +2,24 @@
 
 {
   programs.mbsync.enable = true;
+  programs.lieer.enable = true;
   programs.msmtp.enable = true;
   programs.notmuch = {
     enable = true;
-    hooks = {
-      preNew = "mbsync --all";
-    };
   };
 
   accounts.email = {
     accounts.personal = {
+      flavor = "gmail.com";
       address = config.my.email;
       imap.host = "imap.gmail.com";
-      mbsync = {
+      # mbsync = {
+      #   enable = true;
+      #   create = "maildir";
+      # };
+      lieer = {
         enable = true;
-        create = "maildir";
+        sync.enable = true;
       };
       msmtp.enable = true;
       notmuch.enable = true;
@@ -35,6 +38,11 @@
       };
       userName = config.my.email;
     };
+    # accounts.work = {
+    #   flavor = "outlook.office365.com";
+    #   address = config.my.workmail;
+    #   imap.host = "outlook.office365.com";
+    # };
   };
 }
 
