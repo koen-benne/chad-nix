@@ -1,12 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
-  programs.mbsync.enable = true;
-  programs.lieer.enable = true;
-  programs.msmtp.enable = true;
-  programs.notmuch = {
-    enable = true;
-  };
+  programs.neomutt.enable = true;
+  programs.notmuch.enable = true;
 
   accounts.email = {
     accounts.personal = {
@@ -17,12 +13,18 @@
       #   enable = true;
       #   create = "maildir";
       # };
-      lieer = {
+      # lieer = {
+      #   enable = true;
+      #   sync.enable = true;
+      # };
+      # msmtp.enable = true;
+      notmuch = {
         enable = true;
-        sync.enable = true;
+        neomutt.enable = true;
       };
-      msmtp.enable = true;
-      notmuch.enable = true;
+      neomutt = {
+        enable = true;
+      };
       primary = true;
       realName = config.my.name;
       # signature = {
