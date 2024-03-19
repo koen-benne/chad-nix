@@ -34,6 +34,7 @@ in
         ".*.sw?"
         ".direnv/"
         ".envrc"
+        ".stignore"
       ];
       extraConfig = {
         rebase = {
