@@ -12,7 +12,7 @@
     git.enable = true;
     syncthing.enable = true;
     lazygit.enable = true;
-    # gitui.enable = true;
+    gitui.enable = true;
     neovim.enable = true;
     # nnn.enable = true;
     zsh.enable = true;

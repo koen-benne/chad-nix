@@ -29,8 +29,6 @@
     zbar
     dockutil
 
-    gitui
-
     wakatime
 
     mkcert

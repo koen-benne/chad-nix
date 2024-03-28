@@ -35,6 +35,7 @@ in
       shellAliases = {
         vim = "nvim";
         lg = "lazygit";
+        gu = "gitui";
         ll = "ls -lah";
         shell = "export NIXPKGS_ALLOW_INSECURE=1 && nix shell --impure";
         to = "turbotmux open";
