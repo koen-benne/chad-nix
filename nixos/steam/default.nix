@@ -13,6 +13,12 @@ in
 
     # environment.systemPackages = [ pkgs.steam-run-native ];
 
+    environment.systemPackages = with pkgs; [
+      steamcmd
+    ];
+
+    programs.gamemode.enable = true;
+
     programs.steam = {
       enable = true;
     };
