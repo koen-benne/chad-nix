@@ -19,6 +19,7 @@
     scripts
     jetbrains-mono-nerdfont
     discord
+    nmap
 
     nodejs
     nodePackages.pnpm
