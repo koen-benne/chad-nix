@@ -18,6 +18,7 @@ in
       pavucontrol
       gnome.nautilus
       evince
+      gnome.eog
       libreoffice-qt
       prismlauncher
       jdk8
@@ -34,6 +35,16 @@ in
       enable = true;
       settings = {
         default = { path = wallpaper; };
+      };
+    };
+
+    xdg.mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "x-scheme-handler/http" = "firefox.desktop";
+        "x-scheme-handler/https" = "firefox.desktop";
+        # "x-scheme-handler/mailto" = "thunderbird.desktop";
+        "application/pdf" = "evince.desktop";
       };
     };
   };
