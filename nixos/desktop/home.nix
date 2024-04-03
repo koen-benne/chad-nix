@@ -22,6 +22,8 @@ in
       prismlauncher
       jdk8
       teams-for-linux
+      grim
+      slurp
     ];
 
     programs.fuzzel = {
