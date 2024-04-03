@@ -21,6 +21,7 @@ in
       libreoffice-qt
       prismlauncher
       jdk8
+      teams-for-linux
     ];
 
     programs.fuzzel = {
