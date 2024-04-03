@@ -20,6 +20,7 @@ in
       evince
       libreoffice-qt
       prismlauncher
+      jdk8
     ];
 
     programs.fuzzel = {
