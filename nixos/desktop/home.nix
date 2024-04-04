@@ -33,9 +33,9 @@ in
       grim
       slurp
 
-      # electron wrappers
+      # other
       teams-for-linux
-      figma-linux
+      figma-agent
     ];
 
     programs.fuzzel = {
