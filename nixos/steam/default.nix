@@ -15,6 +15,7 @@ in
 
     environment.systemPackages = with pkgs; [
       steamcmd
+      xdg-user-dirs
     ];
 
     programs.nix-ld.enable = true;
