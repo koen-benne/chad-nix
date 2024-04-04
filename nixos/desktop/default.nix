@@ -1,4 +1,5 @@
-# This is where I configure the entire desktop environment for linux systems
+# This is where I configure the entire desktop environment for linux systems in general
+# There should not be anything in here that I don't want in every one of my linux systems with a desktop environment
 
 { config, lib, pkgs, ... }:
 let
