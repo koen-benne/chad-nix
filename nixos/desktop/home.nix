@@ -1,3 +1,6 @@
+# This is where I configure the entire desktop environment for linux systems in general
+# There should not be anything in here that I don't want in every one of my linux systems with a desktop environment
+
 { config, lib, pkgs, ... }:
 
 let
@@ -11,20 +14,28 @@ in
   };
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      polkit
-      wl-clipboard
-      pinentry-gnome
-      dunst
+      # packages for my custom DE
       pavucontrol
+      wl-clipboard
+      dunst
+      polkit
+      pinentry-gnome
       gnome.nautilus
       evince
       gnome.eog
       libreoffice-qt
+
+      # MC shit
       prismlauncher
       jdk8
-      teams-for-linux
+
+      # screenshotting
       grim
       slurp
+
+      # electron wrappers
+      teams-for-linux
+      figma-linux
     ];
 
     programs.fuzzel = {
