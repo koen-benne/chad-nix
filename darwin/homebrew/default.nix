@@ -30,6 +30,7 @@
       # Browsers
       "brave-browser"
       "firefox"
+      "eloston-chromium"
 
        # Design Tools
        "figma"
