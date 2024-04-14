@@ -2,7 +2,5 @@
 
 # openrgb --profile ../../openrgb/profiles/asleep.orp
 swaylock --daemonize &
-sleep 1
-
-systemctl suspend
+sleep 3 && systemctl suspend
 # openrgb --profile ../../openrgb/profiles/awake.orp
