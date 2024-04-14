@@ -10,6 +10,7 @@ in
   };
   config = mkIf cfg.enable {
     programs.thunderbird = {
+      enable = true;
     };
   };
 }
