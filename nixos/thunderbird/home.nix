@@ -11,6 +11,11 @@ in
   config = mkIf cfg.enable {
     programs.thunderbird = {
       enable = true;
+      profiles = {
+        default = {
+          isDefault = true;
+        };
+      };
     };
   };
 }
