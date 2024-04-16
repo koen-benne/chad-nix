@@ -49,6 +49,8 @@ in
       };
     };
 
+    # See issue: https://github.com/nix-community/home-manager/issues/1213
+    xdg.configFile."mimeapps.list".force = true;
     xdg.mimeApps = {
       enable = true;
       defaultApplications = {
