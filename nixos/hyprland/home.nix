@@ -61,21 +61,21 @@ layout = master
 }
 
 decoration {
-# See https://wiki.hyprland.org/Configuring/Variables/ for more
+  # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
-rounding = 10
+  rounding = 10
 
-drop_shadow = true
-shadow_range = 4
-shadow_render_power = 3
-col.shadow = rgba(1a1a1aee)
+  drop_shadow = true
+  shadow_range = 4
+  shadow_render_power = 3
+  col.shadow = rgba(1a1a1aee)
 
-blur {
-enabled = true
-size = 3
-passes = 1
-new_optimizations = true
-}
+  blur {
+    enabled = true
+    size = 3
+    passes = 1
+    new_optimizations = true
+  }
 }
 
 
@@ -116,19 +116,23 @@ workspace_swipe = off
 #   sensitivity = -0.5
 # }
 
-windowrule = float, title:(Floorp - Sharing Indicator)
-windowrule = tile, title:(Spotify)
-windowrule = workspace 9, title:(Spotify)
+# Window rules
+windowrule = noblur,^(?!(foot))
+# windowrule = noblur,^(?!(foot|other))
 
-# See https://wiki.hyprland.org/Configuring/Keywords/ for more
+windowrule = float, title:(Floorp - Sharing Indicator)
+windowrule = tile, title:^(.*PWA.*)$
+windowrule = tile, title:(Spotify)
+
+windowrule = workspace 9, title:(Spotify)
+windowrulev2 = stayfocused, class:^(pinentry-) # fix pinentry losing focus
+
 $mainMod = SUPER
 
-# Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
 bind = $mainMod, Return, exec, footclient
 bind = $mainMod, W, exec, librewolf
 bind = $mainMod, Q, killactive,
 bind = $mainMod SHIFT, C, exit,
-# bind = $mainMod, E, exec, pcmanfm
 bind = $mainMod, E, exec, nautilus
 bind = $mainMod, V, togglefloating,
 bind = $mainMod, R, exec, fuzzel
