@@ -15,6 +15,7 @@
     ipcalc
     jq
     python3
+    cargo
     ripgrep
     scripts
     jetbrains-mono-nerdfont
