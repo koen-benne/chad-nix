@@ -19,7 +19,7 @@ in
       wl-clipboard
       dunst
       polkit
-      pinentry-gnome
+      # pinentry-gnome3
       gnome.nautilus
       evince
       gnome.eog
