@@ -24,6 +24,7 @@ in
       evince
       gnome.eog
       libreoffice-qt
+      mpv
 
       # MC shit
       prismlauncher
@@ -36,6 +37,7 @@ in
       # other
       teams-for-linux
       figma-agent
+
     ];
 
     programs.fuzzel = {
