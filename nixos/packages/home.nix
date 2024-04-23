@@ -5,5 +5,6 @@
     slack
     localsend
     ungoogled-chromium
+    mpv
   ];
 }
