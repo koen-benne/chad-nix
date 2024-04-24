@@ -27,6 +27,7 @@ in
       gnome.eog
       libreoffice-qt
       mpv
+      qbittorrent
 
       # MC shit
       prismlauncher
