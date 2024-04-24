@@ -47,6 +47,11 @@ natural_scroll = false
 sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
 }
 
+misc {
+  disable_splash_rendering = true
+  disable_hyprland_logo = true
+}
+
 general {
 # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
