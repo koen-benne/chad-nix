@@ -146,6 +146,7 @@ bind = $mainMod, T, togglesplit, # dwindle
 bind = $mainMod, F, fullscreen,
 bind = $mainMod SHIFT, S, exec, ${scripts}/suspend.sh
 bind = $mainMod, P, exec, ${scripts}/fuzzelpass.sh
+bind = $mainMod, C, exec, hyprpicker -a
 bind = $mainMod, G, exec, grim -g "$(slurp)" ~/Images/$(date +%s)_grim.png
 bind = $mainMod SHIFT, G, exec, grim ~/Images/$(date +%s)_grim.png
 

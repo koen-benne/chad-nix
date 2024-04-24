@@ -20,6 +20,7 @@ in
       wl-clipboard
       dunst
       polkit
+      hyprpicker
       # pinentry-gnome3
       gnome.nautilus
       evince
