@@ -6,9 +6,9 @@
   ];
   networking = {
     hostName = "nixos";
-   # usePredictableInterfaceNames = true;
-   # defaultGateway = "192.168.0.1";
-   # nameservers = ["8.8.8.8" "8.8.4.4"];
+    # usePredictableInterfaceNames = true;
+    # defaultGateway = "192.168.0.1";
+    # nameservers = ["8.8.8.8" "8.8.4.4"];
     firewall = {
       enable = true;
       allowedTCPPorts = [ 80 443 53317 22067 22070 8211 ]; # 53317 is for LocalSend and 22067, 22070 are for Syncthing and 8211 is for palworld server
@@ -21,10 +21,9 @@
     };
   };
 
+  # Everythhing desktop related
   my.desktop.enable = true;
+
+  # Stuff specific to only this machine
   my.steam.enable = true;
-  hm.my.zsh.enable = true;
-  hm.my.foot.enable = true;
-  hm.my.librewolf.enable = true;
-  hm.my.spicetify.enable = true;
 }

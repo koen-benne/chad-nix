@@ -25,7 +25,10 @@ in
     my.swaylock.enable = true;
     my.theme.enable = true;
     hm.my.waybar.enable = true;
+    hm.my.foot.enable = true;
     hm.my.thunderbird.enable = true;
+    hm.my.librewolf.enable = true;
+    hm.my.spicetify.enable = true;
 
     environment.sessionVariables = {
       NIXOS_OXONE_WL = "1";

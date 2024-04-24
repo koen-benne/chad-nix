@@ -1,3 +1,4 @@
+# All NixOS systems will have this in their configuration
 { config, lib, pkgs, ... }:
 {
   boot.kernel.sysctl = {
