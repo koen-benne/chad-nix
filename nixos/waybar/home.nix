@@ -75,12 +75,12 @@ in
           format-alt = "{ipaddr} {icon}";
           format-wifi = "  {essid} ({signalStrength}%)";
           format-ethernet = " {ifname}";
-          format-disconnected = "睊";
+          format-disconnected = "";
           max-length = 50;
         };
         clock = {
-          format = "{: %H:%M }";
-          format-alt = "{: %H:%M %p   %d/%m/%Y}";
+          format = " {:%H:%M }";
+          format-alt = " {:%H:%M %p  󰸗 %d/%m/%Y}";
         };
         cpu = {
           interval = 15;
