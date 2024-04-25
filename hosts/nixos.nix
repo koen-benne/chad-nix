@@ -12,7 +12,7 @@
     # nameservers = ["8.8.8.8" "8.8.4.4"];
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 80 443 53317 22067 22070 8211 ]; # 53317 is for LocalSend and 22067, 22070 are for Syncthing and 8211 is for palworld server
+      allowedTCPPorts = [ 80 443 53317 8211 ]; # 53317 is for LocalSend and 8211 is for palworld server
       allowedUDPPorts = [ 8211 ];
       allowedUDPPortRanges = [
         { from = 4000; to = 4007; }
