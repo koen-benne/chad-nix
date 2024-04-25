@@ -1,6 +1,6 @@
 { inputs, config, lib, pkgs, ... }:
 
 {
-  hm.imports = [
+  imports = [
   ] ++ lib.my.getHmModules [ ./. ];
 }
