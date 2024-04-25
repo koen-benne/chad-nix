@@ -10,10 +10,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    imports = [
-      inputs.spicetify-nix.homeManagerModule
-    ];
-
     programs.spicetify = {
       enable = true;
       theme = spicePkgs.themes.Onepunch;

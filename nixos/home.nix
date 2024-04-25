@@ -1,6 +1,7 @@
-{ inputs, config, lib, pkgs, ... }:
+{ inputs, lib, ... }:
 
 {
   imports = [
+    inputs.spicetify-nix.homeManagerModule
   ] ++ lib.my.getHmModules [ ./. ];
 }
