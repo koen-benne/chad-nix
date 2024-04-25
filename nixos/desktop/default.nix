@@ -24,6 +24,7 @@ in
     my.openrgb.enable = true;
     my.swaylock.enable = true;
     my.theme.enable = true;
+    my.uxplay.enable = true;
     hm.my.waybar.enable = true;
     hm.my.foot.enable = true;
     hm.my.thunderbird.enable = true;

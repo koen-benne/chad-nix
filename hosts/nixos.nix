@@ -1,3 +1,4 @@
+# TODO: move some of the firewall config here to their own files
 { config, lib, pkgs, ... }:
 
 {
