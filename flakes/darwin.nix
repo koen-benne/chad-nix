@@ -1,3 +1,4 @@
+# Entry point when using darwin-rebuild switch
 { inputs, withSystem, ... }:
 
 let

@@ -1,3 +1,4 @@
+# Entry point when using home-manager switch
 { self, withSystem, ... }:
 
 let
@@ -45,10 +46,13 @@ in
 {
   flake.homeConfigurations = {
     koenbenne = mkHome {
-      modules = [{
-        home.username = "koenbenne";
-        home.homeDirectory = "/home/koenbenne";
-      }];
+      modules = [
+        {
+          home.username = "koenbenne";
+          home.homeDirectory = "/home/koenbenne";
+        }
+        ../nixos/home.nix
+      ];
     };
 
     "koenbenne@RQG5XMDJF4" = mkHome {

@@ -1,3 +1,4 @@
+# Entry point when using nixos-rebuild switch
 { self, withSystem, ... }:
 
 let
