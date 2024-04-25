@@ -1,3 +1,4 @@
+# The whole "my" section needs to go, it can be defined in different places instead
 { inputs, config, lib, pkgs, ... }:
 
 {
