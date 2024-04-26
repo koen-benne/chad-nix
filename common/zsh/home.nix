@@ -16,7 +16,6 @@ in
     ];
 
     programs.fzf.enable = true;
-    programs.zoxide.enable = true;
     programs.zsh = {
       enable = true;
     };
