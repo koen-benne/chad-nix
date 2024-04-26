@@ -37,6 +37,7 @@ in
         ".stignore"
       ];
       extraConfig = {
+        diff.tool = "nvimdiff";
         rebase = {
           autosquash = true;
           autostash = true;
