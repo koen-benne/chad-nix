@@ -12,6 +12,7 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       fd
+      eza
     ];
 
     programs.fzf.enable = true;
@@ -33,10 +34,11 @@ in
         fish_add_path $HOME/.local/bin
       '';
       shellAliases = {
+        ls = "eza --color=always --git --icons=always";
+        la = "eza --color=always --git --long --all --icons=always";
         vim = "nvim";
         lg = "lazygit";
         gu = "gitui";
-        ll = "ls -lah";
         shell = "export NIXPKGS_ALLOW_INSECURE=1 && nix shell --impure";
         to = "turbotmux open";
         tc = "turbotmux close";
