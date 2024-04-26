@@ -1,3 +1,4 @@
+# All systems will have these packages
 { config, lib, pkgs, ... }:
 
 {
@@ -26,4 +27,15 @@
     nodePackages.pnpm
     nodePackages.yarn
   ];
+
+  my = {
+    direnv.enable = true;
+    git.enable = true;
+    lazygit.enable = true;
+    gitui.enable = true;
+    neovim.enable = true;
+    zsh.enable = true;
+    fish.enable = true;
+    tmux.enable = true;
+  };
 }

@@ -7,21 +7,6 @@
     ./my/default.nix
   ] ++ lib.my.getHmModules [ ./. ];
 
-  my = {
-    # difftastic.enable = true;
-    direnv.enable = true;
-    # helix.enable = true;
-    git.enable = true;
-    syncthing.enable = true;
-    lazygit.enable = true;
-    gitui.enable = true;
-    neovim.enable = true;
-    # nnn.enable = true;
-    zsh.enable = true;
-    fish.enable = true;
-    tmux.enable = true;
-  };
-
   # let standalone home-manager and home-manager in nixos/nix-darwin use the same derivation
   home.packages = [
     (pkgs.callPackage (inputs.home-manager + /home-manager) { path = inputs.home-manager; })
