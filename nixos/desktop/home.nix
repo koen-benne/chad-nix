@@ -28,6 +28,7 @@ in
       libreoffice-qt
       mpv
       qbittorrent
+      obsidian
 
       # MC shit
       prismlauncher
