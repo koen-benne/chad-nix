@@ -11,6 +11,6 @@
   home.packages = [
     (pkgs.callPackage (inputs.home-manager + /home-manager) { path = inputs.home-manager; })
   ];
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
   systemd.user.startServices = "sd-switch";
 }
