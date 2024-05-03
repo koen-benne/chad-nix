@@ -3,11 +3,11 @@
 let
   inherit (lib) mdDoc mkEnableOption mkIf;
   cfg = config.my.firefox;
-  uc = ./userChrome.css;
+  uc = builtins.readFile ./userChrome.css;
 
 in
 {
-  options.my.firefoxj = {
+  options.my.firefox = {
     enable = mkEnableOption (mdDoc "firefox");
   };
 
@@ -15,13 +15,13 @@ in
 
     programs.firefox = {
       enable = true;
-      profiles = [
-        {
+      profiles = {
+        default = {
           isDefault = true;
           name = "default";
           userChrome = uc;
-        }
-      ];
+        };
+      };
     };
 
   };
