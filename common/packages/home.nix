@@ -22,10 +22,11 @@
     jetbrains-mono-nerdfont
     discord
     nmap
+    python311Packages.pyaudio
 
     nodejs
-    nodePackages.pnpm
-    nodePackages.yarn
+    # nodePackages.pnpm
+    # nodePackages.yarn
   ];
 
   my = {
