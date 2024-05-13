@@ -15,6 +15,7 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     android-nixpkgs.url = "github:tadfisher/android-nixpkgs";
     spicetify-nix.url = "github:the-argus/spicetify-nix";
+    arkenfox-nix.url = "github:dwarfmaster/arkenfox-nixos";
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     homebrew-core.url = "github:homebrew/homebrew-core";

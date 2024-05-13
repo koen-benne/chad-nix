@@ -28,7 +28,6 @@ in
     hm.my.waybar.enable = true;
     hm.my.foot.enable = true;
     hm.my.thunderbird.enable = true;
-    hm.my.librewolf.enable = true;
     hm.my.firefox.enable = true;
     hm.my.spicetify.enable = true;
 

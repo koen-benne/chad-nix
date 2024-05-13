@@ -135,7 +135,7 @@ windowrulev2 = stayfocused, class:^(pinentry-) # fix pinentry losing focus
 $mainMod = SUPER
 
 bind = $mainMod, Return, exec, footclient
-bind = $mainMod, W, exec, librewolf
+bind = $mainMod, W, exec, firefox
 bind = $mainMod, Q, killactive,
 bind = $mainMod SHIFT, C, exit,
 bind = $mainMod, E, exec, nautilus
