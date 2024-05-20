@@ -55,7 +55,6 @@ misc {
 general {
 # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
-cursor_inactive_timeout = 5
 gaps_in = 5
 gaps_out = 0
 border_size = 2
@@ -63,6 +62,10 @@ col.active_border = rgba(ca714eee)
 col.inactive_border = rgba(00000000)
 
 layout = master
+}
+
+cursor {
+  inactive_timeout = 5
 }
 
 decoration {
