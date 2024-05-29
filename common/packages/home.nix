@@ -20,7 +20,7 @@
     ripgrep
     scripts
     jetbrains-mono-nerdfont
-    discord
+    openASAR
     nmap
     python311Packages.pyaudio
 
