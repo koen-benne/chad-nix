@@ -3,6 +3,10 @@
   home.file.".ssh/config".text = ''
 
 
+Host coolify
+  HostName 23.88.117.45
+  User root
+  IdentityFile ~/.ssh/coolify
 
 Host github.com
   HostName github.com
