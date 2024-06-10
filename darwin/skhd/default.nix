@@ -12,6 +12,8 @@ in
       # Resize window
       # alt - h : yabai -m window west --resize right:-300:0 2> /dev/null || yabai -m window --resize right:-300:0
       # alt - l : yabai -m window east --resize left:300:0 2> /dev/null || yabai -m window --resize left:300:0
+      alt - h : yabai -m window --resize right:-50:0; yabai -m window --resize left:-50:0
+      alt - l : yabai -m window --resize right:50:0; yabai -m window --resize left:50:0
       # shift window in current workspace
       alt + shift - h : yabai -m window --swap west
       alt + shift - j : yabai -m window --swap south
