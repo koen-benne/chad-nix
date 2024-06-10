@@ -1,4 +1,4 @@
-# All nixos systems will have these packages
+# All darwin systems will have these packages
 { config, lib, pkgs, ... }:
 
 {
@@ -27,8 +27,9 @@
     subfinder
 
     browserpass
+    ueberzugpp
     zbar
-    dockutil
+    raycast
 
     wakatime
 
@@ -39,6 +40,5 @@
     neofetch
     cachix
 
-    ueberzugpp
   ];
 }
