@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 let
   inherit (lib) mdDoc mkEnableOption mkIf;
@@ -14,7 +14,6 @@ in
 
     programs.neovim = {
       enable = true;
-      package = pkgs.neovim-nightly;
       extraLuaPackages = ps: [ ps.magick ];
     };
   };
