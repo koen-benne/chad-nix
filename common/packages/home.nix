@@ -22,7 +22,8 @@
     jetbrains-mono-nerdfont
     openASAR
     nmap
-    python311Packages.pyaudio
+    rippkgs
+
 
     nodejs
     # nodePackages.pnpm
