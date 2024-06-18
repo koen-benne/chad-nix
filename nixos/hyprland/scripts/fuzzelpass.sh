@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 shopt -s nullglob globstar
 
 dmenu=fuzzel
