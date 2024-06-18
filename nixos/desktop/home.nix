@@ -17,9 +17,9 @@ in
     home.packages = with pkgs; [
       # packages for my custom DE
       pavucontrol
+      obs-studio
       wl-clipboard
       dunst
-      polkit
       hyprpicker
       # pinentry-gnome3
       gnome.nautilus

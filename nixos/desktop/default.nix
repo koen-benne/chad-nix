@@ -13,6 +13,7 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
+      gparted
       xdg-desktop-portal-gtk
       xdg-desktop-portal-hyprland
       xwayland
@@ -59,6 +60,7 @@ in
       jack.enable = true;
     };
     security.rtkit.enable = true;
+    security.polkit.enable = true;
   };
 
 }
