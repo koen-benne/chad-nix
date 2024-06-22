@@ -27,7 +27,8 @@
     openASAR
     nmap
     rippkgs
-    nvim-pkg
+    nvim-pkg # Custom neovim build
+    yazi # File manager
 
 
     nodejs
