@@ -62,12 +62,11 @@ col.active_border = rgba(ca714eee)
 col.inactive_border = rgba(00000000)
 
 layout = master
-cursor_inactive_timeout = 5
 }
 
-# cursor {
-#   inactive_timeout = 5
-# }
+cursor {
+  inactive_timeout = 5
+}
 
 decoration {
   # See https://wiki.hyprland.org/Configuring/Variables/ for more
