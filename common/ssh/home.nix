@@ -23,6 +23,11 @@ Host bitbucket.org
   User git
   IdentityFile ~/.ssh/bitbucket
 
+Host nixos
+  HostName 77.169.201.160
+  User koenbenne
+  IdentityFile ~/.ssh/nixos
+
 
 
   '';

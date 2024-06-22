@@ -11,6 +11,10 @@ with lib;
       systemPath = builtins.replaceStrings
         [ "$HOME" "$USER" ] [ "/Users/${config.my.user}" config.my.user ]
         config.environment.systemPath;
+      # Authorized keys
+      keys = [
+        "to be filled"
+      ]
     };
   };
 }
