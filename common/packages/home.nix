@@ -5,7 +5,7 @@
   home.packages = with pkgs; [
     (writeScriptBin "fp-update" ''
       #!${runtimeShell}
-      rippkgs-index nixpkgs -o ${config.users.users."koenbenne".home}/.local/share/rippkgs-index.sqlite
+      rippkgs-index nixpkgs -o $HOME/.local/share/rippkgs-index.sqlite
     '')
     (pass.withExtensions (ext: [ ext.pass-otp ]))
     age
