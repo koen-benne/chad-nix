@@ -31,7 +31,7 @@ in
 
     hardware.graphics = {
       enable = true;
-      driSupport32Bit = true;
+      enable32Bit = true;
     };
 
     hardware.steam-hardware.enable = true;
