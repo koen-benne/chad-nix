@@ -13,8 +13,8 @@ with lib;
         config.environment.systemPath;
       # Authorized keys
       keys = [
-        "to be filled"
-      ]
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDxi9At1p43peTX3rwPFe224xA2JJ8G+Eq72ttJwT+J3 koen.benne@gmail.com"
+      ];
     };
   };
 }

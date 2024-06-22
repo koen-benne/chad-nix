@@ -84,6 +84,6 @@
     isNormalUser = true;
     shell = pkgs.fish;
     uid = config.my.uid;
-    #openssh.authorizedKeys.keys = config.my.keys;
+    openssh.authorizedKeys.keys = config.my.keys;
   };
 }
