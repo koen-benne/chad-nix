@@ -5,6 +5,7 @@ with lib;
 {
   options.my = {
     systemPath = mkOption { type = types.str; };
+    keys = mkOption { type = types.listOf types.str; };
   };
   config = {
     my = {
