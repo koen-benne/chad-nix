@@ -12,10 +12,11 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     android-nixpkgs.url = "github:tadfisher/android-nixpkgs";
     spicetify-nix.url = "github:the-argus/spicetify-nix";
     arkenfox-nix.url = "github:dwarfmaster/arkenfox-nixos";
+
+    nvim-nix.url = "github:koen-benne/nvim-nix";
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     homebrew-core.url = "github:homebrew/homebrew-core";

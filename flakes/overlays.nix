@@ -8,7 +8,7 @@
         config.allowUnfree = true;
         overlays = [
           self.overlays.default
-          self.inputs.neovim-nightly-overlay.overlays.default
+          self.inputs.nvim-nix.overlays.default
         ];
       };
     in
