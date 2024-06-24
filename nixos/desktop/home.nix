@@ -7,7 +7,7 @@
 let
   inherit (lib) mkIf mkEnableOption mdDoc;
   cfg = config.my.desktop;
-  wallpaper = ../../wp-1.png;
+  wallpaper = ../../assets/wp-ultrawide.png;
 in
 {
   options.my.desktop = {
