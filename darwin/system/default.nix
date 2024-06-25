@@ -9,8 +9,7 @@
     LANG = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
   };
-  fonts.fontDir.enable = true;
-  fonts.fonts = with pkgs; [ jetbrains-mono-nerdfont ];
+  fonts.packages = with pkgs; [ jetbrains-mono-nerdfont ];
   nix.settings.allowed-users = [ config.my.user ];
   launchd.daemons.activate-system.script = lib.mkOrder 0 ''
     wait4path /nix/store
