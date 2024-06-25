@@ -8,6 +8,13 @@
       rippkgs-index nixpkgs -o $HOME/.local/share/rippkgs-index.sqlite
     '')
     (pass.withExtensions (ext: [ ext.pass-otp ]))
+    (writeScriptBin "nvim-update" ''
+      #!${runtimeShell}
+      cd $HOME/.config/chad-nix
+      nix flake lock --update-input nvim-nix
+      sudo nixos-rebuild switch --flake .
+    '')
+    (pass.withExtensions (ext: [ ext.pass-otp ]))
     age
     diffutils
     stow
