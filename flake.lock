@@ -642,11 +642,11 @@
         "project-nvim": "project-nvim"
       },
       "locked": {
-        "lastModified": 1719334197,
-        "narHash": "sha256-ED7csDLHbPUuZSVfUUxh+G2UVM5nCCH36nT2ckL0CJc=",
+        "lastModified": 1719334955,
+        "narHash": "sha256-h4hQ+96U7AwpaPllgJdEkhqRrsRTvgjLhUVX6wSQFEM=",
         "owner": "koen-benne",
         "repo": "nvim-nix",
-        "rev": "6a768548430c67b2128f5fca78c482dd402033c8",
+        "rev": "6abba62d52009dac577cabeda86e5e979951bb50",
         "type": "github"
       },
       "original": {
