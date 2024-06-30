@@ -40,5 +40,6 @@
     neofetch
     cachix
 
+    libreoffice
   ];
 }
