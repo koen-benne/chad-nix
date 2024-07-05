@@ -22,9 +22,9 @@ in
       dunst
       hyprpicker
       # pinentry-gnome3
-      gnome.nautilus
+      nautilus
       evince
-      gnome.eog
+      eog
       libreoffice-qt
       mpv
       qbittorrent
