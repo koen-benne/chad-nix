@@ -109,7 +109,7 @@ preserve_split = yes # you probably want this
 
 master {
 # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-new_is_master = true
+new_status = master
 new_on_top = true
 }
 
