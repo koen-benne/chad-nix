@@ -39,7 +39,5 @@
     platformsh
     neofetch
     cachix
-
-    libreoffice
   ];
 }
