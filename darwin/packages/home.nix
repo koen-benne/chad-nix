@@ -35,7 +35,6 @@
 
     mkcert
 
-    platformsh
     neofetch
     cachix
   ];
