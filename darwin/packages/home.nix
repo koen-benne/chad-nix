@@ -34,7 +34,6 @@
     wakatime
 
     mkcert
-    ddev
 
     platformsh
     neofetch
