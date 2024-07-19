@@ -394,11 +394,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1721215364,
-        "narHash": "sha256-ncmO9v96U3XS578TzjIq84PJvCSbkCPvKnwU949J+co=",
+        "lastModified": 1721217696,
+        "narHash": "sha256-W1wXW7jYCDw1bae0TAnuMfmr1y26+JU211NzCBHWcJc=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "6d6cafdc655d45a830eacdc08cb9265fd704b937",
+        "rev": "3759d472fc73a9ff39a865832387081dfb1372c2",
         "type": "github"
       },
       "original": {
@@ -644,11 +644,11 @@
         "ts-error-translator-nvim": "ts-error-translator-nvim"
       },
       "locked": {
-        "lastModified": 1721216726,
-        "narHash": "sha256-Fd2GazKI/6BtuTbRXTGnEoCBvKiuL9khTg0nUh+zy0M=",
+        "lastModified": 1721220329,
+        "narHash": "sha256-BjuSCTNWIyb+1s3lsKgZ2O6kquS5tS0qSwrycaR5qRs=",
         "owner": "koen-benne",
         "repo": "nvim-nix",
-        "rev": "5162e453724ee06f07b3fb14e70a1e50f3986025",
+        "rev": "9d62a07bf3e61610f5c5ab7d52b426b4f1c70c12",
         "type": "github"
       },
       "original": {

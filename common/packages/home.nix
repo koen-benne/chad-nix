@@ -14,6 +14,11 @@
       nix flake lock --update-input nvim-nix
       sudo nixos-rebuild switch --flake .
     '')
+    (writeScriptBin "dvd" ''
+      #!${runtimeShell}
+      echo "use flake \"github:koen-benne/dev-flakes?dir=$1\"" >> .envrc
+      direnv allow
+    '')
     (pass.withExtensions (ext: [ ext.pass-otp ]))
     age
     diffutils
