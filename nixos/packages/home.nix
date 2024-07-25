@@ -4,5 +4,4 @@
 {
   home.packages = with pkgs; [
   ];
-  my.syncthing.enable = true;
 }

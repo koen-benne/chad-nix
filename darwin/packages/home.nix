@@ -38,4 +38,5 @@
     neofetch
     cachix
   ];
+  my.syncthing.enable = true;
 }

@@ -5,4 +5,5 @@
     man-pages
     nixos-option
   ];
+  my.syncthing.enable = true;
 }
