@@ -1,7 +1,7 @@
 { config, inputs, lib, pkgs, ... }:
 let
   inherit (lib) mdDoc mkEnableOption mkIf;
-  spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
   cfg = config.my.spicetify;
 in
 {
@@ -12,7 +12,7 @@ in
   config = mkIf cfg.enable {
     programs.spicetify = {
       enable = true;
-      theme = spicePkgs.themes.Onepunch;
+      theme = spicePkgs.themes.onepunch;
       # colorScheme = "frappe";
 
       enabledExtensions = with spicePkgs.extensions; [
