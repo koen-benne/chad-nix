@@ -9,6 +9,7 @@
         overlays = [
           self.overlays.default
           self.inputs.nvim-nix.overlays.default
+          self.inputs.dev-flakes.overlays.default
         ];
       };
     in

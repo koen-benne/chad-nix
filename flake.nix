@@ -18,6 +18,7 @@
     arkenfox-nix.url = "github:dwarfmaster/arkenfox-nixos";
 
     nvim-nix.url = "github:koen-benne/nvim-nix";
+    dev-flakes.url = "github:koen-benne/dev-flakes";
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     homebrew-core.url = "github:homebrew/homebrew-core";
