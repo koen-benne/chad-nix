@@ -1,14 +1,16 @@
-{ config, lib, pkgs, ... }:
-
-with lib;
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; {
   options.my = {
-    user = mkOption { type = types.str; };
-    name = mkOption { type = types.str; };
-    email = mkOption { type = types.str; };
-    workmail = mkOption { type = types.str; };
-    uid = mkOption { type = types.int; };
+    user = mkOption {type = types.str;};
+    name = mkOption {type = types.str;};
+    email = mkOption {type = types.str;};
+    workmail = mkOption {type = types.str;};
+    uid = mkOption {type = types.int;};
   };
   config.my = {
     user = "koenbenne";

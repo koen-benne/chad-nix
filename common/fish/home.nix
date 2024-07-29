@@ -1,10 +1,12 @@
-{ config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mdDoc mkEnableOption mkIf;
   cfg = config.my.fish;
-in
-{
+in {
   options.my.fish = {
     enable = mkEnableOption (mdDoc "fish");
   };

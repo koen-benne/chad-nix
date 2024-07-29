@@ -1,10 +1,12 @@
-{ config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mdDoc mkEnableOption mkIf;
   cfg = config.my.git;
-in
-{
+in {
   options.my.git = {
     enable = mkEnableOption (mdDoc "git");
   };
@@ -47,9 +49,9 @@ in
           autoupdate = true;
           enabled = true;
         };
-        status = { submoduleSummary = true; };
+        status = {submoduleSummary = true;};
         url = {
-          "ssh://git@github.com:22/" = { pushInsteadOf = "https://github.com/"; };
+          "ssh://git@github.com:22/" = {pushInsteadOf = "https://github.com/";};
         };
       };
     };

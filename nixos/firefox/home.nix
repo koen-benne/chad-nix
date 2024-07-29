@@ -1,19 +1,20 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 # Configured with help of https://github.com/dwarfmaster/arkenfox-nixos
-
 let
   inherit (lib) mdDoc mkEnableOption mkIf;
   cfg = config.my.firefox;
   uc = builtins.readFile ./userChrome.css;
-
-in
-{
+in {
   options.my.firefox = {
     enable = mkEnableOption (mdDoc "firefox");
   };
 
   config = mkIf cfg.enable {
-
     programs.firefox = {
       enable = true;
       arkenfox = {
@@ -32,7 +33,9 @@ in
         };
       };
       policies = {
-        /* ---- EXTENSIONS ---- */
+        /*
+        ---- EXTENSIONS ----
+        */
         # Check about:support for extension/add-on ID strings.
         # Valid strings for installation_mode are "allowed", "blocked",
         # "force_installed" and "normal_installed".
@@ -73,4 +76,3 @@ in
     };
   };
 }
-

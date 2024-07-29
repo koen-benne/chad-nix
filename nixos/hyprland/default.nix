@@ -1,9 +1,12 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mdDoc mkDefualt mkEnableOption mkIf mkMerge;
   cfg = config.my.hyprland;
-in
-{
+in {
   options.my.hyprland = {
     enable = mkEnableOption (mdDoc "hyprland");
   };
@@ -16,5 +19,4 @@ in
       xwayland.enable = true;
     };
   };
-
 }

@@ -1,15 +1,16 @@
 # Stuff specific to a desktop version of darwin
 # This structure is goddamn terrible lmao
 # Works for now ig
-{ config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mdDoc mkEnableOption mkIf;
   wallpaper = ../../assets/wp-normal.jpg;
   cfg = config.my.desktop;
-
-in
-{
+in {
   options.my.desktop = {
     enable = mkEnableOption (mdDoc "desktop");
   };
@@ -18,7 +19,7 @@ in
     # my.mpv.enable = true;
     my.alacritty.enable = true;
 
-    home.activation.setWallpaper = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    home.activation.setWallpaper = lib.hm.dag.entryAfter ["writeBoundary"] ''
       /usr/bin/osascript -e '
         set desktopImage to POSIX file "${wallpaper}"
         tell application "Finder"

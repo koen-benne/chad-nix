@@ -1,8 +1,11 @@
-{ config, lib, pkgs, ... }:
-let
-  scripts = ./scripts;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  scripts = ./scripts;
+in {
   # csrutil enable --without fs --without debug --without nvram
   # nvram boot-args=-arm64e_preview_abi
   environment.etc."sudoers.d/yabai".text = ''

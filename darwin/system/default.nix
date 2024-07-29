@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   users.users.${config.my.user} = {
     home = "/Users/${config.my.user}";
     shell = pkgs.fish;
@@ -9,8 +12,8 @@
     LANG = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
   };
-  fonts.packages = with pkgs; [ jetbrains-mono-nerdfont ];
-  nix.settings.allowed-users = [ config.my.user ];
+  fonts.packages = with pkgs; [jetbrains-mono-nerdfont];
+  nix.settings.allowed-users = [config.my.user];
   launchd.daemons.activate-system.script = lib.mkOrder 0 ''
     wait4path /nix/store
   '';

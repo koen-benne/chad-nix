@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   homebrew = {
     enable = true;
     onActivation = {
@@ -33,8 +36,8 @@
       "firefox"
       "eloston-chromium"
 
-       # Design Tools
-       "figma"
+      # Design Tools
+      "figma"
     ];
     masApps = {
       Trello = 1278508951;

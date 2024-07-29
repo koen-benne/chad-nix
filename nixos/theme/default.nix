@@ -1,11 +1,12 @@
-{ config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mdDoc mkEnableOption mkIf;
   cfg = config.my.theme;
-
-in
-{
+in {
   options.my.theme = {
     enable = mkEnableOption (mdDoc "theme");
   };
@@ -42,6 +43,5 @@ in
       platformTheme = "gnome";
       style = "adwaita";
     };
-
   };
 }

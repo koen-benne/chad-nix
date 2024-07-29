@@ -1,10 +1,12 @@
-{ config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mdDoc mkEnableOption mkIf;
   cfg = config.my.lazygit;
-in
-{
+in {
   options.my.lazygit = {
     enable = mkEnableOption (mdDoc "lazygit");
   };
@@ -14,9 +16,9 @@ in
       settings = {
         gui.theme = {
           lightTheme = false;
-          activeBorderColor = [ "green" "bold" ];
-          inactiveBorderColor = [ "white" ];
-          optionsTextColor = [ "blue" ];
+          activeBorderColor = ["green" "bold"];
+          inactiveBorderColor = ["white"];
+          optionsTextColor = ["blue"];
         };
       };
     };

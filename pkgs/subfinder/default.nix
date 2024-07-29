@@ -1,8 +1,8 @@
-{ lib
-, fetchFromGitHub
-, python3
+{
+  lib,
+  fetchFromGitHub,
+  python3,
 }:
-
 python3.pkgs.buildPythonApplication {
   pname = "subfinder";
   version = "unstable-2023-04-19";
@@ -33,7 +33,7 @@ python3.pkgs.buildPythonApplication {
   meta = with lib; {
     description = "Subtitle finder";
     homepage = "https://github.com/ausaki/subfinder";
-    license = with licenses; [ mit ];
-    maintainers = with maintainers; [ azuwis ];
+    license = with licenses; [mit];
+    maintainers = with maintainers; [azuwis];
   };
 }

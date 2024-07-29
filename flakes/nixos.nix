@@ -1,20 +1,27 @@
 # Entry point when using nixos-rebuild switch
-{ self, withSystem, ... }:
-
-let
-  mkNixos =
-    { system ? "x86_64-linux"
-    , nixpkgs ? self.inputs.nixpkgs
-    , config ? { }
-    , overlays ? [ ]
-    , modules ? [ ]
-    }:
-    withSystem system ({ lib, pkgs, system, ... }:
-    let
-      customPkgs = import nixpkgs (lib.recursiveUpdate
+{
+  self,
+  withSystem,
+  ...
+}: let
+  mkNixos = {
+    system ? "x86_64-linux",
+    nixpkgs ? self.inputs.nixpkgs,
+    config ? {},
+    overlays ? [],
+    modules ? [],
+  }:
+    withSystem system ({
+      lib,
+      pkgs,
+      system,
+      ...
+    }: let
+      customPkgs = import nixpkgs (
+        lib.recursiveUpdate
         {
           inherit system;
-          overlays = [ self.overlays.default ] ++ overlays;
+          overlays = [self.overlays.default] ++ overlays;
           config.allowUnfree = true;
         }
         {
@@ -22,24 +29,28 @@ let
         }
       );
     in
-    nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = {
-        inherit lib;
-        inputs = self.inputs;
-        pkgs = if (nixpkgs != self.inputs.nixpkgs || config != { } || overlays != [ ]) then customPkgs else pkgs;
-      };
-      modules = [
-         ../nixos
-      ] ++ modules;
-    });
-in
-{
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit lib;
+          inputs = self.inputs;
+          pkgs =
+            if (nixpkgs != self.inputs.nixpkgs || config != {} || overlays != [])
+            then customPkgs
+            else pkgs;
+        };
+        modules =
+          [
+            ../nixos
+          ]
+          ++ modules;
+      });
+in {
   flake.nixosConfigurations = {
     nixos = mkNixos {
       # config.permittedInsecurePackages = [
       # ];
-      modules = [ ../hosts/nixos.nix ];
+      modules = [../hosts/nixos.nix];
     };
   };
 }

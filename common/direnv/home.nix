@@ -1,10 +1,12 @@
-{ config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mdDoc mkEnableOption mkIf;
   cfg = config.my.direnv;
-in
-{
+in {
   options.my.direnv = {
     enable = mkEnableOption (mdDoc "direnv");
   };
@@ -16,7 +18,7 @@ in
     };
     programs.fish.shellInitLast = ''
 
-direnv hook fish | source
+      direnv hook fish | source
 
     '';
   };

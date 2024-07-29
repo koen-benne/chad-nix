@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkIf mkEnableOption mdDoc;
   cfg = config.my.uxplay;
 
@@ -12,8 +15,7 @@ let
     terminal = false;
     type = "Application";
   };
-in
-{
+in {
   options.my.uxplay = {
     enable = mkEnableOption (mdDoc "uxplay");
   };

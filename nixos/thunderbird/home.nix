@@ -1,10 +1,12 @@
-{ config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkIf mkEnableOption mdDoc;
   cfg = config.my.thunderbird;
-in
-{
+in {
   options.my.thunderbird = {
     enable = mkEnableOption (mdDoc "thunderbird");
   };

@@ -1,16 +1,18 @@
-{ config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mdDoc mkEnableOption mkIf;
   cfg = config.my.alacritty;
-in
-{
+in {
   options.my.alacritty = {
     enable = mkEnableOption (mdDoc "alacritty");
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ pkgs.alacritty ];
+    home.packages = [pkgs.alacritty];
     xdg.configFile."alacritty/alacritty.toml".text = ''
       [colors.bright]
       black = "#4c566a"

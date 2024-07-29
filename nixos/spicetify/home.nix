@@ -1,10 +1,14 @@
-{ config, inputs, lib, pkgs, ... }:
-let
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mdDoc mkEnableOption mkIf;
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
   cfg = config.my.spicetify;
-in
-{
+in {
   options.my.spicetify = {
     enable = mkEnableOption (mdDoc "spicetify");
   };

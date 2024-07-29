@@ -1,16 +1,17 @@
-{ config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mdDoc mkEnableOption mkIf;
   cfg = config.my.steam;
-in
-{
+in {
   options.my.steam = {
     enable = mkEnableOption (mdDoc "steam");
   };
 
   config = mkIf cfg.enable {
-
     # environment.systemPackages = [ pkgs.steam-run-native ];
 
     environment.systemPackages = with pkgs; [

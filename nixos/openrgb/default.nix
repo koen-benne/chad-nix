@@ -1,13 +1,16 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mdDoc mkDefualt mkEnableOption mkIf mkMerge;
   cfg = config.my.openrgb;
-in
-{
+in {
   imports = [
     ./udev-rules.nix
   ];
-  options.my.openrgb= {
+  options.my.openrgb = {
     enable = mkEnableOption (mdDoc "openrgb");
   };
 

@@ -1,15 +1,16 @@
 # This is where I configure the entire desktop environment for linux systems in general
 # There should not be anything in here that I don't want in every one of my linux systems with a desktop environment
 # There should also not be anything in here that I would also like to have on my servers
-
-{ config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkIf mkEnableOption mdDoc;
   cfg = config.my.desktop;
   wallpaper = ../../assets/wp-ultrawide.png;
-in
-{
+in {
   options.my.desktop = {
     enable = mkEnableOption (mdDoc "desktop");
   };
@@ -54,7 +55,7 @@ in
     programs.wpaperd = {
       enable = true;
       settings = {
-        default = { path = wallpaper; };
+        default = {path = wallpaper;};
       };
     };
 

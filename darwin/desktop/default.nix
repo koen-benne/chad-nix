@@ -1,11 +1,12 @@
-{ config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mdDoc mkEnableOption mkIf;
   cfg = config.my.desktop;
-
-in
-{
+in {
   options.my.desktop = {
     enable = mkEnableOption (mdDoc "desktop");
   };
@@ -15,10 +16,10 @@ in
     my.dock = {
       enable = true;
       entries = [
-        { path = "/Applications/Slack.app/"; }
-        { path = "/Applications/Brave Browser.app/"; }
-        { path = "/Applications/Trello.app/"; }
-        { path = "${pkgs.kitty}/Applications/Kitty.app/"; }
+        {path = "/Applications/Slack.app/";}
+        {path = "/Applications/Brave Browser.app/";}
+        {path = "/Applications/Trello.app/";}
+        {path = "${pkgs.kitty}/Applications/Kitty.app/";}
         {
           path = "${config.users.users."koenbenne".home}/stage-files/";
           section = "others";

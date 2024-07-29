@@ -1,5 +1,8 @@
-{ lib, stdenvNoCC, fetchFromGitHub }:
-
+{
+  lib,
+  stdenvNoCC,
+  fetchFromGitHub,
+}:
 stdenvNoCC.mkDerivation {
   pname = "nibar";
   version = "2021-08-21";
@@ -11,7 +14,7 @@ stdenvNoCC.mkDerivation {
     sha256 = "1rs81rsbxckfhc75lzyyxf3xlqa2xdr0xbynp8pbcrlcsq1p2g4s";
   };
 
-  phases = [ "unpackPhase" "installPhase" ];
+  phases = ["unpackPhase" "installPhase"];
 
   installPhase = ''
     mkdir $out/

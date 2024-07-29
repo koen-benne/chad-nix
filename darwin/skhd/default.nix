@@ -1,8 +1,11 @@
-{ config, lib, pkgs, ... }:
-let
-  scripts = ./scripts;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  scripts = ./scripts;
+in {
   services.skhd = {
     enable = true;
     skhdConfig = ''
@@ -77,7 +80,7 @@ in
     SHELL = "/bin/bash";
   };
 
-  launchd.user.agents.skhd.path = lib.mkForce [ config.my.systemPath ];
+  launchd.user.agents.skhd.path = lib.mkForce [config.my.systemPath];
 
   # launchd.user.agents.skhd.serviceConfig = {
   #   StandardErrorPath = "/tmp/skhd.log";

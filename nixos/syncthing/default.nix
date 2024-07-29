@@ -1,10 +1,11 @@
-{ config, lib, ... }:
-
-let
+{
+  config,
+  lib,
+  ...
+}: let
   inherit (lib) mdDoc mkEnableOption mkIf;
   cfg = config.my.syncthing;
-in
-{
+in {
   options.my.syncthing = {
     enable = mkEnableOption (mdDoc "syncthing");
   };
@@ -12,6 +13,6 @@ in
   config = mkIf cfg.enable {
     hm.my.syncthing.enable = true;
 
-    networking.firewall.allowedTCPPorts = [ 22067 22070 ];
+    networking.firewall.allowedTCPPorts = [22067 22070];
   };
 }

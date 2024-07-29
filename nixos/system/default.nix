@@ -1,6 +1,10 @@
 # All NixOS systems will have this in their configuration
-{ config, lib, pkgs, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   boot.kernel.sysctl = {
     "net.core.default_qdisc" = "fq";
     "net.ipv4.tcp_congestion_control" = "bbr";
@@ -8,9 +12,10 @@
   boot.loader = {
     efi = {
       canTouchEfiVariables = lib.mkDefault true;
-      efiSysMountPoint = lib.mkIf
-        (builtins.hasAttr "/boot/efi" config.fileSystems &&
-          config.fileSystems."/boot/efi".fsType == "vfat")
+      efiSysMountPoint =
+        lib.mkIf
+        (builtins.hasAttr "/boot/efi" config.fileSystems
+          && config.fileSystems."/boot/efi".fsType == "vfat")
         "/boot/efi";
     };
     grub = {
@@ -21,13 +26,13 @@
   # This is using a rec (recursive) expression to set and access XDG_BIN_HOME within the expression
   # For more on rec expressions see https://nix.dev/tutorials/first-steps/nix-language#recursive-attribute-set-rec
   environment.sessionVariables = rec {
-    XDG_CACHE_HOME  = "$HOME/.cache";
+    XDG_CACHE_HOME = "$HOME/.cache";
     XDG_CONFIG_HOME = "$HOME/.config";
-    XDG_DATA_HOME   = "$HOME/.local/share";
-    XDG_STATE_HOME  = "$HOME/.local/state";
+    XDG_DATA_HOME = "$HOME/.local/share";
+    XDG_STATE_HOME = "$HOME/.local/state";
 
     # Not officially in the specification
-    XDG_BIN_HOME    = "$HOME/.local/bin";
+    XDG_BIN_HOME = "$HOME/.local/bin";
     PATH = [
       "${XDG_BIN_HOME}"
     ];
@@ -77,7 +82,7 @@
   };
   users.users.${config.my.user} = {
     # `users` is the primary group of all normal users in NixOS
-    extraGroups = [ "users" "wheel" "seat" "power" ];
+    extraGroups = ["users" "wheel" "seat" "power"];
     group = config.my.user;
     isNormalUser = true;
     shell = pkgs.fish;

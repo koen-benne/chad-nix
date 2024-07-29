@@ -1,7 +1,10 @@
 # All darwin systems will have these packages
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   home.packages = with pkgs; [
     # (writeScriptBin "bs" ''
     #   #!${runtimeShell}

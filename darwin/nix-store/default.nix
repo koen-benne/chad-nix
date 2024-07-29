@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   # https://github.com/NixOS/nix/issues/7273
   nix.settings.auto-optimise-store = false;
   launchd.daemons."nix-store-optimise".serviceConfig = {

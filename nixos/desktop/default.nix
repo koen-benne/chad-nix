@@ -1,12 +1,14 @@
 # This is where I configure the entire desktop environment for linux systems in general
 # There should not be anything in here that I don't want in every one of my linux systems with a desktop environment
-
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mdDoc mkDefualt mkEnableOption mkIf mkMerge;
   cfg = config.my.desktop;
-in
-{
+in {
   options.my.desktop = {
     enable = mkEnableOption (mdDoc "desktop");
   };
@@ -62,5 +64,4 @@ in
     security.rtkit.enable = true;
     security.polkit.enable = true;
   };
-
 }
