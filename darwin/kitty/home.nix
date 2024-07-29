@@ -45,6 +45,8 @@
       color14      #32c1b6
       color7       #eee8d5
       color15      #ffffff
+
+      map cmd+enter no_op
     '';
   };
   programs.zsh.initExtra = ''
