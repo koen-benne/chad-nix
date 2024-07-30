@@ -20,11 +20,6 @@ in {
         {path = "/Applications/Brave Browser.app/";}
         {path = "${pkgs.kitty}/Applications/Kitty.app/";}
         {
-          path = "${config.users.users."koenbenne".home}/stage-files/";
-          section = "others";
-          options = "--sort name --view grid --display folder";
-        }
-        {
           path = "${config.users.users."koenbenne".home}/Downloads";
           section = "others";
           options = "--sort name --view grid --display stack";
