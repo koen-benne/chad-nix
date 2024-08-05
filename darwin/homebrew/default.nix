@@ -20,6 +20,7 @@
       "homebrew/cask/docker"
       "lando"
       "android-studio"
+      "sequel-ace"
 
       # Communication Tools
       "slack"
