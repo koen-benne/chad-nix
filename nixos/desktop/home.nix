@@ -41,7 +41,7 @@ in {
 
       # other
       teams-for-linux
-      figma-agent
+      # figma-agent
 
       slack
       localsend
