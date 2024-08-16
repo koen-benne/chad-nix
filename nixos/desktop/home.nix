@@ -46,6 +46,8 @@ in {
       slack
       localsend
       ungoogled-chromium
+
+      virt-manager
     ];
 
     programs.fuzzel = {
