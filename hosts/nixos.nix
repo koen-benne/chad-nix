@@ -39,4 +39,5 @@
 
   # Stuff specific to only this machine
   my.steam.enable = true;
+  my.virtualisation.enable = true;
 }
