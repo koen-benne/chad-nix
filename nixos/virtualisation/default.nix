@@ -26,43 +26,6 @@ in {
       qemuRunAsRoot = true;
     };
 
-    # Add binaries to path so that hooks can use it
-    systemd.services.libvirtd = {
-      path = let
-        env = pkgs.buildEnv {
-          name = "qemu-hook-env";
-          paths = with pkgs; [
-            bash
-            libvirt
-            kmod
-            systemd
-            ripgrep
-            sd
-          ];
-        };
-      in
-      [ env ];
-
-      preStart =
-      ''
-        mkdir -p /var/lib/libvirt/hooks
-        mkdir -p /var/lib/libvirt/hooks/qemu.d/macOS/prepare/begin
-        mkdir -p /var/lib/libvirt/hooks/qemu.d/macOS/release/end
-        mkdir -p /var/lib/libvirt/vgabios
-
-        ln -sf ${files}/qemu /var/lib/libvirt/hooks/qemu
-        ln -sf ${files}/kvm.conf /var/lib/libvirt/hooks/kvm.conf
-        ln -sf ${files}/start.sh /var/lib/libvirt/hooks/qemu.d/macOS/prepare/begin/start.sh
-        ln -sf ${files}/stop.sh /var/lib/libvirt/hooks/qemu.d/macOS/release/end/stop.sh
-        ln -sf ${files}/6700xt.rom /var/lib/libvirt/vgabios/6700XT.rom
-
-        chmod +x /var/lib/libvirt/hooks/qemu
-        chmod +x /var/lib/libvirt/hooks/kvm.conf
-        chmod +x /var/lib/libvirt/hooks/qemu.d/macOS/prepare/begin/start.sh
-        chmod +x /var/lib/libvirt/hooks/qemu.d/macOS/release/end/stop.sh
-      '';
-    };
-
     users.extraUsers.${config.my.user}.extraGroups = [ "kvm" "libvirtd" "input" ];
 
     programs.virt-manager.enable = true;
@@ -72,5 +35,35 @@ in {
       options kvm_amd nested=1
       options kvm ignore_msrs=1 report_ignored_msrs=0
     '';
+
+    # Link hooks to the correct directory
+    system.activationScripts.libvirt-hooks.text =
+    ''
+      ln -Tfs /etc/libvirt/hooks /var/lib/libvirt/hooks
+    '';
+   
+    environment.etc = {
+      "libvirt/hooks/qemu" = {
+        source = ./files/qemu;
+        mode = "0755";
+      };
+   
+      "libvirt/hooks/kvm.conf" = {
+        source = ./files/kvm.conf;
+        mode = "0755";
+      };
+   
+      "libvirt/hooks/qemu.d/macOS/prepare/begin/start.sh" = {
+        source = ./files/start.sh;
+        mode = "0755";
+      };
+   
+      "libvirt/hooks/qemu.d/macOS/release/end/stop.sh" = {
+        source = ./files/stop.sh;
+        mode = "0755";
+      };
+   
+      "libvirt/vgabios/patched.rom".source = ./files/6700XT.rom;
+    };
   };
 }
