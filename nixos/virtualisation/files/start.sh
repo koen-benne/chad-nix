@@ -33,74 +33,14 @@ DISPMGR="null"
 echo "$DATE Beginning of Startup!"
 
 
-function stop_display_manager_if_running {
-    ## Get display manager on systemd based distros ##
-    if [[ -x /run/systemd/system ]] && echo "$DATE Distro is using Systemd"; then
-        DISPMGR="$(grep 'ExecStart=' /etc/systemd/system/display-manager.service | awk -F'/' '{print $(NF-0)}')"
-        echo "$DATE Display Manager = $DISPMGR"
+systenctl stop greetd
 
-        ## Stop display manager using systemd ##
-        if systemctl is-active --quiet "$DISPMGR.service"; then
-            grep -qsF "$DISPMGR" "/tmp/vfio-store-display-manager" || echo "$DISPMGR" >/tmp/vfio-store-display-manager
-            systemctl stop "$DISPMGR.service"
-            systemctl isolate multi-user.target
-        fi
-
-        while systemctl is-active --quiet "$DISPMGR.service"; do
-            sleep "1"
-        done
-
-        return
-
-    fi
-
-}
-
-function kde-clause {
-
-    echo "$DATE Display Manager = display-manager"
-
-    ## Stop display manager using systemd ##
-    if systemctl is-active --quiet "display-manager.service"; then
-    
-        grep -qsF "display-manager" "/tmp/vfio-store-display-manager"  || echo "display-manager" >/tmp/vfio-store-display-manager
-        systemctl stop "display-manager.service"
-    fi
-
-        while systemctl is-active --quiet "display-manager.service"; do
-                sleep 2
-        done
-
-    return
-
-}
-
-####################################################################################################################
-## Checks to see if your running KDE. If not it will run the function to collect your display manager.            ##
-## Have to specify the display manager because kde is weird and uses display-manager even though it returns sddm. ##
-####################################################################################################################
-
-if pgrep -l "plasma" | grep "plasmashell"; then
-    echo "$DATE Display Manager is KDE, running KDE clause!"
-    kde-clause
-    else
-        echo "$DATE Display Manager is not KDE!"
-        stop_display_manager_if_running
-fi
 
 ## Unbind EFI-Framebuffer ##
-if test -e "/tmp/vfio-is-nvidia"; then
-    rm -f /tmp/vfio-is-nvidia
-    else
-        test -e "/tmp/vfio-is-amd"
-        rm -f /tmp/vfio-is-amd
-fi
+rm -f /tmp/vfio-is-amd
 
 sleep "1"
 
-##############################################################################################################################
-## Unbind VTconsoles if currently bound (adapted and modernised from https://www.kernel.org/doc/Documentation/fb/fbcon.txt) ##
-##############################################################################################################################
 if test -e "/tmp/vfio-bound-consoles"; then
     rm -f /tmp/vfio-bound-consoles
 fi
@@ -117,33 +57,13 @@ done
 
 sleep "1"
 
-if lspci -nn | grep -e VGA | grep -s NVIDIA ; then
-    echo "$DATE System has an NVIDIA GPU"
-    grep -qsF "true" "/tmp/vfio-is-nvidia" || echo "true" >/tmp/vfio-is-nvidia
-    echo efi-framebuffer.0 > /sys/bus/platform/drivers/efi-framebuffer/unbind
-
-    ## Unload NVIDIA GPU drivers ##
-    modprobe -r nvidia_uvm
-    modprobe -r nvidia_drm
-    modprobe -r nvidia_modeset
-    modprobe -r nvidia
-    modprobe -r i2c_nvidia_gpu
-    modprobe -r drm_kms_helper
-    modprobe -r drm
-
-    echo "$DATE NVIDIA GPU Drivers Unloaded"
-fi
-
 if lspci -nn | grep -e VGA | grep -s AMD ; then
     echo "$DATE System has an AMD GPU"
     grep -qsF "true" "/tmp/vfio-is-amd" || echo "true" >/tmp/vfio-is-amd
     echo efi-framebuffer.0 > /sys/bus/platform/drivers/efi-framebuffer/unbind
 
     ## Unload AMD GPU drivers ##
-    modprobe -r drm_kms_helper
     modprobe -r amdgpu
-    modprobe -r radeon
-    modprobe -r drm
 
     echo "$DATE AMD GPU Drivers Unloaded"
 fi
