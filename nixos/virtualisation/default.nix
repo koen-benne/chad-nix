@@ -12,8 +12,13 @@ in {
   };
 
   config = mkIf cfg.enable {
+    hm.my.virtualisation.enable = true;
+
     virtualisation.libvirtd.enable = true;
     users.extraUsers.${config.my.user}.extraGroups = [ "kvm" "libvirtd" "input" ];
+
+    programs.virt-manager.enable = true;
+    programs.dconf.enable = true;
 
     boot.extraModprobeConfig = ''
       options kvm_amd nested=1
