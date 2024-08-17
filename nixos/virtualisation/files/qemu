@@ -9,13 +9,12 @@
 # For a list of available hooks, please refer to https://www.libvirt.org/hooks.html
 #
 
+
 GUEST_NAME="$1"
 HOOK_NAME="$2"
 STATE_NAME="$3"
 
-BASEDIR="$(dirname -- '$0')"
-
-HOOKPATH="$BASEDIR/qemu.d/$GUEST_NAME/$HOOK_NAME/$STATE_NAME"
+HOOKPATH="/var/lib/libvirt/hooks/qemu.d/$GUEST_NAME/$HOOK_NAME/$STATE_NAME"
 
 set -e # If a script exits with an error, we should as well.
 

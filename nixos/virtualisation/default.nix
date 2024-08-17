@@ -16,14 +16,15 @@ in {
     hm.my.virtualisation.enable = true;
 
 
-    boot.kernelParams = ["amd_iommu=on"];
+    boot.kernelParams = ["amd_iommu=on" "iommu=pt"];
     boot.kernelModules = ["kvm-amd" "vfio-pci"];
     virtualisation.libvirtd = {
       enable = true;
       onBoot = "ignore";
       onShutdown = "shutdown";
-      qemuOvmf = true;
-      qemuRunAsRoot = true;
+      qemu.ovmf.enable = true;
+      qemu.runAsRoot = true;
+      qemu.swtpm.enable = true;
     };
 
     users.extraUsers.${config.my.user}.extraGroups = [ "kvm" "libvirtd" "input" ];
@@ -63,7 +64,7 @@ in {
         mode = "0755";
       };
    
-      "libvirt/vgabios/patched.rom".source = ./files/6700XT.rom;
+      "libvirt/vgabios/6700XT.rom".source = ./files/6700XT.rom;
     };
   };
 }
