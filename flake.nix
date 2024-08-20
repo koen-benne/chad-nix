@@ -43,6 +43,18 @@
       }: {
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
+            (writeShellApplication {
+              name = "format";
+              runtimeInputs = with pkgs; [alejandra];
+              text = "alejandra '**/*.nix'";
+            })
+            (writeShellApplication {
+              name = "check";
+              text = ''
+                echo "checking flake"
+                nix flake check --all-systems --no-build
+              '';
+            })
             alejandra
           ];
         };
