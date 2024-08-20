@@ -15,7 +15,6 @@ in {
   config = mkIf cfg.enable {
     hm.my.virtualisation.enable = true;
 
-
     boot.kernelParams = ["amd_iommu=on" "iommu=pt"];
     boot.kernelModules = ["kvm-amd" "vfio-pci"];
     virtualisation.libvirtd = {
@@ -27,7 +26,7 @@ in {
       qemu.swtpm.enable = true;
     };
 
-    users.extraUsers.${config.my.user}.extraGroups = [ "kvm" "libvirtd" "input" ];
+    users.extraUsers.${config.my.user}.extraGroups = ["kvm" "libvirtd" "input"];
 
     programs.virt-manager.enable = true;
     programs.dconf.enable = true;
@@ -38,32 +37,31 @@ in {
     '';
 
     # Link hooks to the correct directory
-    system.activationScripts.libvirt-hooks.text =
-    ''
+    system.activationScripts.libvirt-hooks.text = ''
       ln -Tfs /etc/libvirt/hooks /var/lib/libvirt/hooks
     '';
-   
+
     environment.etc = {
       "libvirt/hooks/qemu" = {
         source = ./files/qemu;
         mode = "0755";
       };
-   
+
       "libvirt/hooks/kvm.conf" = {
         source = ./files/kvm.conf;
         mode = "0755";
       };
-   
+
       "libvirt/hooks/qemu.d/macOS/prepare/begin/start.sh" = {
         source = ./files/start.sh;
         mode = "0755";
       };
-   
+
       "libvirt/hooks/qemu.d/macOS/release/end/stop.sh" = {
         source = ./files/stop.sh;
         mode = "0755";
       };
-   
+
       "libvirt/vgabios/6700XT.rom".source = ./files/6700XT.rom;
     };
   };
