@@ -4,20 +4,46 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mdDoc mkEnableOption mkIf mkOption listOf types;
   cfg = config.my.kvm;
   files = ./files;
 in {
-  options.my.kvm = {
+  options.my.kvm = with types; {
     enable = mkEnableOption (mdDoc "kvm");
+    gpuPciIds = mkOption {
+      type = listOf str;
+      default = [ ];
+      description = "The hardware IDs to pass through to a virtual machine.";
+    };
+    platform = mkOption {
+      type = enum [
+        "amd"
+        "intel"
+      ];
+      default = "amd";
+      description = "The CPU platform the machine is using.";
+    };
   };
 
   config = mkIf cfg.enable {
     hm.my.kvm.enable = true;
 
+    boot = {
+      kernelModules = [
+        "kvm-${cfg.platform}"
+        "vfio-virqfd"
+        "vfio-pci"
+        "vfio_iommu_type1"
+        "vfio"
+      ];
+      kernelParams = [
+      "${cfg.platform}_iommu=on"
+      "${cfg.platform}_iommu=pt"
+      "kvm.ignore_msrs=1"
+      # "video=efifb:off"
+      ];
+    };
 
-    boot.kernelParams = ["amd_iommu=on" "iommu=pt" "video=efifb:off"];
-    boot.kernelModules = ["kvm-amd" "vfio-pci"];
     virtualisation.libvirtd = {
       enable = true;
       onBoot = "ignore";
@@ -27,14 +53,13 @@ in {
       qemu.swtpm.enable = true;
     };
 
-    users.extraUsers.${config.my.user}.extraGroups = ["kvm" "libvirtd" "input"];
+    users.users.${config.my.user}.extraGroups = ["qemu-libvirtd" "disk" "kvm" "libvirtd" "input"];
 
     programs.virt-manager.enable = true;
     programs.dconf.enable = true;
 
     boot.extraModprobeConfig = ''
       options kvm_amd nested=1
-      options kvm ignore_msrs=1 report_ignored_msrs=0
     '';
 
     # Link hooks to the correct directory

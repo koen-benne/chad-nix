@@ -39,5 +39,9 @@
 
   # Stuff specific to only this machine
   my.steam.enable = true;
-  my.kvm.enable = true;
+  my.kvm = {
+    enable = true;
+    platform = "amd";
+    gpuPciIds = ["0000:0a:00:0" "0000:0a:00:1"];
+  };
 }
