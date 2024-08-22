@@ -15,7 +15,8 @@ in {
   config = mkIf cfg.enable {
     hm.my.virtualisation.enable = true;
 
-    boot.kernelParams = ["amd_iommu=on" "iommu=pt"];
+
+    boot.kernelParams = ["amd_iommu=on" "iommu=pt" "video=efifb:off"];
     boot.kernelModules = ["kvm-amd" "vfio-pci"];
     virtualisation.libvirtd = {
       enable = true;

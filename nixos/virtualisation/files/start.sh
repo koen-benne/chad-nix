@@ -7,35 +7,23 @@ echo "$DATE Beginning of Startup!"
 
 systemctl stop greetd
 
-## Unbind EFI-Framebuffer ##
-rm -f /tmp/vfio-is-amd
-
 sleep "1"
 
-if test -e "/tmp/vfio-bound-consoles"; then
-    rm -f /tmp/vfio-bound-consoles
-fi
-for (( i = 0; i < 16; i++))
-do
-  if test -x /sys/class/vtconsole/vtcon"${i}"; then
-      if [ "$(grep -c "frame buffer" /sys/class/vtconsole/vtcon"${i}"/name)" = 1 ]; then
-	       echo 0 > /sys/class/vtconsole/vtcon"${i}"/bind
-           echo "$DATE Unbinding Console ${i}"
-           echo "$i" >> /tmp/vfio-bound-consoles
-      fi
-  fi
-done
+echo 0 > /sys/class/vtconsole/vtcon0/bind
+echo 0 > /sys/class/vtconsole/vtcon1/bind
 
 sleep "1"
-
-echo "$DATE System has an AMD GPU"
-grep -qsF "true" "/tmp/vfio-is-amd" || echo "true" >/tmp/vfio-is-amd
 
 ## Unload AMD GPU drivers ##
 modprobe -r amdgpu
-modprobe -r radeon
+modprobe -r snd_hda_intel
 
 echo "$DATE AMD GPU Drivers Unloaded"
+
+virsh nodedev-detach pci_0000_0a_00_0
+virsh nodedev-detach pci_0000_0a_00_1
+
+sleep 10
 
 ## Load VFIO-PCI driver ##
 modprobe vfio
