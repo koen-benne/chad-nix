@@ -22,7 +22,7 @@ in {
             mkcert -install
           fi
         '';
-        UserName = config.my.username;
+        UserName = config.my.user;
         Type = "oneshot";
       };
     };
