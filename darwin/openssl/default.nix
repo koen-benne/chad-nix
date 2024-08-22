@@ -14,7 +14,7 @@ in {
       path = [ pkgs.mkcert ];
       serviceConfig = {
         ExecStart = ''
-          if [ ! -f ${config.my.home}/.local/share/mkcert/rootCA.pem ]; then
+          if [ ! -f "${config.my.home}/Library/Application Support/mkcert/rootCA.pem" ]; then
             mkcert -install
           fi
         '';
