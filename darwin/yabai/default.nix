@@ -57,15 +57,6 @@ in {
     '';
   };
 
-  launchd.user.agents.yabai.serviceConfig.EnvironmentVariables.PATH =
-    lib.mkForce "${config.services.yabai.package}/bin:${config.my.systemPath}";
-
-  # launchd.user.agents.yabai.serviceConfig = {
-  #   StandardErrorPath = "/tmp/yabai.log";
-  #   StandardOutPath = "/tmp/yabai.log";
-  # };
-
-  # https://github.com/koekeishiya/yabai#requirements-and-caveats
   system.defaults.CustomUserPreferences = {
     "com.apple.dock" = {
       # Automatically rearrange Spaces based on most recent use -> [ ]

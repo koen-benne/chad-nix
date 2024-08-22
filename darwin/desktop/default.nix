@@ -20,7 +20,7 @@ in {
         {path = "/Applications/Brave Browser.app/";}
         {path = "${pkgs.kitty}/Applications/Kitty.app/";}
         {
-          path = "${config.users.users."koenbenne".home}/Downloads";
+          path = "${config.my.home}/Downloads";
           section = "others";
           options = "--sort name --view grid --display stack";
         }

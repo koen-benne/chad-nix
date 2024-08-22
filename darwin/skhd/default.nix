@@ -75,17 +75,11 @@ in {
     '';
   };
 
+  # Variables passed to skhd service's process
   launchd.user.agents.skhd.environment = {
     NIX_SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
     SHELL = "/bin/bash";
   };
-
-  launchd.user.agents.skhd.path = lib.mkForce [config.my.systemPath];
-
-  # launchd.user.agents.skhd.serviceConfig = {
-  #   StandardErrorPath = "/tmp/skhd.log";
-  #   StandardOutPath = "/tmp/skhd.log";
-  # };
 
   system.activationScripts.preActivation.text = ''
     ${pkgs.sqlite}/bin/sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' \

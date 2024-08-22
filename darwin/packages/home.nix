@@ -36,8 +36,6 @@
 
     wakatime
 
-    mkcert
-
     neofetch
     cachix
   ];

@@ -19,6 +19,7 @@
     '')
     (pass.withExtensions (ext: [ext.pass-otp]))
     age
+    manix
     diffutils
     stow
     file
