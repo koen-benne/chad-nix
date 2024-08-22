@@ -15,7 +15,7 @@
     # nameservers = ["8.8.8.8" "8.8.4.4"];
     firewall = {
       enable = true;
-      allowedTCPPorts = [22 80 443 53317]; # 53317 is for LocalSend and 8211 is for palworld server
+      allowedTCPPorts = [22 80 443 53317]; # 53317 is for LocalSend
       allowedUDPPorts = [8211];
       allowedUDPPortRanges = [
         {
