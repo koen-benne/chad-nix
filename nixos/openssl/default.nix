@@ -4,9 +4,13 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkIf;
+  inherit (lib) mkIf mkEnableOption mdDoc;
   cfg = config.my.openssl;
 in {
+  options.my.openssl = {
+    enable = mkEnableOption (mdDoc "openssl");
+  };
+
   config = mkIf cfg.enable {
     systemd.services.mkcert = {
       description = "Install mkcert CA";
@@ -22,6 +26,10 @@ in {
         Type = "oneshot";
       };
     };
+
+    security.pki.certificateFiles = [
+      "${config.my.home}/.local/share/mkcert/rootCA.pem"
+    ];
   };
 }
 
