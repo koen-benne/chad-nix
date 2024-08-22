@@ -5,15 +5,15 @@
   ...
 }: let
   inherit (lib) mdDoc mkEnableOption mkIf;
-  cfg = config.my.virtualisation;
+  cfg = config.my.kvm;
   files = ./files;
 in {
-  options.my.virtualisation = {
-    enable = mkEnableOption (mdDoc "virtualisation");
+  options.my.kvm = {
+    enable = mkEnableOption (mdDoc "kvm");
   };
 
   config = mkIf cfg.enable {
-    hm.my.virtualisation.enable = true;
+    hm.my.kvm.enable = true;
 
 
     boot.kernelParams = ["amd_iommu=on" "iommu=pt" "video=efifb:off"];
