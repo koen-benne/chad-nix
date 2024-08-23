@@ -9,4 +9,3 @@ Todo:
 - move modules to modules folder
 - give each system a subfolder in hosts, maybe rename to systems
 - add secret management?
-- rename flakes folder to imports or parts or something. They are literally just modules, so this name is confusing

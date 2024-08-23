@@ -32,7 +32,13 @@
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["aarch64-darwin" "x86_64-linux"];
-      imports = [./flakes];
+      imports = [
+        ./parts/lib.nix
+        ./parts/overlays.nix
+        ./parts/darwin.nix
+        ./parts/nixos.nix
+        ./parts/home-manager.nix
+      ];
       perSystem = {
         config,
         self',
