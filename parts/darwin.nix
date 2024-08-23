@@ -19,7 +19,7 @@
         specialArgs = {inherit inputs lib pkgs;};
         modules =
           [
-            ../darwin
+            ../modules/darwin
           ]
           ++ modules;
       });

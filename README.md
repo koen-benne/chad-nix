@@ -6,5 +6,4 @@ nix run nix-darwin -- switch --flake github:koen-benne/chad-nix
 
 
 Todo:
-- move modules to modules folder
 - add secret management?

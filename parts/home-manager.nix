@@ -52,7 +52,7 @@
               # set the same option as home-manager in nixos/nix-darwin, to generate the same derivation
               nix.package = pkgs.nix;
             }
-            ../common/home.nix
+            ../modules/common/home.nix
           ]
           ++ modules;
       });
@@ -64,7 +64,7 @@ in {
           home.username = "koenbenne";
           home.homeDirectory = "/home/koenbenne";
         }
-        ../nixos/home.nix
+        ../modules/nixos/home.nix
       ];
     };
 
@@ -75,7 +75,7 @@ in {
           home.username = "koenbenne";
           home.homeDirectory = "/Users/koenbenne";
         }
-        ../darwin/home.nix
+        ../modules/darwin/home.nix
       ];
     };
   };
