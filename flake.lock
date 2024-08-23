@@ -688,11 +688,11 @@
         "ts-error-translator-nvim": "ts-error-translator-nvim"
       },
       "locked": {
-        "lastModified": 1723799567,
-        "narHash": "sha256-K6tkSfkAIT54urMH/HpbZeOwMXDy+nsRPt8TaPsCDzM=",
+        "lastModified": 1724402052,
+        "narHash": "sha256-J+G7nHH46z+etHdTe31eeq7LSWQeY1Ry2GTFYd2x4C0=",
         "owner": "koen-benne",
         "repo": "nvim-nix",
-        "rev": "956abde0554a6511bc3d7876f859f1059b304509",
+        "rev": "2525c89c42ea758a906a03026fc85d6619b12b53",
         "type": "github"
       },
       "original": {
