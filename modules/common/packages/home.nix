@@ -39,6 +39,7 @@
     nmap
     rippkgs
     nvim-pkg # Custom neovim build
+    comma # for entering shells with packages
 
     nodejs
     # nodePackages.pnpm
