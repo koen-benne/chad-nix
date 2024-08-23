@@ -7,7 +7,11 @@
 }: let
   inherit (lib) mdDoc mkEnableOption mkIf;
 in {
-  imports = lib.my.getHmModules [./.];
+  imports =
+    [
+      ./my/default.nix
+    ]
+    ++ lib.my.getHmModules [./.];
 
   # my.zsh-ssh-agent.enable = true;
 }
