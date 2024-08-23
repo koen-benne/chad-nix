@@ -26,7 +26,7 @@
 in {
   flake.darwinConfigurations = {
     "RQG5XMDJF4" = mkDarwin {
-      modules = [../hosts/work-mac.nix];
+      modules = [../hosts/work-mac];
     };
   };
 }

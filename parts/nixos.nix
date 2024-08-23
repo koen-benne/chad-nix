@@ -50,7 +50,7 @@ in {
     nixos = mkNixos {
       # config.permittedInsecurePackages = [
       # ];
-      modules = [../hosts/nixos.nix];
+      modules = [../hosts/nixos];
     };
   };
 }
