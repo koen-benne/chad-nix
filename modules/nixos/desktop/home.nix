@@ -9,7 +9,7 @@
 }: let
   inherit (lib) mkIf mkEnableOption mdDoc;
   cfg = config.my.desktop;
-  wallpaper = ../../assets/wp-ultrawide.png;
+  wallpaper = ../../../assets/wp-ultrawide.png;
 in {
   options.my.desktop = {
     enable = mkEnableOption (mdDoc "desktop");

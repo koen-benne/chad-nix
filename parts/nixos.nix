@@ -41,7 +41,7 @@
         };
         modules =
           [
-            ../nixos
+            ../modules/nixos
           ]
           ++ modules;
       });

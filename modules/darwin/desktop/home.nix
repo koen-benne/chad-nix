@@ -8,7 +8,7 @@
   ...
 }: let
   inherit (lib) mdDoc mkEnableOption mkIf;
-  wallpaper = ../../assets/wp-normal.jpg;
+  wallpaper = ../../../assets/wp-normal.jpg;
   cfg = config.my.desktop;
 in {
   options.my.desktop = {
