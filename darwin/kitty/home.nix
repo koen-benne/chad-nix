@@ -9,7 +9,7 @@
     shellIntegration.enableFishIntegration = true;
     darwinLaunchOptions = [
       "--single-instance"
-      "--directory=/Users/${config.my.name}"
+      "--directory=${config.my.home}"
     ];
     extraConfig = ''
       background_opacity 0.6
