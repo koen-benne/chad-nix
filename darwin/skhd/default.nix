@@ -81,6 +81,9 @@ in {
     SHELL = "/bin/bash";
   };
 
+  # Necessary for skhd to call binaries from path, otherwise it would need full path to nix store
+  launchd.user.agents.skhd.path = lib.mkForce [config.my.systemPath];
+
   system.activationScripts.preActivation.text = ''
     ${pkgs.sqlite}/bin/sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' \
       "INSERT or REPLACE INTO access(service,client,client_type,auth_value,auth_reason,auth_version) VALUES('kTCCServiceAccessibility','${pkgs.skhd}/bin/skhd',1,2,4,1);"
