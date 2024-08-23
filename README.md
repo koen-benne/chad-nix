@@ -7,5 +7,4 @@ nix run nix-darwin -- switch --flake github:koen-benne/chad-nix
 
 Todo:
 - move modules to modules folder
-- give each system a subfolder in hosts, maybe rename to systems
 - add secret management?
