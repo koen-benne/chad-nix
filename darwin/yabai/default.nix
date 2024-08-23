@@ -57,6 +57,9 @@ in {
     '';
   };
 
+  launchd.user.agents.yabai.serviceConfig.EnvironmentVariables.PATH =
+    lib.mkForce "${config.services.yabai.package}/bin:${config.my.systemPath}";
+
   system.defaults.CustomUserPreferences = {
     "com.apple.dock" = {
       # Automatically rearrange Spaces based on most recent use -> [ ]
