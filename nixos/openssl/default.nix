@@ -12,12 +12,13 @@ in {
   };
 
   config = mkIf cfg.enable {
-    systemd.services.mkcert = {
+    systemd.services.mkcert-install = {
       description = "Install mkcert CA";
       wantedBy = [ "multi-user.target" ];
       path = [ pkgs.mkcert ];
       serviceConfig = {
         ExecStart = ''
+          #!${pkgs.runtimeShell}
           if [ ! -f ${config.my.home}/.local/share/mkcert/rootCA.pem ]; then
             mkcert -install
           fi
@@ -28,7 +29,7 @@ in {
     };
 
     security.pki.certificateFiles = [
-      "${config.my.home}/.local/share/mkcert/rootCA.pem"
+      /home/${config.my.user}/.local/share/mkcert/rootCA.pem
     ];
   };
 }
