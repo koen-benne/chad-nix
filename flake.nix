@@ -52,7 +52,7 @@
             (writeShellApplication {
               name = "format";
               runtimeInputs = with pkgs; [alejandra];
-              text = "alejandra '**/*.nix'";
+              text = "alejandra ./**/*.nix";
             })
             (writeShellApplication {
               name = "check";
