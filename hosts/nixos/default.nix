@@ -6,7 +6,7 @@
   ...
 }: {
   imports = [
-    ./hardware-nixos.nix
+    ./hardware.nix
   ];
   networking = {
     hostName = "nixos";
