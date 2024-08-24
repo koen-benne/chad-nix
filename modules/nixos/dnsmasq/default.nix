@@ -15,10 +15,12 @@ in {
     services.dnsmasq = {
       enable = true;
       resolveLocalQueries = true;
-      extraConfig = ''
-        # Wildcard for *.localhost
-        address=/.localhost/127.0.0.1
-      '';
+      settings = {
+        address = "/.localhost/127.0.0.1";
+        server = ["127.0.0.1" "8.8.8.8"];
+      };
     };
+
+    services.resolved.enable = false;
   };
 }
