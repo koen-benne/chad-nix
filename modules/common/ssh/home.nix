@@ -32,6 +32,9 @@
       User koenbenne
       IdentityFile ~/.ssh/nixos
 
+    Host *.platform.sh
+      Include /home/koenbenne/.platformsh/ssh/*.config
+    Host *
 
 
   '';
