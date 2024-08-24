@@ -16,6 +16,7 @@
     firewall = {
       enable = true;
       allowedTCPPorts = [22 80 443 53317]; # 53317 is for LocalSend
+
       allowedUDPPorts = [8211];
       allowedUDPPortRanges = [
         {
