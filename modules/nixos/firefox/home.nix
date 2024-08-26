@@ -15,7 +15,7 @@ in {
     enable = mkEnableOption (mdDoc "firefox");
   };
 
-  import = [
+  imports = [
     inputs.arkenfox-nix.hmModules.arkenfox
   ];
 

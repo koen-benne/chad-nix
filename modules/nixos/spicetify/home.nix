@@ -13,7 +13,7 @@ in {
     enable = mkEnableOption (mdDoc "spicetify");
   };
 
-  import = [
+  imports = [
     inputs.spicetify-nix.homeManagerModules.default
   ];
 
