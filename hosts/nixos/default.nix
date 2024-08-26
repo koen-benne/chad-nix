@@ -1,0 +1,50 @@
+# TODO: move some of the firewall config here to their own files
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  imports = [
+    ./hardware.nix
+  ];
+  networking = {
+    hostName = "nixos";
+    # usePredictableInterfaceNames = true;
+    # defaultGateway = "192.168.0.1";
+    # nameservers = ["8.8.8.8" "8.8.4.4"];
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [22 80 443 53317]; # 53317 is for LocalSend
+
+      allowedUDPPorts = [8211];
+      allowedUDPPortRanges = [
+        {
+          from = 4000;
+          to = 4007;
+        }
+        {
+          from = 53315;
+          to = 53318;
+        }
+        {
+          from = 8000;
+          to = 8010;
+        }
+      ];
+    };
+  };
+
+  # Everythhing desktop related
+  my.desktop.enable = true;
+
+  # Stuff specific to only this machine
+  my.steam.enable = true;
+  my.kvm = {
+    enable = true;
+    platform = "amd";
+    gpuPciIds = ["0000:0a:00:0" "0000:0a:00:1"];
+  };
+  my.openssl.enable = true;
+  my.dnsmasq.enable = true;
+}

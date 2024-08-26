@@ -12,13 +12,14 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
-    android-nixpkgs.url = "github:tadfisher/android-nixpkgs";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
     arkenfox-nix.url = "github:dwarfmaster/arkenfox-nixos";
 
     nvim-nix.url = "github:koen-benne/nvim-nix";
     dev-flakes.url = "github:koen-benne/dev-flakes";
+
+    nh_darwin.url = "github:ToyVo/nh_darwin";
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     homebrew-core.url = "github:homebrew/homebrew-core";
@@ -32,7 +33,13 @@
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["aarch64-darwin" "x86_64-linux"];
-      imports = [./flakes];
+      imports = [
+        ./parts/lib.nix
+        ./parts/overlays.nix
+        ./parts/darwin.nix
+        ./parts/nixos.nix
+        ./parts/home-manager.nix
+      ];
       perSystem = {
         config,
         self',
@@ -46,7 +53,7 @@
             (writeShellApplication {
               name = "format";
               runtimeInputs = with pkgs; [alejandra];
-              text = "alejandra '**/*.nix'";
+              text = "alejandra ./**/*.nix";
             })
             (writeShellApplication {
               name = "check";
