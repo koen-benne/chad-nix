@@ -19,6 +19,9 @@ in {
         address = "/.localhost/127.0.0.1";
         server = ["127.0.0.1" "8.8.8.8"];
       };
+      # extraConfig = ''
+      #   address=/.localhost/127.0.0.1
+      # '';
     };
 
     services.resolved.enable = false;
