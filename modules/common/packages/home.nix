@@ -40,6 +40,7 @@
     rippkgs
     nvim-pkg # Custom neovim build
     comma # for entering shells with packages
+    nh # Nix helper
 
     nodejs
     # nodePackages.pnpm

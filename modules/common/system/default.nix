@@ -15,4 +15,8 @@
   nix.package = pkgs.nix;
   programs.fish.enable = true;
   time.timeZone = "Europe/Amsterdam";
+
+  environment.variables = {
+    FLAKE = "${../../..}";
+  };
 }
