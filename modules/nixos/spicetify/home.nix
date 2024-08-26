@@ -13,6 +13,10 @@ in {
     enable = mkEnableOption (mdDoc "spicetify");
   };
 
+  import = [
+    inputs.spicetify-nix.homeManagerModules.default
+  ];
+
   config = mkIf cfg.enable {
     programs.spicetify = {
       enable = true;
