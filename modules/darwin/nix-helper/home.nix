@@ -13,5 +13,10 @@ in {
 
   config = mkIf cfg.enable {
     home.shellAliases.nh = "nh_darwin";
+
+    programs = mkIf config.my.fish.enable {
+      fish.shellAliases.nh = "nh_darwin";
+    };
   };
+
 }
