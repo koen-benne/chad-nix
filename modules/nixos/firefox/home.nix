@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -13,6 +14,10 @@ in {
   options.my.firefox = {
     enable = mkEnableOption (mdDoc "firefox");
   };
+
+  import = [
+    inputs.arkenfox-nix.hmModules.arkenfox
+  ];
 
   config = mkIf cfg.enable {
     programs.firefox = {
