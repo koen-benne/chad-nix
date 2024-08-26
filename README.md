@@ -7,3 +7,4 @@ nix run nix-darwin -- switch --flake github:koen-benne/chad-nix
 
 Todo:
 - add secret management?
+- manage certificates
