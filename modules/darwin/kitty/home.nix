@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkIf;
+  inherit (lib) mkIf mkEnableOption mdDoc;
   cfg = config.my.kitty;
 in {
   options.my.kitty = {
@@ -12,7 +12,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ symbols-mono-nerdfont ];
 
     programs.kitty = {
       enable = true;
