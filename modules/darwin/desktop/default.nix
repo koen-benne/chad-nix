@@ -13,6 +13,9 @@ in {
 
   config = mkIf cfg.enable {
     hm.my.desktop.enable = true;
+
+    my.kitty.enable = true;
+
     my.dock = {
       enable = true;
       entries = [
