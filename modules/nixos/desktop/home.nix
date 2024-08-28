@@ -23,9 +23,9 @@ in {
       dunst
       hyprpicker
       # pinentry-gnome3
-      nautilus
+      gnome.nautilus
       evince
-      eog
+      gnome.eog
       libreoffice-qt
       mpv
       qbittorrent

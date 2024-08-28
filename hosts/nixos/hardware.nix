@@ -41,9 +41,11 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.graphics.extraPackages = [
+  # opengl will become graphics in the future
+  hardware.opengl.extraPackages = [
     pkgs.rocmPackages.clr.icd
   ];
+
   systemd.tmpfiles.rules = let
     rocmEnv = pkgs.symlinkJoin {
       name = "rocm-combined";

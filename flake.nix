@@ -1,7 +1,7 @@
 {
   inputs = {
-    unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*.tar.gz";
+    unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     systems.url = "github:nix-systems/default";
     flake-utils.url = "github:numtide/flake-utils";
     flake-utils.inputs.systems.follows = "systems";
@@ -9,7 +9,7 @@
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
