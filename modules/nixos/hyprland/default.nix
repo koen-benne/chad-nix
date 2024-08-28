@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkDefualt mkEnableOption mkIf mkMerge;
+  inherit (lib) mdDoc mkEnableOption mkIf;
   cfg = config.my.hyprland;
 in {
   options.my.hyprland = {
@@ -16,6 +16,7 @@ in {
 
     programs.hyprland = {
       enable = true;
+      package = pkgs.unstable.hyprland;
       xwayland.enable = true;
     };
   };
