@@ -10,6 +10,10 @@
       inherit system;
       config.allowUnfree = true;
       overlays = [
+        # Add unstable
+        (final: prev: {
+          unstable = import self.inputs.unstable (final // {config.allowUnfree = true;});
+        })
         self.overlays.default
         self.inputs.nvim-nix.overlays.default
         self.inputs.dev-flakes.overlays.default
