@@ -14,12 +14,8 @@ in {
   config = mkIf cfg.enable {
     programs.direnv = {
       enable = true;
+      enableFishIntegration = true;
       nix-direnv.enable = true;
     };
-    programs.fish.shellInitLast = ''
-
-      direnv hook fish | source
-
-    '';
   };
 }
