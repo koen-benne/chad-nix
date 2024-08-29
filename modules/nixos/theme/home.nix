@@ -4,38 +4,38 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mdDoc mkEnableOption mkIf mkForce;
   cfg = config.my.theme;
+  swaylockEnable = config.programs.swaylock.enable;
 in {
   options.my.theme = {
     enable = mkEnableOption (mdDoc "theme");
   };
 
   config = mkIf cfg.enable {
-    dconf = {
-      enable = true;
-      settings."org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
+    stylix = {
+      targets = {
+        neovim.enable = false;
+        waybar.enable = false;
+        fuzzel.enable = false;
       };
-    };
-    home.pointerCursor = {
-      name = "Adwaita";
-      size = 16;
-      package = pkgs.adwaita-icon-theme;
-      gtk.enable = true;
-      x11.enable = true;
+      opacity = {
+        popups = 0.8;
+        terminal = 0.6;
+      };
     };
 
-    gtk = {
-      enable = true;
-      iconTheme = {
-        name = "Papirus-Dark";
-        package = pkgs.papirus-icon-theme;
-      };
-      theme = {
-        name = "Adwaita-Dark";
-        package = pkgs.gnome-themes-extra;
-      };
+    programs.swaylock.settings = mkIf swaylockEnable {
+      screenshots = true;
+      clock = true;
+      indicator = true;
+      indicator-radius = 100;
+      indicator-thickness = 7;
+      effect-blur = "7x5";
+      line-color = "00000000";
+      separator-color = "00000000";
+      grace = 2;
+      fade-in = 0.2;
     };
   };
 }
