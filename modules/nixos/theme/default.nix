@@ -24,7 +24,7 @@ in {
       image = ../../../assets/wp-ultrawide.png;
       polarity = "dark";
       cursor = {
-        package = pkgs.adwaita-icon-theme;
+        package = pkgs.gnome.adwaita-icon-theme;
         size = 16;
         name = "Adwaita";
       };
