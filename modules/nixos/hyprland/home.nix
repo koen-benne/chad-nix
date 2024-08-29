@@ -83,9 +83,10 @@ in {
 
           blur {
             enabled = true
-            size = 3
+            size = 8
             passes = 1
             new_optimizations = true
+            popups = true
           }
         }
 

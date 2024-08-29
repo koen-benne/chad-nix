@@ -1,42 +1,54 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mdDoc mkEnableOption mkIf mkForce;
   cfg = config.my.theme;
 in {
   options.my.theme = {
     enable = mkEnableOption (mdDoc "theme");
   };
 
-  config = mkIf cfg.enable {
-    hm.my.theme.enable = true;
+  imports = [
+    inputs.stylix.nixosModules.stylix
+  ];
 
-    fonts = {
-      packages = with pkgs; [
-        fira
-        jetbrains-mono-nerdfont
-        noto-fonts-cjk-sans
-        noto-fonts-cjk-serif
-        poly
-      ];
-      fontconfig.defaultFonts = {
-        sansSerif = [
-          "Fira Sans"
-          "Noto Sans CJK SC"
-        ];
-        serif = [
-          "Poly"
-          "Noto Serif CJK SC"
-        ];
-        monospace = [
-          "JetBrainsMonoNL Nerd Font"
-          "Noto Sans Mono CJK SC"
-        ];
+  config = mkIf cfg.enable {
+    stylix = {
+      enable = true;
+      # TODO: find a more bluish theme
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/railscasts.yaml";
+      image = ../../../assets/wp-ultrawide.png;
+      polarity = "dark";
+      cursor = {
+        package = pkgs.adwaita-icon-theme;
+        size = 16;
+        name = "Adwaita";
+      };
+      fonts = {
+        sansSerif = {
+          package = pkgs.fira;
+          name = "Fira Sans";
+        };
+        serif = {
+          package = pkgs.poly;
+          name = "Poly";
+        };
+        monospace = {
+          package = pkgs.jetbrains-mono-nerdfont;
+          name = "JetBrainsMonoNL Nerd Font";
+        };
+        emoji = {
+          package = pkgs.noto-fonts-emoji;
+          name = "Noto Color Emoji";
+        };
       };
     };
+
+    hm.my.theme.enable = true;
 
     qt = {
       enable = true;

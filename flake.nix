@@ -22,6 +22,8 @@
 
     nh_darwin.url = "github:ToyVo/nh_darwin";
 
+    stylix.url = "github:danth/stylix";
+
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     homebrew-core.url = "github:homebrew/homebrew-core";
     homebrew-core.flake = false;

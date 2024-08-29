@@ -52,13 +52,6 @@ in {
       enable = true;
     };
 
-    programs.wpaperd = {
-      enable = true;
-      settings = {
-        default = {path = wallpaper;};
-      };
-    };
-
     # See issue: https://github.com/nix-community/home-manager/issues/1213
     xdg.configFile."mimeapps.list".force = true;
     xdg.mimeApps = {
