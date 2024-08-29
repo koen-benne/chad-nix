@@ -15,6 +15,7 @@ in {
     hm.my.desktop.enable = true;
 
     my.kitty.enable = true;
+    hm.my.wezterm.enable = true;
 
     my.dock = {
       enable = true;

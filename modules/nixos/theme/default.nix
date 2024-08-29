@@ -5,7 +5,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf mkForce;
+  inherit (lib) mdDoc mkEnableOption mkIf;
   cfg = config.my.theme;
 in {
   options.my.theme = {
@@ -19,7 +19,6 @@ in {
   config = mkIf cfg.enable {
     stylix = {
       enable = true;
-      # TODO: find a more bluish theme
       base16Scheme = "${pkgs.base16-schemes}/share/themes/railscasts.yaml";
       image = ../../../assets/wp-ultrawide.png;
       polarity = "dark";
