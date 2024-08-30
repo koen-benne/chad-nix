@@ -29,7 +29,3 @@ c.hints.selectors["all"] += [
     "[aria-haspopup]",
 ]
 
-# keybindings
-
-config.bind('pi', 'spawn xdotool key space ;; spawn --userscript pinp {url}')
-config.bind('tt', 'config-cycle tabs.show always switching')
