@@ -18,6 +18,7 @@ in {
         neovim.enable = false;
         waybar.enable = false;
         fuzzel.enable = false;
+        fzf.enable = false;
       };
       opacity = {
         popups = 0.8;
