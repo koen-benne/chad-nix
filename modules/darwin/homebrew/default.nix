@@ -32,7 +32,6 @@
       "onyx"
 
       # Browsers
-      "brave-browser"
       "arc"
       "firefox"
       "eloston-chromium"
