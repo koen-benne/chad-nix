@@ -29,6 +29,8 @@ in {
         config.colors = {
           foreground = "#ffffff",
           background = "#000408",
+          cursor_fg = "#c0cdc7",
+          cursor_bg = "#c0cdc7",
           cursor_border = "#c0cdc7",
 
           ansi = {

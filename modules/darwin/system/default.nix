@@ -5,7 +5,7 @@
   ...
 }: {
   users.users.${config.my.user} = {
-    home = "/Users/${config.my.user}";
+    home = config.my.home;
     shell = pkgs.fish;
   };
   environment.variables = {

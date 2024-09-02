@@ -19,6 +19,7 @@ in {
       extraConfig = ''
         set -ga terminal-overrides ",screen-256color*:Tc"
         set-option -g default-terminal "screen-256color"
+        set-option -ga terminal-overrides ",xterm-256color:Tc"
         set -s escape-time 0
         set -gq allow-passthrough on
 
