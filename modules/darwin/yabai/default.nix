@@ -6,15 +6,10 @@
 }: let
   scripts = ./scripts;
 in {
-  # csrutil enable --without fs --without debug --without nvram
-  # nvram boot-args=-arm64e_preview_abi
-  environment.etc."sudoers.d/yabai".text = ''
-    ${config.my.user} ALL = (root) NOPASSWD: ${pkgs.yabai}/bin/yabai --load-sa
-  '';
 
   services.yabai = {
     enable = true;
-    package = pkgs.yabai;
+    enableScriptingAddition = true;
     config = {
       # layout
       layout = "bsp";
@@ -47,12 +42,10 @@ in {
       yabai -m signal --add event=display_removed action="sleep 1 && ${scripts}/setup_spaces.sh"
       ${scripts}/setup_spaces.sh
       # rules
-      yabai -m rule --add app="^(LuLu|Vimac|Calculator|Software Update|Dictionary|VLC|System Preferences|zoom.us|Photo Booth|Archive Utility|Python|LibreOffice|App Store|Steam|Alfred|Activity Monitor)$" manage=off
+      yabai -m rule --add app="^(Calculator|Software Update|System Settings|Photo Booth|Archive Utility|Python)$" manage=off
       yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
       yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
       yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
-      yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Select file to save to" manage=off
-      yabai -m rule --add label="kittypopup" app="kitty" title="kittypopup" manage=off
       yabai -m rule --add label="Fzf" app="alacritty" title="Fzf" manage=off
     '';
   };
