@@ -175,6 +175,8 @@ in {
         # Change orientation
         bind = $mainMod, H, layoutmsg, orientationleft
         bind = $mainMod, L, layoutmsg, orientationright
+        bind = $mainMod, U, layoutmsg, orientationup
+        bind = $mainMod, D, layoutmsg, orientationdown
 
         # Switch workspaces with mainMod + [0-9]
         bind = $mainMod, 1, workspace, 1
