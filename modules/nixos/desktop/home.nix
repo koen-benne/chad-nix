@@ -46,6 +46,8 @@ in {
       slack
       localsend
       ungoogled-chromium
+
+      ardour
     ];
 
     programs.fuzzel = {
