@@ -33,6 +33,7 @@
     ueberzugpp
     zbar
     raycast
+    spotify
 
     wakatime
 
