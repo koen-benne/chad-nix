@@ -14,7 +14,7 @@ in {
   config = mkIf cfg.enable {
     hm.my.desktop.enable = true;
 
-    my.kitty.enable = true;
+    # my.kitty.enable = true;
     hm.my.wezterm.enable = true;
 
     my.dock = {
