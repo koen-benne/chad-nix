@@ -8,7 +8,6 @@
   imports =
     [
       (lib.mkAliasOptionModule ["hm"] ["home-manager" "users" config.my.user])
-      inputs.sops-nix.nixosModules.sops
     ]
     ++ lib.my.getModules [./.];
 
