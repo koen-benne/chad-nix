@@ -7,6 +7,10 @@
   home.file.".ssh/config".text = ''
 
 
+    Host natmom-staging
+      HostName backend.acc.natuurmonumenten.cloud.intracto.com
+      IdentityFile ~/.ssh/id_ed25519
+
     Host coolify
       HostName 23.88.117.45
       User root
