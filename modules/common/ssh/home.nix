@@ -9,6 +9,7 @@
 
     Host natmom-staging
       HostName backend.acc.natuurmonumenten.cloud.intracto.com
+      User staging-redactie
       IdentityFile ~/.ssh/id_ed25519
 
     Host coolify
