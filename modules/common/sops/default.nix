@@ -17,7 +17,7 @@
 
     secrets.github_token = {
       sopsFile = ./secrets/secrets.yaml;
-      owner = "root";
+      owner = config.my.user;
     };
   };
 }
