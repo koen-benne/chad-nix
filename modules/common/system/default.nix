@@ -11,6 +11,9 @@
     log-lines = 25;
     tarball-ttl = 43200;
     trusted-users = ["root" config.my.user];
+    # Seems like a darwin module for sops-nix is needed for this to work
+    # https://github.com/Mic92/sops-nix/pull/614
+    # access-tokens = "github.com=${config.sops.placeholder.github_access_token}";
   };
   nix.package = pkgs.nix;
   programs.fish.enable = true;
@@ -18,5 +21,6 @@
 
   environment.variables = {
     FLAKE = "${config.my.home}/.config/chad-nix";
+    XDG_CONFIG_HOME = "$HOME/.config";
   };
 }
