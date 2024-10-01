@@ -11,13 +11,10 @@
   ];
 
   sops = {
-    defaultSopsFile = ./secrets/secrets.yaml;
+    defaultSopsFile = ../../../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
     age.keyFile = "${config.my.home}/.config/sops/age/keys.txt";
 
-    secrets.github_token = {
-      sopsFile = ./secrets/secrets.yaml;
-      owner = config.my.user;
-    };
+    secrets.github_access_token = { };
   };
 }
