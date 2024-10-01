@@ -31,6 +31,7 @@
     homebrew-cask.flake = false;
     homebrew-bundle.url = "github:homebrew/homebrew-bundle";
     homebrew-bundle.flake = false;
+    sops-nix.url = "github:Mic92/sops-nix";
   };
 
   outputs = inputs @ {flake-parts, ...}:
