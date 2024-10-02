@@ -7,10 +7,10 @@
   home.file.".ssh/config".text = ''
 
 
-    Host backend.acc.natuurmonumenten.cloud.intracto.com
-      HostName backend.acc.natuurmonumenten.cloud.intracto.com
-      User staging-redactie
-      IdentityFile ~/.ssh/id_ed25519
+    # Host backend.acc.natuurmonumenten.cloud.intracto.com
+    #   HostName backend.acc.natuurmonumenten.cloud.intracto.com
+    #   User staging-redactie
+    #   IdentityFile ~/.ssh/id_ed25519
 
     Host coolify
       HostName 23.88.117.45
