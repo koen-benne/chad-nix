@@ -7,7 +7,7 @@
   home.file.".ssh/config".text = ''
 
 
-    Host natmom-staging
+    Host backend.acc.natuurmonumenten.cloud.intracto.com
       HostName backend.acc.natuurmonumenten.cloud.intracto.com
       User staging-redactie
       IdentityFile ~/.ssh/id_ed25519
