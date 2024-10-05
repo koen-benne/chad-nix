@@ -78,6 +78,16 @@ in {
         ../modules/darwin/home.nix
       ];
     };
+    "koenbenne@music-mac" = mkHome {
+      system = "x86_64-darwin";
+      modules = [
+        {
+          home.username = "koenbenne";
+          home.homeDirectory = "/Users/koenbenne";
+        }
+        ../modules/darwin/home.nix
+      ];
+    };
   };
 
   perSystem = {
