@@ -8,6 +8,7 @@
 
   # Everythhing desktop related
   my.desktop.enable = true;
+  my.desktop.windowManager = "yabai";
 
   # Stuff specific to only this machine
   my.openssl.enable = true;
