@@ -1,13 +1,11 @@
 {
   inputs,
-  config,
-  lib,
   pkgs,
   ...
-}: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
-in {
-  imports = [
+}: {
+  home.packages = [
     inputs.aerospace.packages.aarch64-darwin.default
+    pkgs.sketchybar
+    pkgs.sketchybar-app-font
   ];
 }
