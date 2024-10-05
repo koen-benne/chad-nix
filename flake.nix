@@ -31,6 +31,9 @@
     homebrew-cask.flake = false;
     homebrew-bundle.url = "github:homebrew/homebrew-bundle";
     homebrew-bundle.flake = false;
+
+    # Aerospace will soon be in nixpkgs: https://github.com/NixOS/nixpkgs/pull/344015
+    aerospace.url = "github:Dirakon/Aerospace-Flake";
   };
 
   outputs = inputs @ {flake-parts, ...}:
