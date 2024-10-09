@@ -140,10 +140,10 @@ alt-q = 'close'
 alt-f = 'fullscreen'
 
 alt-p = ''''exec-and-forget bash -c '
-SHELL=/run/current-system/sw/bin/zsh ${pkgs.alacritty}/bin/alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --command bash -c "PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.scripts}/bin/passfzf"'
+SHELL=/run/current-system/sw/bin/zsh ${pkgs.alacritty}/bin/alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --title=Fzf --command bash -c "PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.scripts}/bin/passfzf"'
 ''''
 alt-r = ''''exec-and-forget bash -c '
-SHELL=/run/current-system/sw/bin/zsh ${pkgs.alacritty}/bin/alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --command bash -c "PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.scripts}/bin/appfzf"'
+SHELL=/run/current-system/sw/bin/zsh ${pkgs.alacritty}/bin/alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --title=Fzf --command bash -c "PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.scripts}/bin/appfzf"'
 ''''
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
@@ -213,7 +213,7 @@ alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
 [[on-window-detected]]
-if.app-id = 'org.alacritty'
+if.window-title-regex-substring = 'Fzf'
 run = 'layout floating'
 
 
