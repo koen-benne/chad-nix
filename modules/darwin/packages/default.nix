@@ -12,7 +12,7 @@
       "onyx"
 
       # Browsers
-      "firefox"
+      "arc"
     ];
     masApps = {
       # Trello = 1278508951;
