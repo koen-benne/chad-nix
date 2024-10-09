@@ -13,12 +13,11 @@ in {
       enable = true;
       extraPackages = [
         inputs.aerospace.packages.${pkgs.system}.default
-        pkgs.sketchybar-app-font
         pkgs.jq
       ];
     };
 
-  fonts.packages = [ inputs.apple-fonts.packages.${pkgs.system}.sf-pro ];
+  fonts.packages = [ inputs.apple-fonts.packages.${pkgs.system}.sf-pro pkgs.sketchybar-app-font ];
 
     # Hide the menu bar to make place for sketchybar
     system.defaults = {
