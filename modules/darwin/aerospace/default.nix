@@ -17,7 +17,5 @@ in {
         pkgs.jq
       ];
     };
-
-    hm.my.aerospace.enable = true;
   };
 }
