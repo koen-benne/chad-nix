@@ -6,6 +6,7 @@
   ...
 }: let
   inherit (lib) mkIf;
+  scripts = ./scripts;
   cfg = config.my.desktop;
 in {
   config = mkIf (cfg.windowManager == "aerospace") {
@@ -134,25 +135,28 @@ else
 end if'
 ''''
 
+alt-q = 'close'
+alt-f = 'fullscreen'
+alt-p = "bash -c 'SHELL=/run/current-system/sw/bin/zsh alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --title=Fzf --command ${scripts}/passfzf.sh'"
+alt-r = "bash -c 'SHELL=/run/current-system/sw/bin/zsh alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --title=Fzf --command ${scripts}/appfzf.sh'"
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-alt-h = 'focus left'
-alt-j = 'focus down'
-alt-k = 'focus up'
-alt-l = 'focus right'
+# alt-j = 'focus next'
+# alt-k = 'focus prev'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
-alt-shift-h = 'move left'
-alt-shift-j = 'move down'
-alt-shift-k = 'move up'
-alt-shift-l = 'move right'
+# alt-shift-h = 'move left'
+# alt-shift-j = 'move down'
+# alt-shift-k = 'move up'
+# alt-shift-l = 'move right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-alt-shift-minus = 'resize smart -50'
-alt-shift-equal = 'resize smart +50'
+alt-h = 'resize smart -50'
+alt-l = 'resize smart +50'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 alt-1 = 'workspace 1'
