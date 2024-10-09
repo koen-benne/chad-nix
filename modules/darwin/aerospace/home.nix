@@ -6,7 +6,6 @@
   ...
 }: let
   inherit (lib) mkIf;
-  scripts = ./scripts;
   cfg = config.my.desktop;
 in {
   config = mkIf (cfg.windowManager == "aerospace") {
@@ -89,6 +88,8 @@ outer.right = 15
 # 'main' binding mode must be always presented
 # Fallback value (if you omit the key): mode.main.binding = {}
 [mode.main.binding]
+cmd-h = [] # Disable "hide application"
+cmd-alt-h = [] # Disable "hide others"
 
 # All possible keys:
 # - Letters.        a, b, c, ..., z
@@ -137,16 +138,27 @@ end if'
 
 alt-q = 'close'
 alt-f = 'fullscreen'
-alt-p = "bash -c 'SHELL=/run/current-system/sw/bin/zsh alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --title=Fzf --command ${scripts}/passfzf.sh'"
-alt-r = "bash -c 'SHELL=/run/current-system/sw/bin/zsh alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --title=Fzf --command ${scripts}/appfzf.sh'"
+alt-p = ''''exec-and-forget bash -c '
+SHELL=/run/current-system/sw/bin/zsh ${pkgs.alacritty}/bin/alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --title=Fzf --command bash -c "PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.scripts}/bin/passfzf"'
+''''
+alt-r = ''''exec-and-forget bash -c '
+SHELL=/run/current-system/sw/bin/zsh ${pkgs.alacritty}/bin/alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --title=Fzf --command bash -c "PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.scripts}/bin/appfzf"'
+''''
+
+
+# alt-r = ''''exec-and-forget bash -c '
+# SHELL=/run/current-system/sw/bin/zsh ${pkgs.alacritty}/bin/alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --title=Fzf --command bash -c "PATH=${config.my.home}/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin ${pkgs.scripts}/bin/appfzf"'
+# ''''
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-# alt-j = 'focus next'
-# alt-k = 'focus prev'
+alt-shift-h = 'focus left'
+alt-shift-j = 'focus down'
+alt-shift-k = 'focus up'
+alt-shift-l = 'focus right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 # alt-shift-h = 'move left'
@@ -203,6 +215,10 @@ alt-shift-h = ['join-with left', 'mode main']
 alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
+
+[[on-window-detected]]
+if.app-id = 'org.alacritty'
+run = 'layout floating'
 '';
 
     };
