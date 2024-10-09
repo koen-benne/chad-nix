@@ -5,14 +5,10 @@
   lib,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mdDoc;
+  inherit (lib) mkIf;
   cfg = config.my.aerospace;
 in {
-  options.my.kitty = {
-    enable = mkEnableOption (mdDoc "aerospace");
-  };
-
-  config = mkIf cfg.enable {
+  config = mkIf (cfg.windowManager == "aerospace") {
     home.packages = [
       inputs.aerospace.packages.aarch64-darwin.default
     ];

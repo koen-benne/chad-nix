@@ -5,14 +5,10 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf mdDoc;
+  inherit (lib) mkIf;
   cfg = config.my.aerospace;
 in {
-  options.my.aerospace = {
-    enable = mkEnableOption (mdDoc "aerospace");
-  };
-
-  config = mkIf cfg.enable {
+  config = mkIf (cfg.windowManager == "aerospace") {
     services.sketchybar = {
       enable = true;
       extraPackages = [
