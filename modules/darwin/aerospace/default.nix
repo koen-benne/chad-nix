@@ -12,7 +12,8 @@ in {
     services.sketchybar = {
       enable = true;
       extraPackages = [
-        inputs.aerospace.packages.aarch64-darwin.default
+        inputs.aerospace.packages.${pkgs.system}.default
+        inputs.apple-fonts.packages.${pkgs.system}.sf-pro
         pkgs.sketchybar-app-font
         pkgs.jq
       ];
