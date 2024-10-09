@@ -18,5 +18,12 @@ in {
         pkgs.jq
       ];
     };
+
+    # Hide the menu bar to make place for sketchybar
+    system.defaults = {
+      NSGlobalDomain = {
+        _HIHideMenuBar = true;
+      };
+    };
   };
 }
