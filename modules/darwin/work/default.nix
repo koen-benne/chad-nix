@@ -26,7 +26,7 @@ in {
         "1password"
 
         # Browsers
-        "arc"
+        "firefox"
 
         # Design Tools
         "figma"
