@@ -6,7 +6,6 @@
   ...
 }: let
   inherit (lib) mkIf;
-  cfg = config.my.aerospace;
 in {
   config = mkIf (cfg.windowManager == "aerospace") {
     services.sketchybar = {

@@ -6,7 +6,7 @@
   ...
 }: let
   inherit (lib) mkIf;
-  cfg = config.my.aerospace;
+  cfg = config.my.desktop;
 in {
   config = mkIf (cfg.windowManager == "aerospace") {
     home.packages = [
