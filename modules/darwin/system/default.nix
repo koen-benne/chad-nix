@@ -39,6 +39,7 @@
       AppleTemperatureUnit = "Celsius";
       InitialKeyRepeat = 20;
       KeyRepeat = 2;
+      _HIHideMenuBar = true;
       NSAutomaticCapitalizationEnabled = false;
       NSAutomaticDashSubstitutionEnabled = false;
       NSAutomaticPeriodSubstitutionEnabled = false;
