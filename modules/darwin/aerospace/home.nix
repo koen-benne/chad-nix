@@ -104,17 +104,35 @@ outer.right = 15
 
 # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
-# You can uncomment the following lines to open up terminal with alt + enter shortcut (like in i3)
-# alt-enter = '''exec-and-forget osascript -e '
-# tell application "WezTerm"
-#     do script
-#     activate
-# end tell'
-# '''
+alt-enter = ''''exec-and-forget bash -c '
+  if ps aux | grep -i "WezTerm" | grep -v "grep" > /dev/null
+  then
+    ${pkgs.wezterm}/bin/wezterm start --cwd ${config.my.home}
+  else
+    open ${pkgs.wezterm}/Applications/WezTerm.app
+  fi'
+''''
 
-alt-enter = 'exec-and-forget ${pkgs.wezterm}/bin/wezterm start --cwd ${config.my.home}'
-# alt-w = ''''''
+alt-w = ''''exec-and-forget osascript -e '
+-- Check if Arc is already running
+set isArcRunning to false
+tell application "System Events"
+    if (exists process "Arc") then
+        set isArcRunning to true
+    end if
+end tell
+
+-- If Arc is not running, open it
+if not isArcRunning then
+    tell application "Arc" to activate
+else
+    -- If Arc is running, create a new window
+    tell application "Arc"
+        make new window
+        activate
+    end tell
+end if'
+''''
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-slash = 'layout tiles horizontal vertical'

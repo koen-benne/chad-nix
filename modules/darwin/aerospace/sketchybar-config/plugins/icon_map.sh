@@ -600,9 +600,6 @@ function __icon_map() {
    "WezTerm")
         icon_result=":wezterm:"
         ;;
-   "wezterm-gui")
-        icon_result=":wezterm:"
-        ;;
    "WhatsApp" | "WhatsApp")
         icon_result=":whats_app:"
         ;;

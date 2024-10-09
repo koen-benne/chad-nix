@@ -17,7 +17,7 @@ AEROSPACE_EMPTY_WORKESPACE=$(aerospace list-workspaces --monitor focused --empty
 
 reload_workspace_icon() {
   # echo reload_workspace_icon "$@" >> ~/aaaa
-  apps=$(aerospace list-windows --workspace "$@" | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}' | sed 's/wezterm-gui/WezTerm/g')
+  apps=$(aerospace list-windows --workspace "$@" | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
 
   icon_strip=" "
   if [ "${apps}" != "" ]; then
