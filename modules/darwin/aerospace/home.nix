@@ -4,17 +4,25 @@
   config,
   lib,
   ...
-}: {
-  home.packages = [
-    inputs.aerospace.packages.aarch64-darwin.default
-  ];
-
-  # home.activation.aerospace = lib.hm.dag.entryAfter ["writeBoundary"] ("open ${inputs.aerospace.packages.aarch64-darwin.default}/AeroSpace.app");
-  home.file = {
-    ".config/sketchybar".source = ./sketchybar-config;
+}: let
+  inherit (lib) mkIf mkEnableOption mdDoc;
+  cfg = config.my.aerospace;
+in {
+  options.my.kitty = {
+    enable = mkEnableOption (mdDoc "aerospace");
   };
-  home.file = {
-    ".config/aerospace/aerospace.toml".text = ''
+
+  config = mkIf cfg.enable {
+    home.packages = [
+      inputs.aerospace.packages.aarch64-darwin.default
+    ];
+
+    # home.activation.aerospace = lib.hm.dag.entryAfter ["writeBoundary"] ("open ${inputs.aerospace.packages.aarch64-darwin.default}/AeroSpace.app");
+    home.file = {
+      ".config/sketchybar".source = ./sketchybar-config;
+    };
+    home.file = {
+      ".config/aerospace/aerospace.toml".text = ''
 
 
 # Place a copy of this config to ~/.aerospace.toml
@@ -179,5 +187,6 @@ alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 '';
 
+    };
   };
 }
