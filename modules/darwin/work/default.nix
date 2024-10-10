@@ -19,8 +19,8 @@ in {
         "sequel-ace"
 
         # Communication Tools
-        "slack"
-        "microsoft-teams"
+        # "slack"
+        # "microsoft-teams"
 
         # Utility Tools
         "1password"
