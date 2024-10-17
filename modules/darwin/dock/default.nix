@@ -57,6 +57,8 @@ in {
           (entry: "${dockutil}/bin/dockutil --no-restart --add '${entry.path}' --section ${entry.section} ${entry.options}\n")
           cfg.entries;
       in {
+        environment.systemPackages = [ dockutil ];
+
         system.activationScripts.postUserActivation.text = ''
           echo >&2 "Setting up the Dock..."
           haveURIs="$(${dockutil}/bin/dockutil --list | ${pkgs.coreutils}/bin/cut -f2)"
