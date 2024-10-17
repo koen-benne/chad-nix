@@ -1,23 +1,24 @@
 # https://gist.github.com/antifuchs/10138c4d838a63c0a05e725ccd7bccdd
 
 { config, pkgs, lib, ... }:
-with lib;
 let
-  cfg = config.local.dock;
+  inherit (lib) mkIf mkOption types concatMapStrings hasSuffix;
+  inherit (types) listOf submodule str;
+  cfg = config.my.dock;
   stdenv = pkgs.stdenv;
 in
 {
   options = {
-    local.dock.enable = mkOption {
+    my.dock.enable = mkOption {
       description = "Enable dock";
       default = stdenv.isDarwin;
       example = false;
     };
 
-    local.dock.entries = mkOption
+    my.dock.entries = mkOption
       {
         description = "Entries on the Dock";
-        type = with types; listOf (submodule {
+        type = listOf (submodule {
           options = {
             path = lib.mkOption { type = str; };
             section = lib.mkOption {
