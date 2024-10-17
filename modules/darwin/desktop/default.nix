@@ -17,9 +17,6 @@ in {
     entries = mkOption {
       type = types.listOf types.attrs;
       default = [
-        {path = "/Applications/Slack.app/";}
-        {path = "/Applications/Brave Browser.app/";}
-        {path = "${pkgs.kitty}/Applications/Kitty.app/";}
         {
           path = "${config.my.home}/Downloads";
           section = "others";
