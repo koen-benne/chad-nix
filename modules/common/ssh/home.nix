@@ -41,6 +41,12 @@
       Include /home/koenbenne/.platformsh/ssh/*.config
     Host *
 
+    # BEGIN: Platform.sh certificate configuration
+    Host *.platform.sh
+      Include /Users/koenbenne/.platformsh/ssh/*.config
+    Host *
+    # END: Platform.sh certificate configuration
+
 
   '';
 }
