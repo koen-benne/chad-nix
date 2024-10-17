@@ -24,6 +24,5 @@ in {
       # package = inputs.nh_darwin.packages.${pkgs.system}.default;
       # Hopefully in the future package will be nh_darwin by default so that this can be moved to common
     };
-    hm.my.nix-helper.enable = true;
   };
 }
