@@ -47,7 +47,7 @@ in {
         natural_scroll = false
         }
 
-        sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+        sensitivity = -0.9 # -1.0 - 1.0, 0 means no modification.
         }
 
         misc {
