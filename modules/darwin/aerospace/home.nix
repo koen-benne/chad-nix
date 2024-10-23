@@ -10,7 +10,7 @@
 in {
   config = mkIf (cfg.windowManager == "aerospace") {
     home.packages = [
-      inputs.aerospace.packages.aarch64-darwin.default
+      pkgs.unstable.aerospace
     ];
 
     # home.activation.aerospace = lib.hm.dag.entryAfter ["writeBoundary"] ("open ${inputs.aerospace.packages.aarch64-darwin.default}/AeroSpace.app");

@@ -13,7 +13,7 @@ in {
       enable = true;
       extraPackages = [
         # inputs.aerospace.packages.${pkgs.system}.default
-        pkgs.aerospace
+        pkgs.unstable.aerospace
         pkgs.jq
       ];
     };
