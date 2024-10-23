@@ -13,6 +13,19 @@ in {
   };
 
   config = mkIf cfg.enable {
+    # @release-24.11: remove this hyprpaper block, as it is no longer necessary in this release
+    services.hyprpaper = {
+      enable = true;
+      settings = {
+        preload = [ "${config.stylix.image}" ];
+        wallpaper = [ ",${config.stylix.image}" ];
+      };
+    };
+    home.packages = with pkgs; [ hyprpaper ];
+    wayland.windowManager.hyprland.settings = {
+      exec-once = [ "hyprpaper" ];
+    };
+
     stylix = {
       targets = {
         # Enable on newer stylix version
