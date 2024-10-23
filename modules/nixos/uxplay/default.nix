@@ -16,16 +16,7 @@ in {
     networking.firewall.allowedUDPPorts = [5353 6000 6001 7011];
 
     hm.my.uxplay.enable = true;
-    services.avahi = {
-      enable = true;
-      nssmdns4 = true;
-      publish = {
-        enable = true;
-        addresses = true;
-        workstation = true;
-        userServices = true;
-        domain = true;
-      };
-    };
+
+    my.mdns.enable = true;
   };
 }
