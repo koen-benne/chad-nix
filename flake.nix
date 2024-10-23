@@ -22,7 +22,8 @@
 
     nh_darwin.url = "github:ToyVo/nh_darwin";
 
-    stylix.url = "github:danth/stylix";
+    stylix.url = "github:danth/stylix/release-24.05";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     homebrew-core.url = "github:homebrew/homebrew-core";

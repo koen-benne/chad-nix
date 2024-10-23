@@ -15,7 +15,8 @@ in {
   config = mkIf cfg.enable {
     stylix = {
       targets = {
-        neovim.enable = false;
+        # Enable on newer stylix version
+        # neovim.enable = false;
         waybar.enable = false;
         fuzzel.enable = false;
         fzf.enable = false;
