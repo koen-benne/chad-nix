@@ -8,6 +8,30 @@
   imports = [
     ./hardware.nix
   ];
+
+  boot.kernel.sysctl = {
+    "net.core.default_qdisc" = "fq";
+    "net.ipv4.tcp_congestion_control" = "bbr";
+  };
+  boot.loader = {
+    efi = {
+      canTouchEfiVariables = lib.mkDefault true;
+      efiSysMountPoint =
+        lib.mkIf
+        (builtins.hasAttr "/boot/efi" config.fileSystems
+          && config.fileSystems."/boot/efi".fsType == "vfat")
+        "/boot/efi";
+    };
+    grub = {
+      device = "nodev";
+      efiSupport = true;
+    };
+  };
+
+  system.stateVersion = "23.11";
+
+  networking.enableIPv6 = false;
+
   networking = {
     hostName = "nixos";
     # usePredictableInterfaceNames = true;
