@@ -32,7 +32,7 @@
       User git
       IdentityFile ~/.ssh/bitbucket
 
-    Host nixos
+    Host nixos-server
       HostName 77.169.201.160
       User koenbenne
       IdentityFile ~/.ssh/nixos
