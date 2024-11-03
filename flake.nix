@@ -35,6 +35,9 @@
 
     # Apple fonts flake
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
+
+    # Minecraft servers
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   };
 
   outputs = inputs @ {flake-parts, ...}:

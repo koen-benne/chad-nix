@@ -17,6 +17,7 @@
         self.overlays.default
         self.inputs.nvim-nix.overlays.default
         self.inputs.dev-flakes.overlays.default
+        self.inputs.nix-minecraft.overlay
       ];
     };
   in {
