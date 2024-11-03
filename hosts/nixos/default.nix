@@ -32,6 +32,14 @@
 
   networking.enableIPv6 = false;
 
+  services.openssh = {
+    enable = true;
+    settings = {
+      KbdInteractiveAuthentication = false;
+      PasswordAuthentication = false;
+    };
+  };
+
   networking = {
     hostName = "nixos";
     # usePredictableInterfaceNames = true;

@@ -40,13 +40,6 @@
       Defaults requiretty
     '';
   };
-  services.openssh = {
-    enable = true;
-    settings = {
-      KbdInteractiveAuthentication = false;
-      PasswordAuthentication = false;
-    };
-  };
 
   # nix profile diff-closures --profile /nix/var/nix/profiles/system
   system.activationScripts.systemDiff = ''

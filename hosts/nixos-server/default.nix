@@ -13,6 +13,14 @@
 
   system.stateVersion = "24.05";
 
+  services.openssh = {
+    enable = true;
+    settings = {
+      KbdInteractiveAuthentication = false;
+      PasswordAuthentication = false;
+    };
+  };
+
   networking = {
     hostName = "nixos-server";
 
