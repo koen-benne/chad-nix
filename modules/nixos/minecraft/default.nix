@@ -50,10 +50,18 @@ in {
                 url = "https://cdn.modrinth.com/data/abooMhox/versions/aROMAonE/treeharvester-1.21.3-9.0.jar";
                 sha512 = "b8d5c699d6bf4b26225454302f25a874c2dae078016db33398afb753e32ae23337c3c527467389c795408d894f34159a3f18c4f34ac20aaad299ff97f5685055";
               };
-              Moonrise = pkgs.fetchurl {
-                url = "https://cdn.modrinth.com/data/KOHu7RCS/versions/S7ZBVFid/Moonrise-Fabric-0.2.0-beta.3%2Bbad5cae.jar";
-                sha512 = "84831de3f402bd2f69fba1329412064f487571527fbb4182c45433eba3d716ef52c057d4f2e9f794821ac5147dbae774ef5c83776f4e376fc10ba3d80015cfde";
+              Collective = pkgs.fetchurl {
+                url = "https://cdn.modrinth.com/data/e0M1UDsY/versions/UqTBXnWC/collective-1.21.3-7.89.jar";
+                sha512 = "f8eace73d57e858330e2e15e76767512964c7b4b6aa592a61c29e641d2fda46d548dfc18c67a824c0a16a3da8ae9e1b585de3846e39306789eda98c02bcf7aad";
               };
+              FabricAPI = pkgs.fetchurl {
+                url = "https://cdn.modrinth.com/data/P7dR8mSH/versions/FjU3tsgY/fabric-api-0.107.0%2B1.21.3.jar";
+                sha512 = "f02d4a11e39075333141936816310dbc6131a5c335ea34760bcd69937c3effc20401da5a61c49beaf5ee522330db9fd87beb3d952cea84124eb1691f909fca00";
+              };
+              # Moonrise = pkgs.fetchurl {
+                # url = "https://cdn.modrinth.com/data/KOHu7RCS/versions/S7ZBVFid/Moonrise-Fabric-0.2.0-beta.3%2Bbad5cae.jar";
+                # sha512 = "84831de3f402bd2f69fba1329412064f487571527fbb4182c45433eba3d716ef52c057d4f2e9f794821ac5147dbae774ef5c83776f4e376fc10ba3d80015cfde";
+              # };
             });
           };
         };
