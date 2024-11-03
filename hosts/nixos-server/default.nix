@@ -75,4 +75,5 @@
   };
 
   my.openssl.enable = true;
+  my.mc-servers.enable = true;
 }
