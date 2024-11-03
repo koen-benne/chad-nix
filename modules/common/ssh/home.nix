@@ -37,6 +37,11 @@
       User koenbenne
       IdentityFile ~/.ssh/nixos
 
+    Host nixos-server
+      HostName 77.169.201.160
+      User koenbenne
+      IdentityFile ~/.ssh/nixos
+
     Host *.platform.sh
       Include /home/koenbenne/.platformsh/ssh/*.config
     Host *
