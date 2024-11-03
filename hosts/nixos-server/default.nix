@@ -62,7 +62,17 @@
 
   services.xserver.enable = false;
 
-  services.logind.lidSwitchExternalPower = "ignore";
+  systemd.targets.sleep.enable = false;
+  services.logind = {
+    lidSwitch = "ignore";
+    lidSwitchDocked = "ignore";
+    lidSwitchExternalPower = "ignore";
+    extraConfig = ''
+      HandleLidSwitch=ignore
+      HandleLidSwitchDocked=ignore
+      HandleLidSwitchExternalPower=ignore
+    '';
+  };
 
   my.openssl.enable = true;
 }
