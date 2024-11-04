@@ -63,6 +63,9 @@
   services.xserver.enable = false;
 
   systemd.targets.sleep.enable = false;
+
+  boot.kernelParams = [ "consoleblank=120" ];
+
   services.logind = {
     lidSwitch = "ignore";
     lidSwitchDocked = "ignore";
