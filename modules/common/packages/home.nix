@@ -35,7 +35,6 @@
     ripgrep
     scripts
     jetbrains-mono-nerdfont
-    openASAR
     nmap
     rippkgs
     nvim-pkg # Custom neovim build
