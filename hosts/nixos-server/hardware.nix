@@ -13,7 +13,12 @@
   boot.kernelModules = [ "kvm-intel" "wl" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
   boot.kernelParams = [ "intel_idle.max_cstate=1" ];
+  powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = "performance";
+  services.mbpfan = {
+    enable = true;
+    aggressive = true;
+  };
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/2a7ee3c7-badc-45fc-b118-3085efff2a69";
