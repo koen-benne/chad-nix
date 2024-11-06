@@ -34,6 +34,7 @@ in {
             difficulty = "normal";
             gamemode = "survival";
             max-players = 3;
+            max-tick-time = 60000;
             online-mode = true;
             reduced-debug-info = false;
           };
@@ -44,7 +45,7 @@ in {
             MR_REY = "815687a1-0a07-447b-bc3e-4ea3f423e7d0";
           };
 
-          jvmOpts = "-Xmx8G -Xms8G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1";
+          jvmOpts = "-Xmx8G -Xms6G";
           symlinks = {
             "mods" = pkgs.linkFarmFromDrvs "mods" (builtins.attrValues {
               TreeHarvester = pkgs.fetchurl {
@@ -66,31 +67,31 @@ in {
             });
           };
         };
-        tnauwiecreative = {
-          enable = true;
-          package = pkgs.fabric-server;
-
-          serverProperties = {
-            motd = "Tnauwiecreative";
-            white-list = true;
-            server-port = 25566;
-            difficulty = "normal";
-            gamemode = "creative";
-            max-players = 3;
-            online-mode = true;
-            reduced-debug-info = false;
-          };
-
-          whitelist = {
-            YerBoyCone = "ef4f6857-d513-4dd5-8595-cd9711743a55";
-            RWDLegend = "df9e46f9-d8a3-4092-a970-ff0bce9e6aef";
-            MR_REY = "815687a1-0a07-447b-bc3e-4ea3f423e7d0";
-          };
-
-          jvmOpts = "-Xmx4G -Xms4G";
-          symlinks = {
-          };
-        };
+        # tnauwiecreative = {
+        #   enable = true;
+        #   package = pkgs.fabric-server;
+        #
+        #   serverProperties = {
+        #     motd = "Tnauwiecreative";
+        #     white-list = true;
+        #     server-port = 25566;
+        #     difficulty = "normal";
+        #     gamemode = "creative";
+        #     max-players = 3;
+        #     online-mode = true;
+        #     reduced-debug-info = false;
+        #   };
+        #
+        #   whitelist = {
+        #     YerBoyCone = "ef4f6857-d513-4dd5-8595-cd9711743a55";
+        #     RWDLegend = "df9e46f9-d8a3-4092-a970-ff0bce9e6aef";
+        #     MR_REY = "815687a1-0a07-447b-bc3e-4ea3f423e7d0";
+        #   };
+        #
+        #   jvmOpts = "-Xmx4G -Xms4G";
+        #   symlinks = {
+        #   };
+        # };
       };
     };
   };
