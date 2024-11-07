@@ -14,7 +14,7 @@
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
   boot.kernelParams = [ "intel_idle.max_cstate=1" ];
   powerManagement.enable = true;
-  powerManagement.cpuFreqGovernor = "performance";
+  powerManagement.cpuFreqGovernor = "ondemand";
   services.mbpfan = {
     enable = true;
     aggressive = true;
