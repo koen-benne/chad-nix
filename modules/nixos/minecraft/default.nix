@@ -142,21 +142,21 @@ in {
           script = pkgs.writeScript "backup.sh" ''
 
 SERVERNAME="tnauwiecraft"
+SERVERDIR="/minecraft/''${SERVERNAME}"
 # Check if /minecraft/[servername] exists
-if [ ! -d "/minecraft/''${SERVERNAME}" ]; then
+if [ ! -d "''${SERVERDIR}" ]; then
   echo "Server directory not found. Exiting..."
   exit 1
 fi
 
 NOW=$(date "+%Y-%m-%d_%H%M")
-BACKUP_PATH="/servers/minecraft/backups/''${SERVERNAME}"
+BACKUP_PATH="/minecraft/backups/''${SERVERNAME}"
 if [ ! -d ''${BACKUP_PATH} ]; then
   mkdir -p ''${BACKUP_PATH}
 fi
-ORIGPATH="/srv/minecraft"
 BACKUP_FILE="''${BACKUP_PATH}/backup_''${NOW}.tar.gz"
 echo -n "Backing up Minecraft world, including compression"
-${pkgs.gnutar}/bin/tar -C ''${ORIGPATH} -zcf ''${BACKUP_FILE} . --checkpoint=.1000
+${pkgs.gnutar}/bin/tar -czvf ''${BACKUP_FILE} ''${SERVERDIR} --checkpoint=.1000
 if [ $? == 0 ]; then
   echo -e "[  OK''${NC}  ]"
 else
