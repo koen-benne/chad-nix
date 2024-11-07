@@ -12,12 +12,13 @@ in {
     inputs.nix-minecraft.nixosModules.minecraft-servers
   ];
 
+
   options.my.mc-servers = {
     enable = mkEnableOption (mdDoc "minecraft servers");
   };
 
   config = mkIf cfg.enable {
-    fileSystems."/home/minecraft/ramdisk" = {
+    fileSystems."/minecraft/tnauwiecraft" = {
       device = "none";
       fsType = "tmpfs";
       options = [ "size=4G" ];
@@ -26,10 +27,10 @@ in {
     services.minecraft-servers = {
       enable = true;
       eula = true;
-      dataDir = "/home/minecraft/ramdisk";
+      dataDir = "/minecraft";
       openFirewall = true;
-      managementSystem.tmux.enable = false;
-      managementSystem.systemd-socket.enable = true;
+      # managementSystem.tmux.enable = false;
+      # managementSystem.systemd-socket.enable = true;
 
       servers = {
         tnauwiecraft = {
@@ -55,12 +56,11 @@ in {
           };
 
           extraStartPre = ''
-            cp -R /srv/minecraft/* /home/minecraft/ramdisk
-            chown -R minecraft:minecraft /home/minecraft/ramdisk
+            cp -R /srv/minecraft/tnauwiecraft/* /minecraft/tnauwiecraft
           '';
           extraStopPost = ''
             sync
-            rsync -a --delete /home/minecraft/ramdisk/ /srv/minecraft/ > /var/log/rsync.log
+            rsync -a --delete /minecraft/tnauwiecraft/ /srv/minecraft/tnauwiecraft/
           '';
 
           jvmOpts = "-Xmx8G -Xms6G";

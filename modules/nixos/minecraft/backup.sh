@@ -1,12 +1,12 @@
 SERVERNAME="tnauwiecraft"
-# Check if /home/minecraft/ramdisk/[servername] exists
-if [ ! -d "/home/minecraft/ramdisk/${SERVERNAME}" ]; then
+# Check if /minecraft/[servername] exists
+if [ ! -d "/minecraft/${SERVERNAME}" ]; then
   echo "Server directory not found. Exiting..."
   exit 1
 fi
 
 NOW=$(date "+%Y-%m-%d_%H%M")
-BACKUP_PATH="/home/minecraft/backups/${SERVERNAME}"
+BACKUP_PATH="/servers/minecraft/backups/${SERVERNAME}"
 if [ ! -d ${BACKUP_PATH} ]; then
   mkdir -p ${BACKUP_PATH}
 fi
