@@ -1,3 +1,4 @@
+echo "testtest"
 SERVERNAME="tnauwiecraft"
 # Check if /minecraft/[servername] exists
 if [ ! -d "/minecraft/${SERVERNAME}" ]; then

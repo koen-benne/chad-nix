@@ -138,7 +138,9 @@ in {
       description = "Backup Tnauwiecraft world";
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = "${pkgs.coreutils}/bin/sh ${./backup.sh}";
+        ExecStart = let
+          script = builtins.readFile ./backup.sh;
+        in "${script}";
         User = "minecraft";
         Group = "minecraft";
       };
