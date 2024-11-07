@@ -57,11 +57,11 @@ in {
           };
 
           extraStartPre = ''
-            cp -R /srv/minecraft/tnauwiecraft/* /minecraft/tnauwiecraft
+            cp -R /minecraft/permanent/tnauwiecraft/* /minecraft/tnauwiecraft
           '';
           extraStopPost = ''
             sync
-            rsync -a --delete /minecraft/tnauwiecraft/ /srv/minecraft/tnauwiecraft/
+            rsync -a --delete /minecraft/tnauwiecraft/ /minecraft/permanent/tnauwiecraft/
           '';
 
           jvmOpts = "-Xmx8G -Xms6G";
@@ -149,22 +149,21 @@ if [ ! -d "''${SERVERDIR}" ]; then
   exit 1
 fi
 
-NOW=$(date "+%Y-%m-%d_%H%M")
+NOW=$(${pkgs.coreutils}/bin/date "+%Y-%m-%d_%H%M")
 BACKUP_PATH="/minecraft/backups/''${SERVERNAME}"
 if [ ! -d ''${BACKUP_PATH} ]; then
   mkdir -p ''${BACKUP_PATH}
 fi
 BACKUP_FILE="''${BACKUP_PATH}/backup_''${NOW}.tar.gz"
 echo -n "Backing up Minecraft world, including compression"
-${pkgs.gnutar}/bin/tar -czvf ''${BACKUP_FILE} ''${SERVERDIR} --checkpoint=.1000
-if [ $? == 0 ]; then
-  echo -e "[  OK''${NC}  ]"
+${pkgs.gnutar}/bin/tar -cvf ''${BACKUP_FILE} ''${SERVERDIR} --checkpoint=.1000 --use-compress-program=${pkgs.pigz}/bin/pigz
+if [ $? -eq 0 ]; then
+  echo -en "\nBackup finished at " && ${pkgs.coreutils}/bin/date +"%Y-%m-%d %H%M"
+  ${pkgs.coreutils}/bin/du -h ''${BACKUP_FILE}
 else
   echo -e "[  FAILED''${NC}  ]"
-  echo -n "Backup failed. Review tar.log"
+  echo -n "Backup failed."
 fi
-echo -en "\nBackup finished at " && date +"%Y-%m-%d %H%M"
-du -h ''${BACKUP_FILE}
 
 
           '';
