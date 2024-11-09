@@ -60,8 +60,8 @@ in {
             cp -R /minecraft/permanent/tnauwiecraft/* /minecraft/tnauwiecraft
           '';
           extraStopPost = ''
-            sync
-            rsync -a --delete /minecraft/tnauwiecraft/ /minecraft/permanent/tnauwiecraft/
+            ${pkgs.coreutils}/bin/sync
+            ${pkgs.rsync}/bin/rsync -a --delete /minecraft/tnauwiecraft/ /minecraft/permanent/tnauwiecraft/
           '';
 
           jvmOpts = "-Xmx8G -Xms6G";
@@ -79,10 +79,11 @@ in {
                 url = "https://cdn.modrinth.com/data/P7dR8mSH/versions/FjU3tsgY/fabric-api-0.107.0%2B1.21.3.jar";
                 sha512 = "f02d4a11e39075333141936816310dbc6131a5c335ea34760bcd69937c3effc20401da5a61c49beaf5ee522330db9fd87beb3d952cea84124eb1691f909fca00";
               };
-              # Noisium = pkgs.fetchurl {
-              #   url = "https://cdn.modrinth.com/data/KuNKN7d2/versions/M4c8aGZ4/noisium-fabric-2.4.0%2Bmc1.21.2-1.21.3.jar";
-              #   sha512 = "cc049b37fce73ea4d12b42753a0abecc8f29104bb0b397e3b79fab2f6c957794a8e704c339d87789e3217d0371e31c49d71eff5ca31d1a042e5b5ab869aca844";
-              # };
+              Noisium = pkgs.fetchurl {
+                url = "https://cdn.modrinth.com/data/KuNKN7d2/versions/M4c8aGZ4/noisium-fabric-2.4.0%2Bmc1.21.2-1.21.3.jar";
+                sha512 = "cc049b37fce73ea4d12b42753a0abecc8f29104bb0b397e3b79fab2f6c957794a8e704c339d87789e3217d0371e31c49d71eff5ca31d1a042e5b5ab869aca844";
+              };
+              # TODO: One of these two is causing issues
               # FerriteCore = pkgs.fetchurl {
               #   url = "https://cdn.modrinth.com/data/uXXizFIs/versions/a3QXXGz2/ferritecore-7.1.0-hotfix-fabric.jar";
               #   sha512 = "ae1ab30beb5938643cf2ae7b8220769f2c917e3f5441e46e9bc900295348c0a541a325c30b8dfc38039205620d872c27809acdc6741351f08e4c8edc36ae2bcc";
@@ -99,10 +100,6 @@ in {
                 url = "https://cdn.modrinth.com/data/l6YH9Als/versions/D4nCQOay/spark-1.10.115-fabric.jar";
                 sha512 = "07c760c460f50e31758171151d57f459a020c8b480d326f45a019242956f36572d05cebd36daa03f7c104239d805c5716082aef0a51465cc593dd39a9bd8712f";
               };
-              # Moonrise = pkgs.fetchurl {
-                # url = "https://cdn.modrinth.com/data/KOHu7RCS/versions/S7ZBVFid/Moonrise-Fabric-0.2.0-beta.3%2Bbad5cae.jar";
-                # sha512 = "84831de3f402bd2f69fba1329412064f487571527fbb4182c45433eba3d716ef52c057d4f2e9f794821ac5147dbae774ef5c83776f4e376fc10ba3d80015cfde";
-              # };
             });
           };
         };
