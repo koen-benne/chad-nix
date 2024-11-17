@@ -74,4 +74,5 @@
   my.steam.enable = true;
   my.virtualisation.enable = true;
   my.openssl.enable = true;
+  my.bluetooth.enable = true;
 }
