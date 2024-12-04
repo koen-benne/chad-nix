@@ -17,6 +17,8 @@
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
     arkenfox-nix.url = "github:dwarfmaster/arkenfox-nixos";
 
+    nh.url = "github:viperML/nh";
+
     nvim-nix.url = "github:koen-benne/nvim-nix";
     dev-flakes.url = "github:koen-benne/dev-flakes";
 

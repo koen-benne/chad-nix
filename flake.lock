@@ -661,47 +661,25 @@
         "type": "github"
       }
     },
-    "nh_darwin": {
+    "nh": {
       "inputs": {
-        "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1733092619,
-        "narHash": "sha256-kpzViKJZFIU8DryCQzdpdHdOZN5nWrryZBiMLy3kEEE=",
-        "owner": "ToyVo",
-        "repo": "nh_darwin",
-        "rev": "80e64a85d349aa2075973c68053ab475949f3bfd",
+        "lastModified": 1733130784,
+        "narHash": "sha256-B3PK+e717FdrQXhg53DwTPWLY458yGYsH20tYj0pgzU=",
+        "owner": "viperML",
+        "repo": "nh",
+        "rev": "83db9160f7d79c0e3af45686454853d239202e54",
         "type": "github"
       },
       "original": {
-        "owner": "ToyVo",
-        "repo": "nh_darwin",
+        "owner": "viperML",
+        "repo": "nh",
         "type": "github"
       }
     },
     "nix-darwin": {
-      "inputs": {
-        "nixpkgs": [
-          "nh_darwin",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1733047432,
-        "narHash": "sha256-fQUKxgxAEHlL5bevRkdsQB7sSpAMhlvxf7Zw0KK8QIg=",
-        "owner": "LnL7",
-        "repo": "nix-darwin",
-        "rev": "e30a3622b606dffc622305b4bbe1cfe37e78fa40",
-        "type": "github"
-      },
-      "original": {
-        "owner": "LnL7",
-        "repo": "nix-darwin",
-        "type": "github"
-      }
-    },
-    "nix-darwin_2": {
       "inputs": {
         "nixpkgs": "nixpkgs_6"
       },
@@ -723,7 +701,7 @@
       "inputs": {
         "brew-src": "brew-src",
         "flake-utils": "flake-utils_3",
-        "nix-darwin": "nix-darwin_2",
+        "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
@@ -931,11 +909,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1731386116,
-        "narHash": "sha256-lKA770aUmjPHdTaJWnP3yQ9OI1TigenUqVC3wweqZuI=",
+        "lastModified": 1733016324,
+        "narHash": "sha256-8qwPSE2g1othR1u4uP86NXxm6i7E9nHPyJX3m3lx7Q4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "689fed12a013f56d4c4d3f612489634267d86529",
+        "rev": "7e1ca67996afd8233d9033edd26e442836cc2ad6",
         "type": "github"
       },
       "original": {
@@ -1071,7 +1049,7 @@
         "homebrew-bundle": "homebrew-bundle",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
-        "nh_darwin": "nh_darwin",
+        "nh": "nh",
         "nix-homebrew": "nix-homebrew",
         "nix-index-database": "nix-index-database",
         "nix-minecraft": "nix-minecraft",
