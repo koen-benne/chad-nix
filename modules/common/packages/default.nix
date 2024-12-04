@@ -13,4 +13,6 @@
     man
     openssh
   ];
+
+  my.nix-helper.enable = true;
 }

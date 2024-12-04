@@ -5,7 +5,7 @@
   pkgs,
   ...
 }: {
-  home.packages = with pkgs; [
-    nh
-  ];
+  # home.packages = with pkgs; [
+    # nh
+  # ];
 }

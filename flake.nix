@@ -20,8 +20,6 @@
     nvim-nix.url = "github:koen-benne/nvim-nix";
     dev-flakes.url = "github:koen-benne/dev-flakes";
 
-    nh_darwin.url = "github:ToyVo/nh_darwin";
-
     stylix.url = "github:danth/stylix/release-24.11";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
 

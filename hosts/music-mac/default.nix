@@ -22,6 +22,5 @@
 
   # Stuff specific to only this machine
   my.openssl.enable = true;
-  my.nix-helper.enable = true;
   # hm.my.qutebrowser.enable = true;
 }
