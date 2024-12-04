@@ -13,10 +13,6 @@ in {
     enable = mkEnableOption (mdDoc "nix-helper");
   };
 
-  imports = [
-    inputs.nh.overlays.default
-  ];
-
   config = mkIf cfg.enable {
     # wait for https://github.com/LnL7/nix-darwin/pull/942
     # programs.nh = {
