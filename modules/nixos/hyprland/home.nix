@@ -75,7 +75,7 @@ in {
 
           rounding = 10
 
-          shadow = {
+          shadow {
             enabled = true
             range = 4
             render_power = 3
