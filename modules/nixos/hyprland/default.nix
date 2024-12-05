@@ -16,7 +16,7 @@ in {
 
     programs.hyprland = {
       enable = true;
-      package = pkgs.unstable.hyprland;
+      package = pkgs.hyprland;
       xwayland.enable = true;
     };
   };
