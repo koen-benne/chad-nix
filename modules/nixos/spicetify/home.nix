@@ -20,7 +20,8 @@ in {
   config = mkIf cfg.enable {
     programs.spicetify = {
       enable = true;
-      theme = spicePkgs.themes.onepunch;
+      # This is now managed by stylix
+      # theme = spicePkgs.themes.onepunch;
       # colorScheme = "frappe";
 
       enabledExtensions = with spicePkgs.extensions; [

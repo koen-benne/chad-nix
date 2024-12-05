@@ -30,10 +30,9 @@ in {
       enable = true;
     };
 
-    # opengl.driSupport32Bit will become graphics.enable32Bit in the future
-    hardware.opengl = {
+    hardware.graphics = {
       enable = true;
-      driSupport32Bit = true;
+      enable32Bit = true;
     };
 
     hardware.steam-hardware.enable = true;

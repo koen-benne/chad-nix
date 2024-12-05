@@ -30,7 +30,7 @@ in {
         base16Scheme = "${pkgs.base16-schemes}/share/themes/railscasts.yaml";
         polarity = "dark";
         cursor = {
-          package = pkgs.gnome.adwaita-icon-theme;
+          package = pkgs.adwaita-icon-theme;
           size = 16;
           name = "Adwaita";
         };
