@@ -224,7 +224,7 @@ in {
         bind = $mainMod, mouse_down, workspace, e+1
         bind = $mainMod, mouse_up, workspace, e-1
 
-        bind = $mainMod CTRL SHIFT, L, exec, swaylock
+        bind = $mainMod CTRL SHIFT, L, exec, hyprlock
 
         # Reaload waybar
         bind = $mainMod SHIFT, W, exec, pkill waybar && waybar -c $HOME/.config/waybar/config-hyprland -s $HOME/.config/waybar/hyprland-style.css

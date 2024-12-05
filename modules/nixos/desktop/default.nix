@@ -25,7 +25,7 @@ in {
 
     my.hyprland.enable = true;
     my.openrgb.enable = true;
-    my.swaylock.enable = true;
+    my.lockscreen.enable = true;
     my.theme.enable = true;
     my.uxplay.enable = true;
     hm.my.waybar.enable = true;
