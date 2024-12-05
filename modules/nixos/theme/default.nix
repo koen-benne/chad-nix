@@ -19,7 +19,7 @@ in {
   # Stylix requires an image
 
   config = mkMerge [
-    # Currently, image is not optional: https://github.com/danth/stylix/issues/200
+    # Currently, image has to be set as soon as you import the module: https://github.com/danth/stylix/issues/200
     {
       stylix.image = ../../../assets/wp-ultrawide.png;
     }

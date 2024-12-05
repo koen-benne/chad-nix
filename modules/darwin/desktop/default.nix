@@ -36,6 +36,7 @@ in {
     # my.kitty.enable = true;
     hm.my.wezterm.enable = true;
     hm.my.spicetify.enable = true;
+    hm.my.theme.enable = true;
 
     my.dock = {
       enable = true;

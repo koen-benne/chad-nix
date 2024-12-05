@@ -24,6 +24,7 @@ in {
         terminal = 0.7;
       };
     };
+
     programs.hyprlock.settings = {
       background = {
         blur_passes = 3;
