@@ -17,6 +17,7 @@
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
     arkenfox-nix.url = "github:dwarfmaster/arkenfox-nixos";
 
+    # NH 4.0 has darwin support, will be in nixpkgs unstable soon
     nh.url = "github:viperML/nh";
 
     nvim-nix.url = "github:koen-benne/nvim-nix";
