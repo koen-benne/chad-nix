@@ -20,12 +20,12 @@ See the above repository for updates as well as full license text. */
 }
 
 :root[sizemode="fullscreen"],
-#navigator-toolbox[inFullscreen]{ margin-top: 0 !important; }
+:root[sizemode="fullscreen"] #navigator-toolbox{ margin-top: 0 !important; }
 
 #navigator-toolbox{
+  --browser-area-z-index-toolbox: 3;
   position: fixed !important;
-  display: block;
-  background-color: var(black) !important;
+  background-color: var(--lwt-accent-color,black) !important;
   transition: transform 82ms linear, opacity 82ms linear !important;
   transition-delay: var(--uc-autohide-toolbox-delay) !important;
   transform-origin: top;
@@ -35,15 +35,25 @@ See the above repository for updates as well as full license text. */
   z-index: 1;
   pointer-events: none;
 }
-
+:root[sessionrestored] #urlbar[popover]{
+  pointer-events: none;
+  opacity: 0;
+  transition: transform 82ms linear var(--uc-autohide-toolbox-delay), opacity 0ms calc(var(--uc-autohide-toolbox-delay) + 82ms);
+  transform-origin: 0px calc(0px - var(--tab-min-height) - var(--tab-block-margin) * 2);
+  transform: rotateX(89.9deg);
+}
+#mainPopupSet:has(> [role="group"][panelopen]) ~ toolbox #urlbar[popover],
+#navigator-toolbox:is(:hover,:focus-within) #urlbar[popover],
+#urlbar-container > #urlbar[popover]:is([focused],[open]){
+  pointer-events: auto;
+  opacity: 1;
+  transition-delay: 33ms;
+  transform: rotateX(0deg);
+}
+#mainPopupSet:has(> [role="group"][panelopen]) ~ toolbox,
+#navigator-toolbox:has(#urlbar:is([open],[focus-within])),
 #navigator-toolbox:hover,
 #navigator-toolbox:focus-within{
-  transition-delay: 33ms !important;
-  transform: rotateX(0);
-  opacity: 1;
-}
-/* This ruleset is separate, because not having :has support breaks other selectors as well */
-#mainPopupSet:has(> #appMenu-popup:hover) ~ toolbox{
   transition-delay: 33ms !important;
   transform: rotateX(0);
   opacity: 1;
