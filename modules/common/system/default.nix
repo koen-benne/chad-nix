@@ -17,6 +17,6 @@
   time.timeZone = "Europe/Amsterdam";
 
   environment.variables = {
-    FLAKE = "${config.my.home}/.config/chad-nix";
+    NH_FLAKE = "${config.my.home}/.config/chad-nix";
   };
 }
