@@ -11,7 +11,6 @@ in {
   config = mkIf cfg.enable {
     programs.fish = {
       shellAliases = {
-        nixos-switch = "nixos-rebuild switch --flake ${current}";
         nixos-update = "nix flake update ${current}";
       };
     };
