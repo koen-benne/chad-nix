@@ -29,6 +29,10 @@ in {
         enable = true;
         base16Scheme = "${pkgs.base16-schemes}/share/themes/railscasts.yaml";
         polarity = "dark";
+        opacity = {
+          popups = 0.8;
+          terminal = 0.7;
+        };
       };
     })
   ];
