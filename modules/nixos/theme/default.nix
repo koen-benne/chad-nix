@@ -27,9 +27,6 @@ in {
     (mkIf cfg.enable {
       stylix = {
         enable = true;
-        targets = {
-          neovim.enable = false;
-        };
         base16Scheme = "${pkgs.base16-schemes}/share/themes/railscasts.yaml";
         polarity = "dark";
         cursor = {
