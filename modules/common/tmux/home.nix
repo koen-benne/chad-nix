@@ -15,6 +15,7 @@ in {
     programs.tmux = {
       enable = true;
       baseIndex = 1;
+      sensibleOnTop = false;
       prefix = "C-s";
       extraConfig = ''
         set -ga terminal-overrides ",screen-256color*:Tc"
@@ -22,9 +23,6 @@ in {
         set-option -ga terminal-overrides ",xterm-256color:Tc"
         set -s escape-time 0
         set -gq allow-passthrough on
-
-        bind-key C-a send-prefix
-        set -g status-style 'bg=#333333 fg=#5eacd3'
 
         set-window-option -g mode-keys vi
         bind -T copy-mode-vi v send-keys -X begin-selection
