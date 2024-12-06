@@ -8,7 +8,6 @@
   scripts = ./scripts;
   cfg = config.my.desktop;
 in {
-
   config = mkIf (cfg.windowManager == "yabai") {
     services.skhd = {
       enable = true;

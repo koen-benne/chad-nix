@@ -8,7 +8,6 @@
   inherit (lib) mkIf mkEnableOption mdDoc;
   cfg = config.my.nix-helper;
 in {
-
   options.my.nix-helper = {
     enable = mkEnableOption (mdDoc "nix-helper");
   };

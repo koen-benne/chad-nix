@@ -13,7 +13,6 @@ in {
     inputs.nix-minecraft.nixosModules.minecraft-servers
   ];
 
-
   options.my.mc-servers = {
     enable = mkEnableOption (mdDoc "minecraft servers");
   };
@@ -22,7 +21,7 @@ in {
     fileSystems."/minecraft/tnauwiecraft" = {
       device = "none";
       fsType = "tmpfs";
-      options = [ "size=4G" ];
+      options = ["size=4G"];
     };
 
     services.minecraft-servers = {
@@ -138,29 +137,29 @@ in {
         ExecStart = let
           script = pkgs.writeScript "backup.sh" ''
 
-SERVERNAME="tnauwiecraft"
-SERVERDIR="/minecraft/''${SERVERNAME}"
-# Check if /minecraft/[servername] exists
-if [ ! -d "''${SERVERDIR}" ]; then
-  echo "Server directory not found. Exiting..."
-  exit 1
-fi
+            SERVERNAME="tnauwiecraft"
+            SERVERDIR="/minecraft/''${SERVERNAME}"
+            # Check if /minecraft/[servername] exists
+            if [ ! -d "''${SERVERDIR}" ]; then
+              echo "Server directory not found. Exiting..."
+              exit 1
+            fi
 
-NOW=$(${pkgs.coreutils}/bin/date "+%Y-%m-%d_%H%M")
-BACKUP_PATH="/minecraft/backups/''${SERVERNAME}"
-if [ ! -d ''${BACKUP_PATH} ]; then
-  mkdir -p ''${BACKUP_PATH}
-fi
-BACKUP_FILE="''${BACKUP_PATH}/backup_''${NOW}.tar.gz"
-echo -n "Backing up Minecraft world, including compression"
-${pkgs.gnutar}/bin/tar -cvf ''${BACKUP_FILE} ''${SERVERDIR} --checkpoint=.1000 --use-compress-program=${pkgs.pigz}/bin/pigz
-if [ $? -eq 0 ]; then
-  echo -en "\nBackup finished at " && ${pkgs.coreutils}/bin/date +"%Y-%m-%d %H%M"
-  ${pkgs.coreutils}/bin/du -h ''${BACKUP_FILE}
-else
-  echo -e "[  FAILED''${NC}  ]"
-  echo -n "Backup failed."
-fi
+            NOW=$(${pkgs.coreutils}/bin/date "+%Y-%m-%d_%H%M")
+            BACKUP_PATH="/minecraft/backups/''${SERVERNAME}"
+            if [ ! -d ''${BACKUP_PATH} ]; then
+              mkdir -p ''${BACKUP_PATH}
+            fi
+            BACKUP_FILE="''${BACKUP_PATH}/backup_''${NOW}.tar.gz"
+            echo -n "Backing up Minecraft world, including compression"
+            ${pkgs.gnutar}/bin/tar -cvf ''${BACKUP_FILE} ''${SERVERDIR} --checkpoint=.1000 --use-compress-program=${pkgs.pigz}/bin/pigz
+            if [ $? -eq 0 ]; then
+              echo -en "\nBackup finished at " && ${pkgs.coreutils}/bin/date +"%Y-%m-%d %H%M"
+              ${pkgs.coreutils}/bin/du -h ''${BACKUP_FILE}
+            else
+              echo -e "[  FAILED''${NC}  ]"
+              echo -n "Backup failed."
+            fi
 
 
           '';
@@ -178,7 +177,7 @@ fi
         Persistent = true;
       };
 
-      wantedBy = [ "timers.target" ];
+      wantedBy = ["timers.target"];
     };
   };
 }

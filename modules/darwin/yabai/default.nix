@@ -8,7 +8,6 @@
   cfg = config.my.desktop;
   scripts = ./scripts;
 in {
-
   config = mkIf (cfg.windowManager == "yabai") {
     services.yabai = {
       enable = true;

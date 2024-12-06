@@ -9,7 +9,9 @@
     ./hardware.nix
   ];
 
-  boot.loader.systemd-boot.enable = true; boot.loader.efi.canTouchEfiVariables = true; nixpkgs.config.allowUnfree = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  nixpkgs.config.allowUnfree = true;
 
   system.stateVersion = "24.05";
 
@@ -36,7 +38,7 @@
       wifi.backend = "iwd";
     };
 
-    nameservers = [ "8.8.8.8" "8.8.4.4" ];
+    nameservers = ["8.8.8.8" "8.8.4.4"];
 
     firewall = {
       enable = true;
@@ -64,7 +66,7 @@
 
   systemd.targets.sleep.enable = false;
 
-  boot.kernelParams = [ "consoleblank=120" ];
+  boot.kernelParams = ["consoleblank=120"];
 
   services.logind = {
     lidSwitch = "ignore";

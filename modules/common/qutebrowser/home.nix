@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mdDoc mkEnableOption mkIf;
   cfg = config.my.qutebrowser;
 in {

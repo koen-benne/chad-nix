@@ -18,8 +18,8 @@ in {
     # services.blueman.enable = true;
 
     # Use newer blueman
-    environment.systemPackages = [ pkgs.unstable.blueman ];
-    services.dbus.packages = [ pkgs.unstable.blueman ];
-    systemd.packages = [ pkgs.unstable.blueman ];
+    environment.systemPackages = [pkgs.unstable.blueman];
+    services.dbus.packages = [pkgs.unstable.blueman];
+    systemd.packages = [pkgs.unstable.blueman];
   };
 }
