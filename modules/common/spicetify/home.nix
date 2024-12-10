@@ -29,6 +29,15 @@ in {
         shuffle # shuffle+ (special characters are sanitized out of ext names)
         hidePodcasts
       ];
+      enabledCustomApps = with spicePkgs.apps; [
+        newReleases
+        ncsVisualizer
+        lyricsPlus
+      ];
+      enabledSnippets = with spicePkgs.snippets; [
+        rotatingCoverart
+        pointer
+      ];
     };
   };
 }

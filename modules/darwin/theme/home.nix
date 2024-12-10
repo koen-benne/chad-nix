@@ -30,6 +30,7 @@ in {
         targets = {
           neovim.enable = false;
           fzf.enable = false;
+          # spicetify.enable = false;
         };
         base16Scheme = "${pkgs.base16-schemes}/share/themes/railscasts.yaml";
         polarity = "dark";
