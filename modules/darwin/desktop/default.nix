@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf mkOption types;
+  inherit (lib) mkIf mkOption types;
   cfg = config.my.desktop;
 in {
   options.my.desktop = {
@@ -28,7 +28,6 @@ in {
 
   config = mkIf cfg.enable {
     hm.my.desktop = {
-      enable = true;
       windowManager = cfg.windowManager;
     };
 

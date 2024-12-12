@@ -17,8 +17,6 @@ in {
       xwayland
     ];
 
-    hm.my.desktop.enable = true;
-
     my.hyprland.enable = true;
     my.openrgb.enable = true;
     my.lockscreen.enable = true;
