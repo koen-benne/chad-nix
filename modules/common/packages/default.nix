@@ -14,5 +14,5 @@
     openssh
   ];
 
-  my.nix-helper.enable = true;
+  nix-helper.enable = true;
 }
