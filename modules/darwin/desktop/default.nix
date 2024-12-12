@@ -8,7 +8,6 @@
   cfg = config.my.desktop;
 in {
   options.my.desktop = {
-    enable = mkEnableOption (mdDoc "desktop");
     windowManager = mkOption {
       type = types.enum ["yabai" "aerospace" "none"];
       default = "none";
@@ -35,7 +34,6 @@ in {
 
     # my.kitty.enable = true;
     hm.my.wezterm.enable = true;
-    hm.my.spicetify.enable = true;
     hm.my.theme.enable = true;
 
     my.dock = {

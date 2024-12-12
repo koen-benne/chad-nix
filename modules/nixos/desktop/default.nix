@@ -9,10 +9,6 @@
   inherit (lib) mdDoc mkDefualt mkEnableOption mkIf mkMerge;
   cfg = config.my.desktop;
 in {
-  options.my.desktop = {
-    enable = mkEnableOption (mdDoc "desktop");
-  };
-
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       gparted
@@ -33,7 +29,6 @@ in {
     hm.my.thunderbird.enable = true;
     hm.my.firefox.enable = true;
     hm.my.qutebrowser.enable = true;
-    hm.my.spicetify.enable = true;
 
     environment.sessionVariables = {
       NIXOS_OXONE_WL = "1";
