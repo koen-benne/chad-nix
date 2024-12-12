@@ -21,8 +21,8 @@ in {
     programs.spicetify = {
       enable = true;
       # This is now managed by stylix
-      # theme = spicePkgs.themes.onepunch;
-      # colorScheme = "frappe";
+      theme = spicePkgs.themes.onepunch;
+      colorScheme = "frappe";
 
       enabledExtensions = with spicePkgs.extensions; [
         fullAppDisplay
