@@ -1,4 +1,3 @@
-# TODO: move enable from my.desktop to common
 {
   config,
   lib,
