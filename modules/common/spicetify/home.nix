@@ -20,6 +20,7 @@ in {
   config = mkIf cfg.enable {
     programs.spicetify = {
       enable = true;
+      spotifyPackage = pkgs.unstable.spotify;
       # This is now managed by stylix
       theme = spicePkgs.themes.onepunch;
       colorScheme = "frappe";
