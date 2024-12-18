@@ -991,11 +991,11 @@
         "ts-error-translator-nvim": "ts-error-translator-nvim"
       },
       "locked": {
-        "lastModified": 1733827914,
-        "narHash": "sha256-6nO74mne1i0A8yNTfxt2spqlnC+XaSHtLUX7qPuqJ8A=",
+        "lastModified": 1734528079,
+        "narHash": "sha256-odAmn5gI1kuPMSiJeHgoZmkhA5jlMWx2aaQVJdOlLGg=",
         "owner": "koen-benne",
         "repo": "nvim-nix",
-        "rev": "63587ae3815e0311678d504f8a1d63a092b86bde",
+        "rev": "0cf08cbcd32f7618cec43899fb4768b112be4dcc",
         "type": "github"
       },
       "original": {
