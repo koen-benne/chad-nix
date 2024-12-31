@@ -31,7 +31,6 @@ in {
       ];
       enabledCustomApps = with spicePkgs.apps; [
         newReleases
-        ncsVisualizer
         lyricsPlus
       ];
       enabledSnippets = with spicePkgs.snippets; [
