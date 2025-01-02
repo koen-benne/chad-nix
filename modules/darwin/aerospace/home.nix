@@ -116,20 +116,20 @@ in {
         ''''
 
         alt-w = ''''exec-and-forget osascript -e '
-        -- Check if Arc is already running
-        set isArcRunning to false
+        -- Check if Zen Browser is already running
+        set isZen BrowserRunning to false
         tell application "System Events"
-            if (exists process "Arc") then
-                set isArcRunning to true
+            if (exists process "Zen Browser") then
+                set isZen BrowserRunning to true
             end if
         end tell
 
-        -- If Arc is not running, open it
-        if not isArcRunning then
-            tell application "Arc" to activate
+        -- If Zen Browser is not running, open it
+        if not isZen BrowserRunning then
+            tell application "Zen Browser" to activate
         else
-            -- If Arc is running, create a new window
-            tell application "Arc"
+            -- If Zen Browser is running, create a new window
+            tell application "Zen Browser"
                 make new window
                 activate
             end tell
