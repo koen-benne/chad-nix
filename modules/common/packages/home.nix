@@ -1,7 +1,6 @@
 # All systems will have these packages
 {
-  config,
-  lib,
+  inputs,
   pkgs,
   ...
 }: {

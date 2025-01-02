@@ -9,7 +9,9 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       openASAR
-      ripasso-cursive
+      ripasso-gtk
+    ] ++ [
+      inputs.zen-browser.packages.${pkgs.system}.default
     ];
   };
 }
