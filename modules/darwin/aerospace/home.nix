@@ -115,15 +115,7 @@ in {
           fi'
         ''''
 
-        alt-w = ''''exec-and-forget bash -c '
-          if ps aux | grep -i "Zen Browser" | grep -v "grep" > /dev/null
-          then
-            osascript -e "tell application \"Zen Browser\" to activate"
-            osascript -e "tell application \"System Events\" to keystroke \"n\" using command down"
-          else
-            open -a "Zen Browser"
-          fi'
-        ''''
+        alt-w = 'exec-and-forget /Applications/Zen\ Browser.app/Contents/MacOS/zen'
 
         alt-q = 'close'
         alt-f = 'fullscreen'
