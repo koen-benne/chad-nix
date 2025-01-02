@@ -34,6 +34,10 @@
     homebrew-bundle.url = "github:homebrew/homebrew-bundle";
     homebrew-bundle.flake = false;
 
+    # Zen browser
+    zen-browser.url = "github:youwen5/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+
     # Apple fonts flake
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
 

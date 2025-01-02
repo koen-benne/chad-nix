@@ -1,7 +1,5 @@
 # All darwin systems will have these packages
 {
-  config,
-  lib,
   pkgs,
   ...
 }: {
@@ -27,8 +25,8 @@
     daemon
     darwin.iproute2mac
     pstree
-    subfinder
 
+    zen-browser
     browserpass
     ueberzugpp
     zbar
