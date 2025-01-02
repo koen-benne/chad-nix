@@ -143,7 +143,7 @@ in {
         $mainMod = SUPER
 
         bind = $mainMod, Return, exec, footclient
-        bind = $mainMod, W, exec, firefox
+        bind = $mainMod, W, exec, zen
         bind = $mainMod, Q, killactive,
         bind = $mainMod SHIFT, C, exit,
         bind = $mainMod, E, exec, nautilus

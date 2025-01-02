@@ -3,6 +3,7 @@
 # There should also not be anything in here that I would also like to have on my servers
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
