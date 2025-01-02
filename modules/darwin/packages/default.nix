@@ -12,7 +12,7 @@
       "onyx"
 
       # Browsers
-      "arc"
+      # "arc"
       "zen-browser"
     ];
     masApps = {
