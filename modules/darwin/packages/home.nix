@@ -26,7 +26,6 @@
     darwin.iproute2mac
     pstree
 
-    zen-browser
     browserpass
     ueberzugpp
     zbar
@@ -39,6 +38,9 @@
 
     # MacOS comes with bash from the stone age. This version does not support certain features
     bash
+  ] ++ [
+    self.inputs.zen-browser.packages.${pkgs.system}.default
   ];
+
   my.syncthing.enable = true;
 }

@@ -18,6 +18,7 @@ in {
         waybar.enable = false;
         fuzzel.enable = false;
         fzf.enable = false;
+        spicetify.enable = false;
       };
       opacity = {
         popups = 0.8;

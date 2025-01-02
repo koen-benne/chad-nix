@@ -3,5 +3,4 @@ final: prev: {
   jetbrains-mono-nerdfont = final.nerdfonts.override {fonts = ["JetBrainsMono"];};
   openASAR = final.discord.override {withOpenASAR = true;};
   scripts = final.callPackage ../pkgs/scripts {};
-  zen-browser = final.inputs.zen-browser.packages.${final.system}.default;
 }
