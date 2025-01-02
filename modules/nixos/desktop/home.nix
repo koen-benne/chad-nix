@@ -45,6 +45,8 @@ in {
       slack
       localsend
       ungoogled-chromium
+    ] ++ [
+      inputs.zen-browser.packages.${pkgs.system}.default
     ];
 
     programs.fuzzel = {
