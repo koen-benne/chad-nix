@@ -13,6 +13,7 @@
 
       # Browsers
       "arc"
+      "zen-browser"
     ];
     masApps = {
       # Trello = 1278508951;
