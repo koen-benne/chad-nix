@@ -62,7 +62,8 @@ in {
         alt - r : SHELL=/run/current-system/sw/bin/zsh alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --title=Fzf --command ${scripts}/appfzf.sh
         # open browser
         # alt - w : sudo -u koenbenne /Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser
-        alt - w : osascript ${scripts}/startArc.scpt
+        # alt - w : osascript ${scripts}/startArc.scpt
+        alt - w : osascript ${scripts}/startZen.scpt
         # close current window
         alt - q : yabai -m window --close
         # enter fullscreen mode for the focused container
