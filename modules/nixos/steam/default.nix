@@ -17,6 +17,7 @@ in {
     environment.systemPackages = with pkgs; [
       steamcmd
       xdg-user-dirs
+      protonup-qt
     ];
 
     programs.nix-ld.enable = true;
