@@ -1023,14 +1023,16 @@
       "locked": {
         "lastModified": 1736200483,
         "narHash": "sha256-JO+lFN2HsCwSLMUWXHeOad6QUxOuwe9UOAF/iSl1J4I=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
         "rev": "3f0a8ac25fb674611b98089ca3a5dd6480175751",
-        "revCount": 712512,
-        "type": "tarball",
-        "url": "https://api.flakehub.com/f/pinned/NixOS/nixpkgs/0.2411.712512%2Brev-3f0a8ac25fb674611b98089ca3a5dd6480175751/01944209-0c88-7bd6-8aac-65b5af418928/source.tar.gz"
+        "type": "github"
       },
       "original": {
-        "type": "tarball",
-        "url": "https://flakehub.com/f/NixOS/nixpkgs/%2A.tar.gz"
+        "owner": "NixOS",
+        "ref": "nixos-24.11",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "nvim-nix": {
