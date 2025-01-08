@@ -5,10 +5,11 @@
   ...
 }: let
   inherit (lib) mdDoc mkEnableOption mkIf;
-  cfg = config.my.steam;
+  cfg = config.my.gaming;
 in {
-  options.my.steam = {
-    enable = mkEnableOption (mdDoc "steam");
+  options.my.gaming = {
+    enable = mkEnableOption (mdDoc "gaming");
+    enableSunshine = mkEnableOption (mdDoc "sunshine");
   };
 
   config = mkIf cfg.enable {
@@ -37,5 +38,12 @@ in {
     };
 
     hardware.steam-hardware.enable = true;
+
+    services.sunshine = mkIf cfg.enableSunshine {
+      enable = true;
+      autoStart = true;
+      capSysAdmin = true;
+      openFirewall = true;
+    };
   };
 }

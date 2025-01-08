@@ -71,7 +71,8 @@
   my.desktop.enable = true;
 
   # Stuff specific to only this machine
-  my.steam.enable = true;
+  my.gaming.enable = true;
+  my.gaming.enableSunshine = true;
   my.virtualisation.enable = true;
   my.openssl.enable = true;
   my.bluetooth.enable = true;
