@@ -44,6 +44,34 @@ in {
       autoStart = true;
       capSysAdmin = true;
       openFirewall = true;
+      applications = {
+        env = {
+            PATH = "$(PATH):$(HOME)\/.local\/bin";
+        };
+        apps = [
+          {
+            name = "Desktop";
+            image-path = "desktop.png";
+          }
+          {
+            name = "Steam Big Picture";
+            detached = [
+              "${pkgs.util-linux}/bin/setsid ${pkgs.steam}/bin/steam steam:\/\/open\/gamepadui"
+            ];
+            image-path = "steam.png";
+            exclude-global-prep-cmd = "";
+            auto-detach = "true";
+            wait-all = "true";
+            exit-timeout = "5";
+            prep-cmd = [
+              {
+                do = "${pkgs.hyprland}/bin/hyprctl keyword monitor DP-3,2560x1440@159.96201,0x0,1";
+                undo = "${pkgs.hyprland}/bin/hyprctl keyword monitor DP-3,3440x1440@159.96201,0x0,1";
+              }
+            ];
+          }
+        ];
+      };
     };
   };
 }
