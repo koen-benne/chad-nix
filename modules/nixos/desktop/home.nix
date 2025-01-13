@@ -59,8 +59,8 @@ in {
     xdg.mimeApps = {
       enable = true;
       defaultApplications = {
-        "x-scheme-handler/http" = "firefox.desktop";
-        "x-scheme-handler/https" = "firefox.desktop";
+        "x-scheme-handler/http" = "zen.desktop";
+        "x-scheme-handler/https" = "zen.desktop";
         "x-scheme-handler/mailto" = "thunderbird.desktop";
         "application/pdf" = "evince.desktop";
         "x-scheme-handler/figma" = "figma-linux.desktop";
