@@ -9,7 +9,8 @@
 in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      openASAR
+      # openASAR
+      vesktop
       ripasso-cursive
     ];
   };
