@@ -21,7 +21,9 @@
     nh.url = "github:viperML/nh";
 
     nvim-nix.url = "github:koen-benne/nvim-nix";
+
     dev-flakes.url = "github:koen-benne/dev-flakes";
+    dev-flakes.inputs.nixpkgs.follows = "unstable";
 
     stylix.url = "github:danth/stylix/release-24.11";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
