@@ -899,11 +899,11 @@
     },
     "nixpkgs_11": {
       "locked": {
-        "lastModified": 1733212471,
-        "narHash": "sha256-M1+uCoV5igihRfcUKrr1riygbe73/dzNnzPsmaLCmpo=",
+        "lastModified": 1736344531,
+        "narHash": "sha256-8YVQ9ZbSfuUk2bUf2KRj60NRraLPKPS0Q4QFTbc+c2c=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "55d15ad12a74eb7d4646254e13638ad0c4128776",
+        "rev": "bffc22eb12172e6db3c5dde9e3e5628f8e3e7912",
         "type": "github"
       },
       "original": {
@@ -1040,15 +1040,14 @@
         "flake-utils": "flake-utils_4",
         "gen-luarc": "gen-luarc",
         "nixpkgs": "nixpkgs_11",
-        "supermaven-nvim": "supermaven-nvim",
         "ts-error-translator-nvim": "ts-error-translator-nvim"
       },
       "locked": {
-        "lastModified": 1734528079,
-        "narHash": "sha256-odAmn5gI1kuPMSiJeHgoZmkhA5jlMWx2aaQVJdOlLGg=",
+        "lastModified": 1736524878,
+        "narHash": "sha256-jTspeeCiHlliLKvF9XV2hheDNPJRGMilGnr34bwaegE=",
         "owner": "koen-benne",
         "repo": "nvim-nix",
-        "rev": "0cf08cbcd32f7618cec43899fb4768b112be4dcc",
+        "rev": "5a3a0b44a314fbd695062990836d0f065a6bddea",
         "type": "github"
       },
       "original": {
@@ -1216,22 +1215,6 @@
         "owner": "danth",
         "ref": "release-24.11",
         "repo": "stylix",
-        "type": "github"
-      }
-    },
-    "supermaven-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1728314930,
-        "narHash": "sha256-1z3WKIiikQqoweReUyK5O8MWSRN5y95qcxM6qzlKMME=",
-        "owner": "supermaven-inc",
-        "repo": "supermaven-nvim",
-        "rev": "07d20fce48a5629686aefb0a7cd4b25e33947d50",
-        "type": "github"
-      },
-      "original": {
-        "owner": "supermaven-inc",
-        "repo": "supermaven-nvim",
         "type": "github"
       }
     },
