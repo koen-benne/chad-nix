@@ -16,13 +16,17 @@ in {
   };
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      # packages for my custom DE
+      # sound
+      playerctl
       pavucontrol
+      helvum
+
+      # packages for my custom DE
+      nwg-displays
       obs-studio
       wl-clipboard
       dunst
       hyprpicker
-      # pinentry-gnome3
       nautilus
       evince
       eog

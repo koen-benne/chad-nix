@@ -40,6 +40,8 @@ in {
       ];
     };
 
+    services.gvfs.enable = true;
+
     services.greetd = {
       enable = true;
       package = pkgs.unstable.greetd;
