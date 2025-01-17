@@ -12,6 +12,7 @@ in {
       # openASAR
       vesktop
       ripasso-cursive
+      freetube
     ];
   };
 }
