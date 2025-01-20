@@ -76,4 +76,5 @@
   my.virtualisation.enable = true;
   my.openssl.enable = true;
   my.bluetooth.enable = true;
+  my.android.enable = true;
 }
