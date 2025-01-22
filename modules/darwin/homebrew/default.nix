@@ -3,18 +3,9 @@
   inputs,
   ...
 }: {
-  homebrew = {
-    enable = true;
-    onActivation = {
-      autoUpdate = true;
-      cleanup = "zap";
-    };
-    taps = [
-    ];
-    brews = [
-      "mas"
-    ];
-  };
+  imports = [
+    inputs.nix-homebrew.darwinModules.nix-homebrew
+  ];
 
   nix-homebrew = {
     enable = true;
@@ -28,5 +19,18 @@
     mutableTaps = false;
     autoMigrate = true;
     enableFishIntegration = true;
+  };
+
+  homebrew = {
+    enable = true;
+    onActivation = {
+      autoUpdate = true;
+      cleanup = "zap";
+    };
+    taps = [
+    ];
+    brews = [
+      "mas"
+    ];
   };
 }
