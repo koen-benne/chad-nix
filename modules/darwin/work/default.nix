@@ -25,11 +25,8 @@ in {
         # Utility Tools
         "1password"
 
-        # Browsers
-        "firefox"
-
         # Design Tools
-        "figma"
+        # "figma"
       ];
     };
   };
