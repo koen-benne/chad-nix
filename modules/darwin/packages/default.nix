@@ -13,7 +13,7 @@
 
       # Browsers
       # "arc"
-      "zen-browser"
+      { name ="zen-browser"; greedy = true; }
     ];
     masApps = {
       # Trello = 1278508951;

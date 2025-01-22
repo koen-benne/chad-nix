@@ -14,7 +14,7 @@ in {
     homebrew = {
       casks = [
         # Development Tools
-        "homebrew/cask/docker"
+        { name = "homebrew/cask/docker"; greedy = true; }
         "lando"
         "sequel-ace"
 
@@ -23,7 +23,7 @@ in {
         # "microsoft-teams"
 
         # Utility Tools
-        "1password"
+        { name = "1password"; greedy = true; }
 
         # Design Tools
         # "figma"
