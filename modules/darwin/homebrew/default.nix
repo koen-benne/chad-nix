@@ -25,10 +25,10 @@
     enable = true;
     onActivation = {
       autoUpdate = true;
+      upgrade = true;
       cleanup = "zap";
     };
-    taps = [
-    ];
+    taps = builtins.attrNames config.nix-homebrew.taps;
     brews = [
       "mas"
     ];
