@@ -1,7 +1,6 @@
 {
   config,
-  lib,
-  pkgs,
+  inputs,
   ...
 }: {
   homebrew = {
@@ -15,5 +14,19 @@
     brews = [
       "mas"
     ];
+  };
+
+  nix-homebrew = {
+    enable = true;
+    user = config.my.user;
+    enableRosetta = true;
+    taps = {
+      "homebrew/homebrew-core" = inputs.homebrew-core;
+      "homebrew/homebrew-cask" = inputs.homebrew-cask;
+      "homebrew/homebrew-bundle" = inputs.homebrew-bundle;
+    };
+    mutableTaps = false;
+    autoMigrate = true;
+    enableFishIntegration = true;
   };
 }
