@@ -9,7 +9,7 @@
       #!${runtimeShell}
       rippkgs-index nixpkgs -o $HOME/.local/share/rippkgs-index.sqlite
     '')
-    (pass.withExtensions (ext: [ext.pass-otp]))
+    (pass.withExtensions (ext: [ext.pass-otp ext.pass-audit]))
     (writeScriptBin "nvim-update" ''
       #!${runtimeShell}
       cd $HOME/.config/chad-nix
