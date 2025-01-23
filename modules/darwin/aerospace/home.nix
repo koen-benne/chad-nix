@@ -120,11 +120,12 @@ in {
         alt-q = 'close'
         alt-f = 'fullscreen'
 
+        # SHELL=/run/current-system/sw/bin/zsh ${pkgs.alacritty}/bin/alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --title=Fzf --command bash -c "PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.scripts}/bin/passinator"'
         alt-p = ''''exec-and-forget bash -c '
-        SHELL=/run/current-system/sw/bin/zsh ${pkgs.alacritty}/bin/alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --title=Fzf --command bash -c "PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.scripts}/bin/passinator"'
+        PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.wezterm}/bin/wezterm start --class centered -- "passinator"'
         ''''
         alt-r = ''''exec-and-forget bash -c '
-        SHELL=/run/current-system/sw/bin/zsh ${pkgs.alacritty}/bin/alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --title=Fzf --command bash -c "PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.scripts}/bin/appfzf"'
+        SHELL=/run/current-system/sw/bin/zsh ${pkgs.alacritty}/bin/alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --title=centered --command bash -c "PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.scripts}/bin/appfzf"'
         ''''
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#layout
@@ -194,7 +195,7 @@ in {
         alt-shift-l = ['join-with right', 'mode main']
 
         [[on-window-detected]]
-        if.window-title-regex-substring = 'Fzf'
+        if.window-title-regex-substring = 'centered'
         run = 'layout floating'
 
 

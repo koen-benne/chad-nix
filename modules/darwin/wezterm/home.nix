@@ -57,6 +57,28 @@ in {
         }
         config.font = wezterm.font { family = "JetBrainsMonoNL Nerd Font Mono" }
 
+        wezterm.on("gui-startup", function(cmd)
+          if cmd == nil then return end
+          local args = cmd.args
+          for i, arg in ipairs(args) do
+            if arg == "--class" and args[i+1] == "centered" then
+              local screen = wezterm.gui.screens().active
+              local ratio = 0.7
+              local width = math.floor(screen.width * ratio)
+              local height = math.floor(screen.height * ratio)
+
+              local window = wezterm.mux.spawn_window{}
+              window:gui_window():set_inner_size(width, height)
+              window:gui_window():set_position(
+                math.floor((screen.width - width) / 2),
+                math.floor((screen.height - height) / 2)
+              )
+              window:set_title("centered")
+              return
+            end
+          end
+        end)
+
         return config
       '';
     };
