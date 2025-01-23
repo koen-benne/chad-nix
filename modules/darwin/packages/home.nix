@@ -30,8 +30,6 @@
     browserpass
     ueberzugpp
     zbar
-    raycast
-
     wakatime
 
     neofetch
