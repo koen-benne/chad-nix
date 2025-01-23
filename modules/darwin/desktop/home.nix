@@ -14,7 +14,7 @@ in {
   options.my.desktop = {
     enable = mkEnableOption (mdDoc "desktop");
     windowManager = mkOption {
-      type = types.enum ["yabai" "aerospace" "none"];
+      type = types.enum ["aerospace" "none"];
       default = "none";
       description = "window manager";
     };
