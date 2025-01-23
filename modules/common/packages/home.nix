@@ -16,7 +16,6 @@
       nix flake lock --update-input nvim-nix
       sudo nixos-rebuild switch --flake .
     '')
-    (pass.withExtensions (ext: [ext.pass-otp]))
     age
     manix
     diffutils
