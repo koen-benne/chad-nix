@@ -121,7 +121,7 @@ in {
         alt-f = 'fullscreen'
 
         alt-p = ''''exec-and-forget bash -c '
-        SHELL=/run/current-system/sw/bin/zsh ${pkgs.alacritty}/bin/alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --title=Fzf --command bash -c "PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.scripts}/bin/passfzf"'
+        SHELL=/run/current-system/sw/bin/zsh ${pkgs.alacritty}/bin/alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --title=Fzf --command bash -c "PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.scripts}/bin/passinator"'
         ''''
         alt-r = ''''exec-and-forget bash -c '
         SHELL=/run/current-system/sw/bin/zsh ${pkgs.alacritty}/bin/alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --title=Fzf --command bash -c "PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.scripts}/bin/appfzf"'
