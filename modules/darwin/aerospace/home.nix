@@ -121,7 +121,7 @@ in {
         alt-q = 'close'
         alt-f = 'fullscreen'
 
-        alt-p = 'exec-and-forget ${pkgs.scripts}/bin/passinator'
+        alt-p = 'exec-and-forget bash -c "PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.scripts}/bin/passinator"'
         alt-r = 'exec-and-forget ${pkgs.scripts}/bin/appfzf'
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#layout
