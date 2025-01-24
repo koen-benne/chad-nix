@@ -198,7 +198,7 @@ tsn_clip() {
 # settings for it
 find_fz_backend() {
   if [[ -z $fz_backend ]]; then
-    local -a fz_prog=('fuzzel' 'fzf' 'sk' 'fzy')
+    local -a fz_prog=('fuzzel' 'choose' 'fzf' 'sk' 'fzy')
     local idx
 
     for idx in "${fz_prog[@]}"; do
@@ -224,6 +224,11 @@ init_fz_backend() {
     fuzzel)
       if [[ -z $FUZZEL_DEFAULT_OPTS ]]; then
         fz_backend_opts=(-i -l 20 -d)
+      fi
+      ;;
+    choose)
+      if [[ -z $CHOOSE_DEFAULT_OPTS ]]; then
+        fz_backend_opts=(-e)
       fi
       ;;
     fzf)

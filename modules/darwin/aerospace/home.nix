@@ -121,12 +121,8 @@ in {
         alt-q = 'close'
         alt-f = 'fullscreen'
 
-        alt-p = ''''exec-and-forget bash -c '
-        PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.wezterm}/bin/wezterm start --always-new-process -- "${scripts}/focus-new-window.sh && passinator"
-        ''''
-        alt-r = ''''exec-and-forget bash -c '
-        PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.wezterm}/bin/wezterm start --always-new-process -- "${scripts}/focus-new-window.sh && appfzf"
-        ''''
+        alt-p = 'exec-and-forget passinator'
+        alt-r = 'exec-and-forget appfzf
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#layout
         alt-slash = 'layout tiles horizontal vertical'

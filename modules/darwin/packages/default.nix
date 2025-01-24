@@ -6,6 +6,9 @@
   ...
 }: {
   homebrew = {
+    brews = [
+      "choose-gui"
+    ];
     casks = [
       # Utility Tools
       "appcleaner"
