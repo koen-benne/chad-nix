@@ -7,6 +7,7 @@
 }: let
   inherit (lib) mkIf;
   cfg = config.my.desktop;
+  scripts = ./scripts;
 in {
   config = mkIf (cfg.windowManager == "aerospace") {
     home.packages = [
@@ -121,11 +122,10 @@ in {
         alt-f = 'fullscreen'
 
         alt-p = ''''exec-and-forget bash -c '
-        PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.wezterm}/bin/wezterm start --always-new-process -- "passinator"
-        ${pkgs.unstable.aerospace}/bin/aerospace focus --window-id ''$(${pkgs.unstable.aerospace}/bin/aerospace list-windows --all | ${pkgs.gawk}/bin/awk "{print \$1}" | ${pkgs.coreutils}/bin/sort -n | ${pkgs.coreutils}/bin/tail -n 1)'
+        PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.wezterm}/bin/wezterm start --always-new-process -- "${scripts}/focus-new-window.sh && passinator"
         ''''
         alt-r = ''''exec-and-forget bash -c '
-        SHELL=/run/current-system/sw/bin/zsh ${pkgs.alacritty}/bin/alacritty -o window.dimensions.columns=50 -o window.dimensions.lines=20 -o window.position.x=1480 -o window.position.y=520 --title=centered --command bash -c "PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.scripts}/bin/appfzf"'
+        PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.wezterm}/bin/wezterm start --always-new-process -- "${scripts}/focus-new-window.sh && appfzf"
         ''''
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#layout

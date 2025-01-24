@@ -63,11 +63,10 @@ in {
           for i, arg in ipairs(args) do
             if arg == "passinator" or arg == "appfzf" then
               local screen = wezterm.gui.screens().active
-              local ratio = 0.7
-              local width = math.floor(screen.width * ratio)
-              local height = math.floor(screen.height * ratio)
+              local width = 500
+              local height = 500
 
-              local tab, pane, window = wezterm.mux.spawn_window{ args = { arg } }
+              local tab, pane, window = wezterm.mux.spawn_window{ args = args }
               window:set_title("centered")
               window:gui_window():set_inner_size(width, height)
               window:gui_window():set_position(
