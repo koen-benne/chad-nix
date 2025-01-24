@@ -121,7 +121,7 @@ in {
         alt-f = 'fullscreen'
 
         alt-p = ''''exec-and-forget bash -c '
-        PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.wezterm}/bin/wezterm start -- "passinator"
+        PATH=${config.my.home}/.nix-profile/bin:$PATH ${pkgs.wezterm}/bin/wezterm start --always-new-process -- "passinator"
         ${pkgs.unstable.aerospace}/bin/aerospace focus --window-id ''$(${pkgs.unstable.aerospace}/bin/aerospace list-windows --all | ${pkgs.gawk}/bin/awk "{print \$1}" | ${pkgs.coreutils}/bin/sort -n | ${pkgs.coreutils}/bin/tail -n 1)'
         ''''
         alt-r = ''''exec-and-forget bash -c '
