@@ -57,45 +57,6 @@ in {
         }
         config.font = wezterm.font { family = "JetBrainsMonoNL Nerd Font Mono" }
 
-        wezterm.on("gui-startup", function(cmd)
-          if cmd == nil then return end
-          local args = cmd.args
-          for i, arg in ipairs(args) do
-            if arg == "passinator" or arg == "appfzf" then
-              local screen = wezterm.gui.screens().active
-              local width = 500
-              local height = 500
-
-              local tab, pane, window = wezterm.mux.spawn_window{ args = args }
-              window:set_title("centered")
-              window:gui_window():set_inner_size(width, height)
-              window:gui_window():set_position(
-                math.floor((screen.width - width) / 2),
-                math.floor((screen.height - height) / 2)
-              )
-              return
-            end
-          end
-        end)
-
-        wezterm.on('format-window-title', function(tab, pane, tabs, panes, config)
-          -- Make sure windows will be named centered if they are set to centered
-          if tab.window_title == "centered" then
-            return "centered"
-          end
-
-          -- The default functionality below
-          local zoomed = ""
-          if tab.active_pane.is_zoomed then
-            zoomed = "[Z] "
-          end
-          local index = ""
-          if #tabs > 1 then
-            index = string.format('[%d/%d] ', tab.tab_index + 1, #tabs)
-          end
-          return zoomed .. index .. tab.active_pane.title
-        end)
-
         return config
       '';
     };

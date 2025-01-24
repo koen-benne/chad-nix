@@ -121,8 +121,8 @@ in {
         alt-q = 'close'
         alt-f = 'fullscreen'
 
-        alt-p = 'exec-and-forget passinator'
-        alt-r = 'exec-and-forget appfzf
+        alt-p = 'exec-and-forget ${pkgs.scripts}/passinator'
+        alt-r = 'exec-and-forget ${pkgs.scripts}/appfzf'
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#layout
         alt-slash = 'layout tiles horizontal vertical'

@@ -22,8 +22,6 @@ in {
 
   config = mkIf cfg.enable {
     # my.mpv.enable = true;
-    my.alacritty.enable = true;
-
     home.activation.setWallpaper = lib.hm.dag.entryAfter ["writeBoundary"] ''
       /usr/bin/osascript -e '
         set desktopImage to POSIX file "${wallpaper}"
