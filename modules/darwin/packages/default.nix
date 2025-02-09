@@ -17,6 +17,7 @@
       # Browsers
       # "arc"
       { name ="zen-browser"; greedy = true; }
+      { name ="chromium"; greedy = true; }
     ];
     masApps = {
       # Trello = 1278508951;
