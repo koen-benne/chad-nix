@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ls ~/Applications/ /System/Applications/ "$HOME"/.nix-profile/Applications | \
+ls ~/Applications/ /Applications /System/Applications/ "$HOME"/.nix-profile/Applications | \
     grep '\.app$' | \
     sed 's/\.app$//g' | \
     choose | \
