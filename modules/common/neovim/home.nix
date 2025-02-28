@@ -1,21 +1,23 @@
-
-# All systems will have these packages
 {
   inputs,
   pkgs,
   ...
 }: {
   imports = [
-    inputs.neovim.homeModules.default
+    inputs.neovim.homeModule
   ];
 
-  programs.nvim = {
-    categories = {
-      general = true;
-      debug.php = true;
-      lspDebugMode = false;
-      themer = true;
-      colorscheme = "kanagawa";
+  nvim = {
+    enable = true;
+    packageDefinitions = {
+      existing = "merge";
+      merge = {
+        nixCats = {
+          settings = {
+            wrapRc = true;
+          };
+        };
+      };
     };
   };
 }
