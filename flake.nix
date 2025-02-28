@@ -20,7 +20,8 @@
     # NH 4.0 has darwin support, will be in nixpkgs unstable soon
     nh.url = "github:viperML/nh";
 
-    nvim-nix.url = "github:koen-benne/nvim-nix";
+    neovim.url = "github:koen-benne/neovim";
+    neovim.inputs.nixpkgs.follows = "unstable";
 
     dev-flakes.url = "github:koen-benne/dev-flakes";
     dev-flakes.inputs.nixpkgs.follows = "unstable";

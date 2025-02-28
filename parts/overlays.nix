@@ -17,7 +17,6 @@
         # wait for https://github.com/LnL7/nix-darwin/pull/942 and nh 4 in nixpkgs to remove this overlay
         self.inputs.nh.overlays.default
         self.overlays.default
-        self.inputs.nvim-nix.overlays.default
         self.inputs.dev-flakes.overlays.default
         self.inputs.nix-minecraft.overlay
       ];

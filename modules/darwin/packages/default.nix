@@ -16,6 +16,7 @@
 
       # Browsers
       # "arc"
+      "steam"
       { name ="zen-browser"; greedy = true; }
       { name ="chromium"; greedy = true; }
     ];

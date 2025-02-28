@@ -13,7 +13,7 @@
     (writeScriptBin "nvim-update" ''
       #!${runtimeShell}
       cd $HOME/.config/chad-nix
-      nix flake lock --update-input nvim-nix
+      nix flake lock --update-input neovim
       sudo nixos-rebuild switch --flake .
     '')
     age
@@ -35,7 +35,7 @@
     jetbrains-mono-nerdfont
     nmap
     rippkgs
-    nvim-pkg # Custom neovim build
+    # nvim-pkg # Custom neovim build
     comma # for entering shells with packages
 
     nodejs
