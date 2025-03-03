@@ -38,6 +38,4 @@
     # MacOS comes with bash from the stone age. This version does not support certain features
     bash
   ];
-
-  my.syncthing.enable = true;
 }

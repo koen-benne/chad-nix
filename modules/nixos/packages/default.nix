@@ -11,5 +11,4 @@
   ];
 
   my.mdns.enable = true;
-  my.syncthing.enable = true;
 }
