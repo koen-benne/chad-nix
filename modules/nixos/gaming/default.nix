@@ -17,6 +17,7 @@ in {
 
     environment.systemPackages = with pkgs; [
       steamcmd
+      mangohud
       xdg-user-dirs
       protonup-qt
     ];
