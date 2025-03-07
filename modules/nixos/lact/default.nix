@@ -5,12 +5,19 @@
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mdDoc;
-  cfg = config.my.lact;
+  cfg = config.my.corectrl;
 in {
-  options.my.lact = {
-    enable = mkEnableOption (mdDoc "Enable LACT");
+  options.my.corectrl = {
+    enable = mkEnableOption (mdDoc "Enable CoreCtrl");
   };
   config = mkIf cfg.enable {
-    services.lact.enable = true;
+    programs.corectrl = {
+      enable = true;
+      gpuOverclock = {
+        enable = true;
+        ppfeaturemask = "0xffffffff";
+      };
+    };
+    boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" ];
   };
 }
