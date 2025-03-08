@@ -33,7 +33,7 @@ in {
         exec-once = wpaperd
         exec-once = waybar
         exec-once = openrgb --server
-        exec-once = corectrl --mimimize-systray
+        exec-once = corectrl --minimize-systray
 
         # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
         input {
