@@ -11,6 +11,8 @@ in {
     enable = mkEnableOption (mdDoc "Enable CoreCtrl");
   };
   config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [ geekbench ];
+
     programs.corectrl = {
       enable = true;
       gpuOverclock = {
