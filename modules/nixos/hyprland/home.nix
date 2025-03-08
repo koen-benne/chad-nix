@@ -35,9 +35,10 @@ in {
         exec-once = openrgb --server
         exec-once = corectrl --minimize-systray
 
-        experimental {
-          hdr = true
-        }
+        # Maybe requires newer version?
+        # experimental {
+        #   hdr = true
+        # }
 
         # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
         input {
