@@ -22,18 +22,18 @@ in {
 
         # dont know if nix does this for me
         # exec-once = dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-        exec-once = corectrl --mimimize-systray
-        exec-once = systemctl --user start hyprpolkitagent
         # exec-once = pipewire
         # exec-once = syncthing
         # exec-once = ~/.config/hypr/useXDPH.sh
         # exec-once = dunst
         # exec-once = gnome-keyring-daemon --start --components=secrets
 
+        exec-once = systemctl --user start hyprpolkitagent
         exec-once = foot --server
-        exec-once = waybar
         exec-once = wpaperd
+        exec-once = waybar
         exec-once = openrgb --server
+        exec-once = corectrl --mimimize-systray
 
         # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
         input {
