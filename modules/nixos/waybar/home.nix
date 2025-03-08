@@ -21,6 +21,7 @@ in {
           modules-left = ["wlr/taskbar" "hyprland/window"];
           modules-center = ["hyprland/workspaces"];
           modules-right = [
+            "tray"
             "cpu"
             "memory"
             "pulseaudio"
@@ -84,6 +85,9 @@ in {
           clock = {
             format = " {:%H:%M }";
             format-alt = " {:%H:%M %p  󰸗 %d/%m/%Y}";
+          };
+          tray = {
+            spacing = 10;
           };
           cpu = {
             interval = 15;

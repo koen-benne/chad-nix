@@ -22,6 +22,7 @@ in {
 
         # dont know if nix does this for me
         # exec-once = dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+        exec-once = corectrl --mimimize-systray
         exec-once = systemctl --user start hyprpolkitagent
         # exec-once = pipewire
         # exec-once = syncthing
