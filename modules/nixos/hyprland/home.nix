@@ -35,23 +35,24 @@ in {
         exec-once = openrgb --server
         exec-once = corectrl --minimize-systray
 
-        # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
-        input {
-        repeat_delay = 300
-        repeat_rate = 50
-        kb_layout = us
-
         experimental {
           hdr = true
         }
 
-        follow_mouse = 1
+        # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
+        input {
+          repeat_delay = 300
+          repeat_rate = 50
+          kb_layout = us
 
-        touchpad {
-        natural_scroll = false
-        }
 
-        sensitivity = -0.9 # -1.0 - 1.0, 0 means no modification.
+          follow_mouse = 1
+
+          touchpad {
+            natural_scroll = false
+          }
+
+          sensitivity = -0.9 # -1.0 - 1.0, 0 means no modification.
         }
 
         misc {
