@@ -41,6 +41,10 @@ in {
         repeat_rate = 50
         kb_layout = us
 
+        experimental {
+          hdr = true
+        }
+
         follow_mouse = 1
 
         touchpad {
