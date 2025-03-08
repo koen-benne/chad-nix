@@ -11,8 +11,6 @@ in {
     enable = mkEnableOption (mdDoc "Enable CoreCtrl");
   };
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ geekbench ];
-
     programs.corectrl = {
       enable = true;
       gpuOverclock = {
@@ -21,5 +19,18 @@ in {
       };
     };
     boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" ];
+
+    # Add polkit rules for corectrl
+    security.polkit.extraConfig = ''
+      polkit.addRule(function(action, subject) {
+        if ((action.id == "org.corectrl.helper.init" ||
+          action.id == "org.corectrl.helperkiller.init") &&
+          subject.local == true &&
+          subject.active == true &&
+          subject.isInGroup("koenbenne")) {
+            return polkit.Result.YES;
+        }
+      });
+    '';
   };
 }
