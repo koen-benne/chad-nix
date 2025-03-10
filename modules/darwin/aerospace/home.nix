@@ -116,7 +116,7 @@ in {
           fi'
         ''''
 
-        alt-w = 'exec-and-forget /Applications/Zen\ Browser.app/Contents/MacOS/zen'
+        alt-w = 'exec-and-forget /Applications/Zen.app/Contents/MacOS/zen'
 
         alt-q = 'close'
         alt-f = 'fullscreen'
