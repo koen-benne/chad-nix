@@ -80,7 +80,7 @@ in {
         [gaps]
         inner.horizontal = 15
         inner.vertical = 15
-        outer.top = 40
+        outer.top = [{ monitor."Built-in Retina Display" = 15 }, 40]
         outer.left = 15
         outer.bottom = 15
         outer.right = 15
