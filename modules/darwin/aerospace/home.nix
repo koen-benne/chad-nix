@@ -128,10 +128,10 @@ in {
         alt-slash = 'layout tiles horizontal vertical'
         alt-comma = 'layout accordion horizontal vertical'
 
-        # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-        alt-shift-h = 'focus left'
-        alt-shift-j = 'focus down'
-        alt-shift-k = 'focus up'
+        # # See: https://nikitabobko.github.io/AeroSpace/commands#focus
+        # alt-shift-h = 'focus left'
+        # alt-shift-j = 'focus down'
+        # alt-shift-k = 'focus up'
         alt-shift-l = 'focus right'
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#move
@@ -141,8 +141,8 @@ in {
         # alt-shift-l = 'move right'
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-        alt-h = 'resize smart -50'
-        alt-l = 'resize smart +50'
+        ctrl-alt-h = 'resize smart -50'
+        ctrl-alt-l = 'resize smart +50'
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
         alt-1 = 'workspace 1'
@@ -185,10 +185,10 @@ in {
         # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
         #s = ['layout sticky tiling', 'mode main']
 
-        alt-shift-h = ['join-with left', 'mode main']
-        alt-shift-j = ['join-with down', 'mode main']
-        alt-shift-k = ['join-with up', 'mode main']
-        alt-shift-l = ['join-with right', 'mode main']
+        # alt-shift-h = ['join-with left', 'mode main']
+        # alt-shift-j = ['join-with down', 'mode main']
+        # alt-shift-k = ['join-with up', 'mode main']
+        # alt-shift-l = ['join-with right', 'mode main']
 
         [[on-window-detected]]
         if.window-title-regex-substring = 'centered'
