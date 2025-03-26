@@ -66,7 +66,7 @@ in {
             exit-timeout = "5";
             prep-cmd = [
               {
-                do = ''${pkgs.hyprland}/bin/hyprctl keyword monitor "DP-3,''${SUNSHINE_CLIENT_WIDTH}x''${SUNSHINE_CLIENT_HEIGHT}@''${SUNSHINE_CLIENT_FPS},0x0,1"'';
+                do = ''${pkgs.bash}/bin/bash -c "${pkgs.hyprland}/bin/hyprctl keyword monitor \"DP-3,''${SUNSHINE_CLIENT_WIDTH}x''${SUNSHINE_CLIENT_HEIGHT}@''${SUNSHINE_CLIENT_FPS},0x0,1\""'';
                 undo = "${pkgs.hyprland}/bin/hyprctl keyword monitor DP-3,3440x1440@159.96201,0x0,1";
               }
             ];
