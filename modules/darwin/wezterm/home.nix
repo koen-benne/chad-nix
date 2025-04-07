@@ -18,7 +18,7 @@ in {
         local wezterm = require 'wezterm'
         local config = wezterm.config_builder()
 
-        config.font_size = 15.0
+        config.font_size = 14.0
         -- Fixes https://github.com/wez/wezterm/issues/6005
         config.front_end = "WebGpu"
         config.window_decorations = "RESIZE"
