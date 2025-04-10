@@ -8,6 +8,38 @@
   imports = [
     ./hardware.nix
   ];
+
+  boot.kernel.sysctl = {
+    "net.core.default_qdisc" = "fq";
+    "net.ipv4.tcp_congestion_control" = "bbr";
+  };
+  boot.loader = {
+    efi = {
+      canTouchEfiVariables = lib.mkDefault true;
+      efiSysMountPoint =
+        lib.mkIf
+        (builtins.hasAttr "/boot/efi" config.fileSystems
+          && config.fileSystems."/boot/efi".fsType == "vfat")
+        "/boot/efi";
+    };
+    grub = {
+      device = "nodev";
+      efiSupport = true;
+    };
+  };
+
+  system.stateVersion = "23.11";
+
+  networking.enableIPv6 = false;
+
+  services.openssh = {
+    enable = true;
+    settings = {
+      KbdInteractiveAuthentication = false;
+      PasswordAuthentication = false;
+    };
+  };
+
   networking = {
     hostName = "nixos";
     # usePredictableInterfaceNames = true;
@@ -39,8 +71,11 @@
   my.desktop.enable = true;
 
   # Stuff specific to only this machine
-  my.steam.enable = true;
+  my.gaming.enable = true;
+  my.gaming.enableSunshine = true;
   my.virtualisation.enable = true;
   my.openssl.enable = true;
-  my.dnsmasq.enable = true;
+  my.bluetooth.enable = true;
+  my.android.enable = true;
+  my.corectrl.enable = true;
 }

@@ -7,6 +7,11 @@
   home.file.".ssh/config".text = ''
 
 
+    # Host backend.acc.natuurmonumenten.cloud.intracto.com
+    #   HostName backend.acc.natuurmonumenten.cloud.intracto.com
+    #   User staging-redactie
+    #   IdentityFile ~/.ssh/id_ed25519
+
     Host coolify
       HostName 23.88.117.45
       User root
@@ -27,7 +32,7 @@
       User git
       IdentityFile ~/.ssh/bitbucket
 
-    Host nixos
+    Host nixos-server
       HostName 77.169.201.160
       User koenbenne
       IdentityFile ~/.ssh/nixos
@@ -35,6 +40,12 @@
     Host *.platform.sh
       Include /home/koenbenne/.platformsh/ssh/*.config
     Host *
+
+    # BEGIN: Platform.sh certificate configuration
+    Host *.platform.sh
+      Include /Users/koenbenne/.platformsh/ssh/*.config
+    Host *
+    # END: Platform.sh certificate configuration
 
 
   '';

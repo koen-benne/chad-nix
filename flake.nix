@@ -1,15 +1,15 @@
 {
   inputs = {
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*.tar.gz";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     systems.url = "github:nix-systems/default";
     flake-utils.url = "github:numtide/flake-utils";
     flake-utils.inputs.systems.follows = "systems";
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
-    darwin.url = "github:lnl7/nix-darwin";
+    darwin.url = "github:lnl7/nix-darwin/nix-darwin-24.11";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager/release-24.05";
+    home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
@@ -17,12 +17,17 @@
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
     arkenfox-nix.url = "github:dwarfmaster/arkenfox-nixos";
 
-    nvim-nix.url = "github:koen-benne/nvim-nix";
+    # NH 4.0 has darwin support, will be in nixpkgs unstable soon
+    nh.url = "github:viperML/nh";
+
+    neovim.url = "github:koen-benne/neovim";
+    neovim.inputs.nixpkgs.follows = "unstable";
+
     dev-flakes.url = "github:koen-benne/dev-flakes";
+    dev-flakes.inputs.nixpkgs.follows = "unstable";
 
-    nh_darwin.url = "github:ToyVo/nh_darwin";
-
-    stylix.url = "github:danth/stylix";
+    stylix.url = "github:danth/stylix/release-24.11";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     homebrew-core.url = "github:homebrew/homebrew-core";
@@ -32,6 +37,16 @@
     homebrew-bundle.url = "github:homebrew/homebrew-bundle";
     homebrew-bundle.flake = false;
     sops-nix.url = "github:Mic92/sops-nix";
+
+    # Zen browser
+    zen-browser.url = "github:youwen5/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Apple fonts flake
+    apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
+
+    # Minecraft servers
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   };
 
   outputs = inputs @ {flake-parts, ...}:

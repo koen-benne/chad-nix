@@ -5,24 +5,6 @@
   pkgs,
   ...
 }: {
-  boot.kernel.sysctl = {
-    "net.core.default_qdisc" = "fq";
-    "net.ipv4.tcp_congestion_control" = "bbr";
-  };
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = lib.mkDefault true;
-      efiSysMountPoint =
-        lib.mkIf
-        (builtins.hasAttr "/boot/efi" config.fileSystems
-          && config.fileSystems."/boot/efi".fsType == "vfat")
-        "/boot/efi";
-    };
-    grub = {
-      device = "nodev";
-      efiSupport = true;
-    };
-  };
   # This is using a rec (recursive) expression to set and access XDG_BIN_HOME within the expression
   # For more on rec expressions see https://nix.dev/tutorials/first-steps/nix-language#recursive-attribute-set-rec
   environment.sessionVariables = rec {
@@ -36,10 +18,8 @@
       "${XDG_BIN_HOME}"
     ];
   };
-  # environment.systemPackages = lib.optionals (config.boot.loader.grub.enable == true) [ pkgs.grub-reboot-menu ];
   # explicitly enable nixos docs, system like wsl does not enable this
   documentation.nixos.enable = true;
-  networking.enableIPv6 = false;
   networking.nftables.enable = true;
   networking.useNetworkd = lib.mkDefault true;
   # systemd.network.wait-online.anyInterface = config.networking.useDHCP;
@@ -59,13 +39,6 @@
       Defaults requiretty
     '';
   };
-  services.openssh = {
-    enable = true;
-    settings = {
-      KbdInteractiveAuthentication = false;
-      PasswordAuthentication = false;
-    };
-  };
 
   # nix profile diff-closures --profile /nix/var/nix/profiles/system
   system.activationScripts.systemDiff = ''
@@ -75,7 +48,6 @@
       ${pkgs.nix}/bin/nix store --experimental-features nix-command diff-closures /run/current-system "$systemConfig" || true
     fi
   '';
-  system.stateVersion = "23.11";
   users.groups.${config.my.user} = {
     gid = config.my.uid;
   };

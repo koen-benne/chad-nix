@@ -1,47 +1,36 @@
 {
   config,
-  lib,
-  pkgs,
+  inputs,
   ...
 }: {
+  imports = [
+    inputs.nix-homebrew.darwinModules.nix-homebrew
+  ];
+
+  nix-homebrew = {
+    enable = true;
+    user = config.my.user;
+    enableRosetta = true;
+    taps = {
+      "homebrew/homebrew-core" = inputs.homebrew-core;
+      "homebrew/homebrew-cask" = inputs.homebrew-cask;
+      "homebrew/homebrew-bundle" = inputs.homebrew-bundle;
+    };
+    mutableTaps = false;
+    autoMigrate = true;
+    enableFishIntegration = true;
+  };
+
   homebrew = {
     enable = true;
     onActivation = {
-      # autoUpdate = true;
+      autoUpdate = true;
+      upgrade = true;
       cleanup = "zap";
     };
-    taps = [
-    ];
+    taps = builtins.attrNames config.nix-homebrew.taps;
     brews = [
       "mas"
     ];
-    casks = [
-      # Development Tools
-      "homebrew/cask/docker"
-      "lando"
-      "android-studio"
-      "sequel-ace"
-
-      # Communication Tools
-      "slack"
-      "microsoft-teams"
-
-      # Utility Tools
-      "appcleaner"
-      "1password"
-      "onyx"
-
-      # Browsers
-      "arc"
-      "firefox"
-      "eloston-chromium"
-
-      # Design Tools
-      "figma"
-    ];
-    masApps = {
-      # Trello = 1278508951;
-      # Xcode = 497799835;
-    };
   };
 }

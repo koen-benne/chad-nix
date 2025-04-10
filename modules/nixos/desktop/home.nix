@@ -3,29 +3,33 @@
 # There should also not be anything in here that I would also like to have on my servers
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
 }: let
   inherit (lib) mkIf mkEnableOption mdDoc;
   cfg = config.my.desktop;
-  wallpaper = ../../../assets/wp-ultrawide.png;
 in {
   options.my.desktop = {
     enable = mkEnableOption (mdDoc "desktop");
   };
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      # packages for my custom DE
+      # sound
+      playerctl
       pavucontrol
+      helvum
+
+      # packages for my custom DE
+      nwg-displays
       obs-studio
       wl-clipboard
       dunst
       hyprpicker
-      # pinentry-gnome3
-      gnome.nautilus
+      nautilus
       evince
-      gnome.eog
+      eog
       libreoffice-qt
       mpv
       qbittorrent
@@ -46,8 +50,8 @@ in {
       slack
       localsend
       ungoogled-chromium
-
-      ardour
+    ] ++ [
+      inputs.zen-browser.packages.${pkgs.system}.default
     ];
 
     programs.fuzzel = {
@@ -59,8 +63,8 @@ in {
     xdg.mimeApps = {
       enable = true;
       defaultApplications = {
-        "x-scheme-handler/http" = "firefox.desktop";
-        "x-scheme-handler/https" = "firefox.desktop";
+        "x-scheme-handler/http" = "zen.desktop";
+        "x-scheme-handler/https" = "zen.desktop";
         "x-scheme-handler/mailto" = "thunderbird.desktop";
         "application/pdf" = "evince.desktop";
         "x-scheme-handler/figma" = "figma-linux.desktop";

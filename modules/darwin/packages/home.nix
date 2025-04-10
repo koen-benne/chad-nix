@@ -1,8 +1,7 @@
 # All darwin systems will have these packages
 {
-  config,
-  lib,
   pkgs,
+  inputs,
   ...
 }: {
   home.packages = with pkgs; [
@@ -27,18 +26,16 @@
     daemon
     darwin.iproute2mac
     pstree
-    subfinder
 
     browserpass
     ueberzugpp
     zbar
-    raycast
-    spotify
-
     wakatime
 
     neofetch
     cachix
+
+    # MacOS comes with bash from the stone age. This version does not support certain features
+    bash
   ];
-  my.syncthing.enable = true;
 }

@@ -1,41 +1,48 @@
+# https://gist.github.com/antifuchs/10138c4d838a63c0a05e725ccd7bccdd
 {
   config,
-  lib,
   pkgs,
+  lib,
   ...
 }: let
-  inherit (pkgs) stdenv dockutil;
-  inherit (lib) mkEnableOption mkIf mkOption hasSuffix concatMapStrings mdDoc types;
+  inherit (lib) mkIf mkOption types concatMapStrings hasSuffix;
+  inherit (types) listOf submodule str;
   cfg = config.my.dock;
+  stdenv = pkgs.stdenv;
 in {
-  options.my.dock = {
-    enable = mkEnableOption (mdDoc "dock");
-    entries =
+  options = {
+    my.dock.enable = mkOption {
+      description = "Enable dock";
+      default = stdenv.isDarwin;
+      example = false;
+    };
+
+    my.dock.entries =
       mkOption
       {
         description = "Entries on the Dock";
-        type = with types;
-          listOf (submodule {
-            options = {
-              path = lib.mkOption {type = str;};
-              section = lib.mkOption {
-                type = str;
-                default = "apps";
-              };
-              options = lib.mkOption {
-                type = str;
-                default = "";
-              };
+        type = listOf (submodule {
+          options = {
+            path = lib.mkOption {type = str;};
+            section = lib.mkOption {
+              type = str;
+              default = "apps";
             };
-          });
+            options = lib.mkOption {
+              type = str;
+              default = "";
+            };
+          };
+        });
         readOnly = true;
       };
   };
 
   config =
-    mkIf cfg.enable
+    mkIf (cfg.enable)
     (
       let
+        du = "env PYTHONIOENCODING=utf-8 ${pkgs.dockutil}/bin/dockutil";
         normalize = path:
           if hasSuffix ".app" path
           then path + "/"
@@ -44,6 +51,7 @@ in {
           "file://"
           + (
             builtins.replaceStrings
+            # TODO: This is entirely too naive and works only with the bundles that I have seen on my system so far:
             [" " "!" "\"" "#" "$" "%" "&" "'" "(" ")"]
             ["%20" "%21" "%22" "%23" "%24" "%25" "%26" "%27" "%28" "%29"]
             (normalize path)
@@ -54,19 +62,19 @@ in {
           cfg.entries;
         createEntries =
           concatMapStrings
-          (entry: "${dockutil}/bin/dockutil --no-restart --add '${entry.path}' --section ${entry.section} ${entry.options}\n")
+          (entry: "${du} --no-restart --add '${entry.path}' --section ${entry.section} ${entry.options}\n")
           cfg.entries;
       in {
         system.activationScripts.postUserActivation.text = ''
-          echo >&2 "Setting up the Dock..."
-          haveURIs="$(${dockutil}/bin/dockutil --list | ${pkgs.coreutils}/bin/cut -f2)"
+          echo >&2 "Setting up persistent dock items..."
+          haveURIs="$(${du} --list | ${pkgs.coreutils}/bin/cut -f2)"
           if ! diff -wu <(echo -n "$haveURIs") <(echo -n '${wantURIs}') >&2 ; then
             echo >&2 "Resetting Dock."
-            ${dockutil}/bin/dockutil --no-restart --remove all
+            ${du} --no-restart --remove all
             ${createEntries}
             killall Dock
           else
-            echo >&2 "Dock setup complete."
+            echo >&2 "Dock is how we want it."
           fi
         '';
       }

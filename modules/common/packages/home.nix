@@ -1,7 +1,6 @@
 # All systems will have these packages
 {
-  config,
-  lib,
+  inputs,
   pkgs,
   ...
 }: {
@@ -10,14 +9,13 @@
       #!${runtimeShell}
       rippkgs-index nixpkgs -o $HOME/.local/share/rippkgs-index.sqlite
     '')
-    (pass.withExtensions (ext: [ext.pass-otp]))
+    (pass.withExtensions (ext: [ext.pass-otp ext.pass-audit]))
     (writeScriptBin "nvim-update" ''
       #!${runtimeShell}
       cd $HOME/.config/chad-nix
-      nix flake lock --update-input nvim-nix
+      nix flake lock --update-input neovim
       sudo nixos-rebuild switch --flake .
     '')
-    (pass.withExtensions (ext: [ext.pass-otp]))
     age
     manix
     diffutils
@@ -35,10 +33,9 @@
     ripgrep
     scripts
     jetbrains-mono-nerdfont
-    openASAR
     nmap
     rippkgs
-    nvim-pkg # Custom neovim build
+    # nvim-pkg # Custom neovim build
     comma # for entering shells with packages
 
     nodejs
@@ -57,5 +54,6 @@
     fish.enable = true;
     tmux.enable = true;
     yazi.enable = true;
+    taskwarrior.enable = true;
   };
 }

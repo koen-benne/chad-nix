@@ -9,5 +9,6 @@
     man-pages
     nixos-option
   ];
-  my.syncthing.enable = true;
+
+  my.mdns.enable = true;
 }

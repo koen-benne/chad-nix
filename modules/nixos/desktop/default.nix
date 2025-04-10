@@ -9,10 +9,6 @@
   inherit (lib) mdDoc mkDefualt mkEnableOption mkIf mkMerge;
   cfg = config.my.desktop;
 in {
-  options.my.desktop = {
-    enable = mkEnableOption (mdDoc "desktop");
-  };
-
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       gparted
@@ -21,11 +17,9 @@ in {
       xwayland
     ];
 
-    hm.my.desktop.enable = true;
-
     my.hyprland.enable = true;
     my.openrgb.enable = true;
-    my.swaylock.enable = true;
+    my.lockscreen.enable = true;
     my.theme.enable = true;
     my.uxplay.enable = true;
     hm.my.waybar.enable = true;
@@ -33,7 +27,6 @@ in {
     hm.my.thunderbird.enable = true;
     hm.my.firefox.enable = true;
     hm.my.qutebrowser.enable = true;
-    hm.my.spicetify.enable = true;
 
     environment.sessionVariables = {
       NIXOS_OXONE_WL = "1";
@@ -46,6 +39,8 @@ in {
         pkgs.xdg-desktop-portal-gtk
       ];
     };
+
+    services.gvfs.enable = true;
 
     services.greetd = {
       enable = true;

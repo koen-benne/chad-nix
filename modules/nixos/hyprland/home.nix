@@ -14,7 +14,6 @@ in {
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       enable = true;
-      # package = pkgs.unstable.hyprland;
       extraConfig = ''
 
 
@@ -23,31 +22,38 @@ in {
 
         # dont know if nix does this for me
         # exec-once = dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-        # exec-once = bash /usr/libexec/polkit-mate-authentication-agent-1
         # exec-once = pipewire
         # exec-once = syncthing
         # exec-once = ~/.config/hypr/useXDPH.sh
         # exec-once = dunst
         # exec-once = gnome-keyring-daemon --start --components=secrets
 
+        exec-once = systemctl --user start hyprpolkitagent
         exec-once = foot --server
-        exec-once = waybar
         exec-once = wpaperd
+        exec-once = waybar
         exec-once = openrgb --server
+        exec-once = corectrl --minimize-systray
+
+        # Maybe requires newer version?
+        # experimental {
+        #   hdr = true
+        # }
 
         # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
         input {
-        repeat_delay = 300
-        repeat_rate = 50
-        kb_layout = us
+          repeat_delay = 300
+          repeat_rate = 50
+          kb_layout = us
 
-        follow_mouse = 1
 
-        touchpad {
-        natural_scroll = false
-        }
+          follow_mouse = 1
 
-        sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+          touchpad {
+            natural_scroll = false
+          }
+
+          sensitivity = -0.9 # -1.0 - 1.0, 0 means no modification.
         }
 
         misc {
@@ -76,10 +82,12 @@ in {
 
           rounding = 10
 
-          drop_shadow = true
-          shadow_range = 4
-          shadow_render_power = 3
-          col.shadow = rgba(1a1a1aee)
+          shadow {
+            enabled = true
+            range = 4
+            render_power = 3
+            color = rgba(1a1a1aee)
+          }
 
           blur {
             enabled = true
@@ -142,7 +150,7 @@ in {
         $mainMod = SUPER
 
         bind = $mainMod, Return, exec, footclient
-        bind = $mainMod, W, exec, firefox
+        bind = $mainMod, W, exec, zen
         bind = $mainMod, Q, killactive,
         bind = $mainMod SHIFT, C, exit,
         bind = $mainMod, E, exec, nautilus
@@ -152,7 +160,7 @@ in {
         bind = $mainMod, T, togglesplit, # dwindle
         bind = $mainMod, F, fullscreen,
         bind = $mainMod SHIFT, S, exec, ${scripts}/suspend.sh
-        bind = $mainMod, P, exec, ${scripts}/fuzzelpass.sh
+        bind = $mainMod, P, exec, ${pkgs.scripts}/bin/passinator
         bind = $mainMod, C, exec, hyprpicker -a
         bind = $mainMod, G, exec, grim -g "$(slurp)" ~/Images/$(date +%s)_grim.png
         bind = $mainMod SHIFT, G, exec, grim ~/Images/$(date +%s)_grim.png
@@ -223,7 +231,7 @@ in {
         bind = $mainMod, mouse_down, workspace, e+1
         bind = $mainMod, mouse_up, workspace, e-1
 
-        bind = $mainMod CTRL SHIFT, L, exec, swaylock
+        bind = $mainMod CTRL SHIFT, L, exec, hyprlock
 
         # Reaload waybar
         bind = $mainMod SHIFT, W, exec, pkill waybar && waybar -c $HOME/.config/waybar/config-hyprland -s $HOME/.config/waybar/hyprland-style.css
