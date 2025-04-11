@@ -6,10 +6,6 @@
   ...
 }:
 {
-  imports = [
-    inputs.sops-nix.homeManagerModules.sops
-  ];
-
   sops = {
     defaultSopsFile = ../../../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
@@ -18,7 +14,7 @@
     secrets.github_access_token = { };
   };
 
-  home.packages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     sops
   ];
 }

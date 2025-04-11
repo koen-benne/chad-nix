@@ -14,7 +14,6 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-    spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
     arkenfox-nix.url = "github:dwarfmaster/arkenfox-nixos";
 
     # NH 4.0 has darwin support, will be in nixpkgs unstable soon
@@ -36,7 +35,10 @@
     homebrew-cask.flake = false;
     homebrew-bundle.url = "github:homebrew/homebrew-bundle";
     homebrew-bundle.flake = false;
+
+    # Secrets
     sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     # Zen browser
     zen-browser.url = "github:youwen5/zen-browser-flake";
