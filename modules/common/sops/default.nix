@@ -1,8 +1,6 @@
 {
   config,
-  lib,
   pkgs,
-  inputs,
   ...
 }:
 {
@@ -11,7 +9,10 @@
     defaultSopsFormat = "yaml";
     age.keyFile = "${config.my.home}/.config/sops/age/keys.txt";
 
-    secrets.github_access_token = { };
+    secrets.github_access_token = {
+      mode = "0440";
+      owner = config.my.user;
+    };
   };
 
   environment.systemPackages = with pkgs; [
