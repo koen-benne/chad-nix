@@ -17,4 +17,8 @@
   environment.systemPackages = with pkgs; [
     sops
   ];
+
+  environment.variables = {
+    SOPS_AGE_KEY_FILE = "${config.sops.age.keyFile}";
+  };
 }
