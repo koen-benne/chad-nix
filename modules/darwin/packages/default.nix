@@ -17,8 +17,9 @@
       # Browsers
       # "arc"
       "steam"
-      { name ="zen-browser"; greedy = true; }
-      { name ="chromium"; greedy = true; }
+      { name = "zen-browser"; greedy = true; }
+      { name = "chromium"; greedy = true; }
+      { name = "microsoft-teams"; greedy = true; }
     ];
     masApps = {
       # Trello = 1278508951;

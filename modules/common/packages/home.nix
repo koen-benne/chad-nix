@@ -38,7 +38,7 @@
     # nvim-pkg # Custom neovim build
     comma # for entering shells with packages
 
-    nodejs
+    unstable.nodejs
     # nodePackages.pnpm
     # nodePackages.yarn
 
