@@ -43,6 +43,8 @@
     # nodePackages.yarn
 
     dev-utils # from dev-flakes overlay
+
+    unstable._1password-cli
   ];
 
   my = {
