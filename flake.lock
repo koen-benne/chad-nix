@@ -552,11 +552,11 @@
         "ts-error-translator-nvim": "ts-error-translator-nvim"
       },
       "locked": {
-        "lastModified": 1745940201,
-        "narHash": "sha256-EkoMyQIaCkXEsq/RpN6DwUC/5R1IjtZY1lnyI8doghE=",
+        "lastModified": 1746692074,
+        "narHash": "sha256-8lI2MaoMFCHxLJqGbSgNN8giO6Q1zj1B5AdqkxnCJfs=",
         "owner": "koen-benne",
         "repo": "neovim",
-        "rev": "99e1427ecd9d050173cd0d2d0956dfec4da404c1",
+        "rev": "51f3603ea94db60567d74fdfa0583d445f1d309f",
         "type": "github"
       },
       "original": {
@@ -663,11 +663,11 @@
     },
     "nixCats": {
       "locked": {
-        "lastModified": 1744355826,
-        "narHash": "sha256-uqzxcPQIk6QiZo0tTgPD9UAGq5Q04jCWwZic/hdykEQ=",
+        "lastModified": 1745981676,
+        "narHash": "sha256-KGkNQbZaX+1KKBjUoltOby36+rH2CPNLFpm1blZ5Li4=",
         "owner": "BirdeeHub",
         "repo": "nixCats-nvim",
-        "rev": "3c31202bec49204187f35029c1881c9a28c4433e",
+        "rev": "a4b78fc624b31b68536cdead4699c27bcb9e655a",
         "type": "github"
       },
       "original": {
