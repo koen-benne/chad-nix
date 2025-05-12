@@ -35,10 +35,6 @@ in {
       qbittorrent
       obsidian
 
-      # MC shit
-      prismlauncher
-      jdk8
-
       # screenshotting
       grim
       slurp

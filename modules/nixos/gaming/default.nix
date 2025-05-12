@@ -13,6 +13,7 @@ in {
   };
 
   config = mkIf cfg.enable {
+    hm.my.gaming.enable = true;
     # environment.systemPackages = [ pkgs.steam-run-native ];
 
     environment.systemPackages = with pkgs; [
