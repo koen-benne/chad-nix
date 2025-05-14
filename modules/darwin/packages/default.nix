@@ -17,7 +17,7 @@
       # Browsers
       # "arc"
       "steam"
-      { name = "zen-browser"; greedy = true; }
+      { name = "zen"; greedy = true; }
       { name = "chromium"; greedy = true; }
       { name = "microsoft-teams"; greedy = true; }
     ];
