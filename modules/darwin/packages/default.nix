@@ -20,6 +20,7 @@
       { name = "zen"; greedy = true; }
       { name = "chromium"; greedy = true; }
       { name = "microsoft-teams"; greedy = true; }
+      { name = "slack"; greedy = true; }
     ];
     masApps = {
       # Trello = 1278508951;
