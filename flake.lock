@@ -478,11 +478,11 @@
         "ts-error-translator-nvim": "ts-error-translator-nvim"
       },
       "locked": {
-        "lastModified": 1746692074,
-        "narHash": "sha256-8lI2MaoMFCHxLJqGbSgNN8giO6Q1zj1B5AdqkxnCJfs=",
+        "lastModified": 1747220914,
+        "narHash": "sha256-E9eS4PrXKPtNeHLtBImHE5Ig5tuT2GBPTdtfOMo2s78=",
         "owner": "koen-benne",
         "repo": "neovim",
-        "rev": "51f3603ea94db60567d74fdfa0583d445f1d309f",
+        "rev": "70eb607788ebbcb80caed3a8ff8a58127443df94",
         "type": "github"
       },
       "original": {
