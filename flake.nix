@@ -13,8 +13,13 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    # spicetify-nix.url = "github:Gerg-L/spicetify-nix/for-24.11";
+    # no clue why, but master works just fine
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-    arkenfox-nix.url = "github:dwarfmaster/arkenfox-nixos";
+    spicetify-nix.inputs.nixpkgs.follows = "unstable";
+
+    # arkenfox-nix.url = "github:dwarfmaster/arkenfox-nixos";
 
     # NH 4.0 has darwin support, will be in nixpkgs unstable soon
     nh.url = "github:viperML/nh";
