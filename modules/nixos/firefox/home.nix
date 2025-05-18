@@ -22,16 +22,16 @@ in {
   config = mkIf cfg.enable {
     programs.firefox = {
       enable = true;
-      arkenfox = {
-        enable = true;
-        version = "128.0";
-      };
+      # arkenfox = {
+      #   enable = true;
+      #   version = "128.0";
+      # };
 
       profiles = {
         default = {
-          arkenfox = {
-            enable = true;
-          };
+          # arkenfox = {
+          #   enable = true;
+          # };
           isDefault = true;
           name = "default";
           userChrome = uc;
