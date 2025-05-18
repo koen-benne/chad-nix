@@ -46,6 +46,7 @@ in {
       slack
       localsend
       ungoogled-chromium
+      unstable._1password-gui
     ] ++ [
       inputs.zen-browser.packages.${pkgs.system}.default
     ];
