@@ -40,10 +40,10 @@ in {
       slurp
 
       # other
-      teams-for-linux
+      # teams-for-linux
       # figma-agent
 
-      slack
+      # slack
       localsend
       ungoogled-chromium
       unstable._1password-gui
