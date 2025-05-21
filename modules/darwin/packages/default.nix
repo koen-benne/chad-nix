@@ -18,7 +18,7 @@
       # "arc"
       "steam"
       { name = "zen"; greedy = true; }
-      { name = "chromium"; greedy = true; }
+      { name = "google-chrome"; greedy = true; }
       { name = "microsoft-teams"; greedy = true; }
       { name = "slack"; greedy = true; }
     ];
