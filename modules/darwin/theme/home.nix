@@ -13,7 +13,7 @@ in {
   };
 
   imports = [
-    inputs.stylix.homeManagerModules.stylix
+    inputs.stylix.homeModules.stylix
   ];
 
   # Stylix requires an image
@@ -31,6 +31,8 @@ in {
           neovim.enable = false;
           fzf.enable = false;
           spicetify.enable = false;
+          # The line below can be removed when https://github.com/nix-community/stylix/pull/1316 is merged and backported
+          gnome.enable = false;
         };
         base16Scheme = "${pkgs.base16-schemes}/share/themes/railscasts.yaml";
         polarity = "dark";

@@ -44,7 +44,7 @@ in {
             name = "Poly";
           };
           monospace = {
-            package = pkgs.jetbrains-mono-nerdfont;
+            package = pkgs.nerd-fonts.jetbrains-mono;
             name = "JetBrainsMonoNL Nerd Font";
           };
           emoji = {

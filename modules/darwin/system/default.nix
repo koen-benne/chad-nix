@@ -12,12 +12,12 @@
     LANG = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
   };
-  fonts.packages = with pkgs; [jetbrains-mono-nerdfont];
+  fonts.packages = with pkgs; [nerd-fonts.jetbrains-mono];
   nix.settings.allowed-users = [config.my.user];
   launchd.daemons.activate-system.script = lib.mkOrder 0 ''
     wait4path /nix/store
   '';
-  services.nix-daemon.enable = true;
+  nix.enable = true;
   # nix profile diff-closures --profile /nix/var/nix/profiles/system
   system.activationScripts.extraActivation.text = ''
     softwareupdate --install-rosetta --agree-to-license
@@ -85,5 +85,6 @@
     enableKeyMapping = true;
     # remapCapsLockToControl = true;
   };
+  system.primaryUser = config.my.user;
   system.stateVersion = 4;
 }

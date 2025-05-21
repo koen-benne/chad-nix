@@ -42,7 +42,7 @@ in {
     mkIf (cfg.enable)
     (
       let
-        du = "env PYTHONIOENCODING=utf-8 ${pkgs.dockutil}/bin/dockutil";
+        du = "sudo -u ${config.my.user} env PYTHONIOENCODING=utf-8 ${pkgs.dockutil}/bin/dockutil";
         normalize = path:
           if hasSuffix ".app" path
           then path + "/"
@@ -65,7 +65,7 @@ in {
           (entry: "${du} --no-restart --add '${entry.path}' --section ${entry.section} ${entry.options}\n")
           cfg.entries;
       in {
-        system.activationScripts.postUserActivation.text = ''
+        system.activationScripts.postActivation.text = ''
           echo >&2 "Setting up persistent dock items..."
           haveURIs="$(${du} --list | ${pkgs.coreutils}/bin/cut -f2)"
           if ! diff -wu <(echo -n "$haveURIs") <(echo -n '${wantURIs}') >&2 ; then

@@ -32,7 +32,7 @@
     cargo
     ripgrep
     scripts
-    jetbrains-mono-nerdfont
+    nerd-fonts.jetbrains-mono
     nmap
     rippkgs
     # nvim-pkg # Custom neovim build

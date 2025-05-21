@@ -8,5 +8,5 @@
     Defaults timestamp_timeout=300
     Defaults env_keep += "TERMINFO"
   '';
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 }
