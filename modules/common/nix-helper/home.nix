@@ -13,13 +13,9 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # wait for https://github.com/LnL7/nix-darwin/pull/942
-    # programs.nh = {
-    #   enable = true;
-    #   clean.enable = true;
-    # };
-    home.packages = with pkgs; [
-      nh
-    ];
+    programs.nh = {
+      enable = true;
+      clean.enable = true;
+    };
   };
 }

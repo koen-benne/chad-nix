@@ -21,9 +21,6 @@
 
     # arkenfox-nix.url = "github:dwarfmaster/arkenfox-nixos";
 
-    # NH 4.0 has darwin support, will be in nixpkgs unstable soon
-    nh.url = "github:viperML/nh";
-
     neovim.url = "github:koen-benne/neovim";
     neovim.inputs.nixpkgs.follows = "unstable";
 

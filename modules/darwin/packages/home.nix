@@ -24,7 +24,7 @@
     # '')
     coreutils-full
     daemon
-    darwin.iproute2mac
+    iproute2mac
     pstree
 
     browserpass
