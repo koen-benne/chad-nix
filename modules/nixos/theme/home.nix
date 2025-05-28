@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf mkForce;
+  inherit (lib) mdDoc mkEnableOption mkIf;
   cfg = config.my.theme;
 in {
   options.my.theme = {
@@ -19,6 +19,10 @@ in {
         fuzzel.enable = false;
         fzf.enable = false;
         spicetify.enable = false;
+        qt = {
+          enable = true;
+          platform = "adwaita";
+        };
       };
       opacity = {
         popups = 0.8;

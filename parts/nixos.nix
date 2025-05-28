@@ -35,6 +35,7 @@
           inherit lib;
           inputs = self.inputs;
           pkgs =
+            # If self.inputs.nixpkgs is not used or config or overlays is not set, use the customPkgs defined above
             if (nixpkgs != self.inputs.nixpkgs || config != {} || overlays != [])
             then customPkgs
             else pkgs;
