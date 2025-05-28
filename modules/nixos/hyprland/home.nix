@@ -160,7 +160,8 @@ in {
         bind = $mainMod, T, togglesplit, # dwindle
         bind = $mainMod, F, fullscreen,
         bind = $mainMod SHIFT, S, exec, ${scripts}/suspend.sh
-        bind = $mainMod, P, exec, ${pkgs.scripts}/bin/passinator
+        # bind = $mainMod, P, exec, ${pkgs.scripts}/bin/passinator
+        bind = $mainMod, P, exec, 1password --quick-access
         bind = $mainMod, C, exec, hyprpicker -a
         bind = $mainMod, G, exec, grim -g "$(slurp)" ~/Images/$(date +%s)_grim.png
         bind = $mainMod SHIFT, G, exec, grim ~/Images/$(date +%s)_grim.png
