@@ -26,6 +26,7 @@ in {
         config.macos_window_background_blur = 20
 
         config.default_cursor_style = 'SteadyBar'
+        config.warn_about_missing_glyphs = false
 
         config.colors = {
           foreground = "#ffffff",
