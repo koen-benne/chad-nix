@@ -6,7 +6,5 @@ nix --extra-experimental-features "nix-command flakes" run nix-darwin -- switch 
 
 
 Todo:
-- add secret management?
 - manage certificates
 - when an app has a home manager and non-home manager module, the enable option should only be in home manager, rather than having to enable the home manager module from within the non-home manager module
-- should we even have standalone home manager support?
