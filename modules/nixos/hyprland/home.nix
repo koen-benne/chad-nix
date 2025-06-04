@@ -137,15 +137,14 @@ in {
         # }
 
         # Window rules
-        windowrule = noblur,^(?!(foot))
-        # windowrule = noblur,^(?!(foot|other))
+        windowrule = noblur, class:^(?!foot).*$
 
         windowrule = float, title:(Floorp - Sharing Indicator)
         windowrule = tile, title:^(.*PWA.*)$
         windowrule = tile, title:(Spotify)
 
         windowrule = workspace 9, title:(Spotify)
-        windowrulev2 = stayfocused, class:^(pinentry-) # fix pinentry losing focus
+        windowrule = stayfocused, class:^(pinentry-) # fix pinentry losing focus
 
         $mainMod = SUPER
 
