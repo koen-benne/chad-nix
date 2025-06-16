@@ -21,6 +21,8 @@ in {
       mangohud
       xdg-user-dirs
       protonup-qt
+
+      steamtinkerlaunch
     ];
 
     programs.nix-ld.enable = true;
@@ -38,6 +40,10 @@ in {
       enable = true;
       enable32Bit = true;
     };
+
+    # Use mesa-git instead of stable mesa (for FSR4 and HDR)
+    # Might want to go back to the stable version once it supports all the stuff that I want
+    chaotic.mesa-git.enable = true;
 
     hardware.steam-hardware.enable = true;
 
