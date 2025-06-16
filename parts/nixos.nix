@@ -51,7 +51,9 @@ in {
     nixos = mkNixos {
       # config.permittedInsecurePackages = [
       # ];
-      modules = [../hosts/nixos];
+      modules = [
+        ../hosts/nixos
+      ];
     };
     nixos-server = mkNixos {
       # config.permittedInsecurePackages = [

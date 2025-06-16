@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: let
   inherit (lib) mdDoc mkEnableOption mkIf;
@@ -12,7 +13,15 @@ in {
     enableSunshine = mkEnableOption (mdDoc "sunshine");
   };
 
+  imports = [
+    inputs.chaotic.nixosModules.nyx-cache
+    inputs.chaotic.nixosModules.nyx-overlay
+    inputs.chaotic.nixosModules.nyx-registry
+  ];
+
+
   config = mkIf cfg.enable {
+    chaotic.nyx.overlay.enable = false;
     hm.my.gaming.enable = true;
     # environment.systemPackages = [ pkgs.steam-run-native ];
 
@@ -39,11 +48,12 @@ in {
     hardware.graphics = {
       enable = true;
       enable32Bit = true;
+      # Use mesa-git instead of stable mesa (for FSR4 and HDR)
+      # Might want to go back to the stable version once it supports all the stuff that I want
+      package = pkgs.mesa_git;
+      package32 = pkgs.mesa32_git;
     };
 
-    # Use mesa-git instead of stable mesa (for FSR4 and HDR)
-    # Might want to go back to the stable version once it supports all the stuff that I want
-    chaotic.mesa-git.enable = true;
 
     hardware.steam-hardware.enable = true;
 
