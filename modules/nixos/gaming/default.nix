@@ -19,7 +19,6 @@ in {
     inputs.chaotic.nixosModules.nyx-registry
   ];
 
-
   config = mkIf cfg.enable {
     chaotic.nyx.overlay.enable = false;
     boot.kernelPackages = pkgs.linuxPackages_cachyos;
@@ -56,7 +55,6 @@ in {
       package32 = pkgs.mesa32_git;
     };
 
-
     hardware.steam-hardware.enable = true;
 
     services.sunshine = mkIf cfg.enableSunshine {
@@ -71,7 +69,7 @@ in {
       };
       applications = {
         env = {
-            PATH = "$(PATH):$(HOME)\/.local\/bin";
+          PATH = "$(PATH):$(HOME)\/.local\/bin";
         };
         apps = [
           {

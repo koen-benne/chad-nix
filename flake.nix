@@ -5,7 +5,6 @@
     unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
-
     systems.url = "github:nix-systems/default";
     flake-utils.url = "github:numtide/flake-utils";
     flake-utils.inputs.systems.follows = "systems";
