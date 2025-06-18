@@ -22,6 +22,8 @@ in {
 
   config = mkIf cfg.enable {
     chaotic.nyx.overlay.enable = false;
+    boot.kernelPackages = pkgs.linuxPackages_cachyos;
+
     hm.my.gaming.enable = true;
     # environment.systemPackages = [ pkgs.steam-run-native ];
 
