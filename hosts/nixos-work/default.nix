@@ -60,6 +60,8 @@
     };
   };
 
+  my.plymouth.enable = true;
+
   # Everythhing desktop related
   my.desktop.enable = true;
   hm.my.spicetify.enable = false;
