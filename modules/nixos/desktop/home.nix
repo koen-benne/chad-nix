@@ -18,8 +18,9 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs;
       [
-        # sound
+        # controlls stuff
         playerctl
+        brightnessctl
         pavucontrol
         helvum
 
