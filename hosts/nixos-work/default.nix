@@ -63,6 +63,7 @@
   # Everythhing desktop related
   my.desktop.enable = true;
   hm.my.spicetify.enable = false;
+  hm.my.work.enable = true;
 
   # Stuff specific to only this machine
   my.openssl.enable = true;
