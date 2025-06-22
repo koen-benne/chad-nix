@@ -17,6 +17,8 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
+    apple-silicon.url = "github:tpwrules/nixos-apple-silicon/main";
+
     # spicetify-nix.url = "github:Gerg-L/spicetify-nix/for-25.05";
     # no clue why, but master works just fine
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";

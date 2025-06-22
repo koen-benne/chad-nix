@@ -2,23 +2,20 @@
   config,
   lib,
   pkgs,
+  sys,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mdDoc;
-  cfg = config.my.hyprland;
+  inherit (lib) mkIf optionalString;
   scripts = ./scripts;
 in {
-  options.my.hyprland = {
-    enable = mkEnableOption (mdDoc "hyprland");
-  };
-  config = mkIf cfg.enable {
+  config = mkIf sys.my.hyprland.enable {
     wayland.windowManager.hyprland = {
       enable = true;
       extraConfig = ''
 
 
-
-        monitor = DP-3, addreserved, 10, 20, 20, 20, 3440x1440, 0x0,1
+        monitor = eDP-1, 3024x1890@60, auto, 2
+        monitor = HDMI-A-1, 3440x1440@60, auto, 1
 
         # dont know if nix does this for me
         # exec-once = dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
@@ -34,12 +31,19 @@ in {
         exec-once = waybar
         exec-once = openrgb --server
         exec-once = corectrl --minimize-systray
+        exec-once = nm-applet
+        ${optionalString sys.networking.networkmanager.enable "exec-once = ${pkgs.networkmanagerapplet}/bin/nm-applet"}
+        exec-once = hyprctl setcursor 24
 
         experimental {
           xx_color_management_v4 = true
         }
 
-        # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
+        device {
+          name = apple-spi-trackpad
+          sensitivity = -0.1
+        }
+
         input {
           repeat_delay = 300
           repeat_rate = 50
@@ -49,7 +53,8 @@ in {
           follow_mouse = 1
 
           touchpad {
-            natural_scroll = false
+            natural_scroll = true
+            scroll_factor = 0.5
           }
 
           sensitivity = -0.9 # -1.0 - 1.0, 0 means no modification.
@@ -64,7 +69,7 @@ in {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
         gaps_in = 5
-        gaps_out = 0
+        gaps_out = 10
         border_size = 2
         col.active_border = rgba(ca714eee)
         col.inactive_border = rgba(00000000)
@@ -129,11 +134,7 @@ in {
         workspace_swipe = off
         }
 
-        # Example per-device config
         # See https://wiki.hyprland.org/Configuring/Keywords/#executing for more
-        # device:epic mouse V1 {
-        #   sensitivity = -0.5
-        # }
 
         # Window rules
         windowrule = noblur, class:^(?!foot).*$

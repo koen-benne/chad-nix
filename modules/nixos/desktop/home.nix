@@ -6,9 +6,10 @@
   inputs,
   lib,
   pkgs,
+  sys,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mdDoc;
+  inherit (lib) mkIf mkEnableOption mdDoc optionals;
   cfg = config.my.desktop;
 in {
   options.my.desktop = {
@@ -51,6 +52,9 @@ in {
       ]
       ++ [
         inputs.zen-browser.packages.${pkgs.system}.default
+      ]
+      ++ optionals sys.networking.networkmanager.enable [
+        networkmanagerapplet
       ];
 
     programs.fuzzel = {
