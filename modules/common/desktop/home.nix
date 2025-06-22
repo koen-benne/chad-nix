@@ -11,6 +11,7 @@ in {
     home.packages = with pkgs; [
       unstable.vesktop
       ripasso-cursive
+      spotify-player
       # freetube
     ];
   };
