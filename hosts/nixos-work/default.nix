@@ -71,7 +71,6 @@
   my.openssl.enable = true;
   my.bluetooth.enable = true;
   my.android.enable = true;
-  my.corectrl.enable = true;
 
 }
 
