@@ -1,16 +1,11 @@
 {
-  config,
   lib,
-  pkgs,
+  sys,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mdDoc;
-  cfg = config.my.virtualisation;
+  inherit (lib) mkIf;
 in {
-  options.my.virtualisation = {
-    enable = mkEnableOption (mdDoc "virtualisation");
-  };
-  config = mkIf cfg.enable {
+  config = mkIf sys.my.virtualisation.enable {
     dconf.settings = {
       "org/virt-manager/virt-manager/connections" = {
         autoconnect = ["qemu:///system"];
