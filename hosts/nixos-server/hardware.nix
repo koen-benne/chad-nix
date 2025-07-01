@@ -16,9 +16,26 @@
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel" "wl"];
   boot.extraModulePackages = [config.boot.kernelPackages.broadcom_sta];
-  boot.kernelParams = ["intel_idle.max_cstate=1"];
+  boot.kernelParams = [
+    "intel_idle.max_cstate=1"
+    "processor.max_state=1"
+    "intel_pstate=disable"
+    "pcie_aspm=off"
+    "acpi_osi=Linux"
+    "acpi_backlight=vendor"
+    "libata.force=noncq"
+    "libata.noacpi=1"
+    "ahci.mobile_lpm_policy=1"
+  ];
+
+  # Optimize I/O for Apple SSD
+  boot.kernel.sysctl = {
+    "vm.dirty_ratio" = 15;
+    "vm.dirty_background_ratio" = 5;
+  };
+
   powerManagement.enable = true;
-  powerManagement.cpuFreqGovernor = "ondemand";
+  powerManagement.cpuFreqGovernor = "schedutil";
   services.mbpfan = {
     enable = true;
     aggressive = true;
@@ -27,6 +44,7 @@
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/2a7ee3c7-badc-45fc-b118-3085efff2a69";
     fsType = "ext4";
+    options = ["noatime" "discard"];  # Reduce wear, enable TRIM
   };
 
   boot.initrd.luks.devices."nixosroot".device = "/dev/disk/by-uuid/7d8e632d-5b71-4983-bced-7c771f5e5c12";
@@ -34,7 +52,7 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/67E3-17ED";
     fsType = "vfat";
-    options = ["fmask=0022" "dmask=0022"];
+    options = ["fmask=0022" "dmask=0022" "noatime" "discard"];
   };
 
   swapDevices = [
