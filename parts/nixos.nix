@@ -1,6 +1,7 @@
 # Entry point when using nixos-rebuild switch
 {
   self,
+  inputs,
   withSystem,
   ...
 }: let
@@ -48,10 +49,12 @@
       });
 in {
   flake.nixosConfigurations = {
-    nixos = mkNixos {
-      # config.permittedInsecurePackages = [
-      # ];
-      modules = [../hosts/nixos];
+    nixos-work = mkNixos {
+      system = "aarch64-linux";
+      modules = [
+        ../hosts/nixos-work
+	inputs.apple-silicon.nixosModules.default
+      ];
     };
     nixos-server = mkNixos {
       # config.permittedInsecurePackages = [

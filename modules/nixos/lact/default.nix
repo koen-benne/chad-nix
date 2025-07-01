@@ -18,7 +18,7 @@ in {
         ppfeaturemask = "0xffffffff";
       };
     };
-    boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" ];
+    boot.kernelParams = ["amdgpu.ppfeaturemask=0xffffffff"];
 
     # Add polkit rules for corectrl
     security.polkit.extraConfig = ''

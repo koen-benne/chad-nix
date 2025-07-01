@@ -15,6 +15,6 @@
     ./home.nix
   ];
 
-  home-manager.extraSpecialArgs = {inherit inputs;};
+  home-manager.extraSpecialArgs = {inherit inputs; sys = config;};
   home-manager.useGlobalPkgs = true;
 }

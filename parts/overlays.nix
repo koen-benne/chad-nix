@@ -14,9 +14,13 @@
         (final: prev: {
           unstable = import self.inputs.unstable (final // {config.allowUnfree = true;});
         })
+	self.inputs.apple-silicon.overlays.default
         self.overlays.default
         self.inputs.dev-flakes.overlays.default
         self.inputs.nix-minecraft.overlay
+        # This has to be done manually due to _module.args.pkgs which locks pkgs.
+        # Modules cannot override by themselves due to this, but it does make one global instance of pkgs.
+        self.inputs.chaotic.overlays.cache-friendly
       ];
     };
   in {

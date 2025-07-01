@@ -6,50 +6,57 @@
   inputs,
   lib,
   pkgs,
+  sys,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mdDoc;
+  inherit (lib) mkIf mkEnableOption mdDoc optionals;
   cfg = config.my.desktop;
 in {
   options.my.desktop = {
     enable = mkEnableOption (mdDoc "desktop");
   };
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      # sound
-      playerctl
-      pavucontrol
-      helvum
+    home.packages = with pkgs;
+      [
+        # controlls stuff
+        playerctl
+        brightnessctl
+        pavucontrol
+        helvum
 
-      # packages for my custom DE
-      nwg-displays
-      obs-studio
-      wl-clipboard
-      dunst
-      hyprpicker
-      nautilus
-      evince
-      eog
-      libreoffice-qt
-      mpv
-      qbittorrent
-      obsidian
+        # packages for my custom DE
+        nwg-displays
+        obs-studio
+        wl-clipboard
+        dunst
+        hyprpicker
+        nautilus
+        evince
+        eog
+        libreoffice-qt
+        mpv
+        qbittorrent
+        obsidian
 
-      # screenshotting
-      grim
-      slurp
+        # screenshotting
+        grim
+        slurp
 
-      # other
-      # teams-for-linux
-      # figma-agent
+        # other
+        # teams-for-linux
+        # figma-agent
 
-      # slack
-      localsend
-      ungoogled-chromium
-      unstable._1password-gui
-    ] ++ [
-      inputs.zen-browser.packages.${pkgs.system}.default
-    ];
+        # slack
+        localsend
+        ungoogled-chromium
+        unstable._1password-gui
+      ]
+      ++ [
+        inputs.zen-browser.packages.${pkgs.system}.default
+      ]
+      ++ optionals sys.networking.networkmanager.enable [
+        networkmanagerapplet
+      ];
 
     programs.fuzzel = {
       enable = true;

@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: let
   inherit (lib) mdDoc mkEnableOption mkIf;
@@ -12,7 +13,16 @@ in {
     enableSunshine = mkEnableOption (mdDoc "sunshine");
   };
 
+  imports = [
+    inputs.chaotic.nixosModules.nyx-cache
+    inputs.chaotic.nixosModules.nyx-overlay
+    inputs.chaotic.nixosModules.nyx-registry
+  ];
+
   config = mkIf cfg.enable {
+    chaotic.nyx.overlay.enable = false;
+    boot.kernelPackages = pkgs.linuxPackages_cachyos;
+
     hm.my.gaming.enable = true;
     # environment.systemPackages = [ pkgs.steam-run-native ];
 
@@ -21,6 +31,8 @@ in {
       mangohud
       xdg-user-dirs
       protonup-qt
+
+      steamtinkerlaunch
     ];
 
     programs.nix-ld.enable = true;
@@ -37,6 +49,10 @@ in {
     hardware.graphics = {
       enable = true;
       enable32Bit = true;
+      # Use mesa-git instead of stable mesa (for FSR4 and HDR)
+      # Might want to go back to the stable version once it supports all the stuff that I want
+      package = pkgs.mesa_git;
+      package32 = pkgs.mesa32_git;
     };
 
     hardware.steam-hardware.enable = true;
@@ -46,9 +62,14 @@ in {
       autoStart = true;
       capSysAdmin = true;
       openFirewall = true;
+      # Currently, it is necessary to run 'sudo setfacl -m g:input:rw /dev/uhid' to get ds5 emu to work.
+      # Seems like https://github.com/LizardByte/Sunshine/pull/2906 should fix this issue.
+      settings = {
+        gamepad = "ds5";
+      };
       applications = {
         env = {
-            PATH = "$(PATH):$(HOME)\/.local\/bin";
+          PATH = "$(PATH):$(HOME)\/.local\/bin";
         };
         apps = [
           {

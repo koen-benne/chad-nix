@@ -12,8 +12,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    hm.my.hyprland.enable = true;
-
     environment.systemPackages = with pkgs; [
       hyprpolkitagent
     ];

@@ -7,4 +7,3 @@
     inputs.sops-nix.darwinModules.sops
   ];
 }
-

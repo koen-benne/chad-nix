@@ -2,9 +2,10 @@
   config,
   lib,
   pkgs,
+  sys,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mdDoc mkEnableOption mkIf optional;
   cfg = config.my.waybar;
 in {
   options.my.waybar = {
@@ -25,7 +26,8 @@ in {
             "cpu"
             "memory"
             "pulseaudio"
-            "network"
+          ] ++ optional (!sys.networking.networkmanager.enable) "network" ++ [
+            "battery"
             "clock"
           ];
 
@@ -85,6 +87,19 @@ in {
           clock = {
             format = " {:%H:%M }";
             format-alt = " {:%H:%M %p  󰸗 %d/%m/%Y}";
+          };
+
+          battery = {
+            states = {
+              warning = 30;
+              critical = 15;
+            };
+            format = "{icon} {capacity}%";
+            format-charging = "󰂄 {capacity}%";
+            format-plugged = "󰚥 {capacity}%";
+            format-alt = "{time} {icon}";
+            format-full = "󰁹 {capacity}%";
+            format-icons = ["󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
           };
           tray = {
             spacing = 10;

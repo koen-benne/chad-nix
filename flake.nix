@@ -1,7 +1,10 @@
 {
   inputs = {
+    # Package sources
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+
     systems.url = "github:nix-systems/default";
     flake-utils.url = "github:numtide/flake-utils";
     flake-utils.inputs.systems.follows = "systems";
@@ -13,6 +16,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    apple-silicon.url = "github:tpwrules/nixos-apple-silicon/main";
 
     # spicetify-nix.url = "github:Gerg-L/spicetify-nix/for-25.05";
     # no clue why, but master works just fine
