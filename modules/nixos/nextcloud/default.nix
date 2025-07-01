@@ -9,10 +9,11 @@
   cfg = config.my.nextcloud;
 in {
   options.my.nextcloud = {
-    enable = mkEnableOption (mdDoc "NextCloud");
+    client.enable = mkEnableOption (mdDoc "NextCloud client");
+    server.enable = mkEnableOption (mdDoc "NextCloud server");
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.server.enable {
     environment.etc."nextcloud-admin-pass".text = "PWD";
     services.nextcloud = {
       enable = true;

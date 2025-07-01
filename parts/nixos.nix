@@ -49,6 +49,9 @@
       });
 in {
   flake.nixosConfigurations = {
+    nixos = mkNixos {
+      modules = [../hosts/nixos];
+    };
     nixos-work = mkNixos {
       system = "aarch64-linux";
       modules = [
