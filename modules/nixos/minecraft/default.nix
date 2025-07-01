@@ -18,16 +18,9 @@ in {
   };
 
   config = mkIf cfg.enable {
-    fileSystems."/minecraft/tnauwiecraft" = {
-      device = "none";
-      fsType = "tmpfs";
-      options = ["size=4G"];
-    };
-
     services.minecraft-servers = {
       enable = true;
       eula = true;
-      dataDir = "/minecraft";
       openFirewall = true;
       # managementSystem.tmux.enable = false;
       # managementSystem.systemd-socket.enable = true;
@@ -54,14 +47,6 @@ in {
             RWDLegend = "df9e46f9-d8a3-4092-a970-ff0bce9e6aef";
             MR_REY = "815687a1-0a07-447b-bc3e-4ea3f423e7d0";
           };
-
-          extraStartPre = ''
-            cp -R /minecraft/permanent/tnauwiecraft/* /minecraft/tnauwiecraft
-          '';
-          extraStopPost = ''
-            ${pkgs.coreutils}/bin/sync
-            ${pkgs.rsync}/bin/rsync -a --delete /minecraft/tnauwiecraft/ /minecraft/permanent/tnauwiecraft/
-          '';
 
           jvmOpts = "-Xmx8G -Xms6G";
           symlinks = {
@@ -128,56 +113,6 @@ in {
         #   };
         # };
       };
-    };
-    # Minecraft backup service
-    systemd.services.minecraft-backup = {
-      description = "Backup Tnauwiecraft world";
-      serviceConfig = {
-        Type = "oneshot";
-        ExecStart = let
-          script = pkgs.writeScript "backup.sh" ''
-
-            SERVERNAME="tnauwiecraft"
-            SERVERDIR="/minecraft/''${SERVERNAME}"
-            # Check if /minecraft/[servername] exists
-            if [ ! -d "''${SERVERDIR}" ]; then
-              echo "Server directory not found. Exiting..."
-              exit 1
-            fi
-
-            NOW=$(${pkgs.coreutils}/bin/date "+%Y-%m-%d_%H%M")
-            BACKUP_PATH="/minecraft/backups/''${SERVERNAME}"
-            if [ ! -d ''${BACKUP_PATH} ]; then
-              mkdir -p ''${BACKUP_PATH}
-            fi
-            BACKUP_FILE="''${BACKUP_PATH}/backup_''${NOW}.tar.gz"
-            echo -n "Backing up Minecraft world, including compression"
-            ${pkgs.gnutar}/bin/tar -cvf ''${BACKUP_FILE} ''${SERVERDIR} --checkpoint=.1000 --use-compress-program=${pkgs.pigz}/bin/pigz
-            if [ $? -eq 0 ]; then
-              echo -en "\nBackup finished at " && ${pkgs.coreutils}/bin/date +"%Y-%m-%d %H%M"
-              ${pkgs.coreutils}/bin/du -h ''${BACKUP_FILE}
-            else
-              echo -e "[  FAILED''${NC}  ]"
-              echo -n "Backup failed."
-            fi
-
-
-          '';
-        in "${pkgs.runtimeShell} ${script}";
-        User = "minecraft";
-        Group = "minecraft";
-      };
-    };
-
-    # Timer for periodic Minecraft backups
-    systemd.timers.minecraft-backup = {
-      description = "Timer for periodically backing up Minecraft world";
-      timerConfig = {
-        OnCalendar = "hourly"; # Adjust the frequency as needed
-        Persistent = true;
-      };
-
-      wantedBy = ["timers.target"];
     };
   };
 }

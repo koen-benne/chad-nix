@@ -17,9 +17,10 @@ in {
     services.nextcloud = {
       enable = true;
       package = pkgs.nextcloud31;
-      hostName = "localhost";
+      hostName = "nextcloud.local";
       config.adminpassFile = "/etc/nextcloud-admin-pass";
       config.dbtype = "sqlite";
+      config.extraTrustedDomains = ["92.168.68.54"];
     };
   };
 }

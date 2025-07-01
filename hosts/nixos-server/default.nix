@@ -80,4 +80,5 @@
 
   my.openssl.enable = true;
   # my.mc-servers.enable = true;
+  my.nextcloud.enable = true;
 }
