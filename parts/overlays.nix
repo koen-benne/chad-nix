@@ -6,20 +6,29 @@
     system,
     ...
   }: let
+    # Define config once
+    sharedConfig = {
+      allowUnfree = true;
+      permittedInsecurePackages = [
+        "dotnet-runtime-7.0.20"
+      ];
+    };
+
     pkgs = import self.inputs.nixpkgs {
       inherit system;
-      config.allowUnfree = true;
+      config = sharedConfig;
       overlays = [
-        # Add unstable
+        # Add unstable with inherited config
         (final: prev: {
-          unstable = import self.inputs.unstable (final // {config.allowUnfree = true;});
+          unstable = import self.inputs.unstable {
+            inherit system;
+            config = sharedConfig;  # Same config as main nixpkgs
+          };
         })
-	self.inputs.apple-silicon.overlays.default
+        self.inputs.apple-silicon.overlays.default
         self.overlays.default
         self.inputs.dev-flakes.overlays.default
         self.inputs.nix-minecraft.overlay
-        # This has to be done manually due to _module.args.pkgs which locks pkgs.
-        # Modules cannot override by themselves due to this, but it does make one global instance of pkgs.
         self.inputs.chaotic.overlays.cache-friendly
       ];
     };

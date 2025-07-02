@@ -15,11 +15,11 @@
       ...
     }:
       inputs.darwin.lib.darwinSystem {
-        inherit system;
         specialArgs = {inherit inputs lib pkgs;};
         modules =
           [
             ../modules/darwin
+            inputs.nixpkgs.nixosModules.readOnlyPkgs
           ]
           ++ modules;
       });

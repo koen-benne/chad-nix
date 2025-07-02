@@ -60,21 +60,13 @@
 
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["aarch64-darwin" "x86_64-linux"];
+      systems = ["aarch64-darwin" "x86_64-linux" "aarch64-linux"];
       imports = [
-        ./parts/lib.nix
         ./parts/overlays.nix
         ./parts/darwin.nix
         ./parts/nixos.nix
       ];
-      perSystem = {
-        config,
-        self',
-        inputs',
-        pkgs,
-        system,
-        ...
-      }: {
+      perSystem = {pkgs, ...}: {
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
             (writeShellApplication {
