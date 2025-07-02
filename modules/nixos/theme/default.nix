@@ -19,6 +19,8 @@ in {
   config = mkIf cfg.enable {
     stylix = {
       enable = true;
+      # We have readonly packages
+      overlays.enable = false;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/railscasts.yaml";
       image = ../../../assets/wp-ultrawide.png;
       polarity = "dark";
