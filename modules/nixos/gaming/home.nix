@@ -15,6 +15,7 @@ in {
     home.packages = with pkgs; [
       # MC shit
       prismlauncher
+      unstable.vintagestory
       jdk8
     ];
   };
