@@ -14,7 +14,8 @@
       ...
     }:
       inputs.darwin.lib.darwinSystem {
-        specialArgs = {inherit inputs lib pkgs;};
+        inherit pkgs;
+        specialArgs = {inherit inputs lib;};
         modules =
           [
             ../modules/darwin
