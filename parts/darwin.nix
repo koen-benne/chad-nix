@@ -11,7 +11,6 @@
     withSystem system ({
       lib,
       pkgs,
-      system,
       ...
     }:
       inputs.darwin.lib.darwinSystem {
