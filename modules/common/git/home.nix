@@ -26,11 +26,18 @@ in {
         co = "checkout";
         cp = "cherry-pick";
         di = "diff";
+        st = "status";
+
         fixup = "!sh -c 'git commit --fixup=$1 && git rebase --interactive --autosquash $1~' -";
         gch = "!sh -c 'git reflog expire --expire=now --all && git gc --prune=now --aggressive'";
         lg = "log --abbrev-commit --graph --date=relative --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset'";
-        st = "status";
         rewind = "!sh -c 'git update-ref refs/heads/$1 \${2:-HEAD}' -";
+        amend = "commit --amend --no-edit";
+        unstage = "reset HEAD --";
+        last = "log -1 HEAD";
+        graph = "log --graph --oneline --decorate --all";
+        force = "push --force-with-lease";
+        clean-branches = "!git branch --merged | grep -v '\\*\\|main\\|master' | xargs -n 1 git branch -d";
       };
       ignores = [
         ".*.sw?"
@@ -39,6 +46,22 @@ in {
         ".stignore"
       ];
       extraConfig = {
+        core = {
+          autocrlf = "input";  # Fuck Windows line endings
+          ignorecase = false;
+        };
+        init.defaultBranch = "main";
+        pull = {
+          rebase = true; # Rebase on pull by default
+          ff = "only";
+        };
+        push = {
+          default = "simple";
+          autoSetupRemote = true;  # Set up remote branch on new branch push
+        };
+        merge.ff = false;  # Always create merge commits for explicit merges
+        branch.autoSetupRebase = "always";
+        fetch.prune = true;
         diff.tool = "nvimdiff";
         rebase = {
           autosquash = true;
@@ -49,7 +72,15 @@ in {
           autoupdate = true;
           enabled = true;
         };
-        status = {submoduleSummary = true;};
+        status = {
+          submoduleSummary = true;
+          showUntrackedFiles = "all";  # Show untracked files in subdirs
+        };
+
+        # Quality of life improvements
+        help.autoCorrect = 10;  # Auto-correct typos after 1 second
+        commit.verbose = true;  # Show diff in commit message
+
         url = {
           "ssh://git@github.com:22/" = {pushInsteadOf = "https://github.com/";};
         };
@@ -57,3 +88,4 @@ in {
     };
   };
 }
+
