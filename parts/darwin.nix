@@ -19,7 +19,6 @@
         modules =
           [
             ../modules/darwin
-            inputs.nixpkgs.nixosModules.readOnlyPkgs
           ]
           ++ modules;
       });
