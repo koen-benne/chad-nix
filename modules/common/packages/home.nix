@@ -25,7 +25,6 @@
     gawk
     gzip
     btop
-    hdparm
     imagemagick
     ipcalc
     jq
