@@ -33,7 +33,7 @@
       IdentityFile ~/.ssh/bitbucket
 
     Host nixos-server
-      HostName 87.208.48.64
+      HostName 82.174.152.170
       User koenbenne
       IdentityFile ~/.ssh/nixos
 
