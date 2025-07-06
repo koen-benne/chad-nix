@@ -9,3 +9,4 @@ Todo:
 - manage certificates
 - when an app has a home manager and non-home manager module, the enable option should only be in home manager, rather than having to enable the home manager module from within the non-home manager module
 - use sys instead of making separate options for hm when they are already in the nixos/darwin config
+- make stylix always enabled, as it is impossible to manage optionally

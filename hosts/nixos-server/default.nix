@@ -81,4 +81,5 @@
   my.openssl.enable = true;
   # my.mc-servers.enable = true;
   my.homelab.enable = true;
+  my.theme.enable = true;
 }
