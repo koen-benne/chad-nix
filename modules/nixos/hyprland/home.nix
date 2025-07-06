@@ -151,7 +151,7 @@ in {
         bind = $mainMod, Return, exec, footclient
         bind = $mainMod, W, exec, zen
         bind = $mainMod, Q, killactive,
-        bind = $mainMod SHIFT, C, exit,
+        bind = $mainMod CTRL SHIFT, C, exit,
         bind = $mainMod, E, exec, nautilus
         bind = $mainMod, V, togglefloating,
         bind = $mainMod, R, exec, fuzzel
