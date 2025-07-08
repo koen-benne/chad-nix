@@ -30,7 +30,7 @@ setup_tunnel() {
     
     # Check if any ports are already in use
     ports_in_use=()
-    for port in 6001 6002 6003 6004 6005 6006 6007; do
+    for port in 6001 6002 6003 6004 6005 6006 6007 6008; do
         if check_port $port; then
             ports_in_use+=($port)
         fi
@@ -53,7 +53,8 @@ setup_tunnel() {
         -L 6003:localhost:8989 \
         -L 6004:localhost:7878 \
         -L 6005:localhost:5055 \
-        -L 6006:localhost:6767 &
+        -L 6006:localhost:6767 \
+        -L 6008:localhost:8191 &
     
     SSH_PID=$!
     
@@ -74,6 +75,7 @@ setup_tunnel() {
         echo -e "${BLUE}Radarr (Movies):${NC}                  http://localhost:6004"
         echo -e "${BLUE}Jellyseerr (Request Manager):${NC}     http://localhost:6005"
         echo -e "${BLUE}Bazarr (Subtitles):${NC}               http://localhost:6006"
+        echo -e "${BLUE}FlareSolverr (Cloudflare Bypass):${NC} http://localhost:6008"
         echo ""
         
         # Create PID file for easy cleanup
@@ -123,6 +125,7 @@ show_status() {
         "6004:Radarr"
         "6005:Jellyseerr"
         "6006:Bazarr"
+        "6008:FlareSolverr"
     )
     
     for service in "${services[@]}"; do
