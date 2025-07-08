@@ -78,7 +78,7 @@ in {
           map (appName: {
             name = appName;
             value = availableApps.${appName};
-          }) (builtins.filter (appName: 
+          }) (builtins.filter (appName:
             builtins.hasAttr appName availableApps
           ) cfg.extraApps)
         );
