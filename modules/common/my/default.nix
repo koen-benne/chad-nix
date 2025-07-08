@@ -8,6 +8,7 @@ with lib; {
   options.my = {
     user = mkOption {type = types.str;};
     name = mkOption {type = types.str;};
+    domain = mkOption {type = types.str;};
     email = mkOption {type = types.str;};
     workmail = mkOption {type = types.str;};
     uid = mkOption {type = types.int;};
@@ -15,6 +16,7 @@ with lib; {
   config.my = {
     user = "koenbenne";
     name = "Koen Benne";
+    domain = "dorkoe.nl";
     email = "koen.benne@gmail.com";
     workmail = "koen.benne@iodigital.com";
     uid = 1000;

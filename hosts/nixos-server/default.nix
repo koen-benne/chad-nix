@@ -80,6 +80,34 @@
 
   my.openssl.enable = true;
   # my.mc-servers.enable = true;
-  my.homelab.enable = true;
   my.theme.enable = true;
+
+  # Enable the services you want
+  my.homelab = {
+    enable = true;
+    # domain = "dorkoe.nl";  # Optional, this is the default
+    # email = "koen.benne@gmail.com";  # Optional, this is the default
+
+    nginx = {
+      enable = true;
+      mainSite.enable = true;  # Optional: enable the main landing page
+    };
+
+    nextcloud = {
+      enable = true;
+      subdomain = "cloud";  # Optional, this is the default
+      adminPassword = "PWD";
+      dataDir = "/export/1tb/NextCloud/data";  # Optional, this is the default
+    };
+    jellyfin = {
+      enable = true;
+      subdomain = "jellyfin";  # Optional, this is the default
+      mediaLibraries = {
+        movies = "/export/1tb/Media/Movies";
+        tv = "/export/1tb/Media/TV";
+        music = "/export/1tb/Media/Music";
+      };
+      enableHardwareAcceleration = true;  # Enable if you have compatible hardware
+    };
+  };
 }
