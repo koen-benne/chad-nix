@@ -78,6 +78,22 @@
     '';
   };
 
+  # Auto garbage collection
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
+  # Limit boot entries (important for /boot space)
+  boot.loader.systemd-boot.configurationLimit = 5;
+
+  # Auto-optimize nix store (deduplication)
+  nix.optimise = {
+    automatic = true;
+    dates = [ "03:45" ];  # 3:45 AM daily
+  };
+
   my.openssl.enable = true;
   # my.mc-servers.enable = true;
   my.theme.enable = true;
@@ -109,5 +125,7 @@
       };
       enableHardwareAcceleration = true;  # Enable if you have compatible hardware
     };
+    sonarr.enable = true;
+    radarr.enable = true;
   };
 }

@@ -14,7 +14,8 @@
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel" "wl"];
+  boot.kernelModules = ["kvm-intel" "i915" "video" "wl" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" "applesmc"];
+  boot.blacklistedKernelModules = [ "nouveau" ];
   boot.extraModulePackages = [config.boot.kernelPackages.broadcom_sta];
   boot.kernelParams = [
     "intel_idle.max_cstate=1"
@@ -22,11 +23,33 @@
     "intel_pstate=disable"
     "pcie_aspm=off"
     "acpi_osi=Linux"
-    "acpi_backlight=vendor"
+    "acpi_backlight=native"
     "libata.force=noncq"
     "libata.noacpi=1"
     "ahci.mobile_lpm_policy=1"
+    "nvidia-drm.modeset=0"
+    "video=efifb:off"
+    "i915.modeset=1"
+    "i915.enable_rc6=0"
+    "i915.enable_dpcd_backlight=1"
+    "apple_gmux.force_igd=Y"           # Force Intel Graphics Device
   ];
+  programs.light.enable = true;
+
+  # NVIDIA hardware configuration
+  hardware.nvidia = {
+    modesetting.enable = false;
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+    powerManagement.enable = true; # For laptops
+  };
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  # Graphics support for compute/transcoding workloads
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
 
   # Optimize I/O for Apple SSD
   boot.kernel.sysctl = {
