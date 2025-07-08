@@ -82,7 +82,7 @@ in {
     '';
 
     # Bind mount media libraries to Jellyfin-accessible locations
-    fileSystems = lib.mapAttrs' (name: sourcePath: 
+    fileSystems = lib.mapAttrs' (name: sourcePath:
       lib.nameValuePair "/var/lib/jellyfin/media/${name}" {
         device = sourcePath;
         options = [ "bind" "ro" ]; # Read-only for safety
@@ -99,15 +99,27 @@ in {
           proxyPass = "http://127.0.0.1:${toString cfg.port}";
           proxyWebsockets = true;
           extraConfig = ''
+            # Essential headers for Jellyfin
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_set_header X-Forwarded-Proto $scheme;
-            proxy_set_header X-Forwarded-Protocol $scheme;
             proxy_set_header X-Forwarded-Host $http_host;
 
-            # Disable buffering when the nginx proxy gets very resource heavy upon streaming
+            # Disable buffering for streaming
             proxy_buffering off;
+
+            # Handle large uploads
+            client_max_body_size 20M;
+
+            # Timeout settings
+            proxy_connect_timeout 60s;
+            proxy_send_timeout 60s;
+            proxy_read_timeout 60s;
+
+            # HTTP version
+            proxy_http_version 1.1;
+            proxy_set_header Connection "";
           '';
         };
       };
