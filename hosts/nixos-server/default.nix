@@ -117,15 +117,8 @@
     };
     jellyfin = {
       enable = true;
-      subdomain = "jellyfin";  # Optional, this is the default
-      mediaLibraries = {
-        movies = "/export/1tb/Media/Movies";
-        tv = "/export/1tb/Media/TV";
-        music = "/export/1tb/Media/Music";
-      };
-      enableHardwareAcceleration = true;  # Enable if you have compatible hardware
+      subdomain = "jellyfin";
+      mediaDir = "/mnt/jellyfin/";
     };
-    sonarr.enable = true;
-    radarr.enable = true;
   };
 }

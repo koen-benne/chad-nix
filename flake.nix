@@ -56,6 +56,9 @@
 
     # Minecraft servers
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+
+    # Arr
+    nixarr.url = "github:rasmus-kirk/nixarr";
   };
 
   outputs = inputs @ {flake-parts, ...}:

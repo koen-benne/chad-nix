@@ -1,7 +1,7 @@
-# File: modules/homelab/jellyfin.nix
 {
   config,
   lib,
+  inputs,
   pkgs,
   ...
 }: let
@@ -9,119 +9,72 @@
   cfg = config.my.homelab.jellyfin;
   homelabCfg = config.my.homelab;
 in {
+  imports = [
+    inputs.nixarr.nixosModules.default
+  ];
+
   options.my.homelab.jellyfin = {
-    enable = mkEnableOption (mdDoc "Jellyfin media server");
+    enable = mkEnableOption (mdDoc "Jellyfin media server via nixarr");
 
     subdomain = mkOption {
       type = types.str;
-      default = "jellyfin";
+      default = "watch";
       description = mdDoc "Subdomain for Jellyfin";
     };
 
-    port = mkOption {
-      type = types.port;
-      default = 8096;
-      description = mdDoc "Port for Jellyfin web interface";
-    };
-
-    dataDir = mkOption {
+    mediaDir = mkOption {
       type = types.path;
-      default = "/var/lib/jellyfin";
-      description = mdDoc "Data directory for Jellyfin";
+      default = "/mnt/jellyfin";
+      description = mdDoc "Root media directory";
     };
 
-    mediaLibraries = mkOption {
-      type = types.attrsOf types.path;
-      default = {
-        movies = "/export/1tb/Media/Movies";
-        tv = "/export/1tb/Media/TV";
-        music = "/export/1tb/Media/Music";
-      };
-      description = mdDoc "Media library paths to mount in Jellyfin";
-      example = {
-        movies = "/mnt/storage/movies";
-        tv = "/mnt/storage/tv";
-        music = "/mnt/storage/music";
-        books = "/mnt/storage/books";
-      };
+    stateDir = mkOption {
+      type = types.path;
+      default = "/mnt/jellyfin/.state/nixarr";
+      description = mdDoc "Nixarr state directory";
     };
 
-    openFirewall = mkOption {
-      type = types.bool;
-      default = false;
-      description = mdDoc "Open firewall for direct access to Jellyfin port (not needed if using nginx proxy)";
-    };
-
-    enableHardwareAcceleration = mkOption {
-      type = types.bool;
-      default = false;
-      description = mdDoc "Enable hardware acceleration (requires appropriate hardware)";
+    transmissionPeerPort = mkOption {
+      type = types.port;
+      default = 50000;
+      description = mdDoc "Transmission peer port";
     };
   };
 
   config = mkIf (homelabCfg.enable && cfg.enable) {
-    # Enable Jellyfin service
-    services.jellyfin = {
+    nixarr = {
       enable = true;
-      dataDir = cfg.dataDir;
-      openFirewall = cfg.openFirewall;
-    };
+      mediaDir = cfg.mediaDir;
+      stateDir = cfg.stateDir;
 
-    # Create media directories and set permissions
-    system.activationScripts.jellyfin-setup = ''
-      # Create media library directories if they don't exist
-      ${lib.concatStringsSep "\n" (lib.mapAttrsToList (name: path: ''
-        mkdir -p ${path}
-        chown -R jellyfin:jellyfin ${path}
-        chmod -R 755 ${path}
-      '') cfg.mediaLibraries)}
+      # No VPN configuration
+      vpn.enable = false;
 
-      # Ensure Jellyfin data directory has correct permissions
-      mkdir -p ${cfg.dataDir}
-      chown -R jellyfin:jellyfin ${cfg.dataDir}
-    '';
-
-    # Bind mount media libraries to Jellyfin-accessible locations
-    fileSystems = lib.mapAttrs' (name: sourcePath:
-      lib.nameValuePair "/var/lib/jellyfin/media/${name}" {
-        device = sourcePath;
-        options = [ "bind" "ro" ]; # Read-only for safety
-      }
-    ) cfg.mediaLibraries;
-
-    # Add Jellyfin virtual host to nginx if nginx is enabled
-    services.nginx.virtualHosts = mkIf config.my.homelab.nginx.enable {
-      "${cfg.subdomain}.${homelabCfg.domain}" = {
-        enableACME = true;
-        forceSSL = true;
-
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString cfg.port}";
-          proxyWebsockets = true;
-          extraConfig = ''
-            # Disable buffering for streaming
-            proxy_buffering off;
-          '';
+      # Jellyfin with HTTPS
+      jellyfin = {
+        enable = true;
+        expose.https = {
+          enable = config.my.homelab.nginx.enable;
+          domainName = "${cfg.subdomain}.${homelabCfg.domain}";
+          acmeMail = homelabCfg.email;
         };
       };
+
+      # Download client (no VPN)
+      transmission = {
+        enable = true;
+        vpn.enable = false;
+        peerPort = cfg.transmissionPeerPort;
+      };
+
+      # Media management stack
+      bazarr.enable = true;      # Subtitles
+      prowlarr.enable = true;    # Indexer management
+      radarr.enable = true;      # Movies
+      sonarr.enable = true;      # TV Shows
+      jellyseerr.enable = true;  # User requests
     };
 
-    # Hardware acceleration setup (optional)
-    hardware.graphics = mkIf cfg.enableHardwareAcceleration {
-      enable = true;
-    };
-
-    # Add jellyfin user to video group for hardware acceleration
-    users.users.jellyfin = mkIf cfg.enableHardwareAcceleration {
-      extraGroups = [ "video" "render" ];
-    };
-
-    # System packages that might be useful for media handling
-    environment.systemPackages = with pkgs; [
-      jellyfin
-      jellyfin-web
-      jellyfin-ffmpeg
-    ];
+    services.flaresolverr.enable = true;
   };
 }
-

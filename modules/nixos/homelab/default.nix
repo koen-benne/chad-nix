@@ -12,9 +12,6 @@ in {
     ./nginx.nix
     ./nextcloud.nix
     ./jellyfin.nix
-    ./transmission.nix
-    ./sonarr.nix
-    ./radarr.nix
   ];
 
   options.my.homelab = {
