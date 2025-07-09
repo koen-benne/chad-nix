@@ -27,7 +27,6 @@ in {
     hm.my.thunderbird.enable = true;
     # hm.my.firefox.enable = true;
     hm.my.qutebrowser.enable = true;
-    my.nextcloud.client.enable = true;
     environment.sessionVariables = {
       NIXOS_OXONE_WL = "1";
     };
