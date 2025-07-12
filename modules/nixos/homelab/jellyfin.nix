@@ -66,6 +66,7 @@ in {
         vpn.enable = false;
         peerPort = cfg.transmissionPeerPort;
       };
+      sabnzbd.enable = true;
 
       # Media management stack
       bazarr.enable = true;      # Subtitles
