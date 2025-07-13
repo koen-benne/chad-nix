@@ -1,15 +1,14 @@
 {
-  inputs,
   pkgs,
   config,
   lib,
+  sys,
   ...
 }: let
   inherit (lib) mkIf;
-  cfg = config.my.desktop;
   scripts = ./scripts;
 in {
-  config = mkIf (cfg.windowManager == "aerospace") {
+  config = mkIf (sys.desktop.windowManager == "aerospace") {
     home.packages = [
       pkgs.unstable.aerospace
     ];

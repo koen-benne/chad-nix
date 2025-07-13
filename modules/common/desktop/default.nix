@@ -12,8 +12,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    hm.my.desktop.enable = true;
-
     hm.my.spicetify.enable = lib.mkDefault true;
   };
 }

@@ -1,13 +1,10 @@
 {
-  config,
   lib,
-  inputs,
+  sys,
   pkgs,
   ...
-}: let
-  cfg = config.my.desktop;
-in {
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf sys.desktop.enable {
     home.packages = with pkgs; [
       unstable.vesktop
       ripasso-cursive

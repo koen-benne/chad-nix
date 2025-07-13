@@ -6,7 +6,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkDefualt mkEnableOption mkIf mkMerge;
+  inherit (lib) mkIf;
   cfg = config.my.desktop;
 in {
   config = mkIf cfg.enable {

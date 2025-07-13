@@ -27,10 +27,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    hm.my.desktop = {
-      windowManager = cfg.windowManager;
-    };
-
     # my.kitty.enable = true;
     hm.my.wezterm.enable = true;
     hm.my.theme.enable = true;
