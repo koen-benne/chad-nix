@@ -98,7 +98,7 @@ in {
             "8266:8266"
           ];
           volumes = [
-            "/path/to/your/media:/media"
+            "/mnt/jellyfin/library:/media"
             "/etc/tdarr/configs:/app/configs"
             "/etc/tdarr/logs:/app/logs"
             "/tmp/tdarr-temp:/temp"
