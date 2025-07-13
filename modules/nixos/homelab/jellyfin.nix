@@ -91,6 +91,8 @@ in {
       containers = {
         tdarr = {
           image = "haveagitgat/tdarr:latest";
+          autoStart = true;
+          autoRemoveOnStop = false;
           ports = [
             "8265:8265"
             "8266:8266"
@@ -105,6 +107,7 @@ in {
             TZ = "Europe/Amsterdam";
             PUID = "1000";
             PGID = "1000";
+            internalNode = "true";
           };
           extraOptions = [
             "--restart=unless-stopped"
