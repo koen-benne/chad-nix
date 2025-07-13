@@ -55,7 +55,7 @@ setup_tunnel() {
         -L 6005:localhost:5055 \
         -L 6006:localhost:6767 \
         -L 6008:localhost:8191 \
-        -L 6009:localhost:8080 &
+        -L 6009:localhost:6336 &
     
     SSH_PID=$!
     
