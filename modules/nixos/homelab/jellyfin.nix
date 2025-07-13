@@ -77,5 +77,40 @@ in {
     };
 
     services.flaresolverr.enable = true;
+
+    virtualisation.docker.enable = true;
+    users.users.${config.my.user}.extraGroups = [ "docker" ];
+
+    # Create persistent directories
+    systemd.tmpfiles.rules = [
+      "d /etc/tdarr/configs 0755 root root"
+      "d /etc/tdarr/logs 0755 root root"
+    ];# Declarative container management
+    virtualisation.oci-containers = {
+      backend = "docker";
+      containers = {
+        tdarr = {
+          image = "haveagitgat/tdarr:latest";
+          ports = [
+            "8265:8265"
+            "8266:8266"
+          ];
+          volumes = [
+            "/path/to/your/media:/media"
+            "/etc/tdarr/configs:/app/configs"
+            "/etc/tdarr/logs:/app/logs"
+            "/tmp/tdarr-temp:/temp"
+          ];
+          environment = {
+            TZ = "Europe/Amsterdam";
+            PUID = "1000";
+            PGID = "1000";
+          };
+          extraOptions = [
+            "--restart=unless-stopped"
+          ];
+        };
+      };
+    };
   };
 }
