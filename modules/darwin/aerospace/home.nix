@@ -8,7 +8,7 @@
   inherit (lib) mkIf;
   scripts = ./scripts;
 in {
-  config = mkIf (sys.desktop.windowManager == "aerospace") {
+  config = mkIf (sys.my.desktop.windowManager == "aerospace") {
     home.packages = [
       pkgs.unstable.aerospace
     ];

@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  config = lib.mkIf sys.desktop.enable {
+  config = lib.mkIf sys.my.desktop.enable {
     home.packages = with pkgs; [
       unstable.vesktop
       ripasso-cursive

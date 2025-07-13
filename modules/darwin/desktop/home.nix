@@ -9,7 +9,7 @@
   inherit (lib) mkIf;
   wallpaper = ../../../assets/wp-normal.jpg;
 in {
-  config = mkIf sys.desktop.enable {
+  config = mkIf sys.my.desktop.enable {
     # my.mpv.enable = true;
     home.activation.setWallpaper = lib.hm.dag.entryAfter ["writeBoundary"] ''
       /usr/bin/osascript -e '
