@@ -5,7 +5,7 @@
   ...
 }: let
   inherit (lib) mdDoc mkEnableOption mkIf;
-  cfg = config.my.syncthing;
+  cfg = config.my.tdarr-worker;
 in {
   options.my.tdarr-worker = {
     enable = mkEnableOption (mdDoc "tdarr-worker");
@@ -15,15 +15,7 @@ in {
     virtualisation.docker.enable = true;
 
     # AMD GPU support
-    hardware.opengl = {
-      enable = true;
-      driSupport = true;
-      extraPackages = with pkgs; [
-        amdvlk
-        rocm-opencl-icd
-        rocm-opencl-runtime
-      ];
-    };
+    hardware.amdgpu.opencl.enable = true;
 
     # Tdarr Node container
     virtualisation.oci-containers = {
@@ -59,12 +51,12 @@ in {
     environment.systemPackages = with pkgs; [ sshfs ];
 
     fileSystems."/mnt/server-media" = {
-      device = "koenbenne@192.168.68.56:/mnt/jellyfin/library";
+      device = "${config.my.user}@192.168.68.56:/mnt/jellyfin/library";
       fsType = "sshfs";
       options = [
         "allow_other"
         "_netdev"
-        "IdentityFile=/home/koenbenne/.ssh/nixos"
+        "IdentityFile=${config.my.home}/.ssh/nixos"
         "StrictHostKeyChecking=no"
         "debug"          # Add SSHFS debugging
         "sshfs_debug"    # More SSHFS debugging
