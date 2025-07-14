@@ -81,6 +81,13 @@ in {
     virtualisation.docker.enable = true;
     users.users.${config.my.user}.extraGroups = [ "docker" ];
 
+    services.nfs.server = {
+      enable = true;
+      exports = ''
+        /mnt/jellyfin/library desktop-ip(rw,sync,no_subtree_check)
+      '';
+    };
+
     # Create persistent directories
     systemd.tmpfiles.rules = [
       "d /etc/tdarr/configs 0755 root root"
@@ -99,15 +106,14 @@ in {
           ];
           volumes = [
             "/mnt/jellyfin/library:/media"
-            "/etc/tdarr/configs:/app/configs"
+            "/etc/tdarr/configs:/app/server"
             "/etc/tdarr/logs:/app/logs"
             "/tmp/tdarr-temp:/temp"
           ];
           environment = {
             TZ = "Europe/Amsterdam";
-            PUID = "1000";
-            PGID = "1000";
-            internalNode = "true";
+            PUID = "0";
+            PGID = "0";
           };
           extraOptions = [
             "--restart=unless-stopped"
