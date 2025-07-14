@@ -84,7 +84,7 @@ in {
     services.nfs.server = {
       enable = true;
       exports = ''
-        /mnt/jellyfin/library desktop-ip(rw,sync,no_subtree_check)
+        /mnt/jellyfin/library 192.168.68.56/24(rw,sync,no_subtree_check,no_root_squash,vers=4)
       '';
     };
 
@@ -106,7 +106,7 @@ in {
           ];
           volumes = [
             "/mnt/jellyfin/library:/media"
-            "/etc/tdarr/configs:/app/server"
+            "/etc/tdarr/configs:/app/configs"
             "/etc/tdarr/logs:/app/logs"
             "/tmp/tdarr-temp:/temp"
           ];
