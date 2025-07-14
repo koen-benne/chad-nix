@@ -9,13 +9,9 @@
   sys,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mdDoc optionals;
-  cfg = config.my.desktop;
+  inherit (lib) mkIf optionals;
 in {
-  options.my.desktop = {
-    enable = mkEnableOption (mdDoc "desktop");
-  };
-  config = mkIf cfg.enable {
+  config = mkIf sys.my.desktop.enable {
     home.packages = with pkgs;
       [
         # controlls stuff

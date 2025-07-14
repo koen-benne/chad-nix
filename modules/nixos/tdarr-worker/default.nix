@@ -71,10 +71,11 @@ in {
       options = [
         "allow_other"
         "_netdev"
+        "x-systemd.automount"
+        "x-systemd.device-timeout=30"
         "IdentityFile=${config.my.home}/.ssh/nixos"
         "StrictHostKeyChecking=no"
-        "debug"          # Add SSHFS debugging
-        "sshfs_debug"    # More SSHFS debugging
+        "reconnect"
       ];
     };
     # Create temp directory
