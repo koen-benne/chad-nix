@@ -22,7 +22,7 @@ in {
       backend = "docker";
       containers = {
         tdarr-node = {
-          image = "haveagitgat/tdarr-node:latest";
+          image = "haveagitgat/tdarr_node:latest";
           autoStart = true;
           autoRemoveOnStop = false;
           volumes = [
@@ -37,6 +37,21 @@ in {
             serverIP = "192.168.68.56";
             serverPort = "8266";
             nodeName = "Desktop-GPU-Node";
+            UMASK_SET = "002";
+            inContainer = "true";
+            ffmpegVersion = "7";
+            nodeType = "mapped";
+            priority = "-1";
+            cronPluginUpdate = "";
+            apiKey = "";
+            maxLogSizeMB = "10";
+            pollInterval = "2000";
+            startPaused = "false";
+            transcodegpuWorkers = "4";
+            transcodecpuWorkers = "6";
+            healthcheckgpuWorkers = "2";
+            healthcheckcpuWorkers = "2";
+            LIBVA_DRIVER_NAME = "radeonsi";
           };
           extraOptions = [
             "--device=/dev/dri"
