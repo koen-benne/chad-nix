@@ -52,12 +52,27 @@ in {
         };
       };
     };
+    # Enable FUSE for SSHFS
+    programs.fuse.userAllowOther = true;
 
-    # Mount server media via NFS/SMB
+    # Install SSHFS
+    environment.systemPackages = with pkgs; [ sshfs ];
+
     fileSystems."/mnt/server-media" = {
-      device = "your-server-ip:/mnt/jellyfin/library";
-      fsType = "nfs";
-      options = [ "rw" "hard" "intr" ];
+      device = "koenbenne@192.168.68.56:/mnt/jellyfin/library";
+      fsType = "sshfs";
+      options = [
+        "allow_other"
+        "_netdev"
+        "IdentityFile=/home/koenbenne/.ssh/nixos"
+        "StrictHostKeyChecking=no"
+        "debug"          # Add SSHFS debugging
+        "sshfs_debug"    # More SSHFS debugging
+      ];
     };
+    # Create temp directory
+    systemd.tmpfiles.rules = [
+      "d /tmp/tdarr-node 0755 root root -"
+    ];
   };
 }
