@@ -39,5 +39,50 @@ in {
         "reconnect"
       ];
     };
+
+    # Create unmanic user
+    users.users.unmanic = {
+      isSystemUser = true;
+      group = "unmanic";
+      home = "/var/lib/unmanic";
+      createHome = true;
+      description = "Unmanic service user";
+    };
+
+    users.groups.unmanic = {};
+
+    # Create the systemd service
+    systemd.services.unmanic = {
+      description = "Unmanic - Library Optimiser";
+      after = [ "network-online.target" ];
+      wants = [ "network-online.target" ];
+      wantedBy = [ "multi-user.target" ];
+
+      serviceConfig = {
+        Type = "simple";
+        User = "unmanic";
+        Group = "unmanic";
+        WorkingDirectory = "/var/lib/unmanic";
+        ExecStart = "${pkgs.python3Packages.unmanic}/bin/unmanic";
+        Restart = "always";
+        RestartSec = "30";
+        StartLimitInterval = "200";
+        StartLimitBurst = "3";
+
+        # Security hardening
+        PrivateTmp = true;
+        ProtectSystem = "strict";
+        ProtectHome = true;
+        ReadWritePaths = [ "/var/lib/unmanic" "/mnt/server-media" ];
+        NoNewPrivileges = true;
+      };
+
+      environment = {
+        HOME = "/var/lib/unmanic";
+      };
+    };
+
+    # Ensure the service starts automatically
+    systemd.targets.multi-user.wants = [ "unmanic.service" ];
   };
 }

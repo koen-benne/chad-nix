@@ -13,6 +13,7 @@
 , peewee-migrate-1_6_1
 , swagger-ui-py
 , tornado
+, marshmallow
 , schedule
 , importlib-metadata
 , ffmpeg-full
@@ -114,6 +115,7 @@ buildPythonPackage rec {
     peewee-migrate-1_6_1
     swagger-ui-py
     tornado
+    marshmallow
     schedule
     importlib-metadata
     psutil
