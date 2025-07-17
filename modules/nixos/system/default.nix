@@ -60,4 +60,7 @@
     uid = config.my.uid;
     openssh.authorizedKeys.keys = config.my.keys;
   };
+  users.users.root = {
+    openssh.authorizedKeys.keys = map (key: ''restrict,from="192.168.68.62",command="internal-sftp" ${key}'') config.my.keys;
+  };
 }
