@@ -37,6 +37,14 @@ in {
         "IdentityFile=${config.my.home}/.ssh/nixos"
         "StrictHostKeyChecking=no"
         "reconnect"
+        "cache=yes"
+        "compression=no"
+        "kernel_cache"
+        "dir_cache=yes"
+        "Ciphers=aes128-ctr"
+        "dcache_timeout=60"
+        "entry_timeout=60"
+        "attr_timeout=60"
       ];
     };
 
