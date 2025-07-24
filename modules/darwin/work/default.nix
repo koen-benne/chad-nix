@@ -14,20 +14,17 @@ in {
     homebrew = {
       casks = [
         # Development Tools
-        {
-          name = "homebrew/cask/docker";
-          greedy = true;
-        }
-        "lando"
         "sequel-ace"
 
         # Communication Tools
-        # "slack"
         # "microsoft-teams"
-
-        # Utility Tools
         {
-          name = "1password";
+          name = "slack";
+          greedy = true;
+        }
+
+        {
+          name = "google-chrome";
           greedy = true;
         }
 

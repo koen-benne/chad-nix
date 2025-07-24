@@ -22,15 +22,12 @@
         greedy = true;
       }
       {
-        name = "google-chrome";
-        greedy = true;
-      }
-      {
         name = "microsoft-teams";
         greedy = true;
       }
+      # Utility Tools
       {
-        name = "slack";
+        name = "1password";
         greedy = true;
       }
     ];

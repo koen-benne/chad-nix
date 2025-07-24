@@ -31,6 +31,7 @@
     # show upgrade diff
     ${pkgs.nix}/bin/nix store --experimental-features nix-command diff-closures /run/current-system "$systemConfig"
   '';
+  ids.gids.nixbld = 350;
   system.defaults = {
     NSGlobalDomain = {
       AppleMeasurementUnits = "Centimeters";
