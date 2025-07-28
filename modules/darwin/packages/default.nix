@@ -30,6 +30,10 @@
         name = "1password";
         greedy = true;
       }
+      {
+        name = "focusrite-control";
+        greedy = true;
+      }
     ];
     masApps = {
       # Trello = 1278508951;
