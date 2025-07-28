@@ -18,6 +18,10 @@ in {
   ];
 
   config = mkIf cfg.enable {
+    home.packages = [
+      pkgs.spotdl
+    ];
+
     programs.spicetify = {
       enable = true;
       theme = spicePkgs.themes.onepunch;
