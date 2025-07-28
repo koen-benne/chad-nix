@@ -6,6 +6,8 @@
 }: {
   networking.hostName = "music-mac";
 
+  ids.gids.nixbld = 350;
+
   # Everythhing desktop related
   my.desktop.enable = true;
   my.desktop.windowManager = "aerospace";
