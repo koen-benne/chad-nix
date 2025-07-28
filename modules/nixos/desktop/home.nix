@@ -33,6 +33,7 @@ in {
         mpv
         qbittorrent
         obsidian
+        alsa-scarlett-gui
 
         # screenshotting
         grim
