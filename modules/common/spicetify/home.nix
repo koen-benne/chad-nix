@@ -24,8 +24,8 @@ in {
 
     programs.spicetify = {
       enable = true;
-      theme = spicePkgs.themes.onepunch;
-      colorScheme = "dark";
+      theme = spicePkgs.themes.catppuccin;
+      colorScheme = "mocha";
       # alwaysEnableDevTools = true;
 
       enabledExtensions = with spicePkgs.extensions; [
