@@ -37,5 +37,7 @@
 
     # MacOS comes with bash from the stone age. This version does not support certain features
     bash
+
+    python3Packages.md2confluence
   ];
 }
