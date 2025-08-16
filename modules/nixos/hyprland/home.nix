@@ -137,7 +137,7 @@ in {
         # See https://wiki.hyprland.org/Configuring/Keywords/#executing for more
 
         # Window rules
-        windowrule = noblur, class:^(?!foot).*$
+        #windowrule = noblur, class:^(?!foot).*$
 
         windowrule = float, title:(Floorp - Sharing Indicator)
         windowrule = tile, title:^(.*PWA.*)$
