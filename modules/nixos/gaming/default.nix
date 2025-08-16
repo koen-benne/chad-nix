@@ -53,10 +53,9 @@ in {
       hardware.graphics = {
         enable = true;
         enable32Bit = true;
-        # Use mesa-git instead of stable mesa (for FSR4 and HDR)
-        # Might want to go back to the stable version once it supports all the stuff that I want
-        package = pkgs.mesa_git;
-        package32 = pkgs.mesa32_git;
+        # In case i want to use mesa-git. This tends to be a bad idea when not on unstable
+        # package = pkgs.mesa_git;
+        # package32 = pkgs.mesa32_git;
       };
 
       hardware.steam-hardware.enable = true;
