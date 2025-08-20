@@ -16,7 +16,7 @@
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel" "i915" "video" "wl" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" "applesmc"];
   boot.blacklistedKernelModules = [ "nouveau" ];
-  boot.extraModulePackages = [config.boot.kernelPackages.broadcom_sta];
+  # boot.extraModulePackages = [config.boot.kernelPackages.broadcom_sta];
   boot.kernelParams = [
     "intel_idle.max_cstate=1"
     "processor.max_state=1"
