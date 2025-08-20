@@ -81,7 +81,7 @@
   fileSystems."/mnt/biggidrive" = {
     device = "/dev/disk/by-uuid/dbbf1ce5-ab00-4312-941c-8cff767e5e1d";
     fsType = "ext4";
-    options = [ "defaults" ];
+    options = [ "nofail" "x-systemd.device-timeout=10" "noatime" "defaults" ];
   };
 
   swapDevices = [
