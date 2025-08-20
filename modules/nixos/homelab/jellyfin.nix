@@ -61,11 +61,11 @@ in {
       };
 
       # Download client (no VPN)
-      transmission = {
-        enable = true;
-        vpn.enable = false;
-        peerPort = cfg.transmissionPeerPort;
-      };
+      # transmission = {
+      #   enable = true;
+      #   vpn.enable = false;
+      #   peerPort = cfg.transmissionPeerPort;
+      # };
       sabnzbd.enable = true;
 
       # Media management stack
