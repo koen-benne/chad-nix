@@ -78,5 +78,5 @@
   my.bluetooth.enable = true;
   my.android.enable = true;
   my.corectrl.enable = true;
-  my.unmanic.enable = true;
+  my.unmanic.enable = false;
 }

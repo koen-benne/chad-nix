@@ -24,13 +24,13 @@ in {
 
     mediaDir = mkOption {
       type = types.path;
-      default = "/mnt/jellyfin";
+      default = "/mnt/biggidrive/jellyfin";
       description = mdDoc "Root media directory";
     };
 
     stateDir = mkOption {
       type = types.path;
-      default = "/mnt/jellyfin/.state/nixarr";
+      default = "/mnt/biggidrive/jellyfin/.state/nixarr";
       description = mdDoc "Nixarr state directory";
     };
 

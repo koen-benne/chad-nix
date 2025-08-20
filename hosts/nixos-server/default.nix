@@ -118,7 +118,7 @@
     jellyfin = {
       enable = true;
       subdomain = "jellyfin";
-      mediaDir = "/mnt/jellyfin/";
+      mediaDir = "/mnt/biggidrive/jellyfin/";
     };
   };
 }

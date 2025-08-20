@@ -78,8 +78,8 @@
     options = ["fmask=0022" "dmask=0022" "noatime" "discard"];
   };
 
-  fileSystems."/mnt/jellyfin" = {
-    device = "/dev/disk/by-uuid/e51bb546-03c4-4ec2-bdfe-d8fcb30c1a7b";
+  fileSystems."/mnt/biggidrive" = {
+    device = "/dev/disk/by-uuid/dbbf1ce5-ab00-4312-941c-8cff767e5e1d";
     fsType = "ext4";
     options = [ "defaults" ];
   };

@@ -27,7 +27,7 @@ in {
     ];
 
     fileSystems."/mnt/server-media" = {
-      device = "root@192.168.68.56:/mnt/jellyfin/library";
+      device = "root@192.168.68.56:/mnt/biggidrive/jellyfin/library";
       fsType = "sshfs";
       options = [
         "allow_other"
