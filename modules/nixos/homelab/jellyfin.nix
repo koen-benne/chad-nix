@@ -30,7 +30,7 @@ in {
 
     stateDir = mkOption {
       type = types.path;
-      default = "/mnt/biggidrive/jellyfin/.state/nixarr";
+      default = "/nixarr/.state";
       description = mdDoc "Nixarr state directory";
     };
 
