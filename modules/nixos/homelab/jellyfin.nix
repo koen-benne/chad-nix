@@ -22,6 +22,12 @@ in {
       description = mdDoc "Subdomain for Jellyfin";
     };
 
+    requestSubdomain = mkOption {
+      type = types.str;
+      default = "request";
+      description = mdDoc "Subdomain for Jellyseerr";
+    };
+
     mediaDir = mkOption {
       type = types.path;
       default = "/mnt/biggidrive/jellyfin";
@@ -42,6 +48,9 @@ in {
   };
 
   config = mkIf (homelabCfg.enable && cfg.enable) {
+    environment.systemPackages = with pkgs; [
+      opforjellyfin
+    ];
     nixarr = {
       enable = true;
       mediaDir = cfg.mediaDir;
@@ -60,6 +69,15 @@ in {
         };
       };
 
+      jellyseerr = {
+        enable = true;
+        expose.https = {
+          enable = config.my.homelab.nginx.enable;
+          domainName = "${cfg.requestSubdomain}.${homelabCfg.domain}";
+          acmeMail = homelabCfg.email;
+        };
+      };
+
       # Download client (no VPN)
       # transmission = {
       #   enable = true;
@@ -73,9 +91,8 @@ in {
       prowlarr.enable = true;    # Indexer management
       radarr.enable = true;      # Movies
       sonarr.enable = true;      # TV Shows
-      jellyseerr.enable = true;  # User requests
     };
 
-    services.flaresolverr.enable = true;
+    # services.flaresolverr.enable = true;
   };
 }
