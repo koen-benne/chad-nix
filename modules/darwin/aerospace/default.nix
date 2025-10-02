@@ -12,7 +12,7 @@ in {
     services.sketchybar = {
       enable = true;
       extraPackages = [
-        pkgs.unstable.aerospace
+        pkgs.aerospace
         pkgs.jq
       ];
     };

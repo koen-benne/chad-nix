@@ -1,5 +1,6 @@
 {
   pkgs,
+  inputs,
   config,
   lib,
   sys,
@@ -10,10 +11,10 @@
 in {
   config = mkIf (sys.my.desktop.windowManager == "aerospace") {
     home.packages = [
-      pkgs.unstable.aerospace
+      pkgs.aerospace
     ];
 
-    # home.activation.aerospace = lib.hm.dag.entryAfter ["writeBoundary"] ("open ${inputs.aerospace.packages.aarch64-darwin.default}/AeroSpace.app");
+    home.activation.aerospace = lib.hm.dag.entryAfter ["writeBoundary"] ("/usr/bin/open ${pkgs.aerospace}/Applications/AeroSpace.app");
     home.file = {
       ".config/sketchybar".source = ./sketchybar-config;
     };
@@ -106,13 +107,13 @@ in {
 
         # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
-        alt-enter = ''''exec-and-forget bash -c '
+        alt-enter = ''''exec-and-forget bash -c "
           if ps aux | grep -i "WezTerm" | grep -v "grep" > /dev/null
           then
             ${pkgs.wezterm}/bin/wezterm start --cwd ${config.my.home}
           else
             open ${pkgs.wezterm}/Applications/WezTerm.app
-          fi'
+          fi"
         ''''
 
         alt-w = 'exec-and-forget /Applications/Zen.app/Contents/MacOS/zen'
