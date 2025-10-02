@@ -32,10 +32,6 @@
         };
       };
     };
-    networkmanager = {
-      enable = true;
-      wifi.backend = "iwd";
-    };
 
     nameservers = ["8.8.8.8" "8.8.4.4"];
 
