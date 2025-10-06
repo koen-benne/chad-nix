@@ -16,6 +16,6 @@ in {
       Defaults env_keep += "TERMINFO_DIRS"
     '';
 
-    hm.my.kitty.enable = true;
+
   };
 }

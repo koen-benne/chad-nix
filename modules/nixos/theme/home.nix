@@ -2,15 +2,12 @@
   config,
   lib,
   pkgs,
+  sys,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
-  cfg = config.my.theme;
+  inherit (lib) mkIf;
+  cfg = sys.my.theme;
 in {
-  options.my.theme = {
-    enable = mkEnableOption (mdDoc "theme");
-  };
-
   config = mkIf cfg.enable {
     stylix = {
       targets = {

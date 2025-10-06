@@ -2,15 +2,12 @@
   config,
   lib,
   pkgs,
+  sys,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mdDoc;
-  cfg = config.my.kitty;
+  inherit (lib) mkIf;
+  cfg = sys.my.kitty;
 in {
-  options.my.kitty = {
-    enable = mkEnableOption (mdDoc "kitty");
-  };
-
   config = mkIf cfg.enable {
     programs.kitty = {
       enable = true;

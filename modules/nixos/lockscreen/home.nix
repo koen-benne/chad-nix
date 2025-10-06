@@ -2,15 +2,12 @@
   config,
   lib,
   pkgs,
+  sys,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mkMerge mdDoc;
-  cfg = config.my.lockscreen;
+  inherit (lib) mkIf mkMerge;
+  cfg = sys.my.lockscreen;
 in {
-  options.my.lockscreen = {
-    enable = mkEnableOption (mdDoc "lockscreen");
-    autoLock = mkEnableOption (mdDoc "enable auto lock with hypridle");
-  };
   config = mkIf cfg.enable (mkMerge [
     # Always enable hyprlock
     {

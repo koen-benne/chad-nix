@@ -28,7 +28,7 @@ in {
     #     };
     #   };
 
-    hm.my.openssl.enable = true;
+
 
     security.pki.certificateFiles = [
       ../../../certs/rootCA.pem

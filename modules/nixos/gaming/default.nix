@@ -27,7 +27,7 @@ in {
     (mkIf cfg.enable {
       boot.kernelPackages = pkgs.linuxPackages_cachyos;
 
-      hm.my.gaming.enable = true;
+
       # environment.systemPackages = [ pkgs.steam-run-native ];
 
       environment.systemPackages = with pkgs; [

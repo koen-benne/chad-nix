@@ -2,10 +2,11 @@
   config,
   lib,
   pkgs,
+  sys,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mdDoc;
-  cfg = config.my.uxplay;
+  inherit (lib) mkIf;
+  cfg = sys.my.uxplay;
 
   uxplayDesktopItem = pkgs.makeDesktopItem {
     name = "uxplay";
@@ -16,10 +17,6 @@
     type = "Application";
   };
 in {
-  options.my.uxplay = {
-    enable = mkEnableOption (mdDoc "uxplay");
-  };
-
   config = mkIf cfg.enable {
     home.packages = [
       pkgs.uxplay

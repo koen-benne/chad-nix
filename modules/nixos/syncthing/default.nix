@@ -11,7 +11,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    hm.my.syncthing.enable = true;
+
 
     networking.firewall.allowedTCPPorts = [22067 22070];
   };

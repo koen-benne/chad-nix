@@ -9,9 +9,9 @@
 in {
   options.my.lockscreen = {
     enable = mkEnableOption (mdDoc "Enable lockscreen");
+    autoLock = mkEnableOption (mdDoc "enable auto lock with hypridle");
   };
   config = mkIf cfg.enable {
-    hm.my.lockscreen.enable = true;
     security.pam.services.hyprlock = {
       fprintAuth = false;
     };

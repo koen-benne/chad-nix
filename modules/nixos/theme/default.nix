@@ -49,6 +49,6 @@ in {
       };
     };
 
-    hm.my.theme.enable = true;
+
   };
 }

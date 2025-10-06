@@ -13,7 +13,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    hm.my.virtualisation.enable = true;
+
 
     boot.kernelParams = ["amd_iommu=on" "iommu=pt"];
     boot.kernelModules = ["kvm-amd" "vfio-pci"];
