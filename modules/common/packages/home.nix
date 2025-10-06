@@ -31,7 +31,6 @@
     python3
     cargo
     ripgrep
-    unstable.opencode
     scripts
     nerd-fonts.jetbrains-mono
     nmap
