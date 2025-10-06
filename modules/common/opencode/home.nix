@@ -16,6 +16,13 @@ in {
       pkgs.unstable.opencode
     ];
 
+    # Create the API key file with sops
+    sops.secrets.bonzai-api-key = {
+      sopsFile = ./secrets.yaml;
+      path = "${config.my.home}/.config/opencode/bonzai-key";
+      mode = "0600";
+    };
+
     xdg.configFile = {
       "opencode/opencode.json" = {
         source = ./opencode.json;
@@ -26,4 +33,3 @@ in {
     };
   };
 }
-
