@@ -7,7 +7,7 @@
       "npm": "@ai-sdk/openai-compatible",
       "options": {
         "baseURL": "https://api-v2.bonzai.iodigital.com",
-        "apiKey": "{file:~/.config/opencode/bonzai-key}",
+        "apiKey": "{file:__BONZAI_SECRET_PATH__}",
         "includeUsage": true
       },
       "models": {

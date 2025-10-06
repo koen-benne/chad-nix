@@ -32,5 +32,7 @@ in {
         # "figma"
       ];
     };
+
+    my.opencode.enable = true;
   };
 }

@@ -57,5 +57,6 @@
     tmux.enable = true;
     yazi.enable = true;
     taskwarrior.enable = true;
+    nix-helper.enable = true;
   };
 }
