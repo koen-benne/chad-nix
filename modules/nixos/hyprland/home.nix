@@ -21,7 +21,6 @@ in {
         # dont know if nix does this for me
         # exec-once = dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
         # exec-once = pipewire
-        # exec-once = syncthing
         # exec-once = ~/.config/hypr/useXDPH.sh
         # exec-once = dunst
         # exec-once = gnome-keyring-daemon --start --components=secrets
