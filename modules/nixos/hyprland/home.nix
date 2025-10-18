@@ -15,7 +15,7 @@ in {
 
 
         monitor = eDP-1, 3024x1890@60, auto, 2
-        monitor = HDMI-A-1, 3440x1440@60, auto, 1
+        # monitor = HDMI-A-1, 3440x1440@60, auto, 1
 
         # dont know if nix does this for me
         # exec-once = dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP

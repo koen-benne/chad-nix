@@ -27,8 +27,6 @@ in {
     (mkIf cfg.enable {
       boot.kernelPackages = pkgs.linuxPackages_zen;
 
-      hm.my.gaming.enable = true;
-
       environment.systemPackages = with pkgs; [
         steamcmd
         mangohud
