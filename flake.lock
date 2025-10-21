@@ -504,14 +504,15 @@
         "nixpkgs": [
           "unstable"
         ],
+        "nvim-dap-ruby": "nvim-dap-ruby",
         "ts-error-translator-nvim": "ts-error-translator-nvim"
       },
       "locked": {
-        "lastModified": 1760703908,
-        "narHash": "sha256-W2arGFvj/QJaaIHNW/crJ4039HoMfDKDFtHWvprX0ME=",
+        "lastModified": 1761038665,
+        "narHash": "sha256-x1hKRyQHod8KKGDS7eg+AJJvm9jBIOepxTv6nSM24Bo=",
         "owner": "koen-benne",
         "repo": "neovim",
-        "rev": "caa74394f3094e582bdc585adc944cae54dd6d11",
+        "rev": "f07872ac2d6a1387626da1935b406319f9e14403",
         "type": "github"
       },
       "original": {
@@ -770,6 +771,22 @@
       "original": {
         "owner": "nix-community",
         "repo": "NUR",
+        "type": "github"
+      }
+    },
+    "nvim-dap-ruby": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1752006624,
+        "narHash": "sha256-57BBhdrikDEswZe2QW+jHMSgfXIjauc6iDNpWS0YUaU=",
+        "owner": "suketa",
+        "repo": "nvim-dap-ruby",
+        "rev": "ba36f9905ca9c6d89e5af5467a52fceeb2bbbf6d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "suketa",
+        "repo": "nvim-dap-ruby",
         "type": "github"
       }
     },
