@@ -129,10 +129,8 @@ in {
         alt-comma = 'layout accordion horizontal vertical'
 
         # # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-        # alt-shift-h = 'focus left'
-        # alt-shift-j = 'focus down'
-        # alt-shift-k = 'focus up'
-        alt-shift-l = 'focus right'
+        alt-j = 'focus dfs-next'
+        alt-k = 'focus dfs-prev'
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#move
         # alt-shift-h = 'move left'
