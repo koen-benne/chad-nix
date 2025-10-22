@@ -8,13 +8,14 @@
 }: let
   inherit (lib) mkIf;
   scripts = ./scripts;
+  aerospace = pkgs.unstable.aerospace;
 in {
   config = mkIf (sys.my.desktop.windowManager == "aerospace") {
     home.packages = [
-      pkgs.aerospace
+      aerospace
     ];
 
-    home.activation.aerospace = lib.hm.dag.entryAfter ["writeBoundary"] ("/usr/bin/open ${pkgs.aerospace}/Applications/AeroSpace.app");
+    home.activation.aerospace = lib.hm.dag.entryAfter ["writeBoundary"] ("/usr/bin/open ${aerospace}/Applications/AeroSpace.app");
     home.file = {
       ".config/sketchybar".source = ./sketchybar-config;
     };
@@ -107,13 +108,13 @@ in {
 
         # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
-        alt-enter = ''''exec-and-forget bash -c "
-          if ps aux | grep -i "WezTerm" | grep -v "grep" > /dev/null
+        alt-enter = ''''exec-and-forget bash -c '
+          if /bin/ps aux | /usr/bin/grep -i "wezterm" | /usr/bin/grep -v "grep" > /dev/null
           then
-            ${pkgs.wezterm}/bin/wezterm start --cwd ${config.my.home}
+            /nix/store/i45ywci02z76lmm77gdq68kw2m5wswy2-wezterm-0-unstable-2025-05-18/bin/wezterm start --cwd /Users/koenbenne
           else
-            open ${pkgs.wezterm}/Applications/WezTerm.app
-          fi"
+            /usr/bin/open /nix/store/i45ywci02z76lmm77gdq68kw2m5wswy2-wezterm-0-unstable-2025-05-18/Applications/WezTerm.app
+          fi'
         ''''
 
         alt-w = 'exec-and-forget /Applications/Zen.app/Contents/MacOS/zen'
