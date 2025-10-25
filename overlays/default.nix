@@ -7,7 +7,6 @@ final: prev: {
       swagger-ui-py = python-final.callPackage ../pkgs/swagger-ui-py {};
       json-log-formatter = python-final.callPackage ../pkgs/json-log-formatter {};
       unmanic = python-final.callPackage ../pkgs/unmanic {};
-      md2confluence = python-final.callPackage ../pkgs/md2confluence {};
     };
   };
   python3Packages = final.python3.pkgs;

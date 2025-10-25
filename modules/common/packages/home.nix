@@ -28,7 +28,6 @@
     imagemagick
     ipcalc
     jq
-    python3
     cargo
     ripgrep
     scripts
