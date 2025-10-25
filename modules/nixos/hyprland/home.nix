@@ -29,7 +29,6 @@ in {
         exec-once = foot --server
         exec-once = wpaperd
         exec-once = waybar
-        exec-once = openrgb --server
         exec-once = corectrl --minimize-systray
         exec-once = nm-applet
         ${optionalString sys.networking.networkmanager.enable "exec-once = ${pkgs.networkmanagerapplet}/bin/nm-applet"}
