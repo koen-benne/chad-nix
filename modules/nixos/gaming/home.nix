@@ -10,7 +10,7 @@
 in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      lutris
+      unstable.lutris
       # MC shit
       prismlauncher
       unstable.vintagestory
