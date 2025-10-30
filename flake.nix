@@ -12,6 +12,8 @@
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
     darwin.url = "github:lnl7/nix-darwin/nix-darwin-25.05";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
+    system-manager.url = "github:numtide/system-manager";
+    system-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";
@@ -70,6 +72,7 @@
         ./parts/overlays.nix
         ./parts/darwin.nix
         ./parts/nixos.nix
+        ./parts/system-manager.nix
       ];
       perSystem = {pkgs, ...}: {
         devShells.default = pkgs.mkShell {
