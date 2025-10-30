@@ -16,6 +16,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    mac-app-util.url = "github:hraban/mac-app-util";
 
     apple-silicon.url = "github:tpwrules/nixos-apple-silicon/main";
 
