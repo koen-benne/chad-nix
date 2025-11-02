@@ -57,6 +57,19 @@ in {
 
       hardware.steam-hardware.enable = true;
 
+      # Rule to disable touchpad for PS5 controller
+      services.udev.packages = [
+        (pkgs.writeTextFile {
+          name = "ps5-controller-udev-rules";
+          text = ''
+            # Disable PS5 DualSense touchpad acting as mouse
+            ATTRS{name}=="Sony Interactive Entertainment DualSense Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+            ATTRS{name}=="DualSense Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+          '';
+          destination = "/etc/udev/rules.d/72-ps5-touchpad.rules";
+        })
+      ];
+
       services.sunshine = mkIf cfg.enableSunshine {
         enable = true;
         autoStart = true;
