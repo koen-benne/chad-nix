@@ -64,7 +64,7 @@ in {
           text = ''
             # Disable PS5 DualSense touchpad acting as mouse
             ATTRS{name}=="Sony Interactive Entertainment DualSense Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
-            ATTRS{name}=="DualSense Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+            ATTRS{name}=="Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
           '';
           destination = "/etc/udev/rules.d/72-ps5-touchpad.rules";
         })
