@@ -72,7 +72,7 @@ in {
       hyprpicker
       hyprlock
       playerctl
-      wpctl
+      wireplumber
       brightnessctl
       nautilus
       networkmanagerapplet
