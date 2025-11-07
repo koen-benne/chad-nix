@@ -29,3 +29,9 @@ Todo:
 - when an app has a home manager and non-home manager module, the enable option should only be in home manager, rather than having to enable the home manager module from within the non-home manager module
 - use sys instead of making separate options for hm when they are already in the nixos/darwin config
 - make stylix always enabled, as it is impossible to manage optionally
+
+
+
+
+currently we are doing something very stupid where AI thought sys is just something home manager can do in options and it magically works. I somehow did not realize and went with it. We are going to have to somehow fix this to where it is compatible with standalone home-manager
+
