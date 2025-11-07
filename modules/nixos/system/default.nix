@@ -20,7 +20,7 @@
   };
   # explicitly enable nixos docs, system like wsl does not enable this
   documentation.nixos.enable = true;
-  networking.nftables.enable = true;
+  networking.nftables.enable = false;
   networking.useNetworkd = lib.mkDefault true;
   # systemd.network.wait-online.anyInterface = config.networking.useDHCP;
   nix.gc = {
