@@ -44,6 +44,7 @@
                 then "/Users/${username}"
                 else "/home/${username}";
             }
+            ../modules/home-manager-compat
           ]
           ++ modules;
       });
