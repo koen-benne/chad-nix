@@ -1,4 +1,4 @@
-{lib, ...}: let
+{lib, inputs, pkgs, ...}: let
   inherit (lib) mkEnableOption mkOption types;
 in {
   options.sys.my.desktop = {
@@ -14,4 +14,7 @@ in {
       description = "Desktop entries for dock/launcher";
     };
   };
+  home.packages = [
+    inputs.nixgl.packages.${pkgs.system}.nixGLIntel
+  ];
 }

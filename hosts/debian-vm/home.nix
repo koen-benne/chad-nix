@@ -8,13 +8,17 @@
   imports = [
     inputs.nix-index-database.homeModules.nix-index
     ../../modules/common/my/default.nix
-    # Import only common home modules that don't depend on system config
+
+    # Modules that use companion modules (require sys.* options)
+    ../../modules/common/desktop/home.nix
+    ../../modules/common/hyprland/home.nix
+
+    # Standalone modules (work independently)
     ../../modules/common/direnv/home.nix
     ../../modules/common/fish/home.nix
     ../../modules/common/git/home.nix
     ../../modules/common/gitui/home.nix
     ../../modules/common/gnupg/home.nix
-    ../../modules/common/hyprland/home.nix
     ../../modules/common/lazygit/home.nix
     ../../modules/common/neovim/home.nix
     ../../modules/common/nix-helper/home.nix
@@ -28,13 +32,13 @@
   # Basic home configuration
   home.stateVersion = "24.05";
 
-  # Enable Hyprland
-  my.hyprland.enable = true;
+  # Enable desktop features
+  sys.my.desktop.enable = true;
+  sys.my.hyprland.enable = true;
 
   # nixGL for graphics acceleration on non-NixOS
   home.packages = [
     pkgs.home-manager
-    inputs.nixgl.packages.${pkgs.system}.nixGLIntel   # For VM with virtio-gpu
   ];
 
   # Enable core programs
