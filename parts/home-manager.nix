@@ -52,7 +52,7 @@
 in {
   flake.homeConfigurations = {
     # Auto-detecting configuration based on hostname
-    default = mkHome {
+    koenbenne = mkHome {
       system = "x86_64-linux";
       username = "koenbenne";
       modules = [
@@ -60,7 +60,7 @@ in {
           imports = let
             hostname = lib.strings.removeSuffix "\n" (lib.fileContents /etc/hostname);
             hostConfig = ../hosts/${hostname}/home.nix;
-          in 
+          in
             if builtins.pathExists hostConfig
             then [hostConfig]
             else throw "No configuration found for hostname '${hostname}'. Create hosts/${hostname}/home.nix";
