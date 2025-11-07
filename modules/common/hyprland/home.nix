@@ -32,10 +32,10 @@
     exec -a "$0" ${nixGLPackage}/bin/nixGL ${pkg}/bin/${binary} "$@"
   '';
   
-  # Wrapped packages for graphics applications
-  wrappedHyprland = wrapProgram "hyprland" pkgs.hyprland "Hyprland";
-  wrappedFoot = wrapProgram "foot" pkgs.foot "foot";
-  wrappedFootClient = wrapProgram "footclient" pkgs.foot "footclient";
+  # Wrapped packages for graphics applications  
+  wrappedHyprland = wrapProgram "hyprland-nixgl" pkgs.hyprland "Hyprland";
+  wrappedFoot = wrapProgram "foot-nixgl" pkgs.foot "foot";
+  wrappedFootClient = wrapProgram "footclient-nixgl" pkgs.foot "footclient";
   
 in {
   options.my.hyprland = {
@@ -55,8 +55,7 @@ in {
       # NixGL package
       nixGLPackage
       
-      # Wrapped graphics applications
-      wrappedHyprland
+      # Wrapped graphics applications (with different names to avoid conflicts)
       wrappedFoot
       wrappedFootClient
       
@@ -78,8 +77,7 @@ in {
       nautilus
       networkmanagerapplet
       
-      # Original packages (for reference)
-      hyprland
+      # Original foot package (for reference)
       foot
     ];
 
