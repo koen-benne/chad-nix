@@ -34,7 +34,7 @@
   # nixGL for graphics acceleration on non-NixOS
   home.packages = [
     pkgs.home-manager
-    inputs.nixgl.packages.${pkgs.system}.auto.nixGLDefault   # Auto-detects graphics drivers
+    inputs.nixgl.packages.${pkgs.system}.nixGLIntel   # For VM with virtio-gpu
   ];
 
   # Enable core programs
