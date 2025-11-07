@@ -8,6 +8,7 @@
   imports = [
     inputs.nix-index-database.homeModules.nix-index
     ../../modules/common/my/default.nix
+    ../../modules/common/home-manager-only
     # Import only common home modules that don't depend on system config
     ../../modules/common/direnv/home.nix
     ../../modules/common/fish/home.nix
@@ -26,6 +27,21 @@
 
   # Basic home configuration  
   home.stateVersion = "24.05";
+  
+  # Enable home-manager-only mode with Darwin features
+  my.homeManagerOnly = {
+    enable = true;
+    darwin = {
+      enable = true;
+      aerospace.enable = true;
+      kitty.enable = true;
+      wezterm.enable = true;
+    };
+    systemServices = {
+      enable = true;
+      gnupg.enable = true;
+    };
+  };
   
   # Enable core programs
   programs.direnv.enable = true;

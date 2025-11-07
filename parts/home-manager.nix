@@ -63,7 +63,7 @@ in {
     "koenbenne@debian-vm" = mkHome {
       system = "x86_64-linux";
       username = "koenbenne";
-      modules = [../hosts/nixos-work/home.nix];
+      modules = [../hosts/debian-vm/home.nix];
     };
 
     # macOS configurations
