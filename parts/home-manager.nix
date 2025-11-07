@@ -1,4 +1,5 @@
 # Entry point when using home-manager switch
+# This is only for systems that can't use NixOS/nix-darwin system management
 {
   inputs,
   withSystem,
@@ -50,33 +51,21 @@
       });
 in {
   flake.homeConfigurations = {
-    # Linux configurations
-    "koenbenne@nixos" = mkHome {
+    # Auto-detecting configuration based on hostname
+    default = mkHome {
       system = "x86_64-linux";
       username = "koenbenne";
-      modules = [../hosts/nixos/home.nix];
-    };
-    "koenbenne@nixos-work" = mkHome {
-      system = "aarch64-linux";
-      username = "koenbenne";
-      modules = [../hosts/nixos-work/home.nix];
-    };
-    "koenbenne@debian-vm" = mkHome {
-      system = "x86_64-linux";
-      username = "koenbenne";
-      modules = [../hosts/debian-vm/home.nix];
-    };
-
-    # macOS configurations
-    "koenbenne@work-mac" = mkHome {
-      system = "aarch64-darwin";
-      username = "koenbenne";
-      modules = [../hosts/work-mac/home.nix];
-    };
-    "koenbenne@music-mac" = mkHome {
-      system = "aarch64-darwin";
-      username = "koenbenne";
-      modules = [../hosts/music-mac/home.nix];
+      modules = [
+        ({config, lib, pkgs, ...}: {
+          imports = let
+            hostname = lib.strings.removeSuffix "\n" (lib.fileContents /etc/hostname);
+            hostConfig = ../hosts/${hostname}/home.nix;
+          in 
+            if builtins.pathExists hostConfig
+            then [hostConfig]
+            else throw "No configuration found for hostname '${hostname}'. Create hosts/${hostname}/home.nix";
+        })
+      ];
     };
   };
 }
