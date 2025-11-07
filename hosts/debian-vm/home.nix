@@ -33,9 +33,9 @@
 
   # nixGL for graphics acceleration on non-NixOS
   home.packages = with pkgs; [
-    nixgl.nixGLIntel   # For Intel/generic graphics
-    nixgl.nixGLMesa    # For AMD/Mesa graphics  
-    nixgl.nixGLNvidia  # For NVIDIA graphics
+    inputs.nixgl.packages.${pkgs.system}.nixGLIntel   # For Intel/generic graphics
+    inputs.nixgl.packages.${pkgs.system}.nixGLMesa    # For AMD/Mesa graphics  
+    inputs.nixgl.packages.${pkgs.system}.nixGLNvidia  # For NVIDIA graphics
   ];
 
   # Enable core programs
