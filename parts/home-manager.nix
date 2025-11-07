@@ -51,21 +51,11 @@
       });
 in {
   flake.homeConfigurations = {
-    # Auto-detecting configuration based on hostname
+    # Machine-specific home-manager configurations for non-NixOS systems
     koenbenne = mkHome {
       system = "x86_64-linux";
       username = "koenbenne";
-      modules = [
-        ({config, lib, pkgs, ...}: let
-          hostname = lib.strings.removeSuffix "\n" (lib.fileContents /etc/hostname);
-          hostConfig = ../hosts/${hostname}/home.nix;
-        in {
-          imports = 
-            if builtins.pathExists hostConfig
-            then [hostConfig]
-            else throw "No configuration found for hostname '${hostname}'. Create hosts/${hostname}/home.nix";
-        })
-      ];
+      modules = [../hosts/debian-vm/home.nix];
     };
   };
 }
