@@ -3,24 +3,70 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf mkOption types;
   cfg = config.my.hyprland;
   scripts = ./scripts;
+  
+  # Auto-detect or allow manual override of NixGL variant
+  nixGLPackage = 
+    if cfg.nixgl.variant == "auto" then
+      # Try to auto-detect - fallback to Intel for now
+      inputs.nixgl.packages.${pkgs.system}.nixGLIntel
+    else if cfg.nixgl.variant == "intel" then
+      inputs.nixgl.packages.${pkgs.system}.nixGLIntel
+    else if cfg.nixgl.variant == "nvidia" then
+      inputs.nixgl.packages.${pkgs.system}.nixGLNvidia
+    else
+      inputs.nixgl.packages.${pkgs.system}.nixGLMesa;
+  
+  # NixGL wrapper utility
+  nixGLWrap = pkg: cmd: pkgs.writeShellScriptBin cmd ''
+    exec -a "$0" ${nixGLPackage}/bin/nixGL ${pkg}/bin/${cmd} "$@"
+  '';
+  
+  # Create wrapper script for programs
+  wrapProgram = name: pkg: binary: pkgs.writeShellScriptBin name ''
+    exec -a "$0" ${nixGLPackage}/bin/nixGL ${pkg}/bin/${binary} "$@"
+  '';
+  
+  # Wrapped packages for graphics applications
+  wrappedHyprland = wrapProgram "hyprland" pkgs.hyprland "Hyprland";
+  wrappedFoot = wrapProgram "foot" pkgs.foot "foot";
+  wrappedFootClient = wrapProgram "footclient" pkgs.foot "footclient";
+  
 in {
   options.my.hyprland = {
     enable = mkEnableOption "hyprland home-manager configuration";
+    nixgl = {
+      variant = mkOption {
+        type = types.enum ["auto" "intel" "nvidia" "mesa"];
+        default = "auto";
+        description = "Which NixGL variant to use. Auto-detection attempts Intel first.";
+      };
+    };
   };
 
   config = mkIf cfg.enable {
-    # Install Hyprland and related packages
+    # Install NixGL and wrapped graphics applications
     home.packages = with pkgs; [
-      hyprland
+      # NixGL package
+      nixGLPackage
+      
+      # Wrapped graphics applications
+      wrappedHyprland
+      wrappedFoot
+      wrappedFootClient
+      
+      # Helper script for launching Hyprland
+      (writeShellScriptBin "launch-hyprland" (builtins.readFile ./launch-hyprland.sh))
+      
+      # Other Hyprland essentials 
       hyprpolkitagent
-      foot
       waybar
-      wpaperd
+      wpaperd  
       fuzzel
       grim
       slurp
@@ -31,11 +77,15 @@ in {
       brightnessctl
       nautilus
       networkmanagerapplet
+      
+      # Original packages (for reference)
+      hyprland
+      foot
     ];
 
     wayland.windowManager.hyprland = {
       enable = true;
-      package = pkgs.hyprland;
+      package = pkgs.hyprland;  # Use original package for home-manager integration
       xwayland.enable = true;
       extraConfig = ''
 
@@ -44,7 +94,7 @@ in {
 
         # Startup applications
         exec-once = systemctl --user start hyprpolkitagent
-        exec-once = foot --server
+        exec-once = ${nixGLPackage}/bin/nixGL foot --server
         exec-once = wpaperd
         exec-once = waybar
         exec-once = corectrl --minimize-systray
@@ -159,7 +209,7 @@ in {
         $mainMod = SUPER
 
         bind = $mainMod, Return, exec, footclient
-        bind = $mainMod, W, exec, zen
+        bind = $mainMod, W, exec, ${nixGLPackage}/bin/nixGL zen
         bind = $mainMod, Q, killactive,
         bind = $mainMod CTRL SHIFT, C, exit,
         bind = $mainMod, E, exec, nautilus
