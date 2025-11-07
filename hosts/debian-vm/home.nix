@@ -39,6 +39,7 @@
   # nixGL for graphics acceleration on non-NixOS
   home.packages = [
     pkgs.home-manager
+    inputs.nixgl.packages.${pkgs.system}.nixGLIntel
   ];
 
   # Enable core programs
