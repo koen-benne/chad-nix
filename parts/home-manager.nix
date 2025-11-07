@@ -56,11 +56,11 @@ in {
       system = "x86_64-linux";
       username = "koenbenne";
       modules = [
-        ({config, lib, pkgs, ...}: {
-          imports = let
-            hostname = lib.strings.removeSuffix "\n" (lib.fileContents /etc/hostname);
-            hostConfig = ../hosts/${hostname}/home.nix;
-          in
+        ({config, lib, pkgs, ...}: let
+          hostname = lib.strings.removeSuffix "\n" (lib.fileContents /etc/hostname);
+          hostConfig = ../hosts/${hostname}/home.nix;
+        in {
+          imports = 
             if builtins.pathExists hostConfig
             then [hostConfig]
             else throw "No configuration found for hostname '${hostname}'. Create hosts/${hostname}/home.nix";
