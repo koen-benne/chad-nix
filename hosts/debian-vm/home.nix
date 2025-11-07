@@ -32,10 +32,9 @@
   my.hyprland.enable = true;
 
   # nixGL for graphics acceleration on non-NixOS
-  home.packages = with pkgs; [
-    inputs.nixgl.packages.${pkgs.system}.nixGLIntel   # For Intel/generic graphics
-    inputs.nixgl.packages.${pkgs.system}.nixGLMesa    # For AMD/Mesa graphics  
-    inputs.nixgl.packages.${pkgs.system}.nixGLNvidia  # For NVIDIA graphics
+  home.packages = [
+    pkgs.home-manager
+    inputs.nixgl.packages.${pkgs.system}.auto.nixGLDefault   # Auto-detects graphics drivers
   ];
 
   # Enable core programs
