@@ -52,29 +52,29 @@ in {
     # Linux configurations
     "koenbenne@nixos" = mkHome {
       system = "x86_64-linux";
-      username = "koen";
+      username = "koenbenne";
       modules = [../hosts/nixos/home.nix];
     };
     "koenbenne@nixos-work" = mkHome {
       system = "aarch64-linux";
-      username = "koen";
+      username = "koenbenne";
       modules = [../hosts/nixos-work/home.nix];
     };
     "koenbenne@debian-vm" = mkHome {
-      system = "x86-64-linux";
-      username = "koen";
+      system = "x86_64-linux";
+      username = "koenbenne";
       modules = [../hosts/nixos-work/home.nix];
     };
 
     # macOS configurations
     "koenbenne@work-mac" = mkHome {
       system = "aarch64-darwin";
-      username = "koen";
+      username = "koenbenne";
       modules = [../hosts/work-mac/home.nix];
     };
     "koenbenne@music-mac" = mkHome {
       system = "aarch64-darwin";
-      username = "koen";
+      username = "koenbenne";
       modules = [../hosts/music-mac/home.nix];
     };
   };
