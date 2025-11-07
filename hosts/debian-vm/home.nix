@@ -31,6 +31,13 @@
   # Enable Hyprland
   my.hyprland.enable = true;
 
+  # nixGL for graphics acceleration on non-NixOS
+  home.packages = with pkgs; [
+    nixgl.nixGLIntel   # For Intel/generic graphics
+    nixgl.nixGLMesa    # For AMD/Mesa graphics  
+    nixgl.nixGLNvidia  # For NVIDIA graphics
+  ];
+
   # Enable core programs
   programs.direnv.enable = true;
   programs.git = {
