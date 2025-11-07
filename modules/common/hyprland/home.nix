@@ -59,9 +59,6 @@ in {
       wrappedFoot
       wrappedFootClient
       
-      # Helper script for launching Hyprland
-      (writeShellScriptBin "launch-hyprland" (builtins.readFile ./launch-hyprland.sh))
-      
       # Other Hyprland essentials 
       hyprpolkitagent
       waybar
