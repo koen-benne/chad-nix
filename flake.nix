@@ -73,6 +73,7 @@
         ./parts/darwin.nix
         ./parts/nixos.nix
         ./parts/system-manager.nix
+        ./parts/home-manager.nix
       ];
       perSystem = {pkgs, ...}: {
         devShells.default = pkgs.mkShell {
