@@ -93,6 +93,11 @@ in {
       sonarr.enable = true;      # TV Shows
     };
 
+    # Deny jellyfin write acces as that is a terrible idea
+    systemd.services.jellyfin.serviceConfig.ReadOnlyPaths = [
+      "/mnt/biggidrive/jellyfin/library"
+    ];
+
     # services.flaresolverr.enable = true;
   };
 }
