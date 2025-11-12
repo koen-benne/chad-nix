@@ -14,7 +14,7 @@
 
     # Modules that use companion modules (require sys.* options)
     ../../modules/common/desktop/home.nix
-    ../../modules/common/hyprland/home.nix
+    ../../modules/nixos/hyprland/home.nix
     ../../modules/common/opencode/home.nix
 
     # Standalone modules (work independently)
