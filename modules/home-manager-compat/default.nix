@@ -7,17 +7,10 @@
 # This ensures existing home.nix files work unchanged without needing
 # to maintain separate home-manager-only versions.
 { config, lib, ... }: {
-  imports = [
-    # Manual imports for testing - will switch to auto-discovery once working
-    ../common/desktop/compat.nix
-    ../common/opencode/compat.nix
-    ../nixos/gaming/compat.nix
-    ../nixos/lockscreen/compat.nix
-    ../nixos/openssl/compat.nix
-    ../nixos/theme/compat.nix
-    ../nixos/uxplay/compat.nix
-    ../nixos/virtualisation/compat.nix
-    
+  imports = 
+    # Auto-discovery of compat.nix files
+    lib.my.getCompatModules [../common ../nixos]
+    ++ [
     # Special cases that stay manual
     ./kitty.nix      # Darwin-specific, no nixos equivalent
     ./networking.nix # System-level option, doesn't fit module pattern
