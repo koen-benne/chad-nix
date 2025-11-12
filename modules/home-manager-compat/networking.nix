@@ -1,7 +1,7 @@
 {lib, ...}: let
   inherit (lib) mkEnableOption mkOption types;
 in {
-  options.sys.networking = {
+  options.networking = {
     networkmanager = {
       enable = mkOption {
         type = types.bool;

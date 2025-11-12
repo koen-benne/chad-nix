@@ -9,9 +9,13 @@
     inputs.nix-index-database.homeModules.nix-index
     ../../modules/common/my/default.nix
 
+    # Home-manager compatibility layer (provides sys.* options)
+    ../../modules/home-manager-compat
+
     # Modules that use companion modules (require sys.* options)
     ../../modules/common/desktop/home.nix
     ../../modules/common/hyprland/home.nix
+    ../../modules/common/opencode/home.nix
 
     # Standalone modules (work independently)
     ../../modules/common/direnv/home.nix
@@ -33,8 +37,8 @@
   home.stateVersion = "24.05";
 
   # Enable desktop features
-  sys.my.desktop.enable = true;
-  sys.my.hyprland.enable = true;
+  my.desktop.enable = true;
+  my.hyprland.enable = true;
 
   # nixGL for graphics acceleration on non-NixOS
   home.packages = [

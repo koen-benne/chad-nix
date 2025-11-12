@@ -1,7 +1,7 @@
 {lib, ...}: let
   inherit (lib) mkEnableOption;
 in {
-  options.sys.my.lockscreen = {
+  options.my.lockscreen = {
     enable = mkEnableOption "lockscreen";
     autoLock = mkEnableOption "auto lock with hypridle";
   };

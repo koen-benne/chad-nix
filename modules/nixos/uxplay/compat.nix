@@ -1,7 +1,7 @@
 {lib, ...}: let
   inherit (lib) mkEnableOption;
 in {
-  options.sys.my.uxplay = {
+  options.my.uxplay = {
     enable = mkEnableOption "uxplay AirPlay server";
   };
 }

@@ -23,7 +23,7 @@
         (final: prev: {
           unstable = import self.inputs.unstable {
             inherit system;
-            config = sharedConfig;  # Same config as main nixpkgs
+            config = sharedConfig; # Same config as main nixpkgs
           };
         })
         self.inputs.apple-silicon.overlays.default

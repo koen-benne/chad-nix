@@ -33,6 +33,7 @@
               inherit getPaths;
               getModules = builtins.concatMap (getPaths "default.nix");
               getHmModules = builtins.concatMap (getPaths "home.nix");
+              getCompatModules = builtins.concatMap (getPaths "compat.nix");
             };
           });
         };

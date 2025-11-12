@@ -1,7 +1,7 @@
 {lib, ...}: let
   inherit (lib) mkEnableOption;
 in {
-  options.sys.my.virtualisation = {
+  options.my.virtualisation = {
     enable = mkEnableOption "virtualisation support";
   };
 }

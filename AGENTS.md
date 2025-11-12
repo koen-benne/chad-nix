@@ -19,3 +19,29 @@
 - **Comments**: Use `# TODO:` for known issues, minimal inline comments
 - **File Organization**: Separate `default.nix` (system) and `home.nix` (user) configs
 - **Secrets**: Use sops-nix with proper ownership/permissions (mode "0400")
+
+## Home-Manager Compatibility Architecture (Linux Only)
+
+### Module Structure Pattern
+For modules that need standalone home-manager support on Linux systems:
+```
+modules/{common,nixos}/<module>/
+├── default.nix      # System-level configuration (NixOS only)
+├── home.nix         # User-level configuration (works everywhere)
+└── compat.nix       # Option definitions for home-manager-only mode
+```
+
+### Usage Modes
+1. **NixOS System**: Uses `default.nix` (defines options) + `home.nix` (uses sys.* options)
+2. **Home-Manager Standalone**: Uses `compat.nix` (defines options) + `home.nix` (uses sys.* options)
+
+### Discovery Functions
+- `lib.my.getModules [./.]` - Discovers `default.nix` files (system mode)
+- `lib.my.getCompatModules [./.]` - Discovers `compat.nix` files (home-manager-only mode)
+- `lib.my.getHmModules [./.]` - Discovers `home.nix` files (both modes)
+
+### Implementation Rules
+- **compat.nix**: Only define `options.my.*` - no system-level config
+- **Darwin**: No compat.nix needed (no standalone home-manager support)
+- **Auto-Discovery**: home-manager-compat uses `getCompatModules` for automatic discovery
+- **Selective**: Only modules requiring system options need `compat.nix`
