@@ -35,6 +35,11 @@
 
   # Basic home configuration
   home.stateVersion = "24.05";
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+    };
+  };
 
   # Enable desktop features
   my.desktop.enable = true;
