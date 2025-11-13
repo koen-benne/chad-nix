@@ -62,6 +62,14 @@
 
     # Arr
     nixarr.url = "github:rasmus-kirk/nixarr";
+
+    # Niri wayland compositor
+    niri.url = "github:sodiboo/niri-flake";
+    niri.inputs.nixpkgs.follows = "nixpkgs";
+
+    # DankMaterialShell
+    dms.url = "github:AvengeMedia/DankMaterialShell";
+    dms.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {flake-parts, ...}:

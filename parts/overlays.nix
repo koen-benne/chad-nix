@@ -31,6 +31,7 @@
         self.inputs.dev-flakes.overlays.default
         self.inputs.nix-minecraft.overlay
         self.inputs.chaotic.overlays.cache-friendly
+        self.inputs.niri.overlays.niri
       ];
     };
   in {

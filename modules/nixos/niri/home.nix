@@ -1,0 +1,184 @@
+{
+  inputs,
+  config,
+  lib,
+  pkgs,
+  sys,
+  ...
+}: let
+  inherit (lib) mkIf;
+in {
+  imports = [
+    inputs.niri.homeModules.niri
+    inputs.niri.homeModules.config
+    inputs.niri.homeModules.stylix
+  ];
+  config = mkIf sys.my.niri.enable {
+    programs.niri.settings = {
+      outputs."eDP-1" = {
+        scale = 2.0;
+        mode = {
+          width = 3024;
+          height = 1890;
+          refresh = 60.0;
+        };
+      };
+
+      input = {
+        keyboard.xkb = {
+          layout = "us";
+        };
+        
+        touchpad = {
+          natural-scroll = true;
+          scroll-factor = 0.5;
+          tap = true;
+        };
+
+        mouse = {
+          sensitivity = -0.9;
+        };
+
+        trackpoint = {
+          sensitivity = -0.1;
+        };
+      };
+
+      cursor = {
+        hide-after-inactive-ms = 5000;
+      };
+
+      layout = {
+        gaps = 10;
+        center-focused-column = "never";
+        preset-column-widths = [
+          { proportion = 0.33333; }
+          { proportion = 0.5; }
+          { proportion = 0.66667; }
+        ];
+        default-column-width = { proportion = 0.5; };
+
+        border = {
+          width = 2;
+        };
+      };
+
+      spawn-at-startup = [
+        { command = ["systemctl" "--user" "start" "niri-flake-polkit"]; }
+        { command = ["foot" "--server"]; }
+        { command = ["wpaperd"]; }
+        { command = ["waybar"]; }
+        { command = ["nm-applet"]; }
+      ];
+
+      environment = {
+        NIXOS_OZONE_WL = "1";
+      };
+
+      xwayland-satellite = {
+        enable = true;
+        path = "${pkgs.xwayland-satellite-unstable}/bin/xwayland-satellite";
+      };
+
+      binds = with config.lib.niri.actions; {
+        "Mod+Return".action = spawn "footclient";
+        "Mod+w".action = spawn "zen";
+        "Mod+q".action = close-window;
+        "Mod+Ctrl+Shift+c".action = quit;
+        "Mod+e".action = spawn "nautilus";
+        "Mod+v".action = toggle-window-floating;
+        "Mod+r".action = spawn "fuzzel";
+        "Mod+f".action = fullscreen-window;
+        "Mod+p".action = spawn "1password" "--quick-access";
+        "Mod+c".action = spawn "hyprpicker" "-a";
+        "Mod+g".action = spawn "sh" "-c" "grim -g \"$(slurp)\" ~/Images/$(date +%s)_grim.png";
+        "Mod+Shift+g".action = spawn "sh" "-c" "grim ~/Images/$(date +%s)_grim.png";
+
+        "XF86AudioMedia".action = spawn "playerctl" "play-pause";
+        "XF86AudioPlay".action = spawn "playerctl" "play-pause";
+        "XF86AudioPrev".action = spawn "playerctl" "previous";
+        "XF86AudioNext".action = spawn "playerctl" "next";
+        "XF86AudioLowerVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "10%-";
+        "XF86AudioRaiseVolume".action = spawn "wpctl" "set-volume" "--limit" "1.0" "@DEFAULT_AUDIO_SINK@" "10%+";
+        "XF86AudioMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
+        "XF86AudioMicMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle";
+        "XF86MonBrightnessDown".action = spawn "brightnessctl" "s" "10%-";
+        "XF86MonBrightnessUp".action = spawn "brightnessctl" "s" "+10%";
+
+        "Mod+h".action = focus-column-left;
+        "Mod+l".action = focus-column-right;
+        "Mod+j".action = focus-window-down;
+        "Mod+k".action = focus-window-up;
+
+        "Mod+Shift+h".action = move-column-left;
+        "Mod+Shift+l".action = move-column-right;
+        "Mod+Shift+j".action = move-window-down;
+        "Mod+Shift+k".action = move-window-up;
+
+        "Mod+1".action = focus-workspace 1;
+        "Mod+2".action = focus-workspace 2;
+        "Mod+3".action = focus-workspace 3;
+        "Mod+4".action = focus-workspace 4;
+        "Mod+5".action = focus-workspace 5;
+        "Mod+6".action = focus-workspace 6;
+        "Mod+7".action = focus-workspace 7;
+        "Mod+8".action = focus-workspace 8;
+        "Mod+9".action = focus-workspace 9;
+        "Mod+0".action = focus-workspace 10;
+
+        "Mod+Shift+1".action = move-column-to-workspace 1;
+        "Mod+Shift+2".action = move-column-to-workspace 2;
+        "Mod+Shift+3".action = move-column-to-workspace 3;
+        "Mod+Shift+4".action = move-column-to-workspace 4;
+        "Mod+Shift+5".action = move-column-to-workspace 5;
+        "Mod+Shift+6".action = move-column-to-workspace 6;
+        "Mod+Shift+7".action = move-column-to-workspace 7;
+        "Mod+Shift+8".action = move-column-to-workspace 8;
+        "Mod+Shift+9".action = move-column-to-workspace 9;
+        "Mod+Shift+0".action = move-column-to-workspace 10;
+
+        "Mod+Ctrl+h".action = consume-window-into-column;
+        "Mod+Ctrl+l".action = expel-window-from-column;
+
+        "Mod+WheelScrollDown".action = focus-workspace-down;
+        "Mod+WheelScrollUp".action = focus-workspace-up;
+        "Mod+Shift+WheelScrollDown".action = move-column-to-workspace-down;
+        "Mod+Shift+WheelScrollUp".action = move-column-to-workspace-up;
+
+        "Mod+Ctrl+Shift+l".action = spawn "hyprlock";
+        "Mod+Shift+w".action = spawn "sh" "-c" "pkill waybar && waybar";
+      };
+
+      window-rules = [
+        {
+          matches = [{ app-id = "^org\\.gnome\\.Nautilus$"; }];
+          default-column-width = { proportion = 0.33333; };
+        }
+        {
+          matches = [{ title = "^.*PWA.*$"; }];
+          open-on-output = "eDP-1";
+        }
+        {
+          matches = [{ title = "^Spotify$"; }];
+          open-on-workspace = "9";
+        }
+      ];
+
+      animations = {
+        slowdown = 0.8;
+        window-open = {
+          duration-ms = 150;
+          curve = "ease-out-expo";
+        };
+        window-close = {
+          duration-ms = 150;
+          curve = "ease-out-expo";
+        };
+        workspace-switch = {
+          duration-ms = 200;
+          curve = "ease-out-expo";
+        };
+      };
+    };
+  };
+}
