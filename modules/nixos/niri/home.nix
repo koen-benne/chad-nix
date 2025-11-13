@@ -10,10 +10,11 @@
 in {
   imports = [
     inputs.niri.homeModules.niri
-    inputs.niri.homeModules.config
-    inputs.niri.homeModules.stylix
+    # inputs.niri.homeModules.config
+    # inputs.niri.homeModules.stylix
   ];
   config = mkIf sys.my.niri.enable {
+    programs.niri.enable = true;
     programs.niri.settings = {
       outputs."eDP-1" = {
         scale = 2.0;
@@ -35,13 +36,13 @@ in {
           tap = true;
         };
 
-        mouse = {
-          sensitivity = -0.9;
-        };
+        # mouse = {
+        #   sensitivity = -0.9;
+        # };
 
-        trackpoint = {
-          sensitivity = -0.1;
-        };
+        # trackpoint = {
+        #   sensitivity = -0.1;
+        # };
       };
 
       cursor = {
@@ -69,6 +70,8 @@ in {
       ] ++ lib.optionals (sys.my.desktop.panelStyle == "waybar") [
         { command = ["wpaperd"]; }
         { command = ["waybar"]; }
+      ] ++ lib.optionals (sys.my.desktop.panelStyle == "dms") [
+        { command = ["dms run"]; }
       ] ++ [
         { command = ["nm-applet"]; }
       ];
@@ -147,7 +150,7 @@ in {
         "Mod+Shift+WheelScrollDown".action = move-column-to-workspace-down;
         "Mod+Shift+WheelScrollUp".action = move-column-to-workspace-up;
 
-        "Mod+Ctrl+Shift+l".action = spawn "hyprlock";
+        # "Mod+Ctrl+Shift+l".action = spawn "hyprlock";
       } // lib.optionalAttrs (sys.my.desktop.panelStyle == "waybar") {
         "Mod+Shift+w".action = spawn "sh" "-c" "pkill waybar && waybar";
       };
@@ -166,22 +169,6 @@ in {
           open-on-workspace = "9";
         }
       ];
-
-      animations = {
-        slowdown = 0.8;
-        window-open = {
-          duration-ms = 150;
-          curve = "ease-out-expo";
-        };
-        window-close = {
-          duration-ms = 150;
-          curve = "ease-out-expo";
-        };
-        workspace-switch = {
-          duration-ms = 200;
-          curve = "ease-out-expo";
-        };
-      };
     };
   };
 }

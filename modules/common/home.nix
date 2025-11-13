@@ -9,8 +9,6 @@
   imports =
     [
       inputs.nix-index-database.homeModules.nix-index
-      # This is temporary untill there is a quickshell module in stable!!!
-      inputs.home-manager-unstable.homeModules.programs.quickshell
       ./my/default.nix
     ]
     ++ lib.my.getHmModules [./.];

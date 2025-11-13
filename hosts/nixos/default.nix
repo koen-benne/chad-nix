@@ -71,8 +71,8 @@
   my.desktop = {
     enable = true;
     windowManager = "niri";
-    panelStyle = "dankmaterialshell";
-    greeter = "dankmaterialshell";
+    panelStyle = "dms";
+    greeter = "tuigreet";
   };
 
   # Stuff specific to only this machine

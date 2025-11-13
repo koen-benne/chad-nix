@@ -20,12 +20,12 @@ in {
       description = mdDoc "Window manager to use";
     };
     panelStyle = mkOption {
-      type = types.enum ["waybar" "dankmaterialshell"];
+      type = types.enum ["waybar" "dms"];
       default = "waybar";
       description = mdDoc "Panel/bar style to use";
     };
     greeter = mkOption {
-      type = types.enum ["tuigreet" "dankmaterialshell"];
+      type = types.enum ["tuigreet" "dms"];
       default = "tuigreet";
       description = mdDoc "Greeter/login screen to use";
     };
@@ -49,7 +49,7 @@ in {
     # hm.my.firefox.enable = true;
     hm.my.qutebrowser.enable = true;
     hm.my.waybar.enable = cfg.panelStyle == "waybar";
-    hm.my.dankmaterialshell.enable = cfg.panelStyle == "dankmaterialshell";
+    hm.my.dankmaterialshell.enable = cfg.panelStyle == "dms";
     environment.sessionVariables = {
       NIXOS_OXONE_WL = "1";
     };
@@ -78,10 +78,10 @@ in {
       };
     };
 
-    programs.dankMaterialShell.greeter = mkIf (cfg.greeter == "dankmaterialshell") {
-      enable = true;
-      compositor.name = cfg.windowManager;
-    };
+    # programs.dankMaterialShell.greeter = mkIf (cfg.greeter == "dankmaterialshell") {
+    #   enable = true;
+    #   compositor.name = cfg.windowManager;
+    # };
 
     services.pipewire = {
       enable = true;
