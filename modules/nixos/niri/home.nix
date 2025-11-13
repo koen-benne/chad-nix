@@ -62,6 +62,10 @@ in {
         border = {
           width = 1;
         };
+
+        # focus-ring = {
+        #   off = true;
+        # };
       };
 
       spawn-at-startup = [
@@ -182,7 +186,7 @@ in {
         }
         {
           matches = [{ app-id = "^foot$"; }];
-          opacity = 0.85;
+          # opacity = 0.85;
         }
         {
           matches = [{}];
@@ -192,6 +196,7 @@ in {
             bottom-left = 8.0;
             bottom-right = 8.0;
           };
+          clip-to-geometry = true;
         }
       ];
     };
