@@ -60,7 +60,7 @@ in {
         default-column-width = { proportion = 0.5; };
 
         border = {
-          width = 2;
+          width = 1;
         };
       };
 
@@ -98,6 +98,7 @@ in {
         "Mod+c".action = spawn "hyprpicker" "-a";
         "Mod+g".action = spawn "sh" "-c" "grim -g \"$(slurp)\" ~/Images/$(date +%s)_grim.png";
         "Mod+Shift+g".action = spawn "sh" "-c" "grim ~/Images/$(date +%s)_grim.png";
+        "Mod+question".action = show-hotkey-overlay;
 
         "XF86AudioMedia".action = spawn "playerctl" "play-pause";
         "XF86AudioPlay".action = spawn "playerctl" "play-pause";
@@ -164,6 +165,8 @@ in {
         "Mod+Shift+w".action = spawn "sh" "-c" "pkill waybar && waybar";
       };
 
+      prefer-no-csd = true;
+
       window-rules = [
         {
           matches = [{ app-id = "^org\\.gnome\\.Nautilus$"; }];
@@ -176,6 +179,19 @@ in {
         {
           matches = [{ title = "^Spotify$"; }];
           open-on-workspace = "9";
+        }
+        {
+          matches = [{ app-id = "^foot$"; }];
+          opacity = 0.85;
+        }
+        {
+          matches = [{}];
+          geometry-corner-radius = {
+            top-left = 8.0;
+            top-right = 8.0;
+            bottom-left = 8.0;
+            bottom-right = 8.0;
+          };
         }
       ];
     };
