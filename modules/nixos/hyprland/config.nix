@@ -4,7 +4,7 @@ scripts: ''
   # monitor = HDMI-A-1, 3440x1440@60, auto, 1
 
   exec-once = systemctl --user start hyprpolkitagent
-  exec-once = foot --server
+  exec-once = nixGLIntel foot --server
   exec-once = wpaperd
   exec-once = waybar
   exec-once = corectrl --minimize-systray

@@ -1,4 +1,8 @@
-{lib, ...}: let
+{
+  lib,
+  config,
+  ...
+}: let
   inherit (lib) mkEnableOption;
 in {
   options.my.desktop = {
@@ -7,4 +11,8 @@ in {
   options.networking.networkmanager = {
     enable = mkEnableOption "networkmanager";
   };
+
+  config.my.waybar.enable = true;
+  config.my.foot.enable = true;
 }
+

@@ -13,10 +13,10 @@
     ++ [
     # Special cases that stay manual
     ./kitty.nix      # Darwin-specific, no nixos equivalent
-    ./networking.nix # System-level option, doesn't fit module pattern
   ];
 
   # Make sys available as an alias to config for home.nix files
   # This mimics the behavior of extraSpecialArgs = { sys = config; }
   _module.args.sys = config;
 }
+

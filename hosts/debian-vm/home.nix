@@ -15,15 +15,18 @@
     # Modules that use companion modules (require sys.* options)
     ../../modules/common/desktop/home.nix
     ../../modules/nixos/hyprland/home.nix
+    ../../modules/nixos/theme/home.nix
     ../../modules/common/opencode/home.nix
 
     # Standalone modules (work independently)
+    ../../modules/nixos/foot/home.nix
     ../../modules/common/direnv/home.nix
     ../../modules/common/fish/home.nix
     ../../modules/common/git/home.nix
     ../../modules/common/gitui/home.nix
     ../../modules/common/gnupg/home.nix
     ../../modules/common/lazygit/home.nix
+    ../../modules/common/packages/home.nix
     ../../modules/common/neovim/home.nix
     ../../modules/common/nix-helper/home.nix
     ../../modules/common/ssh/home.nix
@@ -39,6 +42,7 @@
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
     };
+    package = pkgs.nix;
   };
 
   # Enable desktop features
@@ -53,11 +57,11 @@
 
   # Enable core programs
   programs.direnv.enable = true;
-  programs.git = {
-    enable = true;
-    userName = "Koen Benne";
-    userEmail = "koen.benne@iodigital.com";
-  };
+  # programs.git = {
+  #   enable = true;
+  #   userName = "Koen Benne";
+  #   userEmail = "koen.benne@iodigital.com";
+  # };
   programs.tmux.enable = true;
   programs.fish.enable = true;
 }
