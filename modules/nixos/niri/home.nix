@@ -120,6 +120,17 @@ in {
         "Mod+Shift+j".action = move-window-down;
         "Mod+Shift+k".action = move-window-up;
 
+        "Mod+u".action = focus-workspace-down;
+        "Mod+i".action = focus-workspace-up;
+        "Mod+Page_Down".action = focus-workspace-down;
+        "Mod+Page_Up".action = focus-workspace-up;
+
+        "Mod+Shift+u".action = move-column-to-workspace-down;
+        "Mod+Shift+i".action = move-column-to-workspace-up;
+        "Mod+Shift+Page_Down".action = move-column-to-workspace-down;
+        "Mod+Shift+Page_Up".action = move-column-to-workspace-up;
+
+        # Numbered workspace bindings (niri is dynamic but supports these as "best effort")
         "Mod+1".action = focus-workspace 1;
         "Mod+2".action = focus-workspace 2;
         "Mod+3".action = focus-workspace 3;
@@ -129,18 +140,16 @@ in {
         "Mod+7".action = focus-workspace 7;
         "Mod+8".action = focus-workspace 8;
         "Mod+9".action = focus-workspace 9;
-        "Mod+0".action = focus-workspace 10;
 
-        "Mod+Shift+1".action = move-column-to-workspace 1;
-        "Mod+Shift+2".action = move-column-to-workspace 2;
-        "Mod+Shift+3".action = move-column-to-workspace 3;
-        "Mod+Shift+4".action = move-column-to-workspace 4;
-        "Mod+Shift+5".action = move-column-to-workspace 5;
-        "Mod+Shift+6".action = move-column-to-workspace 6;
-        "Mod+Shift+7".action = move-column-to-workspace 7;
-        "Mod+Shift+8".action = move-column-to-workspace 8;
-        "Mod+Shift+9".action = move-column-to-workspace 9;
-        "Mod+Shift+0".action = move-column-to-workspace 10;
+        "Mod+Shift+1".action.move-column-to-workspace = 1;
+        "Mod+Shift+2".action.move-column-to-workspace = 2;
+        "Mod+Shift+3".action.move-column-to-workspace = 3;
+        "Mod+Shift+4".action.move-column-to-workspace = 4;
+        "Mod+Shift+5".action.move-column-to-workspace = 5;
+        "Mod+Shift+6".action.move-column-to-workspace = 6;
+        "Mod+Shift+7".action.move-column-to-workspace = 7;
+        "Mod+Shift+8".action.move-column-to-workspace = 8;
+        "Mod+Shift+9".action.move-column-to-workspace = 9;
 
         "Mod+Ctrl+h".action = consume-window-into-column;
         "Mod+Ctrl+l".action = expel-window-from-column;
