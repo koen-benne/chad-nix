@@ -2,6 +2,7 @@
 # There should not be anything in here that I don't want in every one of my linux systems with a desktop environment
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -9,6 +10,9 @@
   inherit (lib) mdDoc mkEnableOption mkIf mkOption types;
   cfg = config.my.desktop;
 in {
+  imports = [
+    inputs.dms.nixosModules.greeter
+  ];
   options.my.desktop = {
     windowManager = mkOption {
       type = types.enum ["hyprland" "niri"];
@@ -19,6 +23,11 @@ in {
       type = types.enum ["waybar" "dankmaterialshell"];
       default = "waybar";
       description = mdDoc "Panel/bar style to use";
+    };
+    greeter = mkOption {
+      type = types.enum ["tuigreet" "dankmaterialshell"];
+      default = "tuigreet";
+      description = mdDoc "Greeter/login screen to use";
     };
   };
   config = mkIf cfg.enable {
@@ -55,7 +64,7 @@ in {
 
     services.gvfs.enable = true;
 
-    services.greetd = {
+    services.greetd = mkIf (cfg.greeter == "tuigreet") {
       enable = true;
       package = pkgs.unstable.greetd;
       settings = {
@@ -67,6 +76,11 @@ in {
           }'";
         };
       };
+    };
+
+    programs.dankMaterialShell.greeter = mkIf (cfg.greeter == "dankmaterialshell") {
+      enable = true;
+      compositor.name = cfg.windowManager;
     };
 
     services.pipewire = {

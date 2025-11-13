@@ -68,7 +68,12 @@
   };
 
   # Everythhing desktop related
-  my.desktop.enable = true;
+  my.desktop = {
+    enable = true;
+    windowManager = "niri";
+    panelStyle = "dankmaterialshell";
+    greeter = "dankmaterialshell";
+  };
 
   # Stuff specific to only this machine
   my.gaming.enable = true;
