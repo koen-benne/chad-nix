@@ -71,7 +71,7 @@ in {
         default_session = {
           command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --user-menu --cmd 'dbus-run-session ${
             if cfg.windowManager == "niri"
-            then "niri-session"
+            then "niri"
             else "Hyprland"
           }'";
         };
