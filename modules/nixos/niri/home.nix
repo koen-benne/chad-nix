@@ -35,14 +35,6 @@ in {
           scroll-factor = 0.5;
           tap = true;
         };
-
-        # mouse = {
-        #   sensitivity = -0.9;
-        # };
-
-        # trackpoint = {
-        #   sensitivity = -0.1;
-        # };
       };
 
       cursor = {
@@ -75,7 +67,7 @@ in {
         { command = ["wpaperd"]; }
         { command = ["waybar"]; }
       ] ++ lib.optionals (sys.my.desktop.panelStyle == "dms") [
-        { command = ["dms run"]; }
+        { command = ["dms" "run"]; }
       ] ++ [
         { command = ["nm-applet"]; }
       ];
@@ -102,7 +94,7 @@ in {
         "Mod+c".action = spawn "hyprpicker" "-a";
         "Mod+g".action = spawn "sh" "-c" "grim -g \"$(slurp)\" ~/Images/$(date +%s)_grim.png";
         "Mod+Shift+g".action = spawn "sh" "-c" "grim ~/Images/$(date +%s)_grim.png";
-        "Mod+question".action = show-hotkey-overlay;
+        "Mod+Shift+Slash".action = show-hotkey-overlay;
 
         "XF86AudioMedia".action = spawn "playerctl" "play-pause";
         "XF86AudioPlay".action = spawn "playerctl" "play-pause";
