@@ -28,7 +28,7 @@ in {
         keyboard.xkb = {
           layout = "us";
         };
-        
+
         touchpad = {
           natural-scroll = true;
           scroll-factor = 0.5;
@@ -66,8 +66,10 @@ in {
       spawn-at-startup = [
         { command = ["systemctl" "--user" "start" "niri-flake-polkit"]; }
         { command = ["foot" "--server"]; }
+      ] ++ lib.optionals (sys.my.desktop.panelStyle == "waybar") [
         { command = ["wpaperd"]; }
         { command = ["waybar"]; }
+      ] ++ [
         { command = ["nm-applet"]; }
       ];
 
@@ -146,6 +148,7 @@ in {
         "Mod+Shift+WheelScrollUp".action = move-column-to-workspace-up;
 
         "Mod+Ctrl+Shift+l".action = spawn "hyprlock";
+      } // lib.optionalAttrs (sys.my.desktop.panelStyle == "waybar") {
         "Mod+Shift+w".action = spawn "sh" "-c" "pkill waybar && waybar";
       };
 
