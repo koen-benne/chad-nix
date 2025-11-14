@@ -84,7 +84,6 @@ in {
         "Mod+Ctrl+Shift+c".action = quit;
         "Mod+e".action = spawn "nautilus";
         "Mod+v".action = toggle-window-floating;
-        "Mod+r".action = spawn "fuzzel";
         "Mod+f".action = fullscreen-window;
         "Mod+p".action = spawn "1password" "--quick-access";
         "Mod+c".action = spawn "hyprpicker" "-a";
@@ -92,16 +91,60 @@ in {
         "Mod+Shift+g".action = spawn "sh" "-c" "grim ~/Images/$(date +%s)_grim.png";
         "Mod+Shift+Slash".action = show-hotkey-overlay;
 
-        "XF86AudioMedia".action = spawn "playerctl" "play-pause";
-        "XF86AudioPlay".action = spawn "playerctl" "play-pause";
-        "XF86AudioPrev".action = spawn "playerctl" "previous";
-        "XF86AudioNext".action = spawn "playerctl" "next";
-        "XF86AudioLowerVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "10%-";
-        "XF86AudioRaiseVolume".action = spawn "wpctl" "set-volume" "--limit" "1.0" "@DEFAULT_AUDIO_SINK@" "10%+";
-        "XF86AudioMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
-        "XF86AudioMicMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle";
-        "XF86MonBrightnessDown".action = spawn "brightnessctl" "s" "10%-";
-        "XF86MonBrightnessUp".action = spawn "brightnessctl" "s" "+10%";
+        # DMS specific
+        "Mod+Ctrl+n".action = spawn "dms" "ipc" "notifications" "toggle";
+        "Mod+Ctrl+v".action = spawn "dms" "ipc" "clipboard" "toggle";
+        "Mod+Ctrl+p".action = spawn "dms" "ipc" "notepad" "toggle";
+        "Mod+Shift+s".action = spawn "dms" "ipc" "lock" "lock";
+        "Mod+x".action = spawn "dms" "ipc" "powermenu" "toggle";
+        "Mod+r".action = spawn "dms" "ipc" "spotlight" "toggle";
+
+        # Overview and focus switching
+        "Mod+Tab".action = toggle-overview;
+        "Mod+space".action = switch-focus-between-floating-and-tiling;
+
+        "XF86AudioMedia" = {
+          action = spawn "playerctl" "play-pause";
+          allow-when-locked = true;
+        };
+        "XF86AudioPlay" = {
+          action = spawn "playerctl" "play-pause";
+          allow-when-locked = true;
+        };
+        "XF86AudioPrev" = {
+          action = spawn "playerctl" "previous";
+          allow-when-locked = true;
+        };
+        "XF86AudioNext" = {
+          action = spawn "playerctl" "next";
+          allow-when-locked = true;
+        };
+
+        # This can be managed by dms too if we want to. (dms ipc)
+        "XF86AudioLowerVolume" = {
+          action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "10%-";
+          allow-when-locked = true;
+        };
+        "XF86AudioRaiseVolume" = {
+          action = spawn "wpctl" "set-volume" "--limit" "1.0" "@DEFAULT_AUDIO_SINK@" "10%+";
+          allow-when-locked = true;
+        };
+        "XF86AudioMute" = {
+          action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
+          allow-when-locked = true;
+        };
+        "XF86AudioMicMute" = {
+          action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle";
+          allow-when-locked = true;
+        };
+        "XF86MonBrightnessDown" = {
+          action = spawn "brightnessctl" "s" "10%-";
+          allow-when-locked = true;
+        };
+        "XF86MonBrightnessUp" = {
+          action = spawn "brightnessctl" "s" "+10%";
+          allow-when-locked = true;
+        };
 
         "Mod+h".action = focus-column-left;
         "Mod+l".action = focus-column-right;

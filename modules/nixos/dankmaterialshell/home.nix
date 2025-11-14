@@ -13,8 +13,6 @@ in {
     inputs.dms.homeModules.dankMaterialShell.default
     # This is temporary untill there is a quickshell module in stable!!!
     (inputs.home-manager-unstable + "/modules/programs/quickshell.nix")
-  ] ++ lib.optionals (sys.my.niri.enable or false) [
-    # inputs.dms.homeModules.dankMaterialShell.niri
   ];
 
   options.my.dankmaterialshell = {
@@ -36,12 +34,6 @@ in {
       enableAudioWavelength = lib.mkDefault true;
       enableCalendarEvents = lib.mkDefault true;
       enableSystemSound = lib.mkDefault true;
-
-      # Niri-specific configuration (only when niri is enabled)
-      # niri = lib.mkIf (sys.my.niri.enable or false) {
-      #   enableKeybinds = lib.mkDefault true;
-      #   enableSpawn = lib.mkDefault true;
-      # };
     };
   };
 }
