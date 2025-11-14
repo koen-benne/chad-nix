@@ -12,6 +12,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.foot.enable = true;
+    programs.foot = {
+      enable = true;
+      settings.main = {
+        pad = "0x0 center";
+      };
+    };
   };
 }

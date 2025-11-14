@@ -54,10 +54,6 @@ in {
         border = {
           width = 1;
         };
-
-        # focus-ring = {
-        #   off = true;
-        # };
       };
 
       spawn-at-startup = [
@@ -151,6 +147,15 @@ in {
         "Mod+Ctrl+h".action = consume-window-into-column;
         "Mod+Ctrl+l".action = expel-window-from-column;
 
+        # Window resizing bindings
+        "Mod+n".action = set-column-width "+10%";
+        "Mod+minus".action = set-column-width "-10%";
+        "Mod+Shift+n".action = set-window-height "+10%";
+        "Mod+Shift+minus".action = set-window-height "-10%";
+
+        # Maximize window (fill screen without fullscreen)
+        "Mod+m".action = maximize-column;
+
         "Mod+WheelScrollDown".action = focus-workspace-down;
         "Mod+WheelScrollUp".action = focus-workspace-up;
         "Mod+Shift+WheelScrollDown".action = move-column-to-workspace-down;
@@ -165,20 +170,21 @@ in {
 
       window-rules = [
         {
+          matches = [{ is-active = false; }];
+          opacity = 0.9;
+        }
+        {
           matches = [{ app-id = "^org\\.gnome\\.Nautilus$"; }];
           default-column-width = { proportion = 0.33333; };
         }
         {
           matches = [{ title = "^.*PWA.*$"; }];
-          open-on-output = "eDP-1";
         }
         {
           matches = [{ title = "^Spotify$"; }];
-          open-on-workspace = "9";
         }
         {
           matches = [{ app-id = "^foot$"; }];
-          # opacity = 0.85;
         }
         {
           matches = [{}];
