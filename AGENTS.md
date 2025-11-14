@@ -1,5 +1,8 @@
 # AGENTS.md - NixOS/Darwin Configuration
 
+## Important Restrictions
+- **Never switch configurations**: Do not run `nixos-rebuild switch`, `home-manager switch`, or similar commands. The user will handle all configuration switching.
+
 ## Build/Lint/Test Commands
 - `nix flake check --all-systems --no-build` - Check flake structure and syntax
 - `nix develop --command format` - Format all Nix files with alejandra
