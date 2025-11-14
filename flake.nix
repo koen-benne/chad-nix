@@ -25,8 +25,6 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     mac-app-util.url = "github:hraban/mac-app-util";
 
-    apple-silicon.url = "github:tpwrules/nixos-apple-silicon/main";
-
     # spicetify-nix.url = "github:Gerg-L/spicetify-nix/for-25.05";
     # no clue why, but master works just fine
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
@@ -79,7 +77,7 @@
 
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["aarch64-darwin" "x86_64-linux" "aarch64-linux"];
+      systems = ["aarch64-darwin" "x86_64-linux"];
       imports = [
         ./parts/lib.nix
         ./parts/overlays.nix
