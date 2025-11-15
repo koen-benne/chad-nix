@@ -50,5 +50,5 @@
   #   userEmail = "koen.benne@iodigital.com";
   # };
   programs.tmux.enable = true;
-  programs.fish.enable = true;
+  # fish.enable is set by common/packages/home.nix via my.fish.enable
 }
