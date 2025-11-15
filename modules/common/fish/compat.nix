@@ -85,7 +85,15 @@
       fi
       
       # Change default shell
-      currentShell="$(getent passwd "$USER" | cut -d: -f7)"
+      # Try multiple ways to get current shell (getent not always available)
+      currentShell=""
+      if command -v getent >/dev/null 2>&1; then
+        currentShell="$(getent passwd "$USER" | cut -d: -f7)"
+      elif [[ -r /etc/passwd ]]; then
+        currentShell="$(grep "^$USER:" /etc/passwd | cut -d: -f7)"
+      else
+        currentShell="$SHELL"
+      fi
       if [[ "$currentShell" != "$fishPath" ]]; then
         echo "🔄 Changing default shell from $currentShell to fish..."
         if command -v chsh >/dev/null 2>&1; then
