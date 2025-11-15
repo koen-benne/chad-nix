@@ -64,17 +64,58 @@
         fi
       fi
       
-      # Check if fish is already in /etc/shells
+      # Check if fish is in /etc/shells
       if ! grep -Fxq "$fishPath" /etc/shells 2>/dev/null; then
-        echo "📝 Adding fish to /etc/shells (requires sudo)..."
-        if command -v sudo >/dev/null 2>&1; then
-          if echo "$fishPath" | sudo tee -a /etc/shells >/dev/null 2>&1; then
-            echo "✅ Successfully added fish to /etc/shells"
-          else
-            echo "❌ Failed to add fish to /etc/shells"
-            echo "   Please run manually: echo '$fishPath' | sudo tee -a /etc/shells"
-            exit 0
-          fi
+        echo "❌ Fish ($fishPath) is not in /etc/shells"
+        echo "   To add it, run: echo '$fishPath' | sudo tee -a /etc/shells"
+        shellsSetup=false
+      else
+        echo "✅ Fish is already in /etc/shells"
+        shellsSetup=true
+      fi
+      
+      # Check current default shell
+      currentShell=""
+      if command -v getent >/dev/null 2>&1; then
+        currentShell="$(getent passwd "$USER" 2>/dev/null | cut -d: -f7)"
+      elif [[ -r /etc/passwd ]]; then
+        currentShell="$(grep "^$USER:" /etc/passwd 2>/dev/null | cut -d: -f7)"
+      else
+        currentShell="$SHELL"
+      fi
+      
+      # Fallback if we couldn't determine current shell
+      if [[ -z "$currentShell" ]]; then
+        currentShell="$SHELL"
+      fi
+      
+      if [[ "$currentShell" != "$fishPath" ]]; then
+        echo "❌ Current shell is $currentShell, not fish"
+        if [[ "$shellsSetup" == "true" ]]; then
+          echo "   To change it, run: chsh -s '$fishPath'"
+        else
+          echo "   After adding fish to /etc/shells, run: chsh -s '$fishPath'"
+        fi
+        shellChanged=false
+      else
+        echo "✅ Fish is already your default shell"
+        shellChanged=true
+      fi
+      
+      # Summary
+      echo ""
+      if [[ "$shellsSetup" == "true" && "$shellChanged" == "true" ]]; then
+        echo "🎉 Fish shell is fully configured!"
+      else
+        echo "📋 Manual setup required:"
+        if [[ "$shellsSetup" == "false" ]]; then
+          echo "   1. Add fish to shells: echo '$fishPath' | sudo tee -a /etc/shells"
+        fi
+        if [[ "$shellChanged" == "false" ]]; then
+          echo "   2. Change default shell: chsh -s '$fishPath'"
+          echo "   3. Log out and back in, or restart your terminal"
+        fi
+      fi
         else
           echo "❌ sudo not available. Please add fish to /etc/shells manually:"
           echo "   echo '$fishPath' | sudo tee -a /etc/shells"
