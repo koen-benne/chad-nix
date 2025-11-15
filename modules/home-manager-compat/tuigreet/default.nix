@@ -10,11 +10,16 @@
   # Generate a sample greetd config
   greetdConfig = ''
     [terminal]
-    vt = 1
+    vt = 7
+    switch = true
     
     [default_session]
     command = "tuigreet --time --remember --asterisks --cmd ${cfg.defaultSession}"
-    user = "greeter"
+    user = "greetd"
+    
+    [initial_session]
+    command = "${cfg.defaultSession}"
+    user = "${config.home.username}"
   '';
   
   # Generate a tuigreet theme config
@@ -177,7 +182,9 @@ in {
               echo "[✓] greetd service is running"
             else
               echo "[!] greetd service not running"
+              echo "   Status: $(systemctl is-failed greetd 2>/dev/null || echo 'inactive')"
               echo "   Run: sudo systemctl start greetd"
+              echo "   Check logs: sudo journalctl -u greetd -f"
               echo "   (or reboot after enabling)"
               echo ""
             fi
@@ -185,6 +192,13 @@ in {
             # Check config file
             if [[ -f /etc/greetd/config.toml ]]; then
               echo "[✓] greetd config exists"
+              # Check if config references tuigreet
+              if grep -q "tuigreet" /etc/greetd/config.toml 2>/dev/null; then
+                echo "[✓] greetd config uses tuigreet"
+              else
+                echo "[!] greetd config doesn't reference tuigreet"
+                echo "   Update config to use: command = \"tuigreet --cmd Hyprland\""
+              fi
             else
               echo "[!] greetd config missing"
               echo "   Example config available at: ~/.config/tuigreet/example-greetd-config.toml"
@@ -225,6 +239,33 @@ in {
               echo ""
             fi
             
+            # Check if other display managers are still active
+            for dm in gdm sddm lightdm; do
+              if systemctl is-active "$dm" >/dev/null 2>&1; then
+                echo "[!] $dm is still running - this will conflict with greetd"
+                echo "   Disable it: sudo systemctl disable --now $dm"
+              fi
+            done
+            
+            # Check VT availability
+            if [[ -c /dev/tty7 ]]; then
+              echo "[✓] VT7 available for display manager"
+            else
+              echo "[!] VT7 not available - may need to configure different VT"
+            fi
+            
+            # Check if running in a desktop session
+            if [[ -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
+            echo "[i] Currently in desktop session - greetd runs on boot/VT switch"
+            echo "   To test now:"
+            echo "     1. Switch to VT: Ctrl+Alt+F2"  
+            echo "     2. Login as root/sudo user"
+            echo "     3. Stop current DM: systemctl stop gdm (or sddm/lightdm)"
+            echo "     4. Start greetd: systemctl start greetd"
+            echo "     5. Switch to VT7: Ctrl+Alt+F7"
+            echo "   Or reboot to see greetd login screen"
+            fi
+            
             # Disable other display managers
             echo "[i] Don't forget to disable other display managers:"
             echo "   sudo systemctl disable gdm sddm lightdm"
@@ -236,6 +277,14 @@ in {
             echo ""
             
             echo "[✓] Setup complete! Reboot to use tuigreet."
+            echo ""
+            echo "=== Troubleshooting ==="
+            echo "If greetd still doesn't start:"
+            echo "1. Check logs: sudo journalctl -u greetd -f"
+            echo "2. Test manually: sudo greetd --config /etc/greetd/config.toml"
+            echo "3. Check VT permissions: ls -la /dev/tty7"
+            echo "4. Verify no other DM running: ps aux | grep -E '(gdm|sddm|lightdm)'"
+            echo "5. Check greetd user: id greetd"
           '';
           executable = true;
         };
