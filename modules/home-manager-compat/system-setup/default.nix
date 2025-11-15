@@ -10,28 +10,28 @@
   # Helper function to check if a command exists and is working
   checkComponent = name: component: ''
     check_${lib.replaceStrings ["-"] ["_"] name}() {
-      echo "🔍 Checking ${component.name}..."
+      echo "[>] Checking ${component.name}..."
       
       checksPassed=0
       totalChecks=${toString (lib.length component.checkCommands)}
       
       ${lib.concatMapStringsSep "\n" (cmd: ''
         if ${cmd} >/dev/null 2>&1; then
-          echo "  ✅ ${cmd}"
+          echo "  [✓] ${cmd}"
           checksPassed=$((checksPassed + 1))
         else
-          echo "  ❌ ${cmd}"
+          echo "  [✗] ${cmd}"
         fi
       '') component.checkCommands}
       
       if [[ $checksPassed -eq $totalChecks ]]; then
-        echo "  🎉 ${component.name} is properly configured!"
+        echo "  [✓] ${component.name} is properly configured!"
         return 0
       else
-        echo "  ⚠️  ${component.name} needs setup ($checksPassed/$totalChecks checks passed)"
+        echo "  [!] ${component.name} needs setup ($checksPassed/$totalChecks checks passed)"
         echo "     ${component.description}"
         echo ""
-        echo "  📋 Setup instructions:"
+        echo "  [i] Setup instructions:"
         
         # Detect distro and show appropriate instructions
         if command -v apt >/dev/null 2>&1; then
@@ -57,11 +57,11 @@
     check_${lib.replaceStrings ["-"] ["_"] name}
   '';
   
-  # Priority icons
+  # Priority icons using ASCII symbols
   getPriorityIcon = priority: {
-    critical = "🚨";
-    recommended = "📋";
-    optional = "💡";
+    critical = "[!]";     # Critical priority
+    recommended = "[i]";  # Info/recommended
+    optional = "[?]";     # Optional
   }.${priority};
   
   # Sort components by priority
@@ -116,7 +116,7 @@ in {
   config = mkIf (cfg.enable && config.my.isStandalone) {
     home.activation.systemSetupHelper = lib.hm.dag.entryAfter ["writeBoundary"] ''
       echo ""
-      echo "🖥️  System Setup Helper - Checking system requirements..."
+      echo "[*] System Setup Helper - Checking system requirements..."
       echo "=================================================="
       echo ""
       
@@ -131,14 +131,14 @@ in {
       echo ""
       echo "=================================================="
       if [[ $failedChecks -eq 0 ]]; then
-        echo "🎉 All system components are properly configured!"
+        echo "[✓] All system components are properly configured!"
       else
-        echo "⚠️  $failedChecks/$totalComponents components need attention"
+        echo "[!] $failedChecks/$totalComponents components need attention"
         echo ""
         echo "Legend:"
-        echo "  🚨 Critical - Required for basic functionality"
-        echo "  📋 Recommended - Improves experience significantly" 
-        echo "  💡 Optional - Nice to have features"
+        echo "  [!] Critical - Required for basic functionality"
+        echo "  [i] Recommended - Improves experience significantly" 
+        echo "  [?] Optional - Nice to have features"
         echo ""
         echo "Run 'home-manager switch' again after setting up components"
       fi

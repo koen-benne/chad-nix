@@ -38,7 +38,7 @@
       
       # If no stable fish found, create a symlink in ~/.local/bin
       if [[ -z "$fishPath" ]]; then
-        echo "⚠️  No fish found in standard locations."
+        echo "[!] No fish found in standard locations."
         echo "   Setting up user-local symlink to nix-managed fish..."
         
         # Create ~/.local/bin if it doesn't exist
@@ -47,15 +47,15 @@
         # Create symlink to nix fish
         if ln -sf "$nixFishPath" "$userLocalFish" 2>/dev/null; then
           fishPath="$userLocalFish"
-          echo "✅ Created symlink: $fishPath -> $nixFishPath"
+          echo "[✓] Created symlink: $fishPath -> $nixFishPath"
           
           # Add ~/.local/bin to PATH if not already there
           if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
-            echo "⚠️  Note: $HOME/.local/bin is not in your PATH"
+            echo "[i] Note: $HOME/.local/bin is not in your PATH"
             echo "   Add this to your shell rc file: export PATH=\"\$HOME/.local/bin:\$PATH\""
           fi
         else
-          echo "❌ Failed to create symlink"
+          echo "[✗] Failed to create symlink"
           echo "   Alternative options:"
           echo "   1. Install system fish: sudo apt install fish (or your distro equivalent)"
           echo "   2. Use nix profile: nix profile install nixpkgs#fish"
@@ -66,11 +66,11 @@
       
       # Check if fish is in /etc/shells
       if ! grep -Fxq "$fishPath" /etc/shells 2>/dev/null; then
-        echo "❌ Fish ($fishPath) is not in /etc/shells"
+        echo "[✗] Fish ($fishPath) is not in /etc/shells"
         echo "   To add it, run: echo '$fishPath' | sudo tee -a /etc/shells"
         shellsSetup=false
       else
-        echo "✅ Fish is already in /etc/shells"
+        echo "[✓] Fish is already in /etc/shells"
         shellsSetup=true
       fi
       
@@ -90,7 +90,7 @@
       fi
       
       if [[ "$currentShell" != "$fishPath" ]]; then
-        echo "❌ Current shell is $currentShell, not fish"
+        echo "[✗] Current shell is $currentShell, not fish"
         if [[ "$shellsSetup" == "true" ]]; then
           echo "   To change it, run: chsh -s '$fishPath'"
         else
@@ -98,16 +98,16 @@
         fi
         shellChanged=false
       else
-        echo "✅ Fish is already your default shell"
+        echo "[✓] Fish is already your default shell"
         shellChanged=true
       fi
       
       # Summary
       echo ""
       if [[ "$shellsSetup" == "true" && "$shellChanged" == "true" ]]; then
-        echo "🎉 Fish shell is fully configured!"
+        echo "[✓] Fish shell is fully configured!"
       else
-        echo "📋 Manual setup required:"
+        echo "[i] Manual setup required:"
         if [[ "$shellsSetup" == "false" ]]; then
           echo "   1. Add fish to shells: echo '$fishPath' | sudo tee -a /etc/shells"
         fi

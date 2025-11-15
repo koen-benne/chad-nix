@@ -92,7 +92,7 @@ in {
     # Add a test entry to verify the module is working
     home.activation.nixglDesktopTest = lib.hm.dag.entryAfter ["writeBoundary"] ''
       if [[ ${toString (lib.length (lib.attrNames cfg.applications))} -gt 0 ]]; then
-        echo "🖥️  Created ${toString (lib.length (lib.attrNames cfg.applications))} nixGL desktop entries"
+        echo "[*] Created ${toString (lib.length (lib.attrNames cfg.applications))} nixGL desktop entries"
       fi
     '';
   };
