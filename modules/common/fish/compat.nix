@@ -116,47 +116,6 @@
           echo "   3. Log out and back in, or restart your terminal"
         fi
       fi
-        else
-          echo "❌ sudo not available. Please add fish to /etc/shells manually:"
-          echo "   echo '$fishPath' | sudo tee -a /etc/shells"
-          exit 0
-        fi
-      else
-        echo "✅ Fish is already in /etc/shells"
-      fi
-      
-      # Change default shell
-      # Try multiple ways to get current shell (getent not always available)
-      currentShell=""
-      if command -v getent >/dev/null 2>&1; then
-        currentShell="$(getent passwd "$USER" 2>/dev/null | cut -d: -f7)"
-      elif [[ -r /etc/passwd ]]; then
-        currentShell="$(grep "^$USER:" /etc/passwd 2>/dev/null | cut -d: -f7)"
-      else
-        currentShell="$SHELL"
-      fi
-      
-      # Fallback if we couldn't determine current shell
-      if [[ -z "$currentShell" ]]; then
-        currentShell="$SHELL"
-      fi
-      if [[ "$currentShell" != "$fishPath" ]]; then
-        echo "🔄 Changing default shell from $currentShell to fish..."
-        if command -v chsh >/dev/null 2>&1; then
-          if chsh -s "$fishPath" 2>/dev/null; then
-            echo "✅ Successfully changed default shell to fish"
-            echo "   Please log out and back in, or restart your terminal"
-          else
-            echo "❌ Failed to change default shell automatically"
-            echo "   Please run manually: chsh -s '$fishPath'"
-          fi
-        else
-          echo "❌ chsh command not available"
-          echo "   Please change your shell manually or configure your terminal to use fish"
-        fi
-      else
-        echo "✅ Fish is already your default shell"
-      fi
       
       echo "🐟 Fish shell setup complete!"
     '';
