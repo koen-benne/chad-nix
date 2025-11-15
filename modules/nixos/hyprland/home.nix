@@ -14,11 +14,11 @@
   sharedConfig = import ./config.nix;
   
   # Get appropriate browser command and packages based on context
-  browserCmd = if sys ? networking then "zen" else "${nixGLPackage}/bin/nixGL zen";
+  browserCmd = if config.my.isStandalone then "${nixGLPackage}/bin/nixGL zen" else "zen";
   
   # NixGL setup for standalone home-manager mode
   nixGLPackage = 
-    if (sys ? networking) then null  # NixOS system, no NixGL needed
+    if (!config.my.isStandalone) then null  # NixOS system, no NixGL needed
     else if config.my.hyprland.nixgl.variant == "auto" then
       inputs.nixgl.packages.${pkgs.system}.nixGLIntel
     else if config.my.hyprland.nixgl.variant == "intel" then
@@ -29,7 +29,7 @@
       inputs.nixgl.packages.${pkgs.system}.nixGLMesa;
 
   # Conditional packages based on whether we're on NixOS or standalone
-  additionalPackages = if (sys ? networking) then [] else [
+  additionalPackages = if config.my.isStandalone then [
     # NixGL package
     nixGLPackage
     
@@ -48,7 +48,7 @@
     pkgs.nautilus
     pkgs.networkmanagerapplet
     pkgs.foot
-  ];
+  ] else [];
 in {
   config = mkIf (sys.my.hyprland.enable or config.my.hyprland.enable) {
     home.packages = additionalPackages;
@@ -69,7 +69,7 @@ in {
     };
 
     # Enable XDG desktop portal for screen sharing (standalone mode only)
-    xdg.portal = mkIf (!(sys ? networking)) {
+    xdg.portal = mkIf config.my.isStandalone {
       enable = true;
       extraPortals = with pkgs; [
         xdg-desktop-portal-hyprland

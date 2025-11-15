@@ -12,7 +12,11 @@ in {
     enable = mkEnableOption "networkmanager";
   };
 
-  config.my.waybar.enable = true;
-  config.my.foot.enable = true;
+  config = lib.mkIf config.my.desktop.enable {
+    my.waybar.enable = true;
+    my.foot.enable = true;
+    my.thunderbird.enable = true;
+    my.qutebrowser.enable = true;
+  };
 }
 

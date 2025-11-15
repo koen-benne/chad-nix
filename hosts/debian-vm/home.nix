@@ -6,34 +6,12 @@
   ...
 }: {
   imports = [
-    inputs.nix-index-database.homeModules.nix-index
-    ../../modules/common/my/default.nix
-
     # Home-manager compatibility layer (provides sys.* options)
     ../../modules/home-manager-compat
 
-    # Modules that use companion modules (require sys.* options)
-    ../../modules/common/desktop/home.nix
-    ../../modules/nixos/hyprland/home.nix
-    ../../modules/nixos/theme/home.nix
-    ../../modules/common/opencode/home.nix
-
-    # Standalone modules (work independently)
-    ../../modules/nixos/foot/home.nix
-    ../../modules/common/direnv/home.nix
-    ../../modules/common/fish/home.nix
-    ../../modules/common/git/home.nix
-    ../../modules/common/gitui/home.nix
-    ../../modules/common/gnupg/home.nix
-    ../../modules/common/lazygit/home.nix
-    ../../modules/common/packages/home.nix
-    ../../modules/common/neovim/home.nix
-    ../../modules/common/nix-helper/home.nix
-    ../../modules/common/ssh/home.nix
-    ../../modules/common/taskwarrior/home.nix
-    ../../modules/common/tmux/home.nix
-    ../../modules/common/yazi/home.nix
-    ../../modules/common/zsh/home.nix
+    # Auto-discover all home.nix modules
+    ../../modules/common/home.nix
+    ../../modules/nixos/home.nix
   ];
 
   # Basic home configuration
@@ -45,12 +23,21 @@
     package = pkgs.nix;
   };
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
+    config.common.default = "*";
+  };
+
   # Enable desktop features
   my.desktop.enable = true;
   my.hyprland.enable = true;
 
   # nixGL for graphics acceleration on non-NixOS
   home.packages = [
+    pkgs.xdg-desktop-portal
     pkgs.home-manager
     inputs.nixgl.packages.${pkgs.system}.nixGLIntel
   ];

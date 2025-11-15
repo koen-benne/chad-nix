@@ -6,6 +6,16 @@
 # 
 # This ensures existing home.nix files work unchanged without needing
 # to maintain separate home-manager-only versions.
+#
+# Features:
+# - Sets config.my.isStandalone = true for detection in home.nix modules
+# - Provides sys.* options via compat.nix files
+# - Makes sys available as alias to config for backward compatibility
+#
+# Usage in home.nix modules:
+#   footCommand = if config.my.isStandalone 
+#     then "${nixgl}/bin/nixGL foot" 
+#     else "foot";
 { config, lib, ... }: {
   imports = 
     # Auto-discovery of compat.nix files
@@ -15,8 +25,13 @@
     ./kitty.nix      # Darwin-specific, no nixos equivalent
   ];
 
-  # Make sys available as an alias to config for home.nix files
-  # This mimics the behavior of extraSpecialArgs = { sys = config; }
-  _module.args.sys = config;
+  config = {
+    # Detection flag for home-manager standalone mode
+    my.isStandalone = true;
+    
+    # Make sys available as an alias to config for home.nix files
+    # This mimics the behavior of extraSpecialArgs = { sys = config; }
+    _module.args.sys = config;
+  };
 }
 
