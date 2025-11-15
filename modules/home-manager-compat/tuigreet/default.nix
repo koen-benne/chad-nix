@@ -172,6 +172,16 @@ in {
               echo ""
             fi
             
+            # Check if greetd service is running
+            if systemctl is-active greetd >/dev/null 2>&1; then
+              echo "[✓] greetd service is running"
+            else
+              echo "[!] greetd service not running"
+              echo "   Run: sudo systemctl start greetd"
+              echo "   (or reboot after enabling)"
+              echo ""
+            fi
+            
             # Check config file
             if [[ -f /etc/greetd/config.toml ]]; then
               echo "[✓] greetd config exists"
@@ -182,13 +192,46 @@ in {
               echo ""
             fi
             
+            # Check PAM configuration
+            if [[ -f /etc/pam.d/greetd ]]; then
+              echo "[✓] greetd PAM config exists"
+            else
+              echo "[!] greetd PAM config missing"
+              echo "   This is likely causing pam_authenticate errors"
+              echo "   Create /etc/pam.d/greetd with:"
+              echo "   ---"
+              echo "   #%PAM-1.0"
+              echo "   auth       include      login"
+              echo "   account    include      login"
+              echo "   password   include      login"
+              echo "   session    include      login"
+              echo "   ---"
+              echo "   Run: sudo tee /etc/pam.d/greetd << 'EOF'"
+              echo "   #%PAM-1.0"
+              echo "   auth       include      login" 
+              echo "   account    include      login"
+              echo "   password   include      login"
+              echo "   session    include      login"
+              echo "   EOF"
+              echo ""
+            fi
+            
+            # Check greetd user
+            if id greetd >/dev/null 2>&1; then
+              echo "[✓] greetd user exists"
+            else
+              echo "[!] greetd user missing"
+              echo "   Create greetd user: sudo useradd -r -s /bin/false greetd"
+              echo ""
+            fi
+            
             # Disable other display managers
             echo "[i] Don't forget to disable other display managers:"
             echo "   sudo systemctl disable gdm sddm lightdm"
             echo ""
             
             # Theme info
-            echo "🎨 Theme configuration available at: ~/.config/tuigreet/theme.toml"
+            echo "[i] Theme configuration available at: ~/.config/tuigreet/theme.toml"
             echo "   Use with: tuigreet --theme ~/.config/tuigreet/theme.toml"
             echo ""
             

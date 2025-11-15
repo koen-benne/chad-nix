@@ -124,33 +124,39 @@ in {
           "systemctl is-enabled greetd"
           "command -v tuigreet"
           "test -f /etc/greetd/config.toml"
+          "test -f /etc/pam.d/greetd"
+          "id greetd"
         ];
         setupInstructions = {
           ubuntu = [
             "# tuigreet is configured via home-manager, but greetd needs system setup:"
             "# Install greetd (may need building from source or third-party repos)"
-            "# Then run: ~/.local/bin/setup-tuigreet for detailed setup"
+            "# Create greetd user: sudo useradd -r -s /bin/false greetd"
+            "# Then run: ~/.local/bin/setup-tuigreet for detailed setup including PAM"
             "# Alternative: sudo apt install lightdm lightdm-gtk-greeter"
           ];
           fedora = [
             "# Install greetd system package:"
             "sudo dnf copr enable peterwu/greetd"
             "sudo dnf install greetd"
+            "sudo useradd -r -s /bin/false greetd"
             "sudo systemctl enable greetd"
             "# tuigreet and config are provided by home-manager"
-            "# Run: ~/.local/bin/setup-tuigreet for full setup"
+            "# Run: ~/.local/bin/setup-tuigreet for full setup including PAM"
           ];
           arch = [
             "# Install greetd system package:"
             "sudo pacman -S greetd"
+            "sudo useradd -r -s /bin/false greetd"
             "sudo systemctl enable greetd"
             "# tuigreet and config are provided by home-manager"
-            "# Run: ~/.local/bin/setup-tuigreet for full setup"
+            "# Run: ~/.local/bin/setup-tuigreet for full setup including PAM"
           ];
           generic = [
             "# Install greetd via your package manager"
+            "# Create greetd user: sudo useradd -r -s /bin/false greetd"
             "# tuigreet is provided by home-manager"
-            "# Run: ~/.local/bin/setup-tuigreet for configuration help"
+            "# Run: ~/.local/bin/setup-tuigreet for configuration help including PAM"
           ];
         };
       };
