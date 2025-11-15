@@ -11,6 +11,9 @@ in {
 
   # Provide the actual theme configuration for home-manager standalone mode
   config = mkIf config.my.theme.enable {
+    # TODO: find out why we need this.
+    dconf.enable = false;
+
     stylix = {
       enable = true;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/railscasts.yaml";
