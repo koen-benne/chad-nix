@@ -15,17 +15,56 @@
     '';
     
     home.activation.setDefaultShell = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      fishPath="${config.programs.fish.package}/bin/fish"
-      
       echo "🐟 Setting up fish as default shell..."
       
-      # Check if fish path exists
-      if [[ ! -x "$fishPath" ]]; then
-        echo "❌ Fish binary not found at $fishPath"
-        exit 1
+      # Try to find fish in various locations
+      fishPath=""
+      nixFishPath="${config.programs.fish.package}/bin/fish"
+      userLocalFish="$HOME/.local/bin/fish"
+      
+      # Check potential locations in order of preference
+      for path in \
+        "$userLocalFish" \
+        "$HOME/.nix-profile/bin/fish" \
+        /usr/local/bin/fish \
+        /usr/bin/fish \
+        /bin/fish; do
+        if [[ -x "$path" ]]; then
+          fishPath="$path"
+          echo "📍 Found fish at $fishPath"
+          break
+        fi
+      done
+      
+      # If no stable fish found, create a symlink in ~/.local/bin
+      if [[ -z "$fishPath" ]]; then
+        echo "⚠️  No fish found in standard locations."
+        echo "   Setting up user-local symlink to nix-managed fish..."
+        
+        # Create ~/.local/bin if it doesn't exist
+        mkdir -p "$HOME/.local/bin"
+        
+        # Create symlink to nix fish
+        if ln -sf "$nixFishPath" "$userLocalFish" 2>/dev/null; then
+          fishPath="$userLocalFish"
+          echo "✅ Created symlink: $fishPath -> $nixFishPath"
+          
+          # Add ~/.local/bin to PATH if not already there
+          if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+            echo "⚠️  Note: $HOME/.local/bin is not in your PATH"
+            echo "   Add this to your shell rc file: export PATH=\"\$HOME/.local/bin:\$PATH\""
+          fi
+        else
+          echo "❌ Failed to create symlink"
+          echo "   Alternative options:"
+          echo "   1. Install system fish: sudo apt install fish (or your distro equivalent)"
+          echo "   2. Use nix profile: nix profile install nixpkgs#fish"
+          echo "   3. Create symlink manually: ln -sf '$nixFishPath' ~/.local/bin/fish"
+          exit 0
+        fi
       fi
       
-      # Add fish to /etc/shells if not already present
+      # Check if fish is already in /etc/shells
       if ! grep -Fxq "$fishPath" /etc/shells 2>/dev/null; then
         echo "📝 Adding fish to /etc/shells (requires sudo)..."
         if command -v sudo >/dev/null 2>&1; then
