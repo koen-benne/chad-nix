@@ -88,10 +88,15 @@
       # Try multiple ways to get current shell (getent not always available)
       currentShell=""
       if command -v getent >/dev/null 2>&1; then
-        currentShell="$(getent passwd "$USER" | cut -d: -f7)"
+        currentShell="$(getent passwd "$USER" 2>/dev/null | cut -d: -f7)"
       elif [[ -r /etc/passwd ]]; then
-        currentShell="$(grep "^$USER:" /etc/passwd | cut -d: -f7)"
+        currentShell="$(grep "^$USER:" /etc/passwd 2>/dev/null | cut -d: -f7)"
       else
+        currentShell="$SHELL"
+      fi
+      
+      # Fallback if we couldn't determine current shell
+      if [[ -z "$currentShell" ]]; then
         currentShell="$SHELL"
       fi
       if [[ "$currentShell" != "$fishPath" ]]; then
