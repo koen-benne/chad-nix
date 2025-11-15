@@ -9,49 +9,52 @@
   
   # Helper function to check if a command exists and is working
   checkComponent = name: component: ''
-    echo "🔍 Checking ${component.name}..."
-    
-    checksPassed=0
-    totalChecks=${toString (lib.length component.checkCommands)}
-    
-    ${lib.concatMapStringsSep "\n" (cmd: ''
-      if ${cmd} >/dev/null 2>&1; then
-        echo "  ✅ ${cmd}"
-        checksPassed=$((checksPassed + 1))
-      else
-        echo "  ❌ ${cmd}"
-      fi
-    '') component.checkCommands}
-    
-    if [[ $checksPassed -eq $totalChecks ]]; then
-      echo "  🎉 ${component.name} is properly configured!"
-      return 0
-    else
-      echo "  ⚠️  ${component.name} needs setup ($checksPassed/$totalChecks checks passed)"
-      echo "     ${component.description}"
-      echo ""
-      echo "  📋 Setup instructions:"
+    check_${lib.replaceStrings ["-"] ["_"] name}() {
+      echo "🔍 Checking ${component.name}..."
       
-      # Detect distro and show appropriate instructions
-      if command -v apt >/dev/null 2>&1; then
-        distro="ubuntu"
-      elif command -v dnf >/dev/null 2>&1; then
-        distro="fedora"  
-      elif command -v pacman >/dev/null 2>&1; then
-        distro="arch"
-      else
-        distro="generic"
-      fi
+      checksPassed=0
+      totalChecks=${toString (lib.length component.checkCommands)}
       
-      ${lib.concatStringsSep "\n" (lib.mapAttrsToList (d: instructions: ''
-        if [[ "$distro" == "${d}" ]]; then
-          ${lib.concatMapStringsSep "\n" (instr: ''echo "     ${instr}"'') instructions}
+      ${lib.concatMapStringsSep "\n" (cmd: ''
+        if ${cmd} >/dev/null 2>&1; then
+          echo "  ✅ ${cmd}"
+          checksPassed=$((checksPassed + 1))
+        else
+          echo "  ❌ ${cmd}"
         fi
-      '') component.setupInstructions)}
+      '') component.checkCommands}
       
-      echo ""
-      return 1
-    fi
+      if [[ $checksPassed -eq $totalChecks ]]; then
+        echo "  🎉 ${component.name} is properly configured!"
+        return 0
+      else
+        echo "  ⚠️  ${component.name} needs setup ($checksPassed/$totalChecks checks passed)"
+        echo "     ${component.description}"
+        echo ""
+        echo "  📋 Setup instructions:"
+        
+        # Detect distro and show appropriate instructions
+        if command -v apt >/dev/null 2>&1; then
+          distro="ubuntu"
+        elif command -v dnf >/dev/null 2>&1; then
+          distro="fedora"  
+        elif command -v pacman >/dev/null 2>&1; then
+          distro="arch"
+        else
+          distro="generic"
+        fi
+        
+        ${lib.concatStringsSep "\n" (lib.mapAttrsToList (d: instructions: ''
+          if [[ "$distro" == "${d}" ]]; then
+            ${lib.concatMapStringsSep "\n" (instr: ''echo "     ${instr}"'') instructions}
+          fi
+        '') component.setupInstructions)}
+        
+        echo ""
+        return 1
+      fi
+    }
+    check_${lib.replaceStrings ["-"] ["_"] name}
   '';
   
   # Priority icons
@@ -121,7 +124,8 @@ in {
       totalComponents=${toString (lib.length sortedComponents)}
       
       ${lib.concatMapStringsSep "\n\n" (comp: ''
-        ${getPriorityIcon comp.value.priority} ${checkComponent comp.name comp.value} || failedChecks=$((failedChecks + 1))
+        ${checkComponent comp.name comp.value}
+        ${getPriorityIcon comp.value.priority} check_${lib.replaceStrings ["-"] ["_"] comp.name} || failedChecks=$((failedChecks + 1))
       '') sortedComponents}
       
       echo ""
