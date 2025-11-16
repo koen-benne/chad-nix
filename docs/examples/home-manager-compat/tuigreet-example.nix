@@ -1,5 +1,6 @@
 # Example tuigreet configuration for home-manager standalone mode
-# This provides tuigreet installation, theming, and setup helpers
+# This provides tuigreet theming, configuration helpers, and setup guidance
+# IMPORTANT: Install greetd and tuigreet via your native package manager for best compatibility
 
 {
   # Enable tuigreet module
@@ -8,8 +9,8 @@
   # Configure default session (what tuigreet launches)
   my.tuigreet.defaultSession = "Hyprland"; # or "sway", "gnome-session", etc.
   
-  # Install tuigreet via home-manager (default: true)
-  my.tuigreet.installPackage = true;
+  # Install tuigreet via home-manager (NOT recommended - use native packages instead)
+  my.tuigreet.installPackage = false; # Keep false - install via system package manager
   
   # Generate helper configs and scripts (default: true)
   my.tuigreet.generateConfigs = true;
@@ -30,20 +31,23 @@
 
 # What this provides:
 # 
-# 1. **tuigreet package** - Installed via home-manager
+# 1. **Theme configuration** - ~/.config/tuigreet/theme.toml  
 # 2. **Example greetd config** - ~/.config/tuigreet/example-greetd-config.toml
-# 3. **Theme configuration** - ~/.config/tuigreet/theme.toml  
-# 4. **Setup helper script** - ~/.local/bin/setup-tuigreet
+# 3. **Setup helper script** - ~/.local/bin/setup-tuigreet
+# 4. **Installation guidance** - Strongly recommends native package manager
 # 
 # The setup helper will:
-# - Check if greetd is installed system-wide
-# - Verify tuigreet is in PATH
-# - Check greetd service status
+# - Guide native package installation (greetd + tuigreet)
+# - Detect mixed Nix/system installations and warn about compatibility
+# - Check greetd service status and configuration
+# - Verify PAM configuration and user permissions
 # - Provide copy-paste commands for system setup
-# - Help disable other display managers
+# - Help disable conflicting display managers
 # 
-# Manual steps still required:
-# 1. Install greetd system package
-# 2. Copy config: sudo cp ~/.config/tuigreet/example-greetd-config.toml /etc/greetd/config.toml
-# 3. Enable service: sudo systemctl enable greetd
-# 4. Disable other DMs: sudo systemctl disable gdm sddm lightdm
+# RECOMMENDED installation steps:
+# 1. Install native packages:
+#    - Ubuntu: sudo apt install greetd greetd-tuigreet
+#    - Fedora: sudo dnf copr enable peterwu/greetd && sudo dnf install greetd greetd-tuigreet  
+#    - Arch: sudo pacman -S greetd greetd-tuigreet
+# 2. Run setup helper: ~/.local/bin/setup-tuigreet
+# 3. The helper will guide the remaining configuration steps

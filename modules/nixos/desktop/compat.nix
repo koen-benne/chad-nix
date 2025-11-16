@@ -131,38 +131,43 @@ in {
         ];
         setupInstructions = {
           ubuntu = [
-            "# tuigreet is configured via home-manager, but greetd needs system setup:"
-            "# Install greetd (may need building from source or third-party repos)"
-            "# Create greetd user: sudo useradd -r -s /bin/false greetd"
-            "# Add to tty group: sudo usermod -a -G tty greetd"
-            "# Then run: ~/.local/bin/setup-tuigreet for detailed setup including PAM"
-            "# Alternative: sudo apt install lightdm lightdm-gtk-greeter"
+            "# Install both greetd and tuigreet via native packages (recommended):"
+            "sudo apt update"
+            "sudo apt install greetd greetd-tuigreet  # If available in repos"
+            "# If not available: build from source or use alternative:"
+            "# sudo apt install lightdm lightdm-gtk-greeter"
+            "# Setup user and permissions:"
+            "sudo useradd -r -s /bin/false greetd"
+            "sudo usermod -a -G tty greetd"
+            "sudo systemctl enable greetd"
+            "# Run setup helper: ~/.local/bin/setup-tuigreet"
           ];
           fedora = [
-            "# Install greetd system package:"
+            "# Install greetd and tuigreet via native packages:"
             "sudo dnf copr enable peterwu/greetd"
-            "sudo dnf install greetd"
+            "sudo dnf install greetd greetd-tuigreet"
             "sudo useradd -r -s /bin/false greetd"
             "sudo usermod -a -G tty greetd"
             "sudo systemctl enable greetd"
-            "# tuigreet and config are provided by home-manager"
-            "# Run: ~/.local/bin/setup-tuigreet for full setup including PAM"
+            "# Theme and config helpers provided by home-manager"
+            "# Run setup helper: ~/.local/bin/setup-tuigreet"
           ];
           arch = [
-            "# Install greetd system package:"
-            "sudo pacman -S greetd"
+            "# Install greetd and tuigreet via native packages:"
+            "sudo pacman -S greetd greetd-tuigreet"
             "sudo useradd -r -s /bin/false greetd"
             "sudo usermod -a -G tty greetd"
             "sudo systemctl enable greetd"
-            "# tuigreet and config are provided by home-manager"
-            "# Run: ~/.local/bin/setup-tuigreet for full setup including PAM"
+            "# Theme and config helpers provided by home-manager"
+            "# Run setup helper: ~/.local/bin/setup-tuigreet"
           ];
           generic = [
-            "# Install greetd via your package manager"
+            "# Install BOTH greetd and tuigreet via your native package manager"
+            "# This prevents GREETD_SOCK compatibility issues"
             "# Create greetd user: sudo useradd -r -s /bin/false greetd"
             "# Add to tty group: sudo usermod -a -G tty greetd"
-            "# tuigreet is provided by home-manager"
-            "# Run: ~/.local/bin/setup-tuigreet for configuration help including PAM"
+            "# Enable service: sudo systemctl enable greetd"
+            "# Run setup helper: ~/.local/bin/setup-tuigreet"
           ];
         };
       };

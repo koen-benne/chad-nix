@@ -54,8 +54,8 @@ in {
     
     installPackage = lib.mkOption {
       type = lib.types.bool;
-      default = true;
-      description = "Install tuigreet package via home-manager";
+      default = false;
+      description = "Install tuigreet package via home-manager (not recommended - use native package manager instead)";
     };
     
     generateConfigs = lib.mkOption {
@@ -122,7 +122,7 @@ in {
   };
 
   config = mkIf (cfg.enable && config.my.isStandalone) {
-    # Install tuigreet if requested
+    # Install tuigreet if requested (fallback only - prefer native package manager)
     home.packages = lib.optionals cfg.installPackage [
       pkgs.greetd.tuigreet
     ];
@@ -160,41 +160,69 @@ in {
             
             # Check if greetd is installed
             if ! command -v greetd >/dev/null 2>&1; then
-              echo "[✗] greetd not found. Please install it first:"
+              echo "[✗] greetd not found. Install via native package manager:"
               if command -v apt >/dev/null 2>&1; then
-                echo "   # Ubuntu/Debian: May need third-party repo or build from source"
-                echo "   # Alternative: sudo apt install lightdm"
+                echo "   # Ubuntu/Debian:"
+                echo "   sudo apt update"
+                echo "   sudo apt install greetd greetd-tuigreet  # If available"
+                echo "   # If not available, try: sudo apt install lightdm lightdm-gtk-greeter" 
+                echo "   # Or build from source: https://git.sr.ht/~kennylevinsen/greetd"
               elif command -v dnf >/dev/null 2>&1; then
+                echo "   # Fedora:"
                 echo "   sudo dnf copr enable peterwu/greetd"
-                echo "   sudo dnf install greetd"
+                echo "   sudo dnf install greetd greetd-tuigreet"
               elif command -v pacman >/dev/null 2>&1; then
-                echo "   sudo pacman -S greetd"
+                echo "   # Arch Linux:"
+                echo "   sudo pacman -S greetd greetd-tuigreet"
+              elif command -v zypper >/dev/null 2>&1; then
+                echo "   # openSUSE:"
+                echo "   sudo zypper install greetd"  
+              else
+                echo "   # Install greetd and greetd-tuigreet via your package manager"
+                echo "   # Check: https://repology.org/project/greetd/versions"
               fi
+              echo ""
+              echo "[!] IMPORTANT: Install both greetd AND tuigreet via native packages"
+              echo "   This prevents GREETD_SOCK compatibility issues"
               echo ""
             fi
             
-            # Check if tuigreet is available
+            # Check if tuigreet is available  
             if command -v tuigreet >/dev/null 2>&1; then
-              echo "[✓] tuigreet is installed"
               tuigreet_path="$(command -v tuigreet)"
-              echo "   Path: $tuigreet_path"
+              echo "[✓] tuigreet is installed: $tuigreet_path"
               
-              # Check if tuigreet is from Nix
+              # Determine installation source
               if echo "$tuigreet_path" | grep -q "/nix/store"; then
-                echo "[i] tuigreet installed via Nix"
+                echo "[!] tuigreet installed via Nix - COMPATIBILITY WARNING"
+                echo "   This can cause GREETD_SOCK issues with system greetd"
+                echo ""
+                echo "   RECOMMENDED: Install tuigreet via native package manager instead:"
+                if command -v apt >/dev/null 2>&1; then
+                  echo "   sudo apt install greetd-tuigreet"
+                elif command -v dnf >/dev/null 2>&1; then
+                  echo "   sudo dnf install greetd-tuigreet"
+                elif command -v pacman >/dev/null 2>&1; then
+                  echo "   sudo pacman -S greetd-tuigreet"
+                else
+                  echo "   Install greetd-tuigreet via your package manager"
+                fi
+                echo ""
                 
-                # Check if greetd is system-installed
+                # Check if greetd is system-installed (common case)
                 if command -v greetd >/dev/null 2>&1; then
                   greetd_path="$(command -v greetd)"
                   if ! echo "$greetd_path" | grep -q "/nix/store"; then
-                    echo "[!] greetd is system-installed but tuigreet is from Nix"
-                    echo "   This can cause GREETD_SOCK issues due to different runtimes"
-                    echo "   Solutions:"
-                    echo "   1. Install system tuigreet: sudo apt install greetd-tuigreet"
-                    echo "   2. Or install both via Nix: nix profile install nixpkgs#greetd.greetd"
-                    echo "   3. Use absolute path in greetd config: $tuigreet_path"
+                    echo "[!] Mixed installation detected:"
+                    echo "   • greetd: system package ($greetd_path)"
+                    echo "   • tuigreet: Nix package ($tuigreet_path)"
+                    echo "   This often causes authentication failures!"
+                    echo ""
                   fi
                 fi
+              else
+                echo "[✓] tuigreet installed via native package manager"
+                echo "   This is the recommended approach for compatibility"
               fi
               
               # Test tuigreet can run
@@ -203,14 +231,26 @@ in {
               else
                 echo "[✗] tuigreet fails to run - check dependencies"
                 if command -v ldd >/dev/null 2>&1; then
-                  echo "   Try: ldd $tuigreet_path"
-                else
-                  echo "   Check if all required libraries are installed"
+                  echo "   Debug with: ldd $tuigreet_path"
                 fi
               fi
             else
               echo "[✗] tuigreet not found in PATH"
-              echo "   Add to PATH or install: nix profile install nixpkgs#greetd.tuigreet"
+              echo ""
+              echo "   INSTALL VIA NATIVE PACKAGE MANAGER (recommended):"
+              if command -v apt >/dev/null 2>&1; then
+                echo "   sudo apt install greetd-tuigreet"
+              elif command -v dnf >/dev/null 2>&1; then
+                echo "   sudo dnf install greetd-tuigreet"
+              elif command -v pacman >/dev/null 2>&1; then
+                echo "   sudo pacman -S greetd-tuigreet"
+              else
+                echo "   Install greetd-tuigreet via your package manager"
+              fi
+              echo ""
+              echo "   FALLBACK (Nix - may have compatibility issues):"
+              echo "   nix profile install nixpkgs#greetd.tuigreet"
+              echo "   Then use absolute path in greetd config"
               echo ""
             fi
             
@@ -446,11 +486,19 @@ in {
             echo "4. Verify no other DM running: ps aux | grep -E '(gdm|sddm|lightdm)'"
             echo "5. Check library dependencies (if ldd available): ldd \$(command -v tuigreet)"
             echo ""
-            echo "For GREETD_SOCK errors (Nix/system package mixing):"
-            echo "• Ensure tuigreet and greetd use compatible runtimes"
-            echo "• Use system packages: sudo apt install greetd-tuigreet"
-            echo "• Or use Nix for both: nix profile install nixpkgs#greetd.greetd"
-            echo "• Verify config uses correct tuigreet path"
+            echo "For GREETD_SOCK errors (common with mixed package sources):"
+            echo "• SOLUTION: Use native packages for both greetd and tuigreet:"
+            if command -v apt >/dev/null 2>&1; then
+              echo "  sudo apt install greetd greetd-tuigreet"
+            elif command -v dnf >/dev/null 2>&1; then
+              echo "  sudo dnf install greetd greetd-tuigreet"
+            elif command -v pacman >/dev/null 2>&1; then
+              echo "  sudo pacman -S greetd greetd-tuigreet"
+            else
+              echo "  Install both via your native package manager"
+            fi
+            echo "• Avoid mixing Nix and system packages for display manager components"
+            echo "• Verify config uses correct tuigreet path: which tuigreet"
           '';
           executable = true;
         };
@@ -461,22 +509,30 @@ in {
     home.activation.tuigreetSetup = lib.hm.dag.entryAfter ["writeBoundary"] ''
       echo "[✓] tuigreet configuration generated!"
       echo ""
-      echo "=== Next Steps ==="
-      echo "1. Run setup helper as regular user:"
-      echo "   ~/.local/bin/setup-tuigreet"
-      echo "   (Will prompt for sudo password when needed)"
+      echo "=== IMPORTANT: Use Native Package Manager ==="
+      echo "For best compatibility, install greetd and tuigreet via your system's"
+      echo "native package manager (apt/dnf/pacman), NOT via Nix."
       echo ""
-      echo "2. Configuration files created:"
+      echo "=== Next Steps ==="
+      echo "1. Install native packages (recommended):"
+      if command -v apt >/dev/null 2>&1; then
+        echo "   sudo apt install greetd greetd-tuigreet"
+      elif command -v dnf >/dev/null 2>&1; then
+        echo "   sudo dnf copr enable peterwu/greetd && sudo dnf install greetd greetd-tuigreet"
+      elif command -v pacman >/dev/null 2>&1; then
+        echo "   sudo pacman -S greetd greetd-tuigreet"
+      else
+        echo "   Install greetd and greetd-tuigreet via your package manager"
+      fi
+      echo ""
+      echo "2. Run setup helper as regular user:"
+      echo "   ~/.local/bin/setup-tuigreet"
+      echo "   (Will guide installation and configuration)"
+      echo ""
+      echo "3. Configuration files created:"
       echo "   • Example greetd config: ~/.config/tuigreet/example-greetd-config.toml"
       echo "   • Theme config: ~/.config/tuigreet/theme.toml"
-      echo ""
-      echo "3. The script will help you:"
-      echo "   • Check system requirements"
-      echo "   • Install missing components" 
-      echo "   • Configure greetd and PAM"
-      echo "   • Test tuigreet functionality"
       echo "   • Setup helper: ~/.local/bin/setup-tuigreet"
-      echo "   Run the setup helper for detailed instructions."
     '';
   };
 }
