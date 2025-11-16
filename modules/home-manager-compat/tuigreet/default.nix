@@ -179,6 +179,24 @@ in {
               tuigreet_path="$(command -v tuigreet)"
               echo "   Path: $tuigreet_path"
               
+              # Check if tuigreet is from Nix
+              if echo "$tuigreet_path" | grep -q "/nix/store"; then
+                echo "[i] tuigreet installed via Nix"
+                
+                # Check if greetd is system-installed
+                if command -v greetd >/dev/null 2>&1; then
+                  greetd_path="$(command -v greetd)"
+                  if ! echo "$greetd_path" | grep -q "/nix/store"; then
+                    echo "[!] greetd is system-installed but tuigreet is from Nix"
+                    echo "   This can cause GREETD_SOCK issues due to different runtimes"
+                    echo "   Solutions:"
+                    echo "   1. Install system tuigreet: sudo apt install greetd-tuigreet"
+                    echo "   2. Or install both via Nix: nix profile install nixpkgs#greetd.greetd"
+                    echo "   3. Use absolute path in greetd config: $tuigreet_path"
+                  fi
+                fi
+              fi
+              
               # Test tuigreet can run
               if tuigreet --help >/dev/null 2>&1; then
                 echo "[✓] tuigreet can execute"
@@ -228,14 +246,22 @@ in {
                 tuigreet_in_config=$(grep "tuigreet" /etc/greetd/config.toml | head -1)
                 echo "   Config: $tuigreet_in_config"
                 
-                # Extract command path and check if it exists
+                # Extract and validate tuigreet path in config
                 if echo "$tuigreet_in_config" | grep -q "command.*=.*tuigreet"; then
-                  # Check if the tuigreet command in config is accessible
-                  if command -v tuigreet >/dev/null 2>&1; then
-                    echo "[✓] tuigreet command in config is accessible"
-                  else
-                    echo "[!] tuigreet in config path may be invalid"
-                    echo "   Update config to use full path: $(command -v tuigreet 2>/dev/null || echo '/usr/bin/tuigreet')"
+                  # Extract the tuigreet path from config
+                  config_tuigreet_path=$(echo "$tuigreet_in_config" | sed -n 's/.*command.*=.*"\([^"]*tuigreet[^"]*\)".*/\1/p' | awk '{print $1}')
+                  
+                  if [[ -n "$config_tuigreet_path" ]]; then
+                    if [[ -x "$config_tuigreet_path" ]]; then
+                      echo "[✓] tuigreet path in config is executable: $config_tuigreet_path"
+                    else
+                      echo "[!] tuigreet path in config not found/executable: $config_tuigreet_path"
+                      current_tuigreet="$(command -v tuigreet 2>/dev/null)"
+                      if [[ -n "$current_tuigreet" ]]; then
+                        echo "   Current tuigreet path: $current_tuigreet"
+                        echo "   Update config to use: $current_tuigreet"
+                      fi
+                    fi
                   fi
                 fi
               else
@@ -246,6 +272,12 @@ in {
               echo "[!] greetd config missing"
               echo "   Example config available at: ~/.config/tuigreet/example-greetd-config.toml"
               echo "   Copy it: sudo cp ~/.config/tuigreet/example-greetd-config.toml /etc/greetd/config.toml"
+              echo ""
+              echo "   Note: The example config uses Nix paths. For system packages, edit the path:"
+              if command -v tuigreet >/dev/null 2>&1; then
+                current_tuigreet="$(command -v tuigreet)"
+                echo "   Replace tuigreet path with: $current_tuigreet"
+              fi
               echo ""
             fi
             
@@ -280,6 +312,32 @@ in {
               echo "[!] greetd user missing"
               echo "   Create greetd user: sudo useradd -r -s /bin/false greetd"
               echo ""
+            fi
+            
+            # Check greetd socket
+            echo ""
+            echo "=== Socket Check ==="
+            if systemctl is-active greetd >/dev/null 2>&1; then
+              # Look for greetd socket in common locations
+              socket_found=false
+              for sock_path in "/run/greetd.sock" "/var/run/greetd.sock" "/tmp/greetd.sock"; do
+                if [[ -S "$sock_path" ]]; then
+                  echo "[✓] greetd socket found: $sock_path"
+                  socket_perms=$(ls -l "$sock_path" 2>/dev/null)
+                  echo "   Permissions: $socket_perms"
+                  socket_found=true
+                  break
+                fi
+              done
+              
+              if [[ "$socket_found" == "false" ]]; then
+                echo "[!] greetd socket not found in common locations"
+                echo "   greetd may not be fully started yet"
+                echo "   Check: sudo find /run /var/run /tmp -name '*greetd*' -type s 2>/dev/null"
+              fi
+            else
+              echo "[!] greetd not running - socket won't exist"
+              echo "   Start greetd: sudo systemctl start greetd"
             fi
             
             # Check if other display managers are still active
@@ -372,18 +430,27 @@ in {
             echo "[✓] Setup complete! Reboot to use tuigreet."
             echo ""
             echo "=== Testing tuigreet ==="
-            echo "Test tuigreet directly:"
-            echo "  tuigreet --help"
-            echo "  tuigreet --cmd echo  # Should show login interface"
+            echo "[i] Note: tuigreet requires greetd to be running"
+            echo "Direct testing outside greetd will show 'GREETD_SOCK must be defined'"
+            echo ""
+            echo "Safe tests:"
+            echo "  tuigreet --help  # Show help (works without greetd)"
+            echo "  sudo systemctl status greetd  # Check if greetd is running"
+            echo "  sudo journalctl -u greetd --no-pager -n 20  # Check greetd logs"
             echo ""
             echo "=== Troubleshooting ==="
             echo "If greetd starts but tuigreet doesn't work:"
             echo "1. Check greetd logs: sudo journalctl -u greetd -f"
             echo "2. Test greetd config: sudo greetd --config /etc/greetd/config.toml --check"
-            echo "3. Test tuigreet manually: sudo -u greetd tuigreet --cmd echo"
-            echo "4. Check VT permissions: ls -la /dev/tty7"
-            echo "5. Verify no other DM running: ps aux | grep -E '(gdm|sddm|lightdm)'"
-            echo "6. Check library dependencies (if ldd available): ldd \$(command -v tuigreet)"
+            echo "3. Check VT permissions: ls -la /dev/tty7"
+            echo "4. Verify no other DM running: ps aux | grep -E '(gdm|sddm|lightdm)'"
+            echo "5. Check library dependencies (if ldd available): ldd \$(command -v tuigreet)"
+            echo ""
+            echo "For GREETD_SOCK errors (Nix/system package mixing):"
+            echo "• Ensure tuigreet and greetd use compatible runtimes"
+            echo "• Use system packages: sudo apt install greetd-tuigreet"
+            echo "• Or use Nix for both: nix profile install nixpkgs#greetd.greetd"
+            echo "• Verify config uses correct tuigreet path"
           '';
           executable = true;
         };
