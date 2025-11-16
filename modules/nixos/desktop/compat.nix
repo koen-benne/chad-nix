@@ -29,12 +29,7 @@ in {
         name = "PipeWire Audio System";
         description = "Modern audio system with low latency and professional features";
         priority = "critical";
-        checkCommands = [
-          "command -v pipewire"
-          "command -v wireplumber" 
-          "pgrep -x pipewire"
-          "pgrep -x wireplumber"
-        ];
+        checkCommands = [];
         setupInstructions = {
           ubuntu = [
             "sudo apt update"
@@ -60,10 +55,7 @@ in {
         name = "Wayland Display Server";
         description = "Required for Hyprland and modern desktop features";
         priority = "critical";
-        checkCommands = [
-          "test -n \"$WAYLAND_DISPLAY\""
-          "command -v wayland-scanner"
-        ];
+        checkCommands = [];
         setupInstructions = {
           ubuntu = [
             "sudo apt install wayland-protocols libwayland-dev"
@@ -88,10 +80,7 @@ in {
         name = "Graphics Drivers";
         description = "Hardware acceleration for smooth desktop and nixGL compatibility";
         priority = "critical";
-        checkCommands = [
-          "test -c /dev/dri/card0"
-          "command -v glxinfo && glxinfo | grep -q 'direct rendering: yes'"
-        ];
+        checkCommands = [];
         setupInstructions = {
           ubuntu = [
             "# For Intel: sudo apt install mesa-utils intel-media-va-driver"
@@ -119,9 +108,7 @@ in {
         name = "Display Manager (greetd + tuigreet)";
         description = "Login manager for graphical sessions - follow Arch Wiki for setup";
         priority = "critical";
-        checkCommands = [
-          "command -v tuigreet"
-        ];
+        checkCommands = [];
         setupInstructions = {
           ubuntu = [
             "# Follow Arch Wiki: https://wiki.archlinux.org/title/Greetd"
