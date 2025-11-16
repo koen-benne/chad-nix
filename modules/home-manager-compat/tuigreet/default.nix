@@ -14,7 +14,7 @@
     switch = true
     
     [default_session]
-    command = "tuigreet --time --remember --asterisks --cmd ${cfg.defaultSession}"
+    command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --asterisks --cmd ${cfg.defaultSession}"
     user = "greetd"
     
     [initial_session]
@@ -138,6 +138,21 @@ in {
           text = ''
             #!/bin/bash
             # tuigreet setup helper script
+            # Run as regular user - will prompt for sudo when needed
+            
+            # Check if running as root (not recommended)
+            if [[ $EUID -eq 0 ]]; then
+              echo "[!] Warning: Running as root. Run as regular user instead."
+              echo "   This script will use sudo when needed for system operations."
+              echo ""
+            fi
+            
+            # Check sudo access
+            if ! sudo -n true 2>/dev/null; then
+              echo "[i] This script needs sudo access for system configuration."
+              echo "   You'll be prompted for your password when needed."
+              echo ""
+            fi            
             
             echo "[*] tuigreet Setup Helper"
             echo "========================="
@@ -161,10 +176,19 @@ in {
             # Check if tuigreet is available
             if command -v tuigreet >/dev/null 2>&1; then
               echo "[✓] tuigreet is installed"
+              tuigreet_path="$(command -v tuigreet)"
+              echo "   Path: $tuigreet_path"
+              
+              # Test tuigreet can run
+              if tuigreet --help >/dev/null 2>&1; then
+                echo "[✓] tuigreet can execute"
+              else
+                echo "[✗] tuigreet fails to run - check dependencies"
+                echo "   Try: ldd $tuigreet_path"
+              fi
             else
               echo "[✗] tuigreet not found in PATH"
-              echo "   Home-manager should have installed it to ~/.nix-profile/bin/"
-              echo "   Make sure ~/.nix-profile/bin is in your PATH"
+              echo "   Add to PATH or install: nix profile install nixpkgs#greetd.tuigreet"
               echo ""
             fi
             
@@ -195,6 +219,21 @@ in {
               # Check if config references tuigreet
               if grep -q "tuigreet" /etc/greetd/config.toml 2>/dev/null; then
                 echo "[✓] greetd config uses tuigreet"
+                
+                # Check if tuigreet path in config is valid
+                tuigreet_in_config=$(grep "tuigreet" /etc/greetd/config.toml | head -1)
+                echo "   Config: $tuigreet_in_config"
+                
+                # Extract command path and check if it exists
+                if echo "$tuigreet_in_config" | grep -q "command.*=.*tuigreet"; then
+                  # Check if the tuigreet command in config is accessible
+                  if command -v tuigreet >/dev/null 2>&1; then
+                    echo "[✓] tuigreet command in config is accessible"
+                  else
+                    echo "[!] tuigreet in config path may be invalid"
+                    echo "   Update config to use full path: $(command -v tuigreet 2>/dev/null || echo '/usr/bin/tuigreet')"
+                  fi
+                fi
               else
                 echo "[!] greetd config doesn't reference tuigreet"
                 echo "   Update config to use: command = \"tuigreet --cmd Hyprland\""
@@ -254,17 +293,30 @@ in {
               echo "[!] VT7 not available - may need to configure different VT"
             fi
             
-            # Check if running in a desktop session
+            # Check environment and dependencies
+            echo ""
+            echo "=== Environment Check ==="
             if [[ -n "$DISPLAY" || -n "$WAYLAND_DISPLAY" ]]; then
-            echo "[i] Currently in desktop session - greetd runs on boot/VT switch"
-            echo "   To test now:"
-            echo "     1. Switch to VT: Ctrl+Alt+F2"  
-            echo "     2. Login as root/sudo user"
-            echo "     3. Stop current DM: systemctl stop gdm (or sddm/lightdm)"
-            echo "     4. Start greetd: systemctl start greetd"
-            echo "     5. Switch to VT7: Ctrl+Alt+F7"
-            echo "   Or reboot to see greetd login screen"
+              echo "[i] Currently in desktop session - greetd runs on boot/VT switch"
+              echo "   To test now:"
+              echo "     1. Switch to VT: Ctrl+Alt+F2"  
+              echo "     2. Login as root/sudo user"
+              echo "     3. Stop current DM: systemctl stop gdm (or sddm/lightdm)"
+              echo "     4. Start greetd: systemctl start greetd"
+              echo "     5. Switch to VT7: Ctrl+Alt+F7"
+              echo "   Or reboot to see greetd login screen"
             fi
+            
+            # Check for common tuigreet dependencies
+            echo ""
+            echo "=== Dependency Check ==="
+            for lib in "libssl" "libcrypto" "libgcc_s"; do
+              if ldconfig -p | grep -q "$lib" 2>/dev/null; then
+                echo "[✓] $lib found"
+              else
+                echo "[!] $lib might be missing"
+              fi
+            done
             
             # Disable other display managers
             echo "[i] Don't forget to disable other display managers:"
@@ -278,13 +330,19 @@ in {
             
             echo "[✓] Setup complete! Reboot to use tuigreet."
             echo ""
+            echo "=== Testing tuigreet ==="
+            echo "Test tuigreet directly:"
+            echo "  tuigreet --help"
+            echo "  tuigreet --cmd echo  # Should show login interface"
+            echo ""
             echo "=== Troubleshooting ==="
-            echo "If greetd still doesn't start:"
-            echo "1. Check logs: sudo journalctl -u greetd -f"
-            echo "2. Test manually: sudo greetd --config /etc/greetd/config.toml"
-            echo "3. Check VT permissions: ls -la /dev/tty7"
-            echo "4. Verify no other DM running: ps aux | grep -E '(gdm|sddm|lightdm)'"
-            echo "5. Check greetd user: id greetd"
+            echo "If greetd starts but tuigreet doesn't work:"
+            echo "1. Check greetd logs: sudo journalctl -u greetd -f"
+            echo "2. Test greetd config: sudo greetd --config /etc/greetd/config.toml --check"
+            echo "3. Test tuigreet manually: sudo -u greetd tuigreet --cmd echo"
+            echo "4. Check VT permissions: ls -la /dev/tty7"
+            echo "5. Verify no other DM running: ps aux | grep -E '(gdm|sddm|lightdm)'"
+            echo "6. Check library dependencies: ldd \$(command -v tuigreet)"
           '';
           executable = true;
         };
@@ -294,8 +352,21 @@ in {
     # Activation message
     home.activation.tuigreetSetup = lib.hm.dag.entryAfter ["writeBoundary"] ''
       echo "[✓] tuigreet configuration generated!"
+      echo ""
+      echo "=== Next Steps ==="
+      echo "1. Run setup helper as regular user:"
+      echo "   ~/.local/bin/setup-tuigreet"
+      echo "   (Will prompt for sudo password when needed)"
+      echo ""
+      echo "2. Configuration files created:"
       echo "   • Example greetd config: ~/.config/tuigreet/example-greetd-config.toml"
-      echo "   • Theme config: ~/.config/tuigreet/theme.toml"  
+      echo "   • Theme config: ~/.config/tuigreet/theme.toml"
+      echo ""
+      echo "3. The script will help you:"
+      echo "   • Check system requirements"
+      echo "   • Install missing components" 
+      echo "   • Configure greetd and PAM"
+      echo "   • Test tuigreet functionality"
       echo "   • Setup helper: ~/.local/bin/setup-tuigreet"
       echo "   Run the setup helper for detailed instructions."
     '';
