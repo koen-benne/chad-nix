@@ -4,9 +4,8 @@ scripts: ''
   # monitor = HDMI-A-1, 3440x1440@60, auto, 1
 
   exec-once = systemctl --user start hyprpolkitagent
-  exec-once = nixGLIntel foot --server
-  exec-once = wpaperd
-  exec-once = waybar
+  exec-once = nixGL foot --server
+  exec-once = dms run
   exec-once = corectrl --minimize-systray
   exec-once = nm-applet
   exec-once = hyprctl setcursor 24
@@ -114,15 +113,21 @@ scripts: ''
   bind = $mainMod CTRL SHIFT, C, exit,
   bind = $mainMod, E, exec, nautilus
   bind = $mainMod, V, togglefloating,
-  bind = $mainMod, R, exec, fuzzel
+  bind = $mainMod, R, exec, dms ipc spotlight toggle
   bind = $mainMod, P, pseudo,
   bind = $mainMod, T, togglesplit,
   bind = $mainMod, F, fullscreen,
-  bind = $mainMod SHIFT, S, exec, ${scripts}/suspend.sh
   bind = $mainMod, P, exec, 1password --quick-access
   bind = $mainMod, C, exec, hyprpicker -a
   bind = $mainMod, G, exec, grim -g "$(slurp)" ~/Images/$(date +%s)_grim.png
   bind = $mainMod SHIFT, G, exec, grim ~/Images/$(date +%s)_grim.png
+
+  # DMS specific keybindings
+  bind = $mainMod CTRL, N, exec, dms ipc notifications toggle
+  bind = $mainMod CTRL, V, exec, dms ipc clipboard toggle
+  bind = $mainMod CTRL, P, exec, dms ipc notepad toggle
+  bind = $mainMod SHIFT, S, exec, dms ipc lock lock
+  bind = $mainMod, X, exec, dms ipc powermenu toggle
 
   # Playerctl binds
   bind = , XF86AudioMedia, exec, playerctl play-pause
@@ -189,8 +194,5 @@ scripts: ''
   bind = $mainMod, mouse_down, workspace, e+1
   bind = $mainMod, mouse_up, workspace, e-1
 
-  bind = $mainMod CTRL SHIFT, L, exec, hyprlock
 
-  # Reload waybar
-  bind = $mainMod SHIFT, W, exec, pkill waybar && waybar -c $HOME/.config/waybar/config-hyprland -s $HOME/.config/waybar/hyprland-style.css
 ''

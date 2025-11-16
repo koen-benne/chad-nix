@@ -19,11 +19,6 @@ in {
       default = "hyprland";
       description = mdDoc "Window manager to use";
     };
-    panelStyle = mkOption {
-      type = types.enum ["waybar" "dms"];
-      default = "waybar";
-      description = mdDoc "Panel/bar style to use";
-    };
     greeter = mkOption {
       type = types.enum ["tuigreet" "dms"];
       default = "tuigreet";
@@ -48,8 +43,7 @@ in {
     hm.my.thunderbird.enable = true;
     # hm.my.firefox.enable = true;
     hm.my.qutebrowser.enable = true;
-    hm.my.waybar.enable = cfg.panelStyle == "waybar";
-    hm.my.dankmaterialshell.enable = cfg.panelStyle == "dms";
+    hm.my.dankmaterialshell.enable = true;
     environment.sessionVariables = {
       NIXOS_OXONE_WL = "1";
     };

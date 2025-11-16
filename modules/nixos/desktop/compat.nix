@@ -1,26 +1,59 @@
 {
   lib,
   config,
+  pkgs,
+  inputs,
   ...
 }: let
-  inherit (lib) mkEnableOption;
+  inherit (lib) mkEnableOption mkIf;
+  
+  # NixGL setup for standalone home-manager mode
+  nixGLPackage =
+    if config.my.hyprland.nixgl.variant == "auto" then
+      inputs.nixgl.packages.${pkgs.system}.nixGLDefault
+    else if config.my.hyprland.nixgl.variant == "intel" then
+      inputs.nixgl.packages.${pkgs.system}.nixGLIntel
+    else if config.my.hyprland.nixgl.variant == "nvidia" then
+      inputs.nixgl.packages.${pkgs.system}.nixGLNvidia
+    else
+      inputs.nixgl.packages.${pkgs.system}.nixGLMesa;
 in {
   options.my.desktop = {
     enable = mkEnableOption "desktop";
+  };
+  options.my.dankmaterialshell = {
+    enable = mkEnableOption "DankMaterialShell";
   };
   options.networking.networkmanager = {
     enable = mkEnableOption "networkmanager";
   };
 
-  config = lib.mkIf config.my.desktop.enable {
+  config = mkIf config.my.desktop.enable {
     my.hyprland.enable = true;
     my.lockscreen.enable = true;
     my.theme.enable = true;
     my.uxplay.enable = true;
-    my.waybar.enable = true;
+    my.dankmaterialshell.enable = true;
     my.foot.enable = true;
     my.thunderbird.enable = true;
     my.qutebrowser.enable = true;
+    
+    # Standalone mode packages
+    home.packages = [
+      # NixGL package
+      nixGLPackage
+
+      # Desktop essentials for standalone mode
+      pkgs.grim
+      pkgs.slurp
+      pkgs.hyprpicker
+      pkgs.playerctl
+      pkgs.wireplumber
+      pkgs.brightnessctl
+      pkgs.nautilus
+      pkgs.networkmanagerapplet
+      pkgs.foot
+    ];
     
     # Enable system setup helper for standalone mode
     my.system-setup.enable = true;

@@ -9,49 +9,22 @@
 }: let
   inherit (lib) mkIf optionalString;
   scripts = ./scripts;
-  
+
   # Import shared config
   sharedConfig = import ./config.nix;
-  
-  # Get appropriate browser command and packages based on context
-  browserCmd = if config.my.isStandalone then "${nixGLPackage}/bin/nixGL zen" else "zen";
-  
-  # NixGL setup for standalone home-manager mode
-  nixGLPackage = 
-    if (!config.my.isStandalone) then null  # NixOS system, no NixGL needed
-    else if config.my.hyprland.nixgl.variant == "auto" then
-      inputs.nixgl.packages.${pkgs.system}.nixGLIntel
-    else if config.my.hyprland.nixgl.variant == "intel" then
-      inputs.nixgl.packages.${pkgs.system}.nixGLIntel
-    else if config.my.hyprland.nixgl.variant == "nvidia" then
-      inputs.nixgl.packages.${pkgs.system}.nixGLNvidia
-    else
-      inputs.nixgl.packages.${pkgs.system}.nixGLMesa;
 
-  # Conditional packages based on whether we're on NixOS or standalone
-  additionalPackages = if config.my.isStandalone then [
-    # NixGL package
-    nixGLPackage
-    
-    # Hyprland essentials for standalone mode
-    pkgs.hyprpolkitagent
-    pkgs.waybar
-    pkgs.wpaperd  
-    pkgs.fuzzel
-    pkgs.grim
-    pkgs.slurp
-    pkgs.hyprpicker
-    pkgs.hyprlock
-    pkgs.playerctl
-    pkgs.wireplumber
-    pkgs.brightnessctl
-    pkgs.nautilus
-    pkgs.networkmanagerapplet
-    pkgs.foot
-  ] else [];
+  # Get appropriate browser command based on context
+  # NixGL will be handled by desktop compat module for standalone mode
+  browserCmd = if config.my.isStandalone then "nixGL zen" else "zen";
 in {
   config = mkIf (sys.my.hyprland.enable or config.my.hyprland.enable) {
-    home.packages = additionalPackages;
+    # Hyprland-specific packages for standalone mode
+    home.packages = mkIf config.my.isStandalone [
+      pkgs.hyprpolkitagent
+    ];
+    
+    # Enable DMS for both NixOS and standalone mode
+    my.dankmaterialshell.enable = true;
 
     wayland.windowManager.hyprland = {
       enable = true;
