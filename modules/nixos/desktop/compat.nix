@@ -126,12 +126,15 @@ in {
           "test -f /etc/greetd/config.toml"
           "test -f /etc/pam.d/greetd"
           "id greetd"
+          "test -c /dev/tty7"
+          "groups greetd | grep -q tty"
         ];
         setupInstructions = {
           ubuntu = [
             "# tuigreet is configured via home-manager, but greetd needs system setup:"
             "# Install greetd (may need building from source or third-party repos)"
             "# Create greetd user: sudo useradd -r -s /bin/false greetd"
+            "# Add to tty group: sudo usermod -a -G tty greetd"
             "# Then run: ~/.local/bin/setup-tuigreet for detailed setup including PAM"
             "# Alternative: sudo apt install lightdm lightdm-gtk-greeter"
           ];
@@ -140,6 +143,7 @@ in {
             "sudo dnf copr enable peterwu/greetd"
             "sudo dnf install greetd"
             "sudo useradd -r -s /bin/false greetd"
+            "sudo usermod -a -G tty greetd"
             "sudo systemctl enable greetd"
             "# tuigreet and config are provided by home-manager"
             "# Run: ~/.local/bin/setup-tuigreet for full setup including PAM"
@@ -148,6 +152,7 @@ in {
             "# Install greetd system package:"
             "sudo pacman -S greetd"
             "sudo useradd -r -s /bin/false greetd"
+            "sudo usermod -a -G tty greetd"
             "sudo systemctl enable greetd"
             "# tuigreet and config are provided by home-manager"
             "# Run: ~/.local/bin/setup-tuigreet for full setup including PAM"
@@ -155,6 +160,7 @@ in {
           generic = [
             "# Install greetd via your package manager"
             "# Create greetd user: sudo useradd -r -s /bin/false greetd"
+            "# Add to tty group: sudo usermod -a -G tty greetd"
             "# tuigreet is provided by home-manager"
             "# Run: ~/.local/bin/setup-tuigreet for configuration help including PAM"
           ];

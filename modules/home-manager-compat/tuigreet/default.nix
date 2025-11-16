@@ -184,7 +184,11 @@ in {
                 echo "[✓] tuigreet can execute"
               else
                 echo "[✗] tuigreet fails to run - check dependencies"
-                echo "   Try: ldd $tuigreet_path"
+                if command -v ldd >/dev/null 2>&1; then
+                  echo "   Try: ldd $tuigreet_path"
+                else
+                  echo "   Check if all required libraries are installed"
+                fi
               fi
             else
               echo "[✗] tuigreet not found in PATH"
@@ -286,12 +290,38 @@ in {
               fi
             done
             
-            # Check VT availability
-            if [[ -c /dev/tty7 ]]; then
-              echo "[✓] VT7 available for display manager"
-            else
-              echo "[!] VT7 not available - may need to configure different VT"
-            fi
+            # Check VT availability and permissions
+            echo ""
+            echo "=== VT Permission Check ==="
+            for vt in 7 1 2; do
+              if [[ -c /dev/tty$vt ]]; then
+                vt_perms=$(ls -l /dev/tty$vt 2>/dev/null)
+                echo "[i] VT$vt: $vt_perms"
+                
+                # Check if greetd user can access the VT
+                if [[ -c /dev/tty$vt ]]; then
+                  if ls -l /dev/tty$vt | grep -q "crw-rw----.*tty"; then
+                    echo "[✓] VT$vt has correct permissions (rw-rw----)"
+                  else
+                    echo "[!] VT$vt permissions may be incorrect"
+                    echo "   Should be: crw-rw---- root tty"
+                    echo "   Current: $vt_perms"
+                  fi
+                  
+                  # Check if greetd user is in tty group
+                  if id greetd >/dev/null 2>&1; then
+                    if groups greetd 2>/dev/null | grep -q "tty"; then
+                      echo "[✓] greetd user is in tty group"
+                    else
+                      echo "[!] greetd user not in tty group"
+                      echo "   Add to tty group: sudo usermod -a -G tty greetd"
+                    fi
+                  fi
+                fi
+              else
+                echo "[!] VT$vt not available"
+              fi
+            done
             
             # Check environment and dependencies
             echo ""
@@ -310,13 +340,24 @@ in {
             # Check for common tuigreet dependencies
             echo ""
             echo "=== Dependency Check ==="
-            for lib in "libssl" "libcrypto" "libgcc_s"; do
-              if ldconfig -p | grep -q "$lib" 2>/dev/null; then
-                echo "[✓] $lib found"
+            if command -v tuigreet >/dev/null 2>&1; then
+              tuigreet_path="$(command -v tuigreet)"
+              if command -v ldd >/dev/null 2>&1; then
+                echo "[i] Checking tuigreet dependencies:"
+                if ldd "$tuigreet_path" >/dev/null 2>&1; then
+                  echo "[✓] tuigreet dependencies look good"
+                  # Show any missing dependencies
+                  if ldd "$tuigreet_path" 2>&1 | grep -q "not found"; then
+                    echo "[!] Missing dependencies:"
+                    ldd "$tuigreet_path" 2>&1 | grep "not found"
+                  fi
+                else
+                  echo "[!] Could not check dependencies with ldd"
+                fi
               else
-                echo "[!] $lib might be missing"
+                echo "[i] ldd not available - skipping dependency check"
               fi
-            done
+            fi
             
             # Disable other display managers
             echo "[i] Don't forget to disable other display managers:"
@@ -342,7 +383,7 @@ in {
             echo "3. Test tuigreet manually: sudo -u greetd tuigreet --cmd echo"
             echo "4. Check VT permissions: ls -la /dev/tty7"
             echo "5. Verify no other DM running: ps aux | grep -E '(gdm|sddm|lightdm)'"
-            echo "6. Check library dependencies: ldd \$(command -v tuigreet)"
+            echo "6. Check library dependencies (if ldd available): ldd \$(command -v tuigreet)"
           '';
           executable = true;
         };
