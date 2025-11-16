@@ -71,7 +71,6 @@
   my.desktop = {
     enable = true;
     windowManager = "niri";
-    panelStyle = "dms";
     greeter = "tuigreet";
   };
 

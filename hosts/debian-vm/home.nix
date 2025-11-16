@@ -23,32 +23,9 @@
     package = pkgs.nix;
   };
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-    ];
-    config.common.default = "*";
-  };
-
   # Enable desktop features
   my.desktop.enable = true;
-  my.hyprland.enable = true;
 
-  # nixGL for graphics acceleration on non-NixOS
-  home.packages = [
-    pkgs.xdg-desktop-portal
-    pkgs.home-manager
-    inputs.nixgl.packages.${pkgs.system}.nixGLIntel
-  ];
-
-  # Enable core programs
-  programs.direnv.enable = true;
-  # programs.git = {
-  #   enable = true;
-  #   userName = "Koen Benne";
-  #   userEmail = "koen.benne@iodigital.com";
-  # };
-  programs.tmux.enable = true;
-  # fish.enable is set by common/packages/home.nix via my.fish.enable
+  # Core programs are enabled by common/packages/home.nix
+  # - direnv, git, tmux, fish, zsh, etc. all enabled via my.* options
 }

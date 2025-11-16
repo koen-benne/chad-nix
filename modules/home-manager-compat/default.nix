@@ -16,7 +16,7 @@
 #   footCommand = if config.my.isStandalone
 #     then "${nixgl}/bin/nixGL foot"
 #     else "foot";
-{ config, lib, ... }: {
+{ config, lib, pkgs, ... }: {
   imports =
     # Auto-discovery of compat.nix files
     lib.my.getCompatModules [../common ../nixos]
@@ -36,6 +36,11 @@
     # Make sys available as an alias to config for home.nix files
     # This mimics the behavior of extraSpecialArgs = { sys = config; }
     _module.args.sys = config;
+    
+    # Essential packages for home-manager standalone mode
+    home.packages = [
+      pkgs.home-manager
+    ];
   };
 }
 
