@@ -162,11 +162,15 @@ in {
             if ! command -v greetd >/dev/null 2>&1; then
               echo "[✗] greetd not found. Install via native package manager:"
               if command -v apt >/dev/null 2>&1; then
-                echo "   # Ubuntu/Debian:"
-                echo "   sudo apt update"
-                echo "   sudo apt install greetd greetd-tuigreet  # If available"
-                echo "   # If not available, try: sudo apt install lightdm lightdm-gtk-greeter" 
-                echo "   # Or build from source: https://git.sr.ht/~kennylevinsen/greetd"
+              echo "   # Ubuntu/Debian:"
+              echo "   sudo apt update"
+              echo "   sudo apt install greetd greetd-tuigreet  # If available"
+              echo "   # If not available:"
+              echo "   #   Option 1: sudo apt install lightdm lightdm-gtk-greeter" 
+              echo "   #   Option 2: Build from source (advanced):"
+              echo "   #     https://git.sr.ht/~kennylevinsen/greetd"
+              echo "   #     https://github.com/apognu/tuigreet"
+              echo "   #     (Requires manual systemd/PAM setup)"
               elif command -v dnf >/dev/null 2>&1; then
                 echo "   # Fedora:"
                 echo "   sudo dnf copr enable peterwu/greetd"
@@ -278,31 +282,60 @@ in {
             # Check config file
             if [[ -f /etc/greetd/config.toml ]]; then
               echo "[✓] greetd config exists"
+              
+              # Show the config for debugging
+              echo "   Config contents:"
+              sed 's/^/   /' /etc/greetd/config.toml
+              echo ""
+              
               # Check if config references tuigreet
               if grep -q "tuigreet" /etc/greetd/config.toml 2>/dev/null; then
                 echo "[✓] greetd config uses tuigreet"
                 
-                # Check if tuigreet path in config is valid
-                tuigreet_in_config=$(grep "tuigreet" /etc/greetd/config.toml | head -1)
-                echo "   Config: $tuigreet_in_config"
+                # Extract tuigreet command from config
+                tuigreet_command=$(grep "command.*=" /etc/greetd/config.toml | grep tuigreet | head -1)
+                echo "   Command line: $tuigreet_command"
                 
-                # Extract and validate tuigreet path in config
-                if echo "$tuigreet_in_config" | grep -q "command.*=.*tuigreet"; then
-                  # Extract the tuigreet path from config
-                  config_tuigreet_path=$(echo "$tuigreet_in_config" | sed -n 's/.*command.*=.*"\([^"]*tuigreet[^"]*\)".*/\1/p' | awk '{print $1}')
+                # Extract just the tuigreet binary path
+                tuigreet_path=$(echo "$tuigreet_command" | sed -n 's/.*command.*=.*"\([^" ]*tuigreet\).*/\1/p')
+                
+                if [[ -n "$tuigreet_path" ]]; then
+                  echo "   tuigreet path in config: $tuigreet_path"
                   
-                  if [[ -n "$config_tuigreet_path" ]]; then
-                    if [[ -x "$config_tuigreet_path" ]]; then
-                      echo "[✓] tuigreet path in config is executable: $config_tuigreet_path"
+                  if [[ -x "$tuigreet_path" ]]; then
+                    echo "[✓] tuigreet path is executable"
+                    
+                    # Test if greetd user can execute it
+                    if sudo -u greetd test -x "$tuigreet_path" 2>/dev/null; then
+                      echo "[✓] greetd user can execute tuigreet"
                     else
-                      echo "[!] tuigreet path in config not found/executable: $config_tuigreet_path"
-                      current_tuigreet="$(command -v tuigreet 2>/dev/null)"
-                      if [[ -n "$current_tuigreet" ]]; then
-                        echo "   Current tuigreet path: $current_tuigreet"
-                        echo "   Update config to use: $current_tuigreet"
+                      echo "[!] greetd user CANNOT execute tuigreet"
+                      echo "   This is likely why tuigreet doesn't start!"
+                      echo "   Check: sudo -u greetd '$tuigreet_path' --help"
+                    fi
+                    
+                    # Test if greetd user can find it via PATH
+                    greetd_tuigreet_path=$(sudo -u greetd which tuigreet 2>/dev/null)
+                    if [[ -n "$greetd_tuigreet_path" ]]; then
+                      echo "[✓] greetd user can find tuigreet in PATH: $greetd_tuigreet_path"
+                      if [[ "$greetd_tuigreet_path" != "$tuigreet_path" ]]; then
+                        echo "[!] PATH mismatch - config uses: $tuigreet_path"
+                        echo "   But greetd finds: $greetd_tuigreet_path"
                       fi
+                    else
+                      echo "[!] greetd user cannot find tuigreet in PATH"
+                      echo "   Config should use absolute path: $tuigreet_path"
+                    fi
+                  else
+                    echo "[!] tuigreet path in config not found/executable: $tuigreet_path"
+                    current_tuigreet="$(command -v tuigreet 2>/dev/null)"
+                    if [[ -n "$current_tuigreet" ]]; then
+                      echo "   Current tuigreet location: $current_tuigreet"
+                      echo "   Update config to use: $current_tuigreet"
                     fi
                   fi
+                else
+                  echo "[!] Could not extract tuigreet path from config"
                 fi
               else
                 echo "[!] greetd config doesn't reference tuigreet"
@@ -313,10 +346,10 @@ in {
               echo "   Example config available at: ~/.config/tuigreet/example-greetd-config.toml"
               echo "   Copy it: sudo cp ~/.config/tuigreet/example-greetd-config.toml /etc/greetd/config.toml"
               echo ""
-              echo "   Note: The example config uses Nix paths. For system packages, edit the path:"
+              echo "   Note: Update the tuigreet path in the config:"
               if command -v tuigreet >/dev/null 2>&1; then
                 current_tuigreet="$(command -v tuigreet)"
-                echo "   Replace tuigreet path with: $current_tuigreet"
+                echo "   Use absolute path: $current_tuigreet"
               fi
               echo ""
             fi
@@ -391,35 +424,57 @@ in {
             # Check VT availability and permissions
             echo ""
             echo "=== VT Permission Check ==="
+            tty_issues_found=false
+            
             for vt in 7 1 2; do
               if [[ -c /dev/tty$vt ]]; then
                 vt_perms=$(ls -l /dev/tty$vt 2>/dev/null)
                 echo "[i] VT$vt: $vt_perms"
                 
-                # Check if greetd user can access the VT
-                if [[ -c /dev/tty$vt ]]; then
-                  if ls -l /dev/tty$vt | grep -q "crw-rw----.*tty"; then
-                    echo "[✓] VT$vt has correct permissions (rw-rw----)"
-                  else
-                    echo "[!] VT$vt permissions may be incorrect"
-                    echo "   Should be: crw-rw---- root tty"
-                    echo "   Current: $vt_perms"
-                  fi
-                  
-                  # Check if greetd user is in tty group
-                  if id greetd >/dev/null 2>&1; then
-                    if groups greetd 2>/dev/null | grep -q "tty"; then
-                      echo "[✓] greetd user is in tty group"
-                    else
-                      echo "[!] greetd user not in tty group"
-                      echo "   Add to tty group: sudo usermod -a -G tty greetd"
-                    fi
-                  fi
+                # Check if VT has correct permissions
+                if ls -l /dev/tty$vt | grep -q "crw-rw----.*tty"; then
+                  echo "[✓] VT$vt has correct permissions (crw-rw---- root tty)"
+                else
+                  echo "[!] VT$vt permissions are WRONG"
+                  echo "   Current: $vt_perms"
+                  echo "   Should be: crw-rw---- root tty"
+                  echo "   Fix with: sudo chmod 660 /dev/tty$vt && sudo chgrp tty /dev/tty$vt"
+                  tty_issues_found=true
                 fi
               else
                 echo "[!] VT$vt not available"
               fi
             done
+            
+            # Check if greetd user is in tty group
+            if id greetd >/dev/null 2>&1; then
+              if groups greetd 2>/dev/null | grep -q "tty"; then
+                echo "[✓] greetd user is in tty group"
+              else
+                echo "[!] greetd user NOT in tty group"
+                echo "   Fix with: sudo usermod -a -G tty greetd"
+                tty_issues_found=true
+              fi
+            else
+              echo "[!] greetd user does not exist"
+              tty_issues_found=true
+            fi
+            
+            if [[ "$tty_issues_found" == "true" ]]; then
+              echo ""
+              echo "[!] TTY PERMISSION ISSUES DETECTED!"
+              echo "This is likely why greetd/tuigreet isn't working on boot."
+              echo ""
+              echo "Quick fix commands:"
+              echo "  sudo chmod 660 /dev/tty7"
+              echo "  sudo chgrp tty /dev/tty7" 
+              echo "  sudo usermod -a -G tty greetd"
+              echo "  sudo systemctl restart greetd"
+              echo ""
+              echo "For permanent fix, check udev rules:"
+              echo "  ls -la /lib/udev/rules.d/*tty*"
+              echo "  # Should have rule: KERNEL==\"tty[0-9]*\", GROUP=\"tty\", MODE=\"0620\""
+            fi
             
             # Check environment and dependencies
             echo ""
@@ -470,21 +525,56 @@ in {
             echo "[✓] Setup complete! Reboot to use tuigreet."
             echo ""
             echo "=== Testing tuigreet ==="
-            echo "[i] Note: tuigreet requires greetd to be running"
-            echo "Direct testing outside greetd will show 'GREETD_SOCK must be defined'"
+            echo "[!] IMPORTANT: Do NOT run tuigreet directly with sudo!"
+            echo "    tuigreet must be launched BY greetd, not manually."
+            echo ""
+            echo "Expected behavior when testing manually:"
+            echo "  $ tuigreet"
+            echo "  GREETD_SOCK must be defined  ← This is NORMAL"
             echo ""
             echo "Safe tests:"
             echo "  tuigreet --help  # Show help (works without greetd)"
             echo "  sudo systemctl status greetd  # Check if greetd is running"
             echo "  sudo journalctl -u greetd --no-pager -n 20  # Check greetd logs"
             echo ""
-            echo "=== Troubleshooting ==="
-            echo "If greetd starts but tuigreet doesn't work:"
-            echo "1. Check greetd logs: sudo journalctl -u greetd -f"
-            echo "2. Test greetd config: sudo greetd --config /etc/greetd/config.toml --check"
-            echo "3. Check VT permissions: ls -la /dev/tty7"
-            echo "4. Verify no other DM running: ps aux | grep -E '(gdm|sddm|lightdm)'"
-            echo "5. Check library dependencies (if ldd available): ldd \$(command -v tuigreet)"
+            echo "Proper testing method:"
+            echo "  1. sudo systemctl stop gdm  # Stop current DM"
+            echo "  2. sudo systemctl start greetd  # Start greetd"
+            echo "  3. Press Ctrl+Alt+F7  # Switch to greetd VT"
+            echo "  4. tuigreet should appear automatically"
+            echo ""
+            echo "=== Troubleshooting Socket Issues ==="
+            echo "If you get 'GREETD_SOCK must be defined' errors:"
+            echo ""
+            echo "1. Check if greetd service is actually running:"
+            echo "   sudo systemctl status greetd"
+            echo "   sudo journalctl -u greetd --no-pager -n 50"
+            echo ""
+            echo "2. Verify greetd config syntax:"
+            echo "   sudo greetd --config /etc/greetd/config.toml --check"
+            echo ""
+            echo "3. Check if socket was created:"
+            echo "   sudo find /run /var/run /tmp -name '*greetd*' -type s 2>/dev/null"
+            echo "   ls -la /run/greetd.sock"
+            echo ""
+            echo "4. Check VT permissions (greetd needs access to tty7):"
+            echo "   ls -la /dev/tty7"
+            echo "   groups greetd"
+            echo "   # greetd user should be in 'tty' group"
+            echo ""
+            echo "5. Verify no other display manager is running:"
+            echo "   ps aux | grep -E '(gdm|sddm|lightdm)'"
+            echo "   sudo systemctl status gdm sddm lightdm"
+            echo ""
+            echo "6. Check PAM configuration:"
+            echo "   ls -la /etc/pam.d/greetd"
+            echo "   cat /etc/pam.d/greetd"
+            echo ""
+            echo "Common fixes:"
+            echo "• Add greetd to tty group: sudo usermod -a -G tty greetd"
+            echo "• Create PAM config: echo '#%PAM-1.0' | sudo tee /etc/pam.d/greetd"
+            echo "• Stop conflicting DMs: sudo systemctl disable --now gdm sddm lightdm"
+            echo "• Restart after changes: sudo systemctl restart greetd"
             echo ""
             echo "For GREETD_SOCK errors (common with mixed package sources):"
             echo "• SOLUTION: Use native packages for both greetd and tuigreet:"
