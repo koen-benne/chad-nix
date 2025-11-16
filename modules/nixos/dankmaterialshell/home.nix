@@ -24,6 +24,14 @@ in {
       enable = true;
       systemd.enable = true;
 
+      # Default settings, can be overwritten by GUI settings
+      default.settings = {
+        lockBeforeSuspend = true;
+        weatherLocation = "Gouda, Zuid-Holland";
+        weatherCoordinates = "52.0181194,4.7111221";
+        launcherLogoMode = "os";
+      };
+
       # All features enabled by default, but can be overridden
       enableSystemMonitoring = lib.mkDefault true;
       enableClipboard = lib.mkDefault true;
