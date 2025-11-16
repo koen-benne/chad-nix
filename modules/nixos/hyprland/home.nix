@@ -14,8 +14,10 @@
   sharedConfig = import ./config.nix;
 
   # Get appropriate browser command based on context
-  # NixGL will be handled by desktop compat module for standalone mode
   browserCmd = if config.my.isStandalone then "nixGL zen" else "zen";
+  
+  # Helper functions for conditional nixGL wrapping
+  wrapCmd = cmd: if config.my.isStandalone then "nixGL ${cmd}" else cmd;
 in {
   config = mkIf (sys.my.hyprland.enable or config.my.hyprland.enable) {
     # Hyprland-specific packages for standalone mode
@@ -31,7 +33,7 @@ in {
       package = pkgs.hyprland;
       xwayland.enable = true;
       extraConfig = ''
-        ${sharedConfig scripts}
+        ${sharedConfig { inherit scripts wrapCmd; }}
 
         # Browser binding (different for NixOS vs standalone)
         bind = $mainMod, W, exec, ${browserCmd}

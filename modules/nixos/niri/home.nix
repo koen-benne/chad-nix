@@ -7,6 +7,12 @@
   ...
 }: let
   inherit (lib) mkIf;
+  
+  # Helper function to conditionally wrap commands with nixGL for standalone mode
+  wrapCmd = cmd: 
+    if config.my.isStandalone or false 
+    then ["nixGL"] ++ (if builtins.isList cmd then cmd else [cmd])
+    else if builtins.isList cmd then cmd else [cmd];
 in {
   imports = [
     inputs.niri.homeModules.niri
@@ -58,9 +64,9 @@ in {
 
       spawn-at-startup = [
         { command = ["systemctl" "--user" "start" "niri-flake-polkit"]; }
-        { command = ["foot" "--server"]; }
-        { command = ["dms" "run"]; }
-        { command = ["nm-applet"]; }
+        { command = wrapCmd ["foot" "--server"]; }
+        { command = wrapCmd ["dms" "run"]; }
+        { command = wrapCmd ["nm-applet"]; }
       ];
 
       environment = {
@@ -74,10 +80,10 @@ in {
 
       binds = with config.lib.niri.actions; {
         "Mod+Return".action = spawn "footclient";
-        "Mod+w".action = spawn "zen";
+        "Mod+w".action = spawn (wrapCmd "zen");
         "Mod+q".action = close-window;
         "Mod+Ctrl+Shift+c".action = quit;
-        "Mod+e".action = spawn "nautilus";
+        "Mod+e".action = spawn (wrapCmd "nautilus");
         "Mod+v".action = toggle-window-floating;
         "Mod+f".action = fullscreen-window;
         "Mod+p".action = spawn "1password" "--quick-access";

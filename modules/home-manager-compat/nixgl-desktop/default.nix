@@ -10,14 +10,21 @@
   
   # Get the appropriate nixGL package based on variant
   getNixGLPackage = variant: 
-    inputs.nixgl.packages.${pkgs.system}.${variant};
+    if variant == "auto" then
+      inputs.nixgl.packages.${pkgs.system}.nixGLDefault
+    else
+      inputs.nixgl.packages.${pkgs.system}.${variant};
   
   # Create a desktop entry for an application with nixGL wrapper
   makeNixGLDesktopEntry = name: app: {
     name = "${name}-nixgl";
     value = {
       name = app.name;
-      exec = "${getNixGLPackage app.nixGLVariant}/bin/${app.nixGLVariant} ${app.exec}";
+      exec = 
+        if app.nixGLVariant == "auto" then
+          "nixGL ${app.exec}"
+        else
+          "${getNixGLPackage app.nixGLVariant}/bin/${app.nixGLVariant} ${app.exec}";
       icon = app.icon;
       comment = app.comment;
       categories = app.categories;
@@ -73,8 +80,8 @@ in {
           };
           
           nixGLVariant = lib.mkOption {
-            type = lib.types.enum ["nixGLIntel" "nixGLNvidia" "nixGLMesa"];
-            default = "nixGLIntel";
+            type = lib.types.enum ["auto" "nixGLIntel" "nixGLNvidia" "nixGLMesa"];
+            default = "auto";
             description = "Which nixGL variant to use";
           };
         };

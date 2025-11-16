@@ -55,6 +55,36 @@ in {
       pkgs.foot
     ];
     
+    # Enable nixGL-wrapped desktop entries for GUI applications
+    my.nixgl-desktop.enable = true;
+    my.nixgl-desktop.applications = {
+      foot = {
+        name = "Foot Terminal";
+        exec = "foot";
+        icon = "utilities-terminal";
+        categories = ["System" "TerminalEmulator"];
+        comment = "Fast, lightweight terminal emulator";
+      };
+      
+      nautilus = {
+        name = "Files";
+        exec = "nautilus";
+        icon = "org.gnome.Nautilus";
+        categories = ["System" "FileManager"];
+        comment = "Access and organize files";
+        mimeTypes = ["inode/directory"];
+      };
+      
+      zen = {
+        name = "Zen Browser";
+        exec = "zen";
+        icon = "zen";
+        categories = ["Network" "WebBrowser"];
+        comment = "Privacy-focused web browser";
+        mimeTypes = ["text/html" "application/xhtml+xml" "x-scheme-handler/http" "x-scheme-handler/https"];
+      };
+    };
+    
     # Enable system setup helper for standalone mode
     my.system-setup.enable = true;
     my.system-setup.checks = {
