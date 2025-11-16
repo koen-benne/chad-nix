@@ -24,7 +24,6 @@ in {
     
     # Enable system setup helper for standalone mode
     my.system-setup.enable = true;
-    my.tuigreet.enable = true;
     my.system-setup.checks = {
       pipewire = {
         name = "PipeWire Audio System";
@@ -118,56 +117,31 @@ in {
       
       display-manager = {
         name = "Display Manager (greetd + tuigreet)";
-        description = "Login manager for graphical sessions - tuigreet provides clean TUI interface";
+        description = "Login manager for graphical sessions - follow Arch Wiki for setup";
         priority = "critical";
         checkCommands = [
           "systemctl is-enabled greetd"
           "command -v tuigreet"
           "test -f /etc/greetd/config.toml"
-          "test -f /etc/pam.d/greetd"
-          "id greetd"
-          "test -c /dev/tty7"
-          "groups greetd | grep -q tty"
         ];
         setupInstructions = {
           ubuntu = [
-            "# Install both greetd and tuigreet via native packages (recommended):"
-            "sudo apt update"
-            "sudo apt install greetd greetd-tuigreet  # If available in repos"
-            "# If not available: build from source or use alternative:"
-            "# sudo apt install lightdm lightdm-gtk-greeter"
-            "# Setup user and permissions:"
-            "sudo useradd -r -s /bin/false greetd"
-            "sudo usermod -a -G tty greetd"
-            "sudo systemctl enable greetd"
-            "# Run setup helper: ~/.local/bin/setup-tuigreet"
+            "# Follow Arch Wiki: https://wiki.archlinux.org/title/Greetd"
+            "sudo apt install greetd greetd-tuigreet  # If available"
+            "# Alternative: sudo apt install lightdm lightdm-gtk-greeter"
           ];
           fedora = [
-            "# Install greetd and tuigreet via native packages:"
+            "# Follow Arch Wiki: https://wiki.archlinux.org/title/Greetd"
             "sudo dnf copr enable peterwu/greetd"
             "sudo dnf install greetd greetd-tuigreet"
-            "sudo useradd -r -s /bin/false greetd"
-            "sudo usermod -a -G tty greetd"
-            "sudo systemctl enable greetd"
-            "# Theme and config helpers provided by home-manager"
-            "# Run setup helper: ~/.local/bin/setup-tuigreet"
           ];
           arch = [
-            "# Install greetd and tuigreet via native packages:"
+            "# Follow Arch Wiki: https://wiki.archlinux.org/title/Greetd"
             "sudo pacman -S greetd greetd-tuigreet"
-            "sudo useradd -r -s /bin/false greetd"
-            "sudo usermod -a -G tty greetd"
-            "sudo systemctl enable greetd"
-            "# Theme and config helpers provided by home-manager"
-            "# Run setup helper: ~/.local/bin/setup-tuigreet"
           ];
           generic = [
-            "# Install BOTH greetd and tuigreet via your native package manager"
-            "# This prevents GREETD_SOCK compatibility issues"
-            "# Create greetd user: sudo useradd -r -s /bin/false greetd"
-            "# Add to tty group: sudo usermod -a -G tty greetd"
-            "# Enable service: sudo systemctl enable greetd"
-            "# Run setup helper: ~/.local/bin/setup-tuigreet"
+            "# Follow Arch Wiki: https://wiki.archlinux.org/title/Greetd"
+            "# Install greetd and tuigreet via your package manager"
           ];
         };
       };
