@@ -33,7 +33,6 @@ in {
     my.lockscreen.enable = true;
     my.theme.enable = true;
     my.uxplay.enable = true;
-    my.dankmaterialshell.enable = true;
     my.foot.enable = true;
     my.thunderbird.enable = true;
     my.qutebrowser.enable = true;
