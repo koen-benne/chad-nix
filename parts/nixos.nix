@@ -28,10 +28,6 @@ in {
     nixos = mkNixos {
       modules = [../hosts/nixos];
     };
-    nixos-work = mkNixos {
-      system = "aarch64-linux";
-      modules = [../hosts/nixos-work];
-    };
     nixos-server = mkNixos {
       modules = [../hosts/nixos-server];
     };

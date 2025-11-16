@@ -1,4 +1,7 @@
 final: prev: {
+  # Override quickshell from unstable to be available in stable
+  quickshell = final.unstable.quickshell;
+
   # pkgs
   scripts = final.callPackage ../pkgs/scripts {};
   python3 = prev.python3.override {

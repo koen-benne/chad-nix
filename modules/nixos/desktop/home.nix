@@ -55,7 +55,7 @@ in {
         networkmanagerapplet
       ];
 
-    programs.fuzzel = {
+    programs.fuzzel = mkIf (sys.my.desktop.panelStyle == "waybar") {
       enable = true;
     };
 

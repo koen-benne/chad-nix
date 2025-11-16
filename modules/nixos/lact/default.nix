@@ -13,12 +13,9 @@ in {
   config = mkIf cfg.enable {
     programs.corectrl = {
       enable = true;
-      gpuOverclock = {
-        enable = true;
-        ppfeaturemask = "0xffffffff";
-      };
     };
-    boot.kernelParams = ["amdgpu.ppfeaturemask=0xffffffff"];
+    hardware.amdgpu.overdrive.enable = true;
+    hardware.amdgpu.overdrive.ppfeaturemask = "0xffffffff";
 
     # Add polkit rules for corectrl
     security.polkit.extraConfig = ''

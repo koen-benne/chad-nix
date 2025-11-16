@@ -26,11 +26,11 @@
             config = sharedConfig; # Same config as main nixpkgs
           };
         })
-        self.inputs.apple-silicon.overlays.default
         self.overlays.default
         self.inputs.dev-flakes.overlays.default
         self.inputs.nix-minecraft.overlay
         self.inputs.chaotic.overlays.cache-friendly
+        self.inputs.niri.overlays.niri
       ];
     };
   in {

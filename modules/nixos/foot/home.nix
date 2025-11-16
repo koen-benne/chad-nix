@@ -24,18 +24,9 @@ in {
   config = mkIf cfg.enable {
     programs.foot = {
       enable = true;
-      server.enable = true;
-    };
-    
-    # Add shell aliases for easy access
-    programs.fish.shellAliases = mkIf config.programs.fish.enable {
-      foot = footCommand;
-      footc = footServerCommand;
-    };
-    
-    programs.zsh.shellAliases = mkIf config.programs.zsh.enable {
-      foot = footCommand;
-      footc = footServerCommand;
+      settings.main = {
+        pad = "0x0 center";
+      };
     };
   };
 }
