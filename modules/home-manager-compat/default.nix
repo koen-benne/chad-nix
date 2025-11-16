@@ -24,7 +24,6 @@
     # Home-manager standalone specific modules
     ./system-setup
     ./nixgl-desktop
-    ./tuigreet
     
     # Special cases that stay manual
     ./kitty.nix      # Darwin-specific, no nixos equivalent
