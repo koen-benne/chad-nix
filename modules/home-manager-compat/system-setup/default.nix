@@ -33,7 +33,7 @@
       '') component.setupInstructions)}
       
       echo ""
-      return 1
+      return 0
     }
     check_${lib.replaceStrings ["-"] ["_"] name}
   '';
@@ -101,28 +101,20 @@ in {
       echo "=================================================="
       echo ""
       
-      failedChecks=0
       totalComponents=${toString (lib.length sortedComponents)}
       
       ${lib.concatMapStringsSep "\n\n" (comp: ''
         ${checkComponent comp.name comp.value}
-        ${getPriorityIcon comp.value.priority} check_${lib.replaceStrings ["-"] ["_"] comp.name} || failedChecks=$((failedChecks + 1))
       '') sortedComponents}
       
       echo ""
       echo "=================================================="
-      if [[ $failedChecks -eq 0 ]]; then
-        echo "[✓] All system components are properly configured!"
-      else
-        echo "[!] $failedChecks/$totalComponents components need attention"
-        echo ""
-        echo "Legend:"
-        echo "  [!] Critical - Required for basic functionality"
-        echo "  [i] Recommended - Improves experience significantly" 
-        echo "  [?] Optional - Nice to have features"
-        echo ""
-        echo "Run 'home-manager switch' again after setting up components"
-      fi
+      echo "[i] Setup instructions for $totalComponents system components shown above"
+      echo ""
+      echo "Legend:"
+      echo "  [!] Critical - Required for basic functionality"
+      echo "  [i] Recommended - Improves experience significantly" 
+      echo "  [?] Optional - Nice to have features"
       echo ""
     '';
   };
