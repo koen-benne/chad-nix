@@ -10,49 +10,30 @@
   # Helper function to check if a command exists and is working
   checkComponent = name: component: ''
     check_${lib.replaceStrings ["-"] ["_"] name}() {
-      echo "[>] Checking ${component.name}..."
+      echo "[>] ${component.name}"
+      echo "     ${component.description}"
+      echo ""
+      echo "  [i] Setup instructions:"
       
-      checksPassed=0
-      totalChecks=${toString (lib.length component.checkCommands)}
-      
-      ${lib.concatMapStringsSep "\n" (cmd: ''
-        if ${cmd} >/dev/null 2>&1; then
-          echo "  [✓] ${cmd}"
-          checksPassed=$((checksPassed + 1))
-        else
-          echo "  [✗] ${cmd}"
-        fi
-      '') component.checkCommands}
-      
-      if [[ $checksPassed -eq $totalChecks ]]; then
-        echo "  [✓] ${component.name} is properly configured!"
-        return 0
+      # Detect distro and show appropriate instructions
+      if command -v apt >/dev/null 2>&1; then
+        distro="ubuntu"
+      elif command -v dnf >/dev/null 2>&1; then
+        distro="fedora"  
+      elif command -v pacman >/dev/null 2>&1; then
+        distro="arch"
       else
-        echo "  [!] ${component.name} needs setup ($checksPassed/$totalChecks checks passed)"
-        echo "     ${component.description}"
-        echo ""
-        echo "  [i] Setup instructions:"
-        
-        # Detect distro and show appropriate instructions
-        if command -v apt >/dev/null 2>&1; then
-          distro="ubuntu"
-        elif command -v dnf >/dev/null 2>&1; then
-          distro="fedora"  
-        elif command -v pacman >/dev/null 2>&1; then
-          distro="arch"
-        else
-          distro="generic"
-        fi
-        
-        ${lib.concatStringsSep "\n" (lib.mapAttrsToList (d: instructions: ''
-          if [[ "$distro" == "${d}" ]]; then
-            ${lib.concatMapStringsSep "\n" (instr: ''echo "     ${instr}"'') instructions}
-          fi
-        '') component.setupInstructions)}
-        
-        echo ""
-        return 1
+        distro="generic"
       fi
+      
+      ${lib.concatStringsSep "\n" (lib.mapAttrsToList (d: instructions: ''
+        if [[ "$distro" == "${d}" ]]; then
+          ${lib.concatMapStringsSep "\n" (instr: ''echo "     ${instr}"'') instructions}
+        fi
+      '') component.setupInstructions)}
+      
+      echo ""
+      return 1
     }
     check_${lib.replaceStrings ["-"] ["_"] name}
   '';
