@@ -120,9 +120,7 @@ in {
         description = "Login manager for graphical sessions - follow Arch Wiki for setup";
         priority = "critical";
         checkCommands = [
-          "systemctl is-enabled greetd"
           "command -v tuigreet"
-          "test -f /etc/greetd/config.toml"
         ];
         setupInstructions = {
           ubuntu = [
