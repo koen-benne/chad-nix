@@ -27,7 +27,7 @@ in {
 
     # Display manager integration
     services.displayManager.sessionPackages = [ pkgs.niri ];
-    
+
     # Graphics support
     hardware.graphics.enable = lib.mkDefault true;
 
@@ -47,10 +47,10 @@ in {
     # Security and services (like niri-flake)
     security.polkit.enable = true;
     services.gnome.gnome-keyring.enable = true;
-    
+
     # PAM for swaylock (like niri-flake)
     security.pam.services.swaylock = { };
-    
+
     # System defaults (like niri-flake)
     programs.dconf.enable = lib.mkDefault true;
     fonts.enableDefaultPackages = lib.mkDefault true;
