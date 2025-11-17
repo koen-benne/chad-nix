@@ -21,35 +21,78 @@ in {
   config = mkIf cfg.enable {
     programs.niri.enable = true;
 
+    # XDG Desktop Portal configuration
+    xdg.portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gnome
+      ];
+      config = {
+        common = {
+          default = "gnome";  # This tells portals to use GNOME backends
+          "org.freedesktop.impl.portal.Screencast" = "gnome";
+          "org.freedesktop.impl.portal.Screenshot" = "gnome";
+        };
+      };
+    };
+
     home.packages = [
-      pkgs.xdg-desktop-portal-gnome
       pkgs.polkit_gnome
       pkgs.niri
     ];
 
-    home.activation.niriSetup = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      echo "Setting up niri for non-NixOS system..."
-      echo ""
-      echo "For full niri functionality, you need to configure:"
-      echo ""
-      echo "1. XDG Desktop Portals (for file pickers, screen sharing):"
-      echo "   - Install xdg-desktop-portal via your system package manager"
-      echo "   - Ensure it starts with your desktop session"
-      echo "   - Or add this to your shell/WM startup:"
-      echo "     systemctl --user start xdg-desktop-portal"
-      echo ""
-      echo "2. PolicyKit daemon (for privilege escalation):"
-      echo "   - Install polkit via your system package manager"
-      echo "   - Ensure polkitd service is running system-wide"
-      echo ""
-      echo "3. Display manager integration:"
-      echo "   - Add niri session to your display manager"
-      echo "   - Or start niri manually: $(which niri)"
-      echo ""
-      echo "4. Optional: PAM configuration for swaylock:"
-      echo "   - Add 'swaylock' PAM service configuration"
-      echo ""
-      echo "Niri has been installed via home-manager but may need system setup."
-    '';
+    # Session environment variables
+    home.sessionVariables = {
+      XDG_CURRENT_DESKTOP = "niri";
+      XDG_SESSION_TYPE = "wayland";
+    };
+
+    # Systemd user service integration for non-NixOS systems
+    systemd.user.services = {
+      # Ensure graphical-session.target is started for portal dependencies
+      niri-session-setup = {
+        Unit = {
+          Description = "Setup niri session environment";
+          Before = [ "xdg-desktop-portal.service" ];
+        };
+        Service = {
+          Type = "oneshot";
+          ExecStart = pkgs.writeShellScript "niri-session-setup" ''
+            # Reset any failed graphical session units
+            for unit in $(systemctl --user --no-legend --state=failed --plain list-units | cut -f1 -d' '); do
+              partof="$(systemctl --user show -p PartOf --value "$unit")"
+              if [ "$partof" = "graphical-session.target" ]; then
+                systemctl --user reset-failed "$unit"
+              fi
+            done
+
+            # Import environment variables into systemd user session
+            systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
+
+            # Start graphical session target
+            systemctl --user start graphical-session.target
+          '';
+          RemainAfterExit = true;
+        };
+        Install.WantedBy = [ "default.target" ];
+      };
+
+      # PolicyKit authentication agent
+      polkit-gnome-authentication-agent = {
+        Unit = {
+          Description = "PolicyKit Authentication Agent";
+          After = [ "graphical-session.target" ];
+          PartOf = [ "graphical-session.target" ];
+        };
+        Service = {
+          Type = "simple";
+          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
+        };
+        Install.WantedBy = [ "graphical-session.target" ];
+      };
+    };
   };
 }
