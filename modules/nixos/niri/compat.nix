@@ -23,19 +23,12 @@ in {
     programs.niri.package = inputs.niri.packages.${pkgs.system}.niri-stable;
 
     # XDG Desktop Portal configuration
-    xdg.portal = {
-      enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gnome
-      ];
-      config = {
-        common = {
-          default = "gnome";  # This tells portals to use GNOME backends
-          "org.freedesktop.impl.portal.Screencast" = "gnome";
-          "org.freedesktop.impl.portal.Screenshot" = "gnome";
-        };
-      };
-    };
+    xdg.configFile."xdg-desktop-portal/niri-portals.conf".text = ''
+      [preferred]
+      default=gnome
+      org.freedesktop.impl.portal.Screencast=gnome
+      org.freedesktop.impl.portal.Screenshot=gnome
+    '';
 
     # Manually install the systemd services for Home Manager
     xdg.configFile = {

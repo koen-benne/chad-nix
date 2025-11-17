@@ -70,10 +70,7 @@ in {
           {command = ["${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"];}
           {command = wrapCmd ["foot" "--server"];}
           {command = wrapCmd ["nm-applet"];}
-        ]
-        ++ (lib.optionals (config.my.isStandalone or false) [
-          {command = wrapCmd ["dms" "run"];}
-        ]);
+        ];
 
       environment = {
         NIXOS_OZONE_WL = "1";
