@@ -10,13 +10,8 @@
   cfg = config.my.niri;
 
   # Helper function to conditionally wrap commands with nixGL for standalone mode
-  wrapCmd = cmd:
-    if config.my.isStandalone or false
-    then ["nixGL"] ++ (if builtins.isList cmd then cmd else [cmd])
-    else if builtins.isList cmd then cmd else [cmd];
+  wrapCmd = lib.my.wrapGL config;
 in {
-
-
   imports = [
     inputs.niri.homeModules.niri
     # inputs.niri.homeModules.config
@@ -59,11 +54,11 @@ in {
         gaps = 10;
         center-focused-column = "never";
         preset-column-widths = [
-          { proportion = 0.33333; }
-          { proportion = 0.5; }
-          { proportion = 0.66667; }
+          {proportion = 0.33333;}
+          {proportion = 0.5;}
+          {proportion = 0.66667;}
         ];
-        default-column-width = { proportion = 0.5; };
+        default-column-width = {proportion = 0.5;};
 
         border = {
           width = 1;
@@ -71,10 +66,10 @@ in {
       };
 
       spawn-at-startup = [
-        { command = ["${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"]; }
-        { command = wrapCmd ["foot" "--server"]; }
-        { command = wrapCmd ["dms" "run"]; }
-        { command = wrapCmd ["nm-applet"]; }
+        {command = ["${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"];}
+        {command = wrapCmd ["foot" "--server"];}
+        {command = wrapCmd ["dms" "run"];}
+        {command = wrapCmd ["nm-applet"];}
       ];
 
       environment = {
@@ -88,10 +83,10 @@ in {
 
       binds = with config.lib.niri.actions; {
         "Mod+Return".action = spawn "footclient";
-        "Mod+w".action = spawn (wrapCmd "zen");
+        "Mod+w".action = spawn (wrapCmd config "zen");
         "Mod+q".action = close-window;
         "Mod+Ctrl+Shift+c".action = quit;
-        "Mod+e".action = spawn (wrapCmd "nautilus");
+        "Mod+e".action = spawn (wrapCmd config "nautilus");
         "Mod+v".action = toggle-window-floating;
         "Mod+f".action = fullscreen-window;
         "Mod+p".action = spawn "1password" "--quick-access";
@@ -220,21 +215,21 @@ in {
 
       window-rules = [
         {
-          matches = [{ is-active = false; }];
+          matches = [{is-active = false;}];
           opacity = 0.99;
         }
         {
-          matches = [{ app-id = "^org\\.gnome\\.Nautilus$"; }];
-          default-column-width = { proportion = 0.33333; };
+          matches = [{app-id = "^org\\.gnome\\.Nautilus$";}];
+          default-column-width = {proportion = 0.33333;};
         }
         {
-          matches = [{ title = "^.*PWA.*$"; }];
+          matches = [{title = "^.*PWA.*$";}];
         }
         {
-          matches = [{ title = "^Spotify$"; }];
+          matches = [{title = "^Spotify$";}];
         }
         {
-          matches = [{ app-id = "^foot$"; }];
+          matches = [{app-id = "^foot$";}];
         }
         {
           matches = [{}];

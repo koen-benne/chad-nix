@@ -14,7 +14,7 @@
   sharedConfig = import ./config.nix;
 
   # Helper functions for conditional nixGL wrapping
-  wrapCmd = cmd: if config.my.isStandalone then "nixGLIntel ${cmd}" else cmd;
+  wrapCmd = lib.my.wrapGL config;
 in {
   config = mkIf (sys.my.hyprland.enable or config.my.hyprland.enable) {
     # Enable DMS for both NixOS and standalone mode
@@ -25,7 +25,7 @@ in {
       package = pkgs.hyprland;
       xwayland.enable = true;
       extraConfig = ''
-        ${sharedConfig { inherit scripts wrapCmd; }}
+        ${sharedConfig {inherit scripts wrapCmd;}}
       '';
     };
   };
