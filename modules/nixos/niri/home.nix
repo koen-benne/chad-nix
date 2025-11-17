@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   sys,
   ...
 }: let
@@ -11,13 +12,18 @@
   # Helper function to conditionally wrap commands with nixGL for standalone mode
   wrapCmd = cmd: lib.my.wrapGL config cmd;
 in {
+  imports = [
+    # inputs.niri.homeModules.niri
+    # inputs.niri.homeModules.config
+    # inputs.niri.homeModules.stylix
+  ];
+
   config = mkIf cfg.enable {
     # Polkit agent package for both NixOS and standalone modes
     home.packages = [
       pkgs.polkit_gnome
     ];
 
-    programs.niri.enable = true;
     programs.niri.settings = {
       outputs."eDP-1" = {
         scale = 2.0;

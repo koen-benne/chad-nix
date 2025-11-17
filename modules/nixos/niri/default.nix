@@ -15,4 +15,8 @@ in {
   imports = [
     inputs.niri.nixosModules.niri
   ];
+
+  config = mkIf cfg.enable {
+    programs.niri.enable = true;
+  };
 }

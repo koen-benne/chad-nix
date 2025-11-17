@@ -19,6 +19,8 @@ in {
   ];
 
   config = mkIf cfg.enable {
+    programs.niri.enable = true;
+
     home.packages = [
       pkgs.xdg-desktop-portal-gnome
       pkgs.polkit_gnome
