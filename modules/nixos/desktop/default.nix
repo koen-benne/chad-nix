@@ -63,10 +63,10 @@ in {
       package = pkgs.unstable.greetd;
       settings = {
         default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --user-menu --cmd 'dbus-run-session ${
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --user-menu --cmd ' ${
             if cfg.windowManager == "niri"
-            then "niri"
-            else "Hyprland"
+            then "niri-session"
+            else "dbus-run-sesion Hyprland"
           }'";
         };
       };
