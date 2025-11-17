@@ -20,6 +20,7 @@ in {
 
   config = mkIf cfg.enable {
     programs.niri.enable = true;
+    programs.niri.package = inputs.niri.packages.${pkgs.system}.niri-stable;
 
     # XDG Desktop Portal configuration
     xdg.portal = {
@@ -38,7 +39,6 @@ in {
 
     home.packages = [
       pkgs.polkit_gnome
-      pkgs.niri
     ];
 
     # Session environment variables
