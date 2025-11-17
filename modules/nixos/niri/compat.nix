@@ -73,7 +73,7 @@ in {
           '';
           RemainAfterExit = true;
         };
-        Install.WantedBy = [ "niri.service" ];  # Now this will work!
+        Install.WantedBy = [ "niri.service" ];
       };
 
       # PolicyKit authentication agent
@@ -93,5 +93,29 @@ in {
         Install.WantedBy = [ "graphical-session.target" ];
       };
     };
+
+    # Instructions for non-NixOS system setup
+    home.activation.niriSystemRequirements = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      echo ""
+      echo "═══════════════════════════════════════════════════════════════"
+      echo "  Niri setup requires these system packages (install via apt):"
+      echo "═══════════════════════════════════════════════════════════════"
+      echo ""
+      echo "Required packages:"
+      echo "  sudo apt install xdg-desktop-portal xdg-desktop-portal-gnome"
+      echo ""
+      echo "Optional but recommended:"
+      echo "  sudo apt install pipewire pipewire-pulse wireplumber"
+      echo "  sudo apt install polkit-1 policykit-1-gnome"
+      echo ""
+      echo "After installing, restart your session or reboot."
+      echo ""
+      echo "To verify portal functionality:"
+      echo "  systemctl --user status xdg-desktop-portal"
+      echo "  busctl --user tree org.freedesktop.portal.Desktop"
+      echo ""
+      echo "═══════════════════════════════════════════════════════════════"
+      echo ""
+    '';
   };
 }
