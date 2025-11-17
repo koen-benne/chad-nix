@@ -11,10 +11,6 @@
     defaultSopsFile = ../../../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
     age.keyFile = "${config.my.home}/.config/sops/age/keys.txt";
-
-    secrets.github_access_token = {
-      mode = "0400";
-    };
   };
 
   home.sessionVariables = {
