@@ -91,6 +91,32 @@ in {
     # Enable system setup helper for standalone mode
     my.system-setup.enable = true;
     my.system-setup.checks = {
+      dbus = {
+        name = "D-Bus Message Bus";
+        description = "Inter-process communication system required for desktop applications";
+        priority = "critical";
+        checkCommands = [];
+        setupInstructions = {
+          ubuntu = [
+            "sudo apt update"
+            "sudo apt install dbus"
+            "sudo systemctl enable --now dbus"
+          ];
+          fedora = [
+            "sudo dnf install dbus"
+            "sudo systemctl enable --now dbus"
+          ];
+          arch = [
+            "sudo pacman -S dbus"
+            "sudo systemctl enable --now dbus"
+          ];
+          generic = [
+            "Install dbus via your package manager"
+            "Enable and start the dbus service"
+          ];
+        };
+      };
+
       pipewire = {
         name = "PipeWire Audio System";
         description = "Modern audio system with low latency and professional features";
