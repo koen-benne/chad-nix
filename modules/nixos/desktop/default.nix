@@ -39,7 +39,6 @@ in {
     my.hyprland.enable = cfg.windowManager == "hyprland";
     my.lockscreen.enable = true;
     my.theme.enable = true;
-    my.uxplay.enable = true;
 
     hm.my.foot.enable = true;
     hm.my.thunderbird.enable = true;
