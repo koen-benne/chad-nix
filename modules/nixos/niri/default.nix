@@ -13,6 +13,6 @@ in {
   };
 
   imports = [
-    inputs.niri.homeModules.niri
+    inputs.niri.nixosModules.niri
   ];
 }
