@@ -13,9 +13,6 @@
   # Import shared config
   sharedConfig = import ./config.nix;
 
-  # Get appropriate browser command based on context
-  browserCmd = if config.my.isStandalone then "nixGL zen" else "zen";
-
   # Helper functions for conditional nixGL wrapping
   wrapCmd = cmd: if config.my.isStandalone then "nixGLIntel ${cmd}" else cmd;
 in {
@@ -34,12 +31,6 @@ in {
       xwayland.enable = true;
       extraConfig = ''
         ${sharedConfig { inherit scripts wrapCmd; }}
-
-        # Browser binding (different for NixOS vs standalone)
-        bind = $mainMod, W, exec, ${browserCmd}
-
-        ${optionalString (sys ? networking && sys.networking.networkmanager.enable)
-          "exec-once = ${pkgs.networkmanagerapplet}/bin/nm-applet"}
       '';
     };
 

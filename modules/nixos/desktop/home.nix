@@ -50,9 +50,6 @@ in {
       ]
       ++ [
         inputs.zen-browser.packages.${pkgs.system}.default
-      ]
-      ++ optionals sys.networking.networkmanager.enable [
-        networkmanagerapplet
       ];
 
 

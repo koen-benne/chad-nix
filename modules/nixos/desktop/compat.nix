@@ -48,8 +48,6 @@ in {
       pkgs.wireplumber
       pkgs.brightnessctl
       pkgs.nautilus
-      pkgs.networkmanagerapplet
-      pkgs.foot
     ];
 
     # Enable nixGL-wrapped desktop entries for GUI applications

@@ -109,6 +109,7 @@
   $mainMod = SUPER
 
   bind = $mainMod, Return, exec, footclient
+  bind = $mainMod, W, exec, ${wrapCmd "zen"}
   bind = $mainMod, Q, killactive,
   bind = $mainMod CTRL SHIFT, C, exit,
   bind = $mainMod, E, exec, nautilus
