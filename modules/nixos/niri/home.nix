@@ -7,6 +7,7 @@
   ...
 }: let
   inherit (lib) mdDoc mkEnableOption mkIf;
+  cfg = config.my.niri;
 
   # Helper function to conditionally wrap commands with nixGL for standalone mode
   wrapCmd = cmd:
@@ -23,7 +24,7 @@ in {
     # inputs.niri.homeModules.config
     # inputs.niri.homeModules.stylix
   ];
-  config = mkIf sys.my.niri.enable {
+  config = mkIf cfg.enable {
     programs.niri.enable = true;
     programs.niri.settings = {
       outputs."eDP-1" = {

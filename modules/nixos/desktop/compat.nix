@@ -6,6 +6,7 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
+  cfg = config.my.desktop;
 
   # NixGL setup for standalone home-manager mode
   nixGLPackage =
@@ -26,7 +27,8 @@ in {
   };
 
   config = mkIf config.my.desktop.enable {
-    my.hyprland.enable = true;
+    my.hyprland.enable = cfg.windowManager == "hyprland";
+    my.niri.enable = cfg.windowManager == "niri";
     my.lockscreen.enable = true;
     my.theme.enable = true;
     my.uxplay.enable = true;
