@@ -6,8 +6,8 @@ in {
     nixgl = {
       variant = mkOption {
         type = types.enum ["auto" "intel" "nvidia" "mesa"];
-        default = "auto";
-        description = "Which NixGL variant to use for standalone home-manager. Auto-detection attempts Intel first.";
+        default = "intel";
+        description = "Which NixGL variant to use for standalone home-manager. Intel variant avoids nvidia impurities.";
       };
     };
   };
