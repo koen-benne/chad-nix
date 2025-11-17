@@ -95,7 +95,8 @@ in {
         "Mod+p".action = spawn "1password" "--quick-access";
         "Mod+c".action = spawn "hyprpicker" "-a";
         "Mod+g".action = screenshot;
-        "Mod+Shift+g".action = screenshot-screen;
+        # Very weird, will maybe be fixed in the future
+        "Mod+Shift+g".action.screenshot-screen = [];
         "Mod+Shift+Slash".action = show-hotkey-overlay;
 
         # DMS specific
