@@ -35,9 +35,7 @@ in {
         obsidian
         alsa-scarlett-gui
 
-        # screenshotting
-        grim
-        slurp
+
 
         # other
         # teams-for-linux

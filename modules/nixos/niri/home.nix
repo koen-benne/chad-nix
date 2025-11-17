@@ -94,8 +94,8 @@ in {
         "Mod+f".action = fullscreen-window;
         "Mod+p".action = spawn "1password" "--quick-access";
         "Mod+c".action = spawn "hyprpicker" "-a";
-        "Mod+g".action = spawn "sh" "-c" "grim -g \"$(slurp)\" ~/Images/$(date +%s)_grim.png";
-        "Mod+Shift+g".action = spawn "sh" "-c" "grim ~/Images/$(date +%s)_grim.png";
+        "Mod+g".action = screenshot;
+        "Mod+Shift+g".action = screenshot-screen;
         "Mod+Shift+Slash".action = show-hotkey-overlay;
 
         # DMS specific

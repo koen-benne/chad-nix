@@ -31,6 +31,8 @@ in {
     # Hyprland-specific packages for standalone mode
     home.packages = [
       pkgs.hyprpolkitagent
+      pkgs.grim
+      pkgs.slurp
     ];
   };
 }

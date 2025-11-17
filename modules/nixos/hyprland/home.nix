@@ -20,6 +20,12 @@ in {
     # Enable DMS for both NixOS and standalone mode
     my.dankmaterialshell.enable = true;
 
+    # Screenshot tools for Hyprland
+    home.packages = with pkgs; [
+      grim
+      slurp
+    ];
+
     wayland.windowManager.hyprland = {
       enable = true;
       package = pkgs.hyprland;

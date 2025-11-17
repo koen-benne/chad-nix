@@ -48,8 +48,6 @@ in {
       nixGLPackage
 
       # Desktop essentials for standalone mode
-      pkgs.grim
-      pkgs.slurp
       pkgs.hyprpicker
       pkgs.playerctl
       pkgs.wireplumber

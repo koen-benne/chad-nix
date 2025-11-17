@@ -32,6 +32,9 @@ in {
       xwayland
     ];
 
+    hardware.bluetooth.enable = true;
+    hardware.bluetooth.powerOnBoot = true;
+
     my.niri.enable = cfg.windowManager == "niri";
     my.hyprland.enable = cfg.windowManager == "hyprland";
     my.lockscreen.enable = true;
