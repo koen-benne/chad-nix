@@ -12,7 +12,7 @@
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
     darwin.url = "github:lnl7/nix-darwin/nix-darwin-25.05";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
-    heme-manager.url = "github:nix-community/home-manager/release-25.05";
+    home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # This is temporary untill there is a quickshell module in stable!!!
