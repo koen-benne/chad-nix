@@ -12,7 +12,6 @@ in {
     stylix = {
       targets = {
         neovim.enable = false;
-        fuzzel.enable = false;
         fzf.enable = false;
         spicetify.enable = false;
         qt = {
