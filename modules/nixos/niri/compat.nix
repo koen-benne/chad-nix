@@ -37,6 +37,17 @@ in {
       };
     };
 
+    # Manually install the systemd services for Home Manager
+    xdg.configFile = {
+      "systemd/user/niri.service".source = "${config.programs.niri.package}/lib/systemd/user/niri.service";
+      "systemd/user/niri-shutdown.target".source = "${config.programs.niri.package}/lib/systemd/user/niri-shutdown.target";
+    };
+
+    # Reload systemd after installing the services
+    home.activation.reloadSystemd = lib.hm.dag.entryAfter ["linkGeneration"] ''
+      $DRY_RUN_CMD ${pkgs.systemd}/bin/systemctl --user daemon-reload
+    '';
+
     home.packages = [
       pkgs.polkit_gnome
     ];
@@ -74,7 +85,7 @@ in {
           '';
           RemainAfterExit = true;
         };
-        Install.WantedBy = [ "default.target" ];
+        Install.WantedBy = [ "niri.service" ];  # Now this will work!
       };
 
       # PolicyKit authentication agent
