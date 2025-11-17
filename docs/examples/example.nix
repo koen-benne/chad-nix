@@ -4,7 +4,7 @@
 {
   # Enable the nixGL desktop entries module
   my.nixgl-desktop.enable = true;
-  
+
   # Configure applications that need nixGL wrapping
   my.nixgl-desktop.applications = {
     # Example: Firefox with nixGL
@@ -14,7 +14,7 @@
       icon = "firefox";
       comment = "Firefox web browser with hardware acceleration";
       categories = ["Network" "WebBrowser"];
-      mimeTypes = [
+      mimeType = [
         "text/html"
         "text/xml"
         "application/xhtml+xml"
@@ -23,7 +23,7 @@
       ];
       nixGLVariant = "nixGLIntel"; # or "nixGLNvidia" or "nixGLMesa"
     };
-    
+
     # Example: VS Code with nixGL
     vscode = {
       name = "Visual Studio Code (nixGL)";
@@ -33,7 +33,7 @@
       categories = ["Development" "TextEditor"];
       nixGLVariant = "nixGLIntel";
     };
-    
+
     # Example: Steam with nixGL (needs Nvidia variant typically)
     steam = {
       name = "Steam (nixGL)";

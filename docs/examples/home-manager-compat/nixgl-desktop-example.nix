@@ -14,7 +14,7 @@
       icon = "firefox";
       comment = "Firefox web browser with hardware acceleration";
       categories = ["Network" "WebBrowser"];
-      mimeTypes = [
+      mimeType = [
         "text/html"
         "text/xml"
         "application/xhtml+xml"

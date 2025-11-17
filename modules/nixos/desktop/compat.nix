@@ -69,7 +69,7 @@ in {
         icon = "org.gnome.Nautilus";
         categories = ["System" "FileManager"];
         comment = "Access and organize files";
-        mimeTypes = ["inode/directory"];
+        mimeType = ["inode/directory"];
       };
 
       zen = {
@@ -78,7 +78,7 @@ in {
         icon = "zen";
         categories = ["Network" "WebBrowser"];
         comment = "Privacy-focused web browser";
-        mimeTypes = ["text/html" "application/xhtml+xml" "x-scheme-handler/http" "x-scheme-handler/https"];
+        mimeType = ["text/html" "application/xhtml+xml" "x-scheme-handler/http" "x-scheme-handler/https"];
       };
     };
 
