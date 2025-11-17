@@ -79,6 +79,15 @@ in {
       };
     };
 
+    # XDG desktop portal for standalone home-manager mode
+    xdg.portal = {
+      enable = true;
+      config.common.default = "*";
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+      ];
+    };
+
     # Enable system setup helper for standalone mode
     my.system-setup.enable = true;
     my.system-setup.checks = {

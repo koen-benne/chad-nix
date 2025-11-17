@@ -14,6 +14,7 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       hyprpolkitagent
+      xdg-desktop-portal-hyprland
     ];
 
     programs.hyprland = {
@@ -21,5 +22,9 @@ in {
       package = pkgs.hyprland;
       xwayland.enable = true;
     };
+
+    xdg.portal.extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+    ];
   };
 }

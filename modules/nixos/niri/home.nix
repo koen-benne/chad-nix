@@ -6,7 +6,7 @@
   sys,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mkIf;
   cfg = config.my.niri;
 
   # Helper function to conditionally wrap commands with nixGL for standalone mode
@@ -15,9 +15,7 @@
     then ["nixGL"] ++ (if builtins.isList cmd then cmd else [cmd])
     else if builtins.isList cmd then cmd else [cmd];
 in {
-  options.my.niri = {
-    enable = mkEnableOption (mdDoc "niri scrollable-tiling wayland compositor");
-  };
+
 
   imports = [
     inputs.niri.homeModules.niri
@@ -25,6 +23,11 @@ in {
     # inputs.niri.homeModules.stylix
   ];
   config = mkIf cfg.enable {
+    # Polkit agent package for both NixOS and standalone modes
+    home.packages = [
+      pkgs.polkit_gnome
+    ];
+
     programs.niri.enable = true;
     programs.niri.settings = {
       outputs."eDP-1" = {
@@ -68,7 +71,7 @@ in {
       };
 
       spawn-at-startup = [
-        { command = ["systemctl" "--user" "start" "niri-flake-polkit"]; }
+        { command = ["${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"]; }
         { command = wrapCmd ["foot" "--server"]; }
         { command = wrapCmd ["dms" "run"]; }
         { command = wrapCmd ["nm-applet"]; }

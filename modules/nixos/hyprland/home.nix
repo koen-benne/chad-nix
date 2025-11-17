@@ -17,11 +17,6 @@
   wrapCmd = cmd: if config.my.isStandalone then "nixGLIntel ${cmd}" else cmd;
 in {
   config = mkIf (sys.my.hyprland.enable or config.my.hyprland.enable) {
-    # Hyprland-specific packages for standalone mode
-    home.packages = mkIf config.my.isStandalone [
-      pkgs.hyprpolkitagent
-    ];
-
     # Enable DMS for both NixOS and standalone mode
     my.dankmaterialshell.enable = true;
 
@@ -32,16 +27,6 @@ in {
       extraConfig = ''
         ${sharedConfig { inherit scripts wrapCmd; }}
       '';
-    };
-
-    # Enable XDG desktop portal for screen sharing (standalone mode only)
-    xdg.portal = mkIf config.my.isStandalone {
-      enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-hyprland
-        xdg-desktop-portal-gtk
-      ];
-      config.common.default = "*";
     };
   };
 }

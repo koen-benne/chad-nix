@@ -30,7 +30,6 @@ in {
     environment.systemPackages = with pkgs; [
       gparted
       xdg-desktop-portal-gtk
-      xdg-desktop-portal-hyprland
       xwayland
     ];
 
