@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  inputs,
   config,
   ...
 }: let
@@ -10,6 +11,12 @@ in {
   options.my.niri = {
     enable = mkEnableOption (mdDoc "niri scrollable-tiling wayland compositor");
   };
+
+  imports = [
+    inputs.niri.homeModules.niri
+    # inputs.niri.homeModules.config
+    # inputs.niri.homeModules.stylix
+  ];
 
   config = mkIf cfg.enable {
     home.packages = [
