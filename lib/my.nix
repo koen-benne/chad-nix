@@ -13,6 +13,9 @@ in {
   getCompatModules = builtins.concatMap (getPaths "compat.nix");
   wrapGL = config: cmd:
     if config.my.isStandalone or false
-    then "nixGLIntel ${cmd}"
+    then
+      if builtins.isList cmd
+      then ["nixGLIntel"] ++ cmd
+      else "nixGLIntel ${cmd}"
     else cmd;
 }
