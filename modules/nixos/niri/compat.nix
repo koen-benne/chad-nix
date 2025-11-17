@@ -36,10 +36,6 @@ in {
       "systemd/user/niri-shutdown.target".source = "${config.programs.niri.package}/lib/systemd/user/niri-shutdown.target";
     };
 
-    home.packages = [
-      pkgs.polkit_gnome
-    ];
-
     # Session environment variables
     home.sessionVariables = {
       XDG_CURRENT_DESKTOP = "niri";
