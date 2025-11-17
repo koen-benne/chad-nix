@@ -40,7 +40,11 @@ in {
       portal = {
         enable = true;
         extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
-        configPackages = [ pkgs.niri ];
+        config.niri = {
+          default = [ "gnome" ];
+          "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+          "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+        };
       };
     };
 
