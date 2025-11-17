@@ -49,8 +49,6 @@ in {
       # Desktop essentials for standalone mode
       pkgs.hyprpicker
       pkgs.playerctl
-      pkgs.wireplumber
-      pkgs.brightnessctl
       pkgs.nautilus
     ];
 

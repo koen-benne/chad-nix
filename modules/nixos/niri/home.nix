@@ -119,29 +119,28 @@ in {
           allow-when-locked = true;
         };
 
-        # This can be managed by dms too if we want to. (dms ipc)
-        "XF86AudioLowerVolume" = {
-          action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "10%-";
+        "XF86AudioRaiseVolume" = {
+          action = spawn "dms" "ipc" "call" "audio" "increment" "3";
           allow-when-locked = true;
         };
-        "XF86AudioRaiseVolume" = {
-          action = spawn "wpctl" "set-volume" "--limit" "1.0" "@DEFAULT_AUDIO_SINK@" "10%+";
+        "XF86AudioLowerVolume" = {
+          action = spawn "dms" "ipc" "call" "audio" "decrement" "3";
           allow-when-locked = true;
         };
         "XF86AudioMute" = {
-          action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
+          action = spawn "dms" "ipc" "call" "audio" "mute";
           allow-when-locked = true;
         };
         "XF86AudioMicMute" = {
-          action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle";
-          allow-when-locked = true;
-        };
-        "XF86MonBrightnessDown" = {
-          action = spawn "brightnessctl" "s" "10%-";
+          action = spawn "dms" "ipc" "call" "audio" "micmute";
           allow-when-locked = true;
         };
         "XF86MonBrightnessUp" = {
-          action = spawn "brightnessctl" "s" "+10%";
+          action = spawn "dms" "ipc" "call" "brightness" "increment" "5" "";
+          allow-when-locked = true;
+        };
+        "XF86MonBrightnessDown" = {
+          action = spawn "dms" "ipc" "call" "brightness" "decrement" "5" "";
           allow-when-locked = true;
         };
 

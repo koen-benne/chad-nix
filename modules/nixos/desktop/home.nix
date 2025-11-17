@@ -16,7 +16,6 @@ in {
       [
         # controlls stuff
         playerctl
-        brightnessctl
         pavucontrol
         helvum
 

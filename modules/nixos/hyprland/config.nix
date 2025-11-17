@@ -135,12 +135,12 @@
   bind = , XF86AudioPlay,  exec, playerctl play-pause
   bind = , XF86AudioPrev,  exec, playerctl previous
   bind = , XF86AudioNext,  exec, playerctl next
-  bind = , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-
-  bind = , XF86AudioRaiseVolume, exec, wpctl set-volume --limit 1.0 @DEFAULT_AUDIO_SINK@ 10%+
-  bind = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-  bind = , XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
-  bind = , XF86MonBrightnessDown, exec, brightnessctl s 10%-
-  bind = , XF86MonBrightnessUp, exec, brightnessctl s +10%
+  bind = , XF86AudioRaiseVolume, exec, dms ipc call audio increment 3
+  bind = , XF86AudioLowerVolume, exec, dms ipc call audio decrement 3
+  bind = , XF86AudioMute, exec, dms ipc call audio mute
+  bind = , XF86AudioMicMute, exec, dms ipc call audio micmute
+  bind = , XF86MonBrightnessUp, exec, dms ipc call brightness increment 5 ""
+  bind = , XF86MonBrightnessDown, exec, dms ipc call brightness decrement 5 ""
 
   # Move focus the river way
   bind = $mainMod, J, layoutmsg, cyclenext
