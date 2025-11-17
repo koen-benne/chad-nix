@@ -6,14 +6,18 @@
   sys,
   ...
 }: let
-  inherit (lib) mkIf;
-  
+  inherit (lib) mdDoc mkEnableOption mkIf;
+
   # Helper function to conditionally wrap commands with nixGL for standalone mode
-  wrapCmd = cmd: 
-    if config.my.isStandalone or false 
+  wrapCmd = cmd:
+    if config.my.isStandalone or false
     then ["nixGL"] ++ (if builtins.isList cmd then cmd else [cmd])
     else if builtins.isList cmd then cmd else [cmd];
 in {
+  options.my.niri = {
+    enable = mkEnableOption (mdDoc "niri scrollable-tiling wayland compositor");
+  };
+
   imports = [
     inputs.niri.homeModules.niri
     # inputs.niri.homeModules.config
