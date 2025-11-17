@@ -6,7 +6,7 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
-  
+
   # NixGL setup for standalone home-manager mode
   nixGLPackage =
     if config.my.hyprland.nixgl.variant == "auto" then
@@ -21,9 +21,6 @@ in {
   options.my.desktop = {
     enable = mkEnableOption "desktop";
   };
-  options.my.dankmaterialshell = {
-    enable = mkEnableOption "DankMaterialShell";
-  };
   options.networking.networkmanager = {
     enable = mkEnableOption "networkmanager";
   };
@@ -33,10 +30,11 @@ in {
     my.lockscreen.enable = true;
     my.theme.enable = true;
     my.uxplay.enable = true;
+    my.dankmaterialshell.enable = true;
     my.foot.enable = true;
     my.thunderbird.enable = true;
     my.qutebrowser.enable = true;
-    
+
     # Standalone mode packages
     home.packages = [
       # NixGL package
@@ -53,7 +51,7 @@ in {
       pkgs.networkmanagerapplet
       pkgs.foot
     ];
-    
+
     # Enable nixGL-wrapped desktop entries for GUI applications
     my.nixgl-desktop.enable = true;
     my.nixgl-desktop.applications = {
@@ -64,7 +62,7 @@ in {
         categories = ["System" "TerminalEmulator"];
         comment = "Fast, lightweight terminal emulator";
       };
-      
+
       nautilus = {
         name = "Files";
         exec = "nautilus";
@@ -73,7 +71,7 @@ in {
         comment = "Access and organize files";
         mimeTypes = ["inode/directory"];
       };
-      
+
       zen = {
         name = "Zen Browser";
         exec = "zen";
@@ -83,7 +81,7 @@ in {
         mimeTypes = ["text/html" "application/xhtml+xml" "x-scheme-handler/http" "x-scheme-handler/https"];
       };
     };
-    
+
     # Enable system setup helper for standalone mode
     my.system-setup.enable = true;
     my.system-setup.checks = {
@@ -112,7 +110,7 @@ in {
           ];
         };
       };
-      
+
       wayland = {
         name = "Wayland Display Server";
         description = "Required for Hyprland and modern desktop features";
@@ -137,7 +135,7 @@ in {
           ];
         };
       };
-      
+
       graphics-drivers = {
         name = "Graphics Drivers";
         description = "Hardware acceleration for smooth desktop and nixGL compatibility";
@@ -165,7 +163,7 @@ in {
           ];
         };
       };
-      
+
       display-manager = {
         name = "Display Manager (greetd + tuigreet)";
         description = "Login manager for graphical sessions - follow Arch Wiki for setup";
