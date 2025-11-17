@@ -7,10 +7,10 @@
   ...
 }: let
   inherit (lib) mkIf;
-  cfg = config.my.niri;
+  cfg = sys.my.niri;
 
   # Helper function to conditionally wrap commands with nixGL for standalone mode
-  wrapCmd = lib.my.wrapGL config;
+  wrapCmd = cmd: lib.my.wrapGL config cmd;
 in {
   imports = [
     inputs.niri.homeModules.niri
@@ -83,10 +83,10 @@ in {
 
       binds = with config.lib.niri.actions; {
         "Mod+Return".action = spawn "footclient";
-        "Mod+w".action = spawn (wrapCmd config "zen");
+        "Mod+w".action = spawn (wrapCmd "zen");
         "Mod+q".action = close-window;
         "Mod+Ctrl+Shift+c".action = quit;
-        "Mod+e".action = spawn (wrapCmd config "nautilus");
+        "Mod+e".action = spawn (wrapCmd "nautilus");
         "Mod+v".action = toggle-window-floating;
         "Mod+f".action = fullscreen-window;
         "Mod+p".action = spawn "1password" "--quick-access";

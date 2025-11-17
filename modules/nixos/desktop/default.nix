@@ -32,8 +32,8 @@ in {
       xwayland
     ];
 
+    my.niri.enable = cfg.windowManager == "niri";
     my.hyprland.enable = cfg.windowManager == "hyprland";
-    hm.my.niri.enable = cfg.windowManager == "niri";
     my.lockscreen.enable = true;
     my.theme.enable = true;
     my.uxplay.enable = true;

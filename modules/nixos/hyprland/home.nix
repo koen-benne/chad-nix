@@ -14,7 +14,7 @@
   sharedConfig = import ./config.nix;
 
   # Helper functions for conditional nixGL wrapping
-  wrapCmd = lib.my.wrapGL config;
+  wrapCmd = cmd: lib.my.wrapGL config cmd;
 in {
   config = mkIf (sys.my.hyprland.enable or config.my.hyprland.enable) {
     # Enable DMS for both NixOS and standalone mode
