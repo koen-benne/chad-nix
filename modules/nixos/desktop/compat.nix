@@ -5,7 +5,7 @@
   inputs,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib) mdDoc mkEnableOption mkIf mkOption types;
   cfg = config.my.desktop;
 
   # NixGL setup for standalone home-manager mode
@@ -21,6 +21,11 @@
 in {
   options.my.desktop = {
     enable = mkEnableOption "desktop";
+    windowManager = mkOption {
+      type = types.enum ["hyprland" "niri"];
+      default = "hyprland";
+      description = mdDoc "Window manager to use";
+    };
   };
   options.networking.networkmanager = {
     enable = mkEnableOption "networkmanager";

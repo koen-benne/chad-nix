@@ -14,6 +14,7 @@ in {
     inputs.dms.nixosModules.greeter
   ];
   options.my.desktop = {
+    enable = mkEnableOption "desktop";
     windowManager = mkOption {
       type = types.enum ["hyprland" "niri"];
       default = "hyprland";
