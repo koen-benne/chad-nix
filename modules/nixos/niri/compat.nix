@@ -43,11 +43,6 @@ in {
       "systemd/user/niri-shutdown.target".source = "${config.programs.niri.package}/lib/systemd/user/niri-shutdown.target";
     };
 
-    # Reload systemd after installing the services
-    home.activation.reloadSystemd = lib.hm.dag.entryAfter ["linkGeneration"] ''
-      $DRY_RUN_CMD ${pkgs.systemd}/bin/systemctl --user daemon-reload
-    '';
-
     home.packages = [
       pkgs.polkit_gnome
     ];
