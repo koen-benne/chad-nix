@@ -1,20 +1,29 @@
 {
-  inputs,
   config,
   lib,
   pkgs,
+  inputs,
   sys,
   ...
 }: let
   inherit (lib) mkIf;
+  cfg = sys.my.niri;
+
+  # Helper function to conditionally wrap commands with nixGL for standalone mode
+  wrapCmd = cmd: lib.my.wrapGL config cmd;
 in {
   imports = [
-    inputs.niri.homeModules.niri
+    # inputs.niri.homeModules.niri
     # inputs.niri.homeModules.config
     # inputs.niri.homeModules.stylix
   ];
-  config = mkIf sys.my.niri.enable {
-    programs.niri.enable = true;
+
+  config = mkIf cfg.enable {
+    # Polkit agent package for both NixOS and standalone modes
+    home.packages = [
+      pkgs.polkit_gnome
+    ];
+
     programs.niri.settings = {
       outputs."eDP-1" = {
         scale = 2.0;
@@ -45,28 +54,23 @@ in {
         gaps = 10;
         center-focused-column = "never";
         preset-column-widths = [
-          { proportion = 0.33333; }
-          { proportion = 0.5; }
-          { proportion = 0.66667; }
+          {proportion = 0.33333;}
+          {proportion = 0.5;}
+          {proportion = 0.66667;}
         ];
-        default-column-width = { proportion = 0.5; };
+        default-column-width = {proportion = 0.5;};
 
         border = {
           width = 1;
         };
       };
 
-      spawn-at-startup = [
-        { command = ["systemctl" "--user" "start" "niri-flake-polkit"]; }
-        { command = ["foot" "--server"]; }
-      ] ++ lib.optionals (sys.my.desktop.panelStyle == "waybar") [
-        { command = ["wpaperd"]; }
-        { command = ["waybar"]; }
-      ] ++ lib.optionals (sys.my.desktop.panelStyle == "dms") [
-        { command = ["dms" "run"]; }
-      ] ++ [
-        { command = ["nm-applet"]; }
-      ];
+      spawn-at-startup =
+        [
+          {command = ["${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"];}
+          {command = wrapCmd ["foot" "--server"];}
+          {command = wrapCmd ["nm-applet"];}
+        ];
 
       environment = {
         NIXOS_OZONE_WL = "1";
@@ -79,16 +83,17 @@ in {
 
       binds = with config.lib.niri.actions; {
         "Mod+Return".action = spawn "footclient";
-        "Mod+w".action = spawn "zen";
+        "Mod+w".action = spawn (wrapCmd "zen");
         "Mod+q".action = close-window;
         "Mod+Ctrl+Shift+c".action = quit;
-        "Mod+e".action = spawn "nautilus";
+        "Mod+e".action = spawn (wrapCmd "nautilus");
         "Mod+v".action = toggle-window-floating;
         "Mod+f".action = fullscreen-window;
         "Mod+p".action = spawn "1password" "--quick-access";
         "Mod+c".action = spawn "hyprpicker" "-a";
-        "Mod+g".action = spawn "sh" "-c" "grim -g \"$(slurp)\" ~/Images/$(date +%s)_grim.png";
-        "Mod+Shift+g".action = spawn "sh" "-c" "grim ~/Images/$(date +%s)_grim.png";
+        # Very weird, will maybe be fixed in the future
+        "Mod+g".action.screenshot = [];
+        "Mod+Shift+g".action.screenshot-screen = [];
         "Mod+Shift+Slash".action = show-hotkey-overlay;
 
         # DMS specific
@@ -205,29 +210,27 @@ in {
         "Mod+Shift+WheelScrollUp".action = move-column-to-workspace-up;
 
         # "Mod+Ctrl+Shift+l".action = spawn "hyprlock";
-      } // lib.optionalAttrs (sys.my.desktop.panelStyle == "waybar") {
-        "Mod+Shift+w".action = spawn "sh" "-c" "pkill waybar && waybar";
       };
 
       prefer-no-csd = true;
 
       window-rules = [
         {
-          matches = [{ is-active = false; }];
+          matches = [{is-active = false;}];
           opacity = 0.99;
         }
         {
-          matches = [{ app-id = "^org\\.gnome\\.Nautilus$"; }];
-          default-column-width = { proportion = 0.33333; };
+          matches = [{app-id = "^org\\.gnome\\.Nautilus$";}];
+          default-column-width = {proportion = 0.33333;};
         }
         {
-          matches = [{ title = "^.*PWA.*$"; }];
+          matches = [{title = "^.*PWA.*$";}];
         }
         {
-          matches = [{ title = "^Spotify$"; }];
+          matches = [{title = "^Spotify$";}];
         }
         {
-          matches = [{ app-id = "^foot$"; }];
+          matches = [{app-id = "^foot$";}];
         }
         {
           matches = [{}];

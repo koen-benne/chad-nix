@@ -71,7 +71,6 @@
   my.desktop = {
     enable = true;
     windowManager = "niri";
-    panelStyle = "dms";
     greeter = "tuigreet";
   };
 
@@ -80,7 +79,7 @@
   my.gaming.enableSunshine = true;
   my.virtualisation.enable = true;
   my.openssl.enable = true;
-  my.bluetooth.enable = true;
+  # my.bluetooth.enable = true;
   my.android.enable = true;
   my.corectrl.enable = true;
   my.unmanic.enable = false;

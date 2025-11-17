@@ -19,11 +19,6 @@ in {
       default = "hyprland";
       description = mdDoc "Window manager to use";
     };
-    panelStyle = mkOption {
-      type = types.enum ["waybar" "dms"];
-      default = "waybar";
-      description = mdDoc "Panel/bar style to use";
-    };
     greeter = mkOption {
       type = types.enum ["tuigreet" "dms"];
       default = "tuigreet";
@@ -34,12 +29,14 @@ in {
     environment.systemPackages = with pkgs; [
       gparted
       xdg-desktop-portal-gtk
-      xdg-desktop-portal-hyprland
       xwayland
     ];
 
-    my.hyprland.enable = cfg.windowManager == "hyprland";
+    hardware.bluetooth.enable = true;
+    hardware.bluetooth.powerOnBoot = true;
+
     my.niri.enable = cfg.windowManager == "niri";
+    my.hyprland.enable = cfg.windowManager == "hyprland";
     my.lockscreen.enable = true;
     my.theme.enable = true;
     my.uxplay.enable = true;
@@ -48,20 +45,12 @@ in {
     hm.my.thunderbird.enable = true;
     # hm.my.firefox.enable = true;
     hm.my.qutebrowser.enable = true;
-    hm.my.waybar.enable = cfg.panelStyle == "waybar";
-    hm.my.dankmaterialshell.enable = cfg.panelStyle == "dms";
+    hm.my.dankmaterialshell.enable = true;
     environment.sessionVariables = {
       NIXOS_OXONE_WL = "1";
     };
 
     services.dbus.enable = true;
-    xdg.portal = {
-      enable = true;
-      config.common.default = "*";
-      extraPortals = [
-        pkgs.xdg-desktop-portal-gtk
-      ];
-    };
 
     services.gvfs.enable = true;
 
@@ -70,10 +59,10 @@ in {
       package = pkgs.unstable.greetd;
       settings = {
         default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --user-menu --cmd 'dbus-run-session ${
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --user-menu --cmd ' ${
             if cfg.windowManager == "niri"
-            then "niri"
-            else "Hyprland"
+            then "niri-session"
+            else "dbus-run-sesion Hyprland"
           }'";
         };
       };

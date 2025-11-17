@@ -66,6 +66,9 @@
     # Arr
     nixarr.url = "github:rasmus-kirk/nixarr";
 
+    # NixGL for non-NixOS graphics
+    nixgl.url = "github:nix-community/nixGL";
+    nixgl.inputs.nixpkgs.follows = "nixpkgs";
     # Niri wayland compositor
     niri.url = "github:sodiboo/niri-flake";
     niri.inputs.nixpkgs.follows = "nixpkgs";
@@ -84,6 +87,7 @@
         ./parts/darwin.nix
         ./parts/nixos.nix
         ./parts/system-manager.nix
+        ./parts/home-manager.nix
       ];
       perSystem = {pkgs, ...}: {
         devShells.default = pkgs.mkShell {

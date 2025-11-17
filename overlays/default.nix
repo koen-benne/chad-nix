@@ -42,14 +42,14 @@ final: prev: {
 
     buildInputs = with prev; [
       # C/C++ runtime libraries
-      stdenv.cc.cc.lib      # This provides libstdc++.so.6
-      gcc.cc.lib            # Alternative way to get libstdc++
-      glibc                 # C standard library
+      stdenv.cc.cc.lib # This provides libstdc++.so.6
+      gcc.cc.lib # Alternative way to get libstdc++
+      glibc # C standard library
     ];
 
     # Runtime dependencies
     propagatedBuildInputs = with prev; [
-      git  # Required for the program to function
+      git # Required for the program to function
     ];
 
     dontUnpack = true;
@@ -66,14 +66,18 @@ final: prev: {
     postFixup = ''
       # Additional wrapping if needed for runtime dependencies
       # wrapProgram $out/bin/opfor-linux \
-      #   --prefix PATH : ${prev.lib.makeBinPath [ /* runtime dependencies */ ]}
+      #   --prefix PATH : ${prev.lib.makeBinPath [
+        /*
+        runtime dependencies
+        */
+      ]}
     '';
 
     meta = with prev.lib; {
       description = "opforjellyfin - A tool for Jellyfin";
       homepage = "https://github.com/tissla/opforjellyfin";
       license = licenses.unfree; # Update this based on actual license
-      maintainers = [ ]; # Add your info if desired
+      maintainers = []; # Add your info if desired
       platforms = platforms.linux;
     };
   };

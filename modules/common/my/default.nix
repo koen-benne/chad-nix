@@ -12,6 +12,11 @@ with lib; {
     email = mkOption {type = types.str;};
     workmail = mkOption {type = types.str;};
     uid = mkOption {type = types.int;};
+    isStandalone = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Whether running in home-manager standalone mode (not NixOS/Darwin)";
+    };
   };
   config.my = {
     user = "koenbenne";
