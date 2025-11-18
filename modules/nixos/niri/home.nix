@@ -97,6 +97,8 @@ in {
         "Mod+Shift+s".action = spawn "dms" "ipc" "lock" "lock";
         "Mod+x".action = spawn "dms" "ipc" "powermenu" "toggle";
         "Mod+r".action = spawn "dms" "ipc" "spotlight" "toggle";
+        "Mod+s".action = spawn "dms" "ipc" "dankdash" "media";
+        "Mod+Comma".action = spawn "dms" "ipc" "settings" "toggle";
 
         # Overview and focus switching
         "Mod+Tab".action = toggle-overview;

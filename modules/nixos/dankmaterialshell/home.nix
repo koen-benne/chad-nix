@@ -22,7 +22,10 @@ in {
   config = mkIf cfg.enable {
     programs.dankMaterialShell = {
       enable = true;
-      systemd.enable = true;
+      systemd = {
+        enable = true;
+        restartIfChanged = true;
+      };
 
       # Default settings, can be overwritten by GUI settings
       default.settings = {
@@ -33,15 +36,15 @@ in {
       };
 
       # All features enabled by default, but can be overridden
-      enableSystemMonitoring = lib.mkDefault true;
-      enableClipboard = lib.mkDefault true;
-      # enableVPN = lib.mkDefault true;
-      enableBrightnessControl = lib.mkDefault true;
-      # enableColorPicker = lib.mkDefault true;
-      # enableDynamicTheming = lib.mkDefault true;
-      enableAudioWavelength = lib.mkDefault true;
-      enableCalendarEvents = lib.mkDefault true;
-      enableSystemSound = lib.mkDefault true;
+      enableSystemMonitoring = true;
+      enableClipboard = true;
+      # enableVPN = true;
+      enableBrightnessControl = true;
+      enableColorPicker = true;
+      enableDynamicTheming = true;
+      enableAudioWavelength = true;
+      enableCalendarEvents = true;
+      enableSystemSound = true;
     };
   };
 }
