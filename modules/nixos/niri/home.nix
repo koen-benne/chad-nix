@@ -209,6 +209,17 @@ in {
 
       window-rules = [
         {
+          matches = [
+            { app-id = "^org\.keepassxc\.KeePassXC$"; }
+            { app-id = "^org\.gnome\.World\.Secrets$"; }
+            { app-id = "^com\.1password\.1password$"; }
+            { title = ".*1[Pp]assword.*"; }
+            { title = ".*Extension.*1[Pp]assword.*"; }
+          ];
+
+          block-out-from = "screencast";
+        }
+        {
           matches = [{is-active = false;}];
           opacity = 0.99;
         }
