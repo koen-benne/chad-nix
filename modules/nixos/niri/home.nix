@@ -212,9 +212,7 @@ in {
           matches = [
             { app-id = "^org\.keepassxc\.KeePassXC$"; }
             { app-id = "^org\.gnome\.World\.Secrets$"; }
-            { app-id = "^com\.1password\.1password$"; }
-            { title = ".*1[Pp]assword.*"; }
-            { title = ".*Extension.*1[Pp]assword.*"; }
+            { app-id = "^1Password$"; }
           ];
 
           block-out-from = "screencast";
