@@ -3,6 +3,7 @@
   monitor = eDP-1, 3024x1890@60, auto, 2
   # monitor = HDMI-A-1, 3440x1440@60, auto, 1
 
+  exec-once = wl-paste --watch cliphist store
   exec-once = systemctl --user start hyprpolkitagent
   exec-once = ${wrapCmd "foot --server"}
   exec-once = ${wrapCmd "dms run"}

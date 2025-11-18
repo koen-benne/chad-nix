@@ -61,9 +61,9 @@ in {
 
       spawn-at-startup =
         [
+          {command = ["wl-paste" "--watch" "cliphist" "store"];}
           {command = ["${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"];}
           {command = wrapCmd ["foot" "--server"];}
-          {command = wrapCmd ["nm-applet"];}
         ];
 
       environment = {
