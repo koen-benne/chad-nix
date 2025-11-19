@@ -15,7 +15,7 @@ in {
   ];
   options.my.desktop = {
     windowManager = mkOption {
-      type = types.enum ["hyprland" "niri"];
+      type = types.enum ["hyprland" "niri" "mango"];
       default = "hyprland";
       description = mdDoc "Window manager to use";
     };
@@ -37,6 +37,7 @@ in {
 
     my.niri.enable = cfg.windowManager == "niri";
     my.hyprland.enable = cfg.windowManager == "hyprland";
+    my.mango.enable = cfg.windowManager == "mango";
     my.lockscreen.enable = true;
     my.theme.enable = true;
 
@@ -61,6 +62,8 @@ in {
           command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --user-menu --cmd ' ${
             if cfg.windowManager == "niri"
             then "niri-session"
+            else if cfg.windowManager == "mango"
+            then "mango"
             else "dbus-run-sesion Hyprland"
           }'";
         };
