@@ -67,9 +67,13 @@
     # NixGL for non-NixOS graphics
     nixgl.url = "github:nix-community/nixGL";
     nixgl.inputs.nixpkgs.follows = "nixpkgs";
+
     # Niri wayland compositor
     niri.url = "github:sodiboo/niri-flake";
     niri.inputs.nixpkgs.follows = "nixpkgs";
+
+    mango.url = "github:DreamMaoMao/mango";
+    mango.inputs.nixpkgs.follows = "nixpkgs";
 
     # DankMaterialShell
     dms.url = "github:AvengeMedia/DankMaterialShell";
