@@ -33,6 +33,7 @@ in {
         wl-paste --watch cliphist store &
         ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1 &
         ${wrapCmd "foot --server"} &
+        ${wrapCmd "dms run"} &
         # see autostart.sh
         # Note: here no need to add shebang
       '';
