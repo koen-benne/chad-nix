@@ -20,11 +20,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # In case we want wallpaperengine
-    home.packages = [
-      pkgs.unstable.linux-wallpaperengine
-    ];
-
     programs.dankMaterialShell = {
       enable = true;
       systemd = {
