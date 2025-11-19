@@ -12,10 +12,6 @@ in {
     enable = mkEnableOption (mdDoc "mango scrollable-tiling wayland compositor");
   };
 
-  imports = [
-    inputs.mango.hmModules.mango
-  ];
-
   config = mkIf cfg.enable {
     wayland.windowManager.mango.enable = true;
 
