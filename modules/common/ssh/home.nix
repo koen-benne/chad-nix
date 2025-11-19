@@ -27,6 +27,11 @@
       User bgit
       IdentityFile ~/.ssh/gitlab
 
+    Host work-gitlab
+      HostName gitlab.com
+      User bgit
+      IdentityFile ~/.ssh/gitlab_work
+
     Host bitbucket.org
       HostName bitbucket.org
       User git
