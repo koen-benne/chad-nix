@@ -21,8 +21,8 @@ in {
 
   config = mkIf cfg.enable {
     # In case we want wallpaperengine
-    home.programs = [
-      pkgs.linux-wallpaperengine
+    home.packages = [
+      pkgs.unstable.linux-wallpaperengine
     ];
 
     programs.dankMaterialShell = {
