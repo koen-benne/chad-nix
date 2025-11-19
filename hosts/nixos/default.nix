@@ -70,8 +70,7 @@
   # Everythhing desktop related
   my.desktop = {
     enable = true;
-    # windowManager = "niri";
-    windowManager = "mango";
+    windowManager = "niri";
     greeter = "tuigreet";
   };
 
