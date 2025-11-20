@@ -50,6 +50,7 @@
     direnv.enable = true;
     git.enable = true;
     lazygit.enable = true;
+    lazydocker.enable = true;
     gitui.enable = true;
     zsh.enable = true;
     fish.enable = true;

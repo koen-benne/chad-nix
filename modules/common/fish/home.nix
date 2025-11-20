@@ -40,6 +40,7 @@ in {
         la = "eza --color=always --git --long --all --icons=always";
         vim = "nvim";
         lg = "lazygit";
+        ld = "lazydocker";
         gu = "gitui";
         shell = "export NIXPKGS_ALLOW_INSECURE=1 && nix shell --impure";
         to = "turbotmux open";
