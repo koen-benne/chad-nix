@@ -18,10 +18,6 @@
       # "arc"
       "steam"
       {
-        name = "zen";
-        greedy = true;
-      }
-      {
         name = "microsoft-teams";
         greedy = true;
       }

@@ -44,11 +44,7 @@ in {
         localsend
         ungoogled-chromium
         unstable._1password-gui
-      ]
-      ++ [
-        inputs.zen-browser.packages.${pkgs.system}.default
       ];
-
 
 
     # See issue: https://github.com/nix-community/home-manager/issues/1213

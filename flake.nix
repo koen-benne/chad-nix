@@ -52,8 +52,11 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     # Zen browser
-    zen-browser.url = "github:youwen5/zen-browser-flake";
-    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
 
     # Apple fonts flake
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
