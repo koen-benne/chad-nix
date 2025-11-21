@@ -38,7 +38,6 @@ in {
     my.niri.enable = cfg.windowManager == "niri";
     my.hyprland.enable = cfg.windowManager == "hyprland";
     my.mango.enable = cfg.windowManager == "mango";
-    my.lockscreen.enable = true;
     my.theme.enable = true;
 
     hm.my.foot.enable = true;

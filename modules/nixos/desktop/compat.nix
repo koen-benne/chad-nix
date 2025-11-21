@@ -34,7 +34,6 @@ in {
   config = mkIf config.my.desktop.enable {
     my.hyprland.enable = cfg.windowManager == "hyprland";
     my.niri.enable = cfg.windowManager == "niri";
-    my.lockscreen.enable = true;
     my.theme.enable = true;
     my.dankmaterialshell.enable = true;
     my.foot.enable = true;
