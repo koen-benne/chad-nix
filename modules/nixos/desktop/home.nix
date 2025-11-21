@@ -61,6 +61,7 @@ in {
         "x-scheme-handler/mailto" = "thunderbird.desktop";
         "application/pdf" = "evince.desktop";
         "x-scheme-handler/figma" = "figma-linux.desktop";
+        "x-scheme-handler/teams" = "teams-for-linux.desktop";
       };
     };
   };
