@@ -75,8 +75,8 @@ in {
         autoStart = true;
         capSysAdmin = true;
         openFirewall = true;
-        # Currently, it is necessary to run 'sudo setfacl -m g:input:rw /dev/uhid' to get ds5 emu to work.
-        # Seems like https://github.com/LizardByte/Sunshine/pull/2906 should fix this issue.
+        # It was necessary to run 'sudo setfacl -m g:input:rw /dev/uhid' to get ds5 emu to work.
+        # Seems like https://github.com/LizardByte/Sunshine/pull/2906 fixed this issue.
         settings = {
           gamepad = "ds5";
         };
