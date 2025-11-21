@@ -2,8 +2,6 @@
 # There should not be anything in here that I don't want in every one of my linux systems with a desktop environment
 # There should also not be anything in here that I would also like to have on my servers
 {
-  config,
-  inputs,
   lib,
   pkgs,
   sys,
