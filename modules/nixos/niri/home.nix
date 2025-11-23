@@ -77,7 +77,7 @@ in {
 
       binds = with config.lib.niri.actions; {
         "Mod+Return".action = spawn "footclient";
-        "Mod+w".action = spawn (wrapCmd "zen");
+        "Mod+w".action = spawn (wrapCmd ["zen-beta" "--name" "zen-beta"]);
         "Mod+q".action = close-window;
         "Mod+Ctrl+Shift+c".action = quit;
         "Mod+e".action = spawn (wrapCmd "nautilus");
