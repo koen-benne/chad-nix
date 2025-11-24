@@ -1,7 +1,6 @@
 {
   pkgs,
   inputs,
-  config,
   lib,
   sys,
   ...
@@ -117,7 +116,7 @@ in {
           fi'
         ''''
 
-        alt-w = 'exec-and-forget /Applications/Zen.app/Contents/MacOS/zen'
+        alt-w = 'exec-and-forget ${inputs.zen-browser.packages."${pkgs.system}".beta}/bin/zen-browser'
 
         alt-q = 'close'
         alt-f = 'fullscreen'
