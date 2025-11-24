@@ -42,15 +42,11 @@
       User koenbenne
       IdentityFile ~/.ssh/nixos
 
-    Host *.platform.sh
-      Include /home/koenbenne/.platformsh/ssh/*.config
+    # BEGIN: Upsun certificate configuration
+    Host *.platform.sh *.upsun.com
+      Include /Users/koenbenne/.upsun-cli/ssh/*.config
     Host *
-
-    # BEGIN: Platform.sh certificate configuration
-    Host *.platform.sh
-      Include /Users/koenbenne/.platformsh/ssh/*.config
-    Host *
-    # END: Platform.sh certificate configuration
+    # END: Upsun certificate configuration
 
 
   '';
