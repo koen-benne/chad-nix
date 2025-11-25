@@ -18,6 +18,7 @@ in {
 
   config = mkIf cfg.enable {
     programs.zen-browser.enable = true;
+    programs.zen-browser.darwinDefaultsId = "org.mozilla.firefox.plist";
     programs.zen-browser.policies = let
       mkExtensionSettings = builtins.mapAttrs (_: pluginId: {
         install_url = "https://addons.mozilla.org/firefox/downloads/latest/${pluginId}/latest.xpi";
