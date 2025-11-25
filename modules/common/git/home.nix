@@ -82,8 +82,9 @@ in {
         commit.verbose = true;  # Show diff in commit message
 
         # Conditional includes for different directories
-        includeIf."gitdir:~/work/" = {
+        includes = {
           path = "~/.config/git/gitconfig-work";
+          condition = "gitdir:~/work/";
         };
 
         url = {
