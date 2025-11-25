@@ -83,7 +83,7 @@ in {
 
         # Conditional includes for different directories
         includeIf."gitdir:~/work/" = {
-          path = "~/.gitconfig-work";
+          path = "~/.config/git/gitconfig-work";
         };
 
         url = {
@@ -92,10 +92,10 @@ in {
       };
     };
 
-    # Create work-specific git config
-    home.file.".gitconfig-work".text = ''
+    # Create work-specific git config in .config/git/
+    home.file.".config/git/gitconfig-work".text = ''
       [user]
-        email = ${config.my.workmail}
+          email = ${config.my.workmail}
     '';
   };
 }
