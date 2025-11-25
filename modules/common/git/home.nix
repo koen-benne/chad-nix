@@ -81,11 +81,21 @@ in {
         help.autoCorrect = 10;  # Auto-correct typos after 1 second
         commit.verbose = true;  # Show diff in commit message
 
+        # Conditional includes for different directories
+        includeIf."gitdir:~/work/" = {
+          path = "~/.gitconfig-work";
+        };
+
         url = {
           "ssh://git@github.com:22/" = {pushInsteadOf = "https://github.com/";};
         };
       };
     };
+
+    # Create work-specific git config
+    home.file.".gitconfig-work".text = ''
+      [user]
+        email = ${config.my.workmail}
+    '';
   };
 }
-
