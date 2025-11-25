@@ -17,17 +17,48 @@ in {
   ];
 
   config = mkIf cfg.enable {
-    programs.zen-browser.enable = true;
-    programs.zen-browser.darwinDefaultsId = "org.mozilla.firefox.plist";
-    programs.zen-browser.policies = let
-      mkExtensionSettings = builtins.mapAttrs (_: pluginId: {
-        install_url = "https://addons.mozilla.org/firefox/downloads/latest/${pluginId}/latest.xpi";
-        installation_mode = "force_installed";
-      });
-    in {
-      ExtensionSettings = mkExtensionSettings {
-        "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = "vimium-ff";
-        # "{d634138d-c276-4fc8-924b-40a0ea21d284}" = "1password-x-password-manager";
+    # Use legacy profile mode to ensure consistent profile naming
+    home.sessionVariables = {
+      MOZ_LEGACY_PROFILES = "1";
+    };
+
+    # Force a consistent profiles.ini to prevent new profile creation (Darwin only)
+    home.file = mkIf pkgs.stdenv.isDarwin {
+      "Library/Application Support/Zen/profiles.ini" = {
+        text = ''
+          [General]
+          StartWithLastProfile=1
+
+          [Profile0]
+          Default=1
+          IsRelative=1
+          Name=default
+          Path=Profiles/default
+        '';
+        force = true;
+      };
+    };
+
+    programs.zen-browser = {
+      enable = true;
+      darwinDefaultsId = mkIf pkgs.stdenv.isDarwin "org.mozilla.zen.browser";
+
+      # Define the stable profile - this prevents database manipulation
+      # since we're not using spaces or pins
+      profiles."default" = {
+        id = 0;
+      };
+
+      policies = let
+        mkExtensionSettings = builtins.mapAttrs (_: pluginId: {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/${pluginId}/latest.xpi";
+          installation_mode = "force_installed";
+        });
+      in {
+        ExtensionSettings = mkExtensionSettings {
+          "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = "vimium-ff";
+          "{d634138d-c276-4fc8-924b-40a0ea21d284}" = "1password-x-password-manager";
+        };
       };
     };
 
