@@ -54,8 +54,8 @@
     # Zen browser
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
+      inputs.nixpkgs.follows = "unstable";
+      inputs.home-manager.follows = "home-manager-unstable";
     };
 
     # Apple fonts flake
