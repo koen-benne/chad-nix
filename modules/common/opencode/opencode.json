@@ -11,9 +11,9 @@
         "includeUsage": true
       },
       "models": {
-        "claude-4-sonnet": {
-          "name": "Anthropic Claude 4 sonnet",
-          "release_date": "2025-05-22",
+        "claude-4-5-sonnet": {
+          "name": "Claude Sonnet 4.5",
+          "release_date": "2025-09-29",
           "attachment": true,
           "reasoning": true,
           "temperature": true,
@@ -27,7 +27,7 @@
             "output": 15.0,
             "cache_read": 0.3,
             "cache_write": 3.75
-          }
+          },
         },
         "gpt-5": {
           "name": "OpenAI GPT-5",
@@ -45,6 +45,9 @@
             "output": 10.0,
             "cache_read": 0.13,
             "cache_write": 0
+          },
+          "options": {
+            // "reasoningEffort": "minimal",
           }
         },
         "gpt-5-mini": {
@@ -138,7 +141,7 @@
           }
         },
         "gemini-2.5-pro": {
-          "name": "Google gemini 2.5 pro",
+          "name": "Google Gemini 2.5 Pro",
           "release_date": "2025-03-20",
           "attachment": true,
           "reasoning": true,
@@ -156,7 +159,7 @@
           }
         },
         "gemini-2.5-flash": {
-          "name": "Google gemini 2.5 flash",
+          "name": "Google Gemini 2.5 Flash",
           "release_date": "2025-05-20",
           "attachment": true,
           "reasoning": true,
