@@ -24,5 +24,6 @@
 
   # Stuff specific to only this machine
   my.openssl.enable = true;
+  hm.my.colima.enable = true;
   # hm.my.qutebrowser.enable = true;
 }
