@@ -87,10 +87,12 @@ in {
         };
       };
       # Conditional includes for different directories
-      includes = {
-        path = "~/.config/.gitconfig-work";
-        condition = "gitdir:~/work/";
-      };
+      includes = [
+        {
+          path = "~/.config/.gitconfig-work";
+          condition = "gitdir:~/work/";
+        }
+      ];
     };
 
     # Create work-specific git config in .config/git/
