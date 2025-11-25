@@ -17,36 +17,22 @@ in {
   ];
 
   config = mkIf cfg.enable {
-    # Use legacy profile mode to ensure consistent profile naming
+    # Use legacy profile mode to prevent random profile directory names
     home.sessionVariables = {
       MOZ_LEGACY_PROFILES = "1";
-    };
-
-    # Force a consistent profiles.ini to prevent new profile creation (Darwin only)
-    home.file = mkIf pkgs.stdenv.isDarwin {
-      "Library/Application Support/Zen/profiles.ini" = {
-        text = ''
-          [General]
-          StartWithLastProfile=1
-
-          [Profile0]
-          Default=1
-          IsRelative=1
-          Name=default
-          Path=Profiles/default
-        '';
-        force = true;
-      };
     };
 
     programs.zen-browser = {
       enable = true;
       darwinDefaultsId = mkIf pkgs.stdenv.isDarwin "org.mozilla.zen.browser";
 
-      # Define the stable profile - this prevents database manipulation
-      # since we're not using spaces or pins
+      # Define a stable profile with consistent naming
+      # The module will generate profiles.ini automatically
       profiles."default" = {
         id = 0;
+        name = "default";
+        path = "default";
+        isDefault = true;
       };
 
       policies = let
