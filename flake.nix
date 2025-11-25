@@ -31,7 +31,8 @@
     # arkenfox-nix.url = "github:dwarfmaster/arkenfox-nixos";
 
     neovim.url = "github:koen-benne/neovim";
-    neovim.inputs.nixpkgs.follows = "unstable";
+    # TODO: make it follow again, master was very temporarily used
+    # neovim.inputs.nixpkgs.follows = "unstable";
 
     dev-flakes.url = "github:koen-benne/dev-flakes";
     dev-flakes.inputs.nixpkgs.follows = "unstable";
