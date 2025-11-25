@@ -19,6 +19,10 @@ in {
     programs.git = {
       enable = true;
       userEmail = config.my.email;
+      includes = [{
+        contents.user.email = config.my.workmail;
+        condition = "gitdir:~/work/";
+      }];
       userName = config.my.name;
       aliases = {
         br = "branch";
@@ -86,19 +90,6 @@ in {
           "ssh://git@github.com:22/" = {pushInsteadOf = "https://github.com/";};
         };
       };
-      # Conditional includes for different directories
-      includes = [
-        {
-          path = "~/.config/.gitconfig-work";
-          condition = "gitdir:~/work/";
-        }
-      ];
     };
-
-    # Create work-specific git config in .config/git/
-    home.file.".config/.gitconfig-work".text = ''
-      [user]
-          email = ${config.my.workmail}
-    '';
   };
 }
