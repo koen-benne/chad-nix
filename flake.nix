@@ -15,7 +15,8 @@
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # This is temporary untill there is a quickshell module in stable!!!
+    # TODO: Remove when upgrading to home-manager 25.11
+    # Used for: aerospace (extraConfig, launchd), quickshell module (for dms)
     home-manager-unstable.url = "github:nix-community/home-manager/master";
     home-manager-unstable.inputs.nixpkgs.follows = "unstable";
 
@@ -81,7 +82,7 @@
 
     # DankMaterialShell
     dms.url = "github:AvengeMedia/DankMaterialShell";
-    dms.inputs.nixpkgs.follows = "nixpkgs";
+    dms.inputs.nixpkgs.follows = "unstable";
   };
 
   outputs = inputs @ {flake-parts, ...}:

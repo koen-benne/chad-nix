@@ -11,7 +11,8 @@
 in {
   imports = [
     inputs.dms.homeModules.dankMaterialShell.default
-    # This is temporary untill there is a quickshell module in stable!!!
+    # Import quickshell module from home-manager-unstable since dms needs it
+    # but it's not available in stable 25.05 yet
     (inputs.home-manager-unstable + "/modules/programs/quickshell.nix")
   ];
 

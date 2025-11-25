@@ -216,15 +216,15 @@
       "inputs": {
         "dgop": "dgop",
         "nixpkgs": [
-          "nixpkgs"
+          "unstable"
         ]
       },
       "locked": {
-        "lastModified": 1764051885,
-        "narHash": "sha256-4NsJnWAxiAUDobwNVEzdBc1HuXzjjN5BXtVNVicWEUc=",
+        "lastModified": 1764100979,
+        "narHash": "sha256-Z/XgP+Lt4NnMELhQkLIfYsjwSXQQH5xLYuL/5fRZ/Sw=",
         "owner": "AvengeMedia",
         "repo": "DankMaterialShell",
-        "rev": "3e472e18bddbb04928aaeb4f4e71b604f7583b4e",
+        "rev": "08641790856d293a11c7647dcb940b05c184abbb",
         "type": "github"
       },
       "original": {
