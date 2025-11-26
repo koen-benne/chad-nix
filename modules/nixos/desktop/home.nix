@@ -10,40 +10,36 @@
   inherit (lib) mkIf optionals;
 in {
   config = mkIf sys.my.desktop.enable {
-    home.packages = with pkgs;
-      [
-        # controlls stuff
-        playerctl
-        pavucontrol
-        helvum
+    home.packages = with pkgs; [
+      # controlls stuff
+      playerctl
+      pavucontrol
+      helvum
 
-        # packages for my custom DE
-        nwg-displays
-        obs-studio
-        wl-clipboard
-        dunst
-        hyprpicker
-        nautilus
-        evince
-        eog
-        libreoffice-qt
-        mpv
-        qbittorrent
-        obsidian
-        alsa-scarlett-gui
+      # packages for my custom DE
+      nwg-displays
+      obs-studio
+      wl-clipboard
+      dunst
+      hyprpicker
+      nautilus
+      evince
+      eog
+      libreoffice-qt
+      mpv
+      qbittorrent
+      obsidian
+      alsa-scarlett-gui
 
+      # other
+      # teams-for-linux
+      # figma-agent
 
-
-        # other
-        # teams-for-linux
-        # figma-agent
-
-        # slack
-        localsend
-        ungoogled-chromium
-        unstable._1password-gui
-      ];
-
+      # slack
+      localsend
+      ungoogled-chromium
+      unstable._1password-gui
+    ];
 
     # See issue: https://github.com/nix-community/home-manager/issues/1213
     xdg.configFile."mimeapps.list".force = true;

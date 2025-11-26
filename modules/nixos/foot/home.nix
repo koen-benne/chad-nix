@@ -15,6 +15,10 @@ in {
   config = mkIf cfg.enable {
     programs.foot = {
       enable = true;
+      package = lib.my.wrapPackage {
+        inherit pkgs config inputs;
+        package = pkgs.foot;
+      };
       settings.main = {
         pad = "0x0 center";
       };

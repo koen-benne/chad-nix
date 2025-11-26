@@ -10,14 +10,13 @@
 
   # NixGL setup for standalone home-manager mode
   nixGLPackage =
-    if config.my.hyprland.nixgl.variant == "auto" then
-      inputs.nixgl.packages.${pkgs.system}.nixGLDefault
-    else if config.my.hyprland.nixgl.variant == "intel" then
-      inputs.nixgl.packages.${pkgs.system}.nixGLIntel
-    else if config.my.hyprland.nixgl.variant == "nvidia" then
-      inputs.nixgl.packages.${pkgs.system}.nixGLNvidia
-    else
-      inputs.nixgl.packages.${pkgs.system}.nixGLMesa;
+    if config.my.hyprland.nixgl.variant == "auto"
+    then inputs.nixgl.packages.${pkgs.system}.nixGLDefault
+    else if config.my.hyprland.nixgl.variant == "intel"
+    then inputs.nixgl.packages.${pkgs.system}.nixGLIntel
+    else if config.my.hyprland.nixgl.variant == "nvidia"
+    then inputs.nixgl.packages.${pkgs.system}.nixGLNvidia
+    else inputs.nixgl.packages.${pkgs.system}.nixGLMesa;
 in {
   options.my.desktop = {
     enable = mkEnableOption "desktop";
@@ -38,6 +37,7 @@ in {
     my.dankmaterialshell.enable = true;
     my.foot.enable = true;
     my.thunderbird.enable = true;
+    my.zen-browser.enable = true;
     my.qutebrowser.enable = true;
 
     # Standalone mode packages
@@ -48,30 +48,11 @@ in {
       # Desktop essentials for standalone mode
       pkgs.hyprpicker
       pkgs.playerctl
-      pkgs.nautilus
+      (lib.my.wrapPackage {
+        inherit pkgs config inputs;
+        package = pkgs.nautilus;
+      })
     ];
-
-    # Enable nixGL-wrapped desktop entries for GUI applications
-    my.nixgl-desktop.enable = true;
-    my.nixgl-desktop.applications = {
-      nautilus = {
-        name = "Files";
-        exec = "nautilus";
-        icon = "org.gnome.Nautilus";
-        categories = ["System" "FileManager"];
-        comment = "Access and organize files";
-        mimeType = ["inode/directory"];
-      };
-
-      zen = {
-        name = "Zen Browser";
-        exec = "zen";
-        icon = "zen";
-        categories = ["Network" "WebBrowser"];
-        comment = "Privacy-focused web browser";
-        mimeType = ["text/html" "application/xhtml+xml" "x-scheme-handler/http" "x-scheme-handler/https"];
-      };
-    };
 
     # Enable system setup helper for standalone mode
     my.system-setup.enable = true;
@@ -210,4 +191,3 @@ in {
     };
   };
 }
-

@@ -45,7 +45,14 @@ in {
     programs.zen-browser = {
       enable = true;
       nativeMessagingHosts = lib.optionals pkgs.stdenv.isLinux [pkgs.bitwarden-desktop];
-      package = lib.mkIf pkgs.stdenv.isDarwin (lib.mkForce null);
+      package =
+        if pkgs.stdenv.isDarwin
+        then lib.mkForce null
+        else
+          lib.my.wrapPackage {
+            inherit pkgs config inputs;
+            package = inputs.zen-browser.packages.${pkgs.system}.default;
+          };
 
       policies = {
         AutofillAddressEnabled = true;

@@ -11,7 +11,5 @@
       spotify-player
       # freetube
     ];
-
-    my.zen-browser.enable = true;
   };
 }
