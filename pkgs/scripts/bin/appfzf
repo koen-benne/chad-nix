@@ -1,8 +1,33 @@
 #!/usr/bin/env bash
 
-ls ~/Applications/ /Applications /System/Applications/ "$HOME"/.nix-profile/Applications | \
-    grep '\.app$' | \
-    sed 's/\.app$//g' | \
-    choose | \
-    xargs -I {} open -a "{}.app"
+# Prioritize Trampolines (stable mac-app-util wrappers) over direct Nix store paths
+# This prevents macOS from losing app data on every rebuild
+SEARCH_PATHS=(
+    "$HOME/Applications/Home Manager Trampolines"  # Stable Nix-managed apps (preferred)
+    "$HOME/Applications"                            # User-installed apps
+    "/Applications"                                 # System-wide apps
+    "/System/Applications"                          # macOS built-in apps
+)
+
+# Build a map of app names to their full paths
+declare -A app_paths
+
+for dir in "${SEARCH_PATHS[@]}"; do
+    if [[ -d "$dir" ]]; then
+        while IFS= read -r -d '' app; do
+            app_name=$(basename "$app" .app)
+            # Only add if we haven't seen this app name before (prioritize earlier paths)
+            if [[ -z "${app_paths[$app_name]}" ]]; then
+                app_paths["$app_name"]="$app"
+            fi
+        done < <(find "$dir" -maxdepth 1 -name "*.app" -print0 2>/dev/null)
+    fi
+done
+
+# Present app names to user and open the selected one
+selected=$(printf "%s\n" "${!app_paths[@]}" | sort | choose)
+
+if [[ -n "$selected" ]]; then
+    open "${app_paths[$selected]}"
+fi
 

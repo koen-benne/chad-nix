@@ -1,0 +1,282 @@
+{
+  pkgs,
+  inputs,
+  lib,
+  config,
+  ...
+}: let
+  inherit (lib) mdDoc mkEnableOption mkIf;
+  cfg = config.my.zen-browser;
+
+  mkLockedAttrs = builtins.mapAttrs (_: value: {
+    Value = value;
+    Status = "locked";
+  });
+
+  mkPluginUrl = id: "https://addons.mozilla.org/firefox/downloads/latest/${id}/latest.xpi";
+
+  mkExtensionEntry = {
+    id,
+    pinned ? false,
+  }: let
+    base = {
+      install_url = mkPluginUrl id;
+      installation_mode = "force_installed";
+    };
+  in
+    if pinned
+    then base // {default_area = "navbar";}
+    else base;
+
+  mkExtensionSettings = builtins.mapAttrs (_: entry:
+    if builtins.isAttrs entry
+    then entry
+    else mkExtensionEntry {id = entry;});
+in {
+  options.my.zen-browser = {
+    enable = mkEnableOption (mdDoc "zen-browser");
+  };
+
+  imports = [
+    inputs.zen-browser.homeModules.beta
+  ];
+
+  config = lib.mkIf cfg.enable {
+    programs.zen-browser = {
+      enable = true;
+      nativeMessagingHosts = lib.optionals pkgs.stdenv.isLinux [pkgs.bitwarden-desktop];
+      package = lib.mkIf pkgs.stdenv.isDarwin (lib.mkForce null);
+
+      policies = {
+        AutofillAddressEnabled = true;
+        AutofillCreditCardEnabled = false;
+        DisableAppUpdate = true;
+        DisableFeedbackCommands = true;
+        DisableFirefoxStudies = true;
+        DisablePocket = true;
+        DisableTelemetry = true;
+        DontCheckDefaultBrowser = true;
+        OfferToSaveLogins = false;
+        EnableTrackingProtection = {
+          Value = true;
+          Locked = true;
+          Cryptomining = true;
+          Fingerprinting = true;
+        };
+        SanitizeOnShutdown = {
+          FormData = true;
+          Cache = true;
+        };
+        ExtensionSettings = mkExtensionSettings {
+          "{d634138d-c276-4fc8-924b-40a0ea21d284}" = mkExtensionEntry {
+            id = "1password-x-password-manager";
+            pinned = true;
+          };
+          "wappalyzer@crunchlabz.com" = mkExtensionEntry {
+            id = "wappalyzer";
+            pinned = true;
+          };
+          "uBlock0@raymondhill.net" = mkExtensionEntry {
+            id = "ublock-origin";
+            pinned = true;
+          };
+          "{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}" = "refined-github-";
+          "{85860b32-02a8-431a-b2b1-40fbd64c9c69}" = "github-file-icons";
+          "{762f9885-5a13-4abd-9c77-433dcd38b8fd}" = "return-youtube-dislikes";
+          "{74145f27-f039-47ce-a470-a662b129930a}" = "clearurls";
+          "github-no-more@ihatereality.space" = "github-no-more";
+          "github-repository-size@pranavmangal" = "gh-repo-size";
+          "firefox-extension@steamdb.info" = "steam-database";
+          "@searchengineadremover" = "searchengineadremover";
+          "jid1-BoFifL9Vbdl2zQ@jetpack" = "decentraleyes";
+          "trackmenot@mrl.nyu.edu" = "trackmenot";
+          "{861a3982-bb3b-49c6-bc17-4f50de104da1}" = "custom-user-agent-revived";
+          "{3579f63b-d8ee-424f-bbb6-6d0ce3285e6a}" = "chameleon-ext";
+        };
+        Preferences = mkLockedAttrs {
+          "browser.aboutConfig.showWarning" = false;
+          "browser.tabs.warnOnClose" = false;
+          "media.videocontrols.picture-in-picture.video-toggle.enabled" = true;
+          "browser.gesture.swipe.left" = "";
+          "browser.gesture.swipe.right" = "";
+          "browser.tabs.hoverPreview.enabled" = true;
+          "browser.newtabpage.activity-stream.feeds.topsites" = false;
+          "browser.topsites.contile.enabled" = false;
+
+          "privacy.resistFingerprinting" = true;
+          "privacy.resistFingerprinting.randomization.canvas.use_siphash" = true;
+          "privacy.resistFingerprinting.randomization.daily_reset.enabled" = true;
+          "privacy.resistFingerprinting.randomization.daily_reset.private.enabled" = true;
+          "privacy.resistFingerprinting.block_mozAddonManager" = true;
+          "privacy.spoof_english" = 1;
+
+          "privacy.firstparty.isolate" = true;
+          "network.cookie.cookieBehavior" = 5;
+          "dom.battery.enabled" = false;
+
+          "gfx.webrender.all" = true;
+          "network.http.http3.enabled" = true;
+          "network.socket.ip_addr_any.disabled" = true;
+        };
+      };
+
+      profiles = {
+        default = {
+          settings = {
+            "zen.workspaces.continue-where-left-off" = true;
+            "zen.workspaces.natural-scroll" = true;
+            "zen.view.compact.hide-tabbar" = true;
+            "zen.view.compact.hide-toolbar" = true;
+            "zen.view.compact.animate-sidebar" = false;
+            "zen.welcome-screen.seen" = true;
+            "zen.urlbar.behavior" = "float";
+          };
+
+          bookmarks = {
+            force = true;
+            settings = [
+              {
+                name = "Nix sites";
+                toolbar = true;
+                bookmarks = [
+                  {
+                    name = "homepage";
+                    url = "https://nixos.org/";
+                  }
+                  {
+                    name = "wiki";
+                    tags = ["wiki" "nix"];
+                    url = "https://wiki.nixos.org/";
+                  }
+                ];
+              }
+            ];
+          };
+
+          pinsForce = true;
+          pins = {
+            "GitHub" = {
+              id = "48e8a119-5a14-4826-9545-91c8e8dd3bf6";
+              url = "https://github.com";
+              position = 101;
+              isEssential = false;
+            };
+            "WhatsApp Web" = {
+              id = "1eabb6a3-911b-4fa9-9eaf-232a3703db19";
+              url = "https://web.whatsapp.com/";
+              position = 102;
+              isEssential = false;
+            };
+            "Telegram Web" = {
+              id = "5065293b-1c04-40ee-ba1d-99a231873864";
+              url = "https://web.telegram.org/k/";
+              position = 103;
+              isEssential = true;
+            };
+          };
+
+          containersForce = true;
+          containers = {
+            personal = {
+              color = "purple";
+              icon = "circle";
+              id = 1;
+              name = "Personal";
+            };
+
+            private = {
+              color = "red";
+              icon = "fingerprint";
+              id = 2;
+              name = "Private";
+            };
+
+            atolls = {
+              color = "blue";
+              icon = "briefcase";
+              id = 3;
+              name = "Atolls";
+            };
+
+            Shopping = {
+              color = "yellow";
+              icon = "dollar";
+              id = 4;
+            };
+          };
+
+          search = {
+            force = true;
+            default = "google";
+            engines = let
+              nixSnowflakeIcon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            in {
+              "Nix Packages" = {
+                urls = [
+                  {
+                    template = "https://search.nixos.org/packages";
+                    params = [
+                      {
+                        name = "type";
+                        value = "packages";
+                      }
+                      {
+                        name = "channel";
+                        value = "unstable";
+                      }
+                      {
+                        name = "query";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
+                icon = nixSnowflakeIcon;
+                definedAliases = ["np"];
+              };
+              "Nix Options" = {
+                urls = [
+                  {
+                    template = "https://search.nixos.org/options";
+                    params = [
+                      {
+                        name = "channel";
+                        value = "unstable";
+                      }
+                      {
+                        name = "query";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
+                icon = nixSnowflakeIcon;
+                definedAliases = ["nop"];
+              };
+              "Home Manager Options" = {
+                urls = [
+                  {
+                    template = "https://home-manager-options.extranix.com/";
+                    params = [
+                      {
+                        name = "query";
+                        value = "{searchTerms}";
+                      }
+                      {
+                        name = "release";
+                        value = "master";
+                      }
+                    ];
+                  }
+                ];
+                icon = nixSnowflakeIcon;
+                definedAliases = ["hmop"];
+              };
+              bing.metaData.hidden = "true";
+            };
+          };
+        };
+      };
+    };
+  };
+}

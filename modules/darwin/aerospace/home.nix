@@ -14,7 +14,13 @@ in {
       aerospace
     ];
 
-    home.activation.aerospace = lib.hm.dag.entryAfter ["writeBoundary"] ("/usr/bin/open ${aerospace}/Applications/AeroSpace.app");
+    # Use trampoline for stable app location (prevents macOS data loss on rebuilds)
+    # Open AeroSpace after rebuild to apply config changes (only if not already running)
+    home.activation.aerospace = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      if ! pgrep -x "AeroSpace" > /dev/null; then
+        $DRY_RUN_CMD /usr/bin/open "$HOME/Applications/Home Manager Trampolines/AeroSpace.app" 2>/dev/null || true
+      fi
+    '';
     home.file = {
       ".config/sketchybar".source = ./sketchybar-config;
     };
@@ -110,9 +116,9 @@ in {
         alt-enter = ''''exec-and-forget bash -c '
           if /bin/ps aux | /usr/bin/grep -i "wezterm" | /usr/bin/grep -v "grep" > /dev/null
           then
-            /nix/store/i45ywci02z76lmm77gdq68kw2m5wswy2-wezterm-0-unstable-2025-05-18/bin/wezterm start --cwd /Users/koenbenne
+            ${pkgs.wezterm}/bin/wezterm start --cwd $HOME
           else
-            /usr/bin/open /nix/store/i45ywci02z76lmm77gdq68kw2m5wswy2-wezterm-0-unstable-2025-05-18/Applications/WezTerm.app
+            /usr/bin/open "$HOME/Applications/Home Manager Trampolines/WezTerm.app"
           fi'
         ''''
 

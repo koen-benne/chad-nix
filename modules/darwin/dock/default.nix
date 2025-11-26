@@ -1,4 +1,11 @@
 # https://gist.github.com/antifuchs/10138c4d838a63c0a05e725ccd7bccdd
+#
+# This module automatically converts Nix store app paths to mac-app-util trampolines.
+# Trampolines are stable wrapper apps that prevent macOS from treating apps as "new"
+# on every rebuild, which would cause data loss (databases, cookies, settings, etc.)
+#
+# You can specify Nix store paths directly in my.desktop.entries and they will be
+# automatically converted to ~/Applications/Home Manager Trampolines/<AppName>.app
 {
   config,
   pkgs,
@@ -47,6 +54,16 @@ in {
           if hasSuffix ".app" path
           then path + "/"
           else path;
+
+        # Convert Nix store app paths to stable mac-app-util trampoline paths
+        # This prevents macOS from losing app data on every rebuild
+        toTrampolinePath = path:
+          if hasSuffix ".app" path && lib.hasPrefix "/nix/store/" path
+          then let
+            appName = baseNameOf path;
+          in "${config.my.home}/Applications/Home Manager Trampolines/${appName}"
+          else path;
+
         entryURI = path:
           "file://"
           + (
@@ -54,7 +71,7 @@ in {
             # TODO: This is entirely too naive and works only with the bundles that I have seen on my system so far:
             [" " "!" "\"" "#" "$" "%" "&" "'" "(" ")"]
             ["%20" "%21" "%22" "%23" "%24" "%25" "%26" "%27" "%28" "%29"]
-            (normalize path)
+            (normalize (toTrampolinePath path))
           );
         wantURIs =
           concatMapStrings
@@ -62,7 +79,7 @@ in {
           cfg.entries;
         createEntries =
           concatMapStrings
-          (entry: "${du} --no-restart --add '${entry.path}' --section ${entry.section} ${entry.options}\n")
+          (entry: "${du} --no-restart --add '${toTrampolinePath entry.path}' --section ${entry.section} ${entry.options}\n")
           cfg.entries;
       in {
         system.activationScripts.postActivation.text = ''
