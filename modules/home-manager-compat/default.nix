@@ -16,18 +16,23 @@
 #   footCommand = if config.my.isStandalone
 #     then "${nixgl}/bin/nixGL foot"
 #     else "foot";
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   imports =
     # Auto-discovery of compat.nix files
     lib.my.getCompatModules [../common ../nixos]
     ++ [
-    # Home-manager standalone specific modules
-    ./system-setup
-    ./nixgl-desktop
+      # Home-manager standalone specific modules
+      ./system-setup
+      ./nixgl-desktop
 
-    # Special cases that stay manual
-    ./kitty.nix      # Darwin-specific, no nixos equivalent
-  ];
+      # Special cases that stay manual
+      ./kitty.nix # Darwin-specific, no nixos equivalent
+    ];
 
   config = {
     # Detection flag for home-manager standalone mode
@@ -36,11 +41,10 @@
     # Make sys available as an alias to config for home.nix files
     # This mimics the behavior of extraSpecialArgs = { sys = config; }
     _module.args.sys = config;
-    
+
     # Essential packages for home-manager standalone mode
     home.packages = [
       pkgs.home-manager
     ];
   };
 }
-

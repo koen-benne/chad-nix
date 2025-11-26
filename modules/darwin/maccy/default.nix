@@ -1,6 +1,4 @@
-{
-  ...
-}: {
+{...}: {
   homebrew.casks = ["maccy"];
   system.defaults.CustomUserPreferences = {
     # find defaults using:

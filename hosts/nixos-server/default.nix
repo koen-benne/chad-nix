@@ -87,7 +87,7 @@
   # Auto-optimize nix store (deduplication)
   nix.optimise = {
     automatic = true;
-    dates = [ "03:45" ];  # 3:45 AM daily
+    dates = ["03:45"]; # 3:45 AM daily
   };
 
   my.openssl.enable = true;
@@ -102,14 +102,14 @@
 
     nginx = {
       enable = true;
-      mainSite.enable = true;  # Optional: enable the main landing page
+      mainSite.enable = true; # Optional: enable the main landing page
     };
 
     nextcloud = {
       enable = true;
-      subdomain = "cloud";  # Optional, this is the default
+      subdomain = "cloud"; # Optional, this is the default
       adminPassword = "PWD";
-      dataDir = "/export/1tb/NextCloud/data";  # Optional, this is the default
+      dataDir = "/export/1tb/NextCloud/data"; # Optional, this is the default
     };
     jellyfin = {
       enable = true;

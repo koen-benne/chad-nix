@@ -1,10 +1,10 @@
-{ lib
-, buildPythonPackage
-, fetchPypi
-, peewee
-, click
+{
+  lib,
+  buildPythonPackage,
+  fetchPypi,
+  peewee,
+  click,
 }:
-
 buildPythonPackage rec {
   pname = "peewee-migrate";
   version = "1.6.1";
@@ -27,6 +27,6 @@ buildPythonPackage rec {
     description = "Simple migration engine for Peewee (version 1.6.1 for compatibility)";
     homepage = "https://github.com/klen/peewee_migrate";
     license = licenses.bsd3;
-    maintainers = [ ];
+    maintainers = [];
   };
 }

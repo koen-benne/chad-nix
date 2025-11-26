@@ -36,8 +36,8 @@ in {
       virtualHosts = {
         # Main domain
         "${homelabCfg.domain}" = mkIf cfg.mainSite.enable {
-          enableACME = true;  # This enables Let's Encrypt
-          forceSSL = true;    # Redirects HTTP to HTTPS
+          enableACME = true; # This enables Let's Encrypt
+          forceSSL = true; # Redirects HTTP to HTTPS
 
           locations."/" = {
             root = cfg.mainSite.root;
@@ -67,19 +67,19 @@ in {
     # Create a simple index page only if main site is enabled
     environment.etc."var/www/main/index.html" = mkIf cfg.mainSite.enable {
       text = ''
-        <!DOCTYPE html>
-        <html>
-        <head><title>My Homelab</title></head>
-        <body>
-          <h1>Welcome to my homelab!</h1>
-          <ul>
-            ${lib.optionalString config.my.homelab.nextcloud.enable
-              ''<li><a href="https://cloud.${homelabCfg.domain}">Nextcloud</a></li>''}
-    ${lib.optionalString config.my.homelab.jellyfin.enable
-              ''<li><a href="https://jellyfin.${homelabCfg.domain}">Jellyfin</a></li>''}
-          </ul>
-        </body>
-        </html>
+            <!DOCTYPE html>
+            <html>
+            <head><title>My Homelab</title></head>
+            <body>
+              <h1>Welcome to my homelab!</h1>
+              <ul>
+                ${lib.optionalString config.my.homelab.nextcloud.enable
+          ''<li><a href="https://cloud.${homelabCfg.domain}">Nextcloud</a></li>''}
+        ${lib.optionalString config.my.homelab.jellyfin.enable
+          ''<li><a href="https://jellyfin.${homelabCfg.domain}">Jellyfin</a></li>''}
+              </ul>
+            </body>
+            </html>
       '';
     };
   };

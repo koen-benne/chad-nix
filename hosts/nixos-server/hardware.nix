@@ -15,7 +15,7 @@
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel" "i915" "video" "wl" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" "applesmc"];
-  boot.blacklistedKernelModules = [ "nouveau" ];
+  boot.blacklistedKernelModules = ["nouveau"];
   # boot.extraModulePackages = [config.boot.kernelPackages.broadcom_sta];
   boot.kernelParams = [
     "intel_idle.max_cstate=1"
@@ -32,7 +32,7 @@
     "i915.modeset=1"
     "i915.enable_rc6=0"
     "i915.enable_dpcd_backlight=1"
-    "apple_gmux.force_igd=Y"           # Force Intel Graphics Device
+    "apple_gmux.force_igd=Y" # Force Intel Graphics Device
   ];
   programs.light.enable = true;
 
@@ -43,7 +43,7 @@
     powerManagement.enable = true; # For laptops
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
 
   # Graphics support for compute/transcoding workloads
   hardware.graphics = {
@@ -67,7 +67,7 @@
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/2a7ee3c7-badc-45fc-b118-3085efff2a69";
     fsType = "ext4";
-    options = ["noatime" "discard"];  # Reduce wear, enable TRIM
+    options = ["noatime" "discard"]; # Reduce wear, enable TRIM
   };
 
   boot.initrd.luks.devices."nixosroot".device = "/dev/disk/by-uuid/7d8e632d-5b71-4983-bced-7c771f5e5c12";
@@ -81,7 +81,7 @@
   fileSystems."/mnt/biggidrive" = {
     device = "/dev/disk/by-uuid/dbbf1ce5-ab00-4312-941c-8cff767e5e1d";
     fsType = "ext4";
-    options = [ "nofail" "x-systemd.device-timeout=10" "noatime" "defaults" ];
+    options = ["nofail" "x-systemd.device-timeout=10" "noatime" "defaults"];
   };
 
   swapDevices = [

@@ -28,8 +28,6 @@ in {
     #     };
     #   };
 
-
-
     security.pki.certificateFiles = [
       ../../../certs/rootCA.pem
     ];

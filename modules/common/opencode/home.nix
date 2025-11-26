@@ -11,7 +11,8 @@
 
     xdg.configFile = {
       "opencode/opencode.json" = {
-        text = lib.replaceStrings
+        text =
+          lib.replaceStrings
           ["__BONZAI_SECRET_PATH__" "\"nil\""]
           [sys.sops.secrets.bonzai_api_key.path "\"${pkgs.nil}/bin/nil\""]
           (builtins.readFile ./opencode.json);
@@ -22,4 +23,3 @@
     };
   };
 }
-

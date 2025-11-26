@@ -1,12 +1,12 @@
-{ lib
-, buildPythonPackage
-, fetchPypi
-, setuptools
-, wheel
-, flask
-, pyyaml
+{
+  lib,
+  buildPythonPackage,
+  fetchPypi,
+  setuptools,
+  wheel,
+  flask,
+  pyyaml,
 }:
-
 buildPythonPackage rec {
   pname = "swagger-ui-py";
   version = "23.9.23";
@@ -45,8 +45,8 @@ buildPythonPackage rec {
       It includes the complete Swagger UI interface for API documentation.
     '';
     homepage = "https://github.com/swagger-api/swagger-ui-py";
-    license = licenses.asl20;  # Apache License 2.0
-    maintainers = with maintainers; [ ];
+    license = licenses.asl20; # Apache License 2.0
+    maintainers = with maintainers; [];
     platforms = platforms.all;
   };
 }

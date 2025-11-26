@@ -1,10 +1,9 @@
 # Example usage of nixgl-desktop module
 # Add this to your host configuration to enable nixGL-wrapped desktop entries
-
 {
   # Enable the nixGL desktop entries module
   my.nixgl-desktop.enable = true;
-  
+
   # Configure applications that need nixGL wrapping
   my.nixgl-desktop.applications = {
     # Example: Firefox with nixGL
@@ -23,7 +22,7 @@
       ];
       nixGLVariant = "nixGLIntel"; # or "nixGLNvidia" or "nixGLMesa"
     };
-    
+
     # Example: VS Code with nixGL
     vscode = {
       name = "Visual Studio Code (nixGL)";
@@ -33,7 +32,7 @@
       categories = ["Development" "TextEditor"];
       nixGLVariant = "nixGLIntel";
     };
-    
+
     # Example: Steam with nixGL (needs Nvidia variant typically)
     steam = {
       name = "Steam (nixGL)";
@@ -43,7 +42,7 @@
       categories = ["Game"];
       nixGLVariant = "nixGLNvidia"; # Usually needs Nvidia variant for gaming
     };
-    
+
     # Example: Discord with nixGL
     discord = {
       name = "Discord (nixGL)";
@@ -53,7 +52,7 @@
       categories = ["Network" "InstantMessaging"];
       nixGLVariant = "nixGLIntel";
     };
-    
+
     # Example: Blender with nixGL (3D applications benefit greatly from nixGL)
     blender = {
       name = "Blender (nixGL)";

@@ -1,10 +1,9 @@
 # Example system setup configuration for desktop environments
 # Add this to your host configuration to get helpful setup instructions
-
 {
   # Enable system setup helper
   my.system-setup.enable = true;
-  
+
   # Configure system components to check
   my.system-setup.checks = {
     pipewire = {
@@ -42,7 +41,7 @@
         ];
       };
     };
-    
+
     wayland = {
       name = "Wayland Display Server";
       description = "Modern display server for better security and performance";
@@ -63,7 +62,7 @@
           "# Wayland is default on modern Fedora"
           "# Install development packages if needed:"
           "sudo dnf install wayland-devel wayland-protocols-devel"
-        ];  
+        ];
         arch = [
           "# Install Wayland:"
           "sudo pacman -S wayland wayland-protocols"
@@ -75,7 +74,7 @@
         ];
       };
     };
-    
+
     graphics-drivers = {
       name = "Graphics Drivers";
       description = "Hardware-accelerated graphics for smooth desktop experience";
@@ -106,7 +105,7 @@
           "sudo pacman -S mesa intel-media-driver"
           "# For NVIDIA:"
           "sudo pacman -S nvidia nvidia-settings"
-          "# For AMD:"  
+          "# For AMD:"
           "sudo pacman -S mesa vulkan-radeon"
         ];
         generic = [
@@ -115,7 +114,7 @@
         ];
       };
     };
-    
+
     fonts = {
       name = "Font Rendering";
       description = "Good font rendering for readable text";
@@ -150,7 +149,7 @@
         ];
       };
     };
-    
+
     polkit = {
       name = "PolicyKit Authentication";
       description = "Handles authentication for privileged operations";
@@ -173,14 +172,14 @@
           "# Install PolicyKit:"
           "sudo pacman -S polkit"
           "# Install an authentication agent:"
-          "sudo pacman -S polkit-gnome"  # or lxsession, etc.
+          "sudo pacman -S polkit-gnome" # or lxsession, etc.
         ];
         generic = [
           "# Install polkit and a polkit authentication agent"
         ];
       };
     };
-    
+
     bluetooth = {
       name = "Bluetooth Support";
       description = "Wireless connectivity for audio devices and peripherals";
@@ -212,7 +211,7 @@
         ];
       };
     };
-    
+
     display-manager = {
       name = "Display Manager (tuigreet)";
       description = "Login manager for starting desktop sessions - tuigreet provides a clean TUI interface";
@@ -239,7 +238,7 @@
           "sudo tee /etc/greetd/config.toml <<EOF"
           "[terminal]"
           "vt = 1"
-          "[default_session]" 
+          "[default_session]"
           "command = \"tuigreet --time --cmd Hyprland\""
           "user = \"greeter\""
           "EOF"
@@ -269,7 +268,7 @@
         ];
       };
     };
-    
+
     session-files = {
       name = "Desktop Session Files";
       description = "Wayland session files for desktop environments to appear in login manager";
@@ -297,7 +296,7 @@
           "[Desktop Entry]"
           "Name=Hyprland"
           "Comment=An intelligent dynamic tiling Wayland compositor"
-          "Exec=Hyprland" 
+          "Exec=Hyprland"
           "Type=Application"
           "EOF"
         ];

@@ -48,7 +48,7 @@ in {
       niri-session-setup = {
         Unit = {
           Description = "Setup niri session environment";
-          Before = [ "xdg-desktop-portal.service" ];
+          Before = ["xdg-desktop-portal.service"];
         };
         Service = {
           Type = "oneshot";
@@ -69,15 +69,15 @@ in {
           '';
           RemainAfterExit = true;
         };
-        Install.WantedBy = [ "niri.service" ];
+        Install.WantedBy = ["niri.service"];
       };
 
       # PolicyKit authentication agent
       polkit-gnome-authentication-agent = {
         Unit = {
           Description = "PolicyKit Authentication Agent";
-          After = [ "graphical-session.target" ];
-          PartOf = [ "graphical-session.target" ];
+          After = ["graphical-session.target"];
+          PartOf = ["graphical-session.target"];
         };
         Service = {
           Type = "simple";
@@ -86,7 +86,7 @@ in {
           RestartSec = 1;
           TimeoutStopSec = 10;
         };
-        Install.WantedBy = [ "graphical-session.target" ];
+        Install.WantedBy = ["graphical-session.target"];
       };
     };
 

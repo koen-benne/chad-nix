@@ -1,6 +1,5 @@
 # Example usage of nixgl-desktop module
 # Add this to your host configuration to enable nixGL-wrapped desktop entries
-
 {
   # Enable the nixGL desktop entries module
   my.nixgl-desktop.enable = true;

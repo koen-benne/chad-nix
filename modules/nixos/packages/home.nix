@@ -1,8 +1,5 @@
 # All nixos systems will have these packages
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     steamcmd
     steam-run

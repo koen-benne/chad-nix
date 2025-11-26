@@ -31,7 +31,7 @@ in {
 
     extraApps = mkOption {
       type = types.listOf types.str;
-      default = [ "news" "contacts" "calendar" "tasks" "notes" "mail" "phonetrack" ];
+      default = ["news" "contacts" "calendar" "tasks" "notes" "mail" "phonetrack"];
       description = mdDoc "List of extra Nextcloud apps to enable";
     };
   };
@@ -78,29 +78,32 @@ in {
           map (appName: {
             name = appName;
             value = availableApps.${appName};
-          }) (builtins.filter (appName:
-            builtins.hasAttr appName availableApps
-          ) cfg.extraApps)
+          }) (builtins.filter (
+              appName:
+                builtins.hasAttr appName availableApps
+            )
+            cfg.extraApps)
         );
-      in enabledApps;
+      in
+        enabledApps;
 
       extraAppsEnable = true;
 
       # Extra configuration
       settings = {
-        trusted_domains = [ "${cfg.subdomain}.${homelabCfg.domain}" ];
-        trusted_proxies = [ "127.0.0.1" ];
+        trusted_domains = ["${cfg.subdomain}.${homelabCfg.domain}"];
+        trusted_proxies = ["127.0.0.1"];
         "overwrite.cli.url" = "https://${cfg.subdomain}.${homelabCfg.domain}";
 
         # File handling
-        "max_chunk_size" = 10485760;  # 10MB chunks for large file uploads
+        "max_chunk_size" = 10485760; # 10MB chunks for large file uploads
       };
     };
 
     # Mount external data directory
     fileSystems."/var/lib/nextcloud/data" = {
       device = cfg.dataDir;
-      options = [ "bind" ];
+      options = ["bind"];
     };
 
     # Add Nextcloud virtual host to nginx if nginx is enabled
@@ -113,4 +116,3 @@ in {
     };
   };
 }
-

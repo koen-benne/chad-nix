@@ -39,7 +39,7 @@ in {
 
     # Open firewall ports for web services
     networking.firewall = {
-      allowedTCPPorts = [ 80 443 ];
+      allowedTCPPorts = [80 443];
     };
 
     # Ensure required users and groups exist

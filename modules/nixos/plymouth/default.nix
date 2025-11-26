@@ -23,4 +23,3 @@ in {
     boot.initrd.verbose = false;
   };
 }
-

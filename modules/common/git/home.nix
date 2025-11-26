@@ -19,10 +19,12 @@ in {
     programs.git = {
       enable = true;
       userEmail = config.my.email;
-      includes = [{
-        contents.user.email = config.my.workmail;
-        condition = "gitdir:~/work/";
-      }];
+      includes = [
+        {
+          contents.user.email = config.my.workmail;
+          condition = "gitdir:~/work/";
+        }
+      ];
       userName = config.my.name;
       aliases = {
         br = "branch";
@@ -51,7 +53,7 @@ in {
       ];
       extraConfig = {
         core = {
-          autocrlf = "input";  # Fuck Windows line endings
+          autocrlf = "input"; # Fuck Windows line endings
           ignorecase = false;
         };
         init.defaultBranch = "main";
@@ -61,9 +63,9 @@ in {
         };
         push = {
           default = "simple";
-          autoSetupRemote = true;  # Set up remote branch on new branch push
+          autoSetupRemote = true; # Set up remote branch on new branch push
         };
-        merge.ff = false;  # Always create merge commits for explicit merges
+        merge.ff = false; # Always create merge commits for explicit merges
         branch.autoSetupRebase = "always";
         fetch.prune = true;
         diff.tool = "nvimdiff";
@@ -78,13 +80,12 @@ in {
         };
         status = {
           submoduleSummary = true;
-          showUntrackedFiles = "all";  # Show untracked files in subdirs
+          showUntrackedFiles = "all"; # Show untracked files in subdirs
         };
 
         # Quality of life improvements
-        help.autoCorrect = 10;  # Auto-correct typos after 1 second
-        commit.verbose = true;  # Show diff in commit message
-
+        help.autoCorrect = 10; # Auto-correct typos after 1 second
+        commit.verbose = true; # Show diff in commit message
 
         url = {
           "ssh://git@github.com:22/" = {pushInsteadOf = "https://github.com/";};

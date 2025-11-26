@@ -59,12 +59,11 @@ in {
         };
       };
 
-      spawn-at-startup =
-        [
-          {command = ["wl-paste" "--watch" "cliphist" "store"];}
-          {command = ["${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"];}
-          {command = wrapCmd ["foot" "--server"];}
-        ];
+      spawn-at-startup = [
+        {command = ["wl-paste" "--watch" "cliphist" "store"];}
+        {command = ["${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"];}
+        {command = wrapCmd ["foot" "--server"];}
+      ];
 
       environment = {
         NIXOS_OZONE_WL = "1";
@@ -212,9 +211,9 @@ in {
       window-rules = [
         {
           matches = [
-            { app-id = "^org\.keepassxc\.KeePassXC$"; }
-            { app-id = "^org\.gnome\.World\.Secrets$"; }
-            { app-id = "^1Password$"; }
+            {app-id = "^org\.keepassxc\.KeePassXC$";}
+            {app-id = "^org\.gnome\.World\.Secrets$";}
+            {app-id = "^1Password$";}
           ];
 
           block-out-from = "screencast";

@@ -28,7 +28,7 @@ in {
     # Fix networking
     networking.firewall = {
       checkReversePath = false;
-      trustedInterfaces = [ "virbr0" ];
+      trustedInterfaces = ["virbr0"];
       extraCommands = ''
         # Ensure proper NAT for libvirt
         iptables -t nat -A LIBVIRT_PRT -s 192.168.122.0/24 -o enp9s0 -j MASQUERADE

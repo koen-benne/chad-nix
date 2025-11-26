@@ -1,5 +1,8 @@
 # Shared Hyprland configuration
-{ scripts, wrapCmd ? (cmd: cmd) }: ''
+{
+  scripts,
+  wrapCmd ? (cmd: cmd),
+}: ''
   monitor = eDP-1, 3024x1890@60, auto, 2
   # monitor = HDMI-A-1, 3440x1440@60, auto, 1
 

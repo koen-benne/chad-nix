@@ -1,10 +1,10 @@
-{ lib
-, buildPythonPackage
-, fetchPypi
-, setuptools
-, wheel
+{
+  lib,
+  buildPythonPackage,
+  fetchPypi,
+  setuptools,
+  wheel,
 }:
-
 buildPythonPackage rec {
   pname = "JSON-log-formatter";
   version = "0.5.2";
@@ -21,7 +21,7 @@ buildPythonPackage rec {
   ];
 
   # No runtime dependencies based on the PyPI page
-  propagatedBuildInputs = [ ];
+  propagatedBuildInputs = [];
 
   doCheck = false; # No tests in the package
 
@@ -29,7 +29,6 @@ buildPythonPackage rec {
     description = "JSON formatter for Python logging";
     homepage = "https://pypi.org/project/JSON-log-formatter/";
     license = licenses.bsd2;
-    maintainers = with maintainers; [ ]; # Add your name
+    maintainers = with maintainers; []; # Add your name
   };
 }
-

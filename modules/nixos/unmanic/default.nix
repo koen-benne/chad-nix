@@ -16,7 +16,7 @@ in {
 
     # AMD GPU support
     hardware.amdgpu.opencl.enable = true;
-    hardware.graphics.extraPackages = [ pkgs.amf ];
+    hardware.graphics.extraPackages = [pkgs.amf];
 
     # Enable FUSE for SSHFS
     programs.fuse.userAllowOther = true;
@@ -62,9 +62,9 @@ in {
     # Create the systemd service
     systemd.services.unmanic = {
       description = "Unmanic - Library Optimiser";
-      after = [ "network-online.target" ];
-      wants = [ "network-online.target" ];
-      wantedBy = [ "multi-user.target" ];
+      after = ["network-online.target"];
+      wants = ["network-online.target"];
+      wantedBy = ["multi-user.target"];
 
       serviceConfig = {
         Type = "simple";
@@ -81,7 +81,7 @@ in {
         PrivateTmp = true;
         ProtectSystem = "strict";
         ProtectHome = true;
-        ReadWritePaths = [ "/var/lib/unmanic" "/mnt/server-media" ];
+        ReadWritePaths = ["/var/lib/unmanic" "/mnt/server-media"];
         NoNewPrivileges = true;
       };
 
@@ -91,6 +91,6 @@ in {
     };
 
     # Ensure the service starts automatically
-    systemd.targets.multi-user.wants = [ "unmanic.service" ];
+    systemd.targets.multi-user.wants = ["unmanic.service"];
   };
 }

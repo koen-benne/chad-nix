@@ -18,7 +18,7 @@
   home.stateVersion = "24.05";
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = ["nix-command" "flakes"];
     };
     package = pkgs.nix;
   };

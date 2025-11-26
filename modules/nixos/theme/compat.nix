@@ -1,4 +1,10 @@
-{lib, inputs, pkgs, config, ...}: let
+{
+  lib,
+  inputs,
+  pkgs,
+  config,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf;
 in {
   options.my.theme = {
