@@ -116,7 +116,7 @@ in {
           fi'
         ''''
 
-        alt-w = 'exec-and-forget ${inputs.zen-browser.packages."${pkgs.system}".beta}/bin/zen-beta'
+        alt-w = 'exec-and-forget zen-beta'
 
         alt-q = 'close'
         alt-f = 'fullscreen'

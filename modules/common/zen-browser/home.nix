@@ -26,12 +26,8 @@ in {
       enable = true;
       darwinDefaultsId = mkIf pkgs.stdenv.isDarwin "org.mozilla.zen.browser";
 
-      # Define a stable profile with consistent naming
-      # The module will generate profiles.ini automatically
       profiles."default" = {
         id = 0;
-        name = "default";
-        path = "default";
         isDefault = true;
       };
 
