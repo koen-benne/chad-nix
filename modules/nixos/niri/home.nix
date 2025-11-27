@@ -41,6 +41,10 @@ in {
         hide-after-inactive-ms = 5000;
       };
 
+      hotkey-overlay = {
+        skip-at-startup = true;
+      };
+
       layout = {
         gaps = 10;
         center-focused-column = "never";
