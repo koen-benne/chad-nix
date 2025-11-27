@@ -32,8 +32,5 @@
     brews = [
       "mas"
     ];
-    casks = [
-      "zen-browser"
-    ];
   };
 }

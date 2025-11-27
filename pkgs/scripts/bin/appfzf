@@ -9,18 +9,19 @@ SEARCH_PATHS=(
     "/System/Applications"                          # macOS built-in apps
 )
 
-# Build a map of app names to their full paths
+# Build a map of app names to their full paths (fast version using ls)
 declare -A app_paths
 
 for dir in "${SEARCH_PATHS[@]}"; do
     if [[ -d "$dir" ]]; then
-        while IFS= read -r -d '' app; do
-            app_name=$(basename "$app" .app)
+        while IFS= read -r app; do
+            [[ -z "$app" ]] && continue
+            app_name="${app%.app}"
             # Only add if we haven't seen this app name before (prioritize earlier paths)
             if [[ -z "${app_paths[$app_name]}" ]]; then
-                app_paths["$app_name"]="$app"
+                app_paths["$app_name"]="$dir/$app"
             fi
-        done < <(find "$dir" -maxdepth 1 -name "*.app" -print0 2>/dev/null)
+        done < <(ls -1 "$dir" 2>/dev/null | grep '\.app$')
     fi
 done
 

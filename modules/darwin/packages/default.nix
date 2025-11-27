@@ -16,11 +16,18 @@
 
       # Browsers
       # "arc"
+      {
+        name = "zen";
+        greedy = true;
+      }
+
       "steam"
       {
         name = "microsoft-teams";
         greedy = true;
       }
+
+
       # Utility Tools
       {
         name = "1password";

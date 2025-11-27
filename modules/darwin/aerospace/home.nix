@@ -17,7 +17,7 @@ in {
     # Use trampoline for stable app location (prevents macOS data loss on rebuilds)
     # Open AeroSpace after rebuild to apply config changes (only if not already running)
     home.activation.aerospace = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      if ! pgrep -x "AeroSpace" > /dev/null; then
+      if ! /usr/bin/pgrep -x "AeroSpace" > /dev/null; then
         $DRY_RUN_CMD /usr/bin/open "$HOME/Applications/Home Manager Trampolines/AeroSpace.app" 2>/dev/null || true
       fi
     '';
