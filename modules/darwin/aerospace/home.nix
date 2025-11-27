@@ -122,7 +122,7 @@ in {
           fi'
         ''''
 
-        alt-w = 'exec-and-forget zen-beta'
+        alt-w = 'exec-and-forget /Applications/Zen.app/Contents/MacOS/zen'
 
         alt-q = 'close'
         alt-f = 'fullscreen'
