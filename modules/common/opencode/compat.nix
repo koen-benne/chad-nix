@@ -5,7 +5,7 @@ in {
     enable = mkEnableOption "opencode";
   };
 
-  sops.secrets.bonzai_api_key = {
+  config.sops.secrets.bonzai_api_key = {
     mode = "0400";
   };
 }
