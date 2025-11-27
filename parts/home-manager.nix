@@ -43,7 +43,7 @@ in {
     koenbenne = mkHome {
       system = "x86_64-linux";
       username = "koenbenne";
-      modules = [../hosts/debian-vm/home.nix];
+      modules = [../hosts/debian-work/home.nix];
     };
   };
 }
