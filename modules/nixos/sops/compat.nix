@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   inputs,
   ...
 }: {
@@ -18,6 +19,6 @@
   };
 
   home.packages = [
-    config.pkgs.sops
+    pkgs.sops
   ];
 }
