@@ -19,12 +19,23 @@
   inputs,
   ...
 }: {
+  # Disable the stable home-manager's targets.genericLinux module to avoid conflicts
+  # when importing the full-featured version from unstable
+  disabledModules = [
+    "targets/generic-linux.nix"
+  ];
+
   imports =
     # Auto-discovery of compat.nix files
     lib.my.getCompatModules [../common ../nixos]
     ++ [
       # Home-manager standalone specific modules
       ./system-setup
+
+      # TODO: Remove after upgrading to home-manager 25.11 - targets.genericLinux will be in stable
+      # Import targets.genericLinux from home-manager-unstable since it's not in 25.05
+      # This provides GPU support and XDG integration for non-NixOS systems
+      (inputs.home-manager-unstable + "/modules/targets/generic-linux.nix")
     ];
 
   config = {
