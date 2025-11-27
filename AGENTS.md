@@ -53,6 +53,8 @@ modules/{common,nixos}/<module>/
 
 For standalone home-manager on non-NixOS Linux systems, GPU support is provided through home-manager's built-in `targets.genericLinux.gpu` module. This creates a system-level integration that makes GPU acceleration work for all Nix packages automatically.
 
+**Note:** This module is not available in home-manager 25.05, so we import it from `home-manager-unstable`. When upgrading to 25.11+, the import can be removed.
+
 ### How It Works
 
 1. **System-Level Integration**: Creates `/run/opengl-driver` symlink pointing to Nix-managed GPU libraries (Mesa, optionally Nvidia)

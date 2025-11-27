@@ -15,8 +15,11 @@
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # TODO: Remove when upgrading to home-manager 25.11
-    # Used for: aerospace (extraConfig, launchd), quickshell module (for dms)
+    # TODO: Remove when upgrading to home-manager 25.11 (releases early December 2024)
+    # Used for: 
+    # - aerospace (extraConfig, launchd) - Darwin
+    # - quickshell module (for dms) - NixOS/Linux
+    # - targets.genericLinux (GPU support) - standalone home-manager on Linux
     home-manager-unstable.url = "github:nix-community/home-manager/master";
     home-manager-unstable.inputs.nixpkgs.follows = "unstable";
 

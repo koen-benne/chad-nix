@@ -16,6 +16,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: {
   imports =
@@ -25,8 +26,10 @@
       # Home-manager standalone specific modules
       ./system-setup
 
-      # Special cases that stay manual
-      ./kitty.nix # Darwin-specific, no nixos equivalent
+      # TODO: Remove after upgrading to home-manager 25.11 - targets.genericLinux will be in stable
+      # Import targets.genericLinux from home-manager-unstable since it's not in 25.05
+      # This provides GPU support and XDG integration for non-NixOS systems
+      (inputs.home-manager-unstable + "/modules/targets/generic-linux.nix")
     ];
 
   config = {
