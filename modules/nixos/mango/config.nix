@@ -1,7 +1,6 @@
 # Shared Mango configuration
 {
   scripts ? null,
-  wrapCmd ? (cmd: cmd),
 }: ''
 
   # More option see https://github.com/DreamMaoMao/mango/wiki/
@@ -152,10 +151,10 @@
   # menu and terminal
   bind=SUPER,r,spawn,dms ipc spotlight toggle
   bind=SUPER,Return,spawn,footclient
-  bind=SUPER,w,spawn,${wrapCmd "zen"}
+  bind=SUPER,w,spawn,zen
   bind=SUPER,q,killclient,
   bind=SUPER+CTRL+SHIFT,c,quit
-  bind=SUPER,e,spawn,${wrapCmd "nautilus"}
+  bind=SUPER,e,spawn,nautilus
   bind=SUPER,v,togglefloating,
   bind=SUPER,f,togglefullscreen,
   bind=SUPER,p,spawn,1password --quick-access

@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }: let
   inherit (lib) mdDoc mkEnableOption mkIf;
@@ -15,10 +14,7 @@ in {
   config = mkIf cfg.enable {
     programs.foot = {
       enable = true;
-      package = lib.my.wrapPackage {
-        inherit pkgs config inputs;
-        package = pkgs.foot;
-      };
+      package = pkgs.foot;
       settings.main = {
         pad = "0x0 center";
       };

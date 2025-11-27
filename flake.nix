@@ -69,10 +69,6 @@
     # Arr
     nixarr.url = "github:rasmus-kirk/nixarr";
 
-    # NixGL for non-NixOS graphics
-    nixgl.url = "github:nix-community/nixGL";
-    nixgl.inputs.nixpkgs.follows = "nixpkgs";
-
     # Niri wayland compositor
     niri.url = "github:sodiboo/niri-flake";
     niri.inputs.nixpkgs.follows = "nixpkgs";

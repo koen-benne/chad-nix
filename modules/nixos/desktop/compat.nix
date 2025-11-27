@@ -2,21 +2,10 @@
   lib,
   config,
   pkgs,
-  inputs,
   ...
 }: let
   inherit (lib) mdDoc mkEnableOption mkIf mkOption types;
   cfg = config.my.desktop;
-
-  # NixGL setup for standalone home-manager mode
-  nixGLPackage =
-    if config.my.hyprland.nixgl.variant == "auto"
-    then inputs.nixgl.packages.${pkgs.system}.nixGLDefault
-    else if config.my.hyprland.nixgl.variant == "intel"
-    then inputs.nixgl.packages.${pkgs.system}.nixGLIntel
-    else if config.my.hyprland.nixgl.variant == "nvidia"
-    then inputs.nixgl.packages.${pkgs.system}.nixGLNvidia
-    else inputs.nixgl.packages.${pkgs.system}.nixGLMesa;
 in {
   options.my.desktop = {
     enable = mkEnableOption "desktop";
@@ -42,16 +31,10 @@ in {
 
     # Standalone mode packages
     home.packages = [
-      # NixGL package
-      nixGLPackage
-
       # Desktop essentials for standalone mode
       pkgs.hyprpicker
       pkgs.playerctl
-      (lib.my.wrapPackage {
-        inherit pkgs config inputs;
-        package = pkgs.nautilus;
-      })
+      pkgs.nautilus
     ];
 
     # Enable system setup helper for standalone mode
@@ -136,28 +119,43 @@ in {
 
       graphics-drivers = {
         name = "Graphics Drivers";
-        description = "Hardware acceleration for smooth desktop and nixGL compatibility";
+        description = "Hardware acceleration via targets.genericLinux.gpu - Home Manager will notify you to run setup";
         priority = "critical";
         checkCommands = [];
         setupInstructions = {
           ubuntu = [
+            "# Install host graphics drivers first:"
             "# For Intel: sudo apt install mesa-utils intel-media-va-driver"
             "# For NVIDIA: sudo ubuntu-drivers autoinstall"
             "# For AMD: sudo apt install mesa-utils mesa-vulkan-drivers"
+            ""
+            "# After 'home-manager switch', run the setup command shown:"
+            "# sudo /nix/store/.../non-nixos-gpu-setup"
+            ""
+            "# This creates /run/opengl-driver and enables GPU for all Nix packages"
           ];
           fedora = [
+            "# Install host graphics drivers first:"
             "# For Intel: sudo dnf install mesa-dri-drivers intel-media-driver"
             "# For NVIDIA: sudo dnf install nvidia-driver nvidia-settings"
             "# For AMD: sudo dnf install mesa-dri-drivers mesa-vulkan-drivers"
+            ""
+            "# After 'home-manager switch', run the setup command shown:"
+            "# sudo /nix/store/.../non-nixos-gpu-setup"
           ];
           arch = [
+            "# Install host graphics drivers first:"
             "# For Intel: sudo pacman -S mesa intel-media-driver"
             "# For NVIDIA: sudo pacman -S nvidia nvidia-settings"
             "# For AMD: sudo pacman -S mesa vulkan-radeon"
+            ""
+            "# After 'home-manager switch', run the setup command shown:"
+            "# sudo /nix/store/.../non-nixos-gpu-setup"
           ];
           generic = [
-            "Install appropriate graphics drivers for your GPU"
-            "Install mesa utilities for OpenGL support"
+            "1. Install appropriate graphics drivers for your GPU"
+            "2. Run 'home-manager switch'"
+            "3. Run the setup command shown to enable GPU for Nix packages"
           ];
         };
       };

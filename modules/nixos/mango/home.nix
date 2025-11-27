@@ -12,9 +12,6 @@
 
   # Import shared config
   sharedConfig = import ./config.nix;
-
-  # Helper function to conditionally wrap commands with nixGL for standalone mode
-  wrapCmd = cmd: lib.my.wrapGL config cmd;
 in {
   imports = [
     inputs.mango.hmModules.mango
@@ -28,12 +25,12 @@ in {
 
     wayland.windowManager.mango = {
       enable = true;
-      settings = sharedConfig {inherit scripts wrapCmd;};
+      settings = sharedConfig {inherit scripts;};
       autostart_sh = ''
         wl-paste --watch cliphist store &
         ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1 &
-        ${wrapCmd "foot --server"} &
-        ${wrapCmd "dms run"} &
+        foot --server &
+        dms run &
         # see autostart.sh
         # Note: here no need to add shebang
       '';

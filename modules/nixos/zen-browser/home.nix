@@ -48,11 +48,7 @@ in {
       package =
         if pkgs.stdenv.isDarwin
         then lib.mkForce null
-        else
-          lib.my.wrapPackage {
-            inherit pkgs config inputs;
-            package = inputs.zen-browser.packages.${pkgs.system}.default;
-          };
+        else inputs.zen-browser.packages.${pkgs.system}.default;
 
       policies = {
         AutofillAddressEnabled = true;

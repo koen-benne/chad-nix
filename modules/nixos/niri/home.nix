@@ -8,9 +8,6 @@
 }: let
   inherit (lib) mkIf;
   cfg = sys.my.niri;
-
-  # Helper function to conditionally wrap commands with nixGL for standalone mode
-  wrapCmd = cmd: lib.my.wrapGL config cmd;
 in {
   config = mkIf cfg.enable {
     # Polkit agent package for both NixOS and standalone modes
@@ -62,7 +59,7 @@ in {
       spawn-at-startup = [
         {command = ["wl-paste" "--watch" "cliphist" "store"];}
         {command = ["${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"];}
-        {command = wrapCmd ["foot" "--server"];}
+        {command = ["foot" "--server"];}
       ];
 
       environment = {
@@ -76,10 +73,10 @@ in {
 
       binds = with config.lib.niri.actions; {
         "Mod+Return".action = spawn "footclient";
-        "Mod+w".action = spawn (wrapCmd ["zen-beta" "--name" "zen-beta"]);
+        "Mod+w".action = spawn ["zen-beta" "--name" "zen-beta"];
         "Mod+q".action = close-window;
         "Mod+Ctrl+Shift+c".action = quit;
-        "Mod+e".action = spawn (wrapCmd "nautilus");
+        "Mod+e".action = spawn "nautilus";
         "Mod+v".action = toggle-window-floating;
         "Mod+f".action = fullscreen-window;
         "Mod+p".action = spawn "1password" "--quick-access";

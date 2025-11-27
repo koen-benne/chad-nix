@@ -49,68 +49,101 @@ modules/{common,nixos}/<module>/
 - **Auto-Discovery**: home-manager-compat uses `getCompatModules` for automatic discovery
 - **Selective**: Only modules requiring system options need `compat.nix`
 
-## NixGL Integration for GPU Applications
+## GPU Support for Standalone Home-Manager (Linux Only)
 
-### Package Wrapping Pattern
-For GUI applications that need GPU acceleration in standalone home-manager mode:
+For standalone home-manager on non-NixOS Linux systems, GPU support is provided through home-manager's built-in `targets.genericLinux.gpu` module. This creates a system-level integration that makes GPU acceleration work for all Nix packages automatically.
+
+### How It Works
+
+1. **System-Level Integration**: Creates `/run/opengl-driver` symlink pointing to Nix-managed GPU libraries (Mesa, optionally Nvidia)
+2. **Systemd Service**: Installs a service that maintains the symlink across reboots
+3. **Automatic Notifications**: Home Manager checks and warns you when setup/updates are needed
+4. **No Per-Package Wrapping**: Once set up, ALL GUI applications automatically get GPU access
+
+### Setup
+
+The GPU module is automatically enabled in `modules/home-manager-compat/default.nix`:
 
 ```nix
-# In home.nix
-programs.myapp = {
+config = {
+  # Provides XDG dirs, shell integration, terminfo, cursor paths, etc.
+  targets.genericLinux.enable = true;
+  
+  # Enables GPU driver integration (Mesa by default)
+  targets.genericLinux.gpu.enable = true;
+}
+```
+
+### First-Time Setup Process
+
+1. **Install host graphics drivers** first (via your distro's package manager)
+2. **Run home-manager switch**:
+   ```bash
+   home-manager switch
+   ```
+3. **Home Manager will notify you**:
+   ```
+   Activating checkExistingGpuDrivers
+   This non-NixOS system is not yet set up to use the GPU
+   with Nix packages. To set up GPU drivers, run
+     sudo /nix/store/HASH-non-nixos-gpu/bin/non-nixos-gpu-setup
+   ```
+4. **Run the setup command** (requires sudo):
+   ```bash
+   sudo /nix/store/HASH-non-nixos-gpu/bin/non-nixos-gpu-setup
+   ```
+5. **All GPU applications now work!** No per-package configuration needed.
+
+### Ongoing Maintenance
+
+- **Automatic updates**: When nixpkgs updates change driver versions, Home Manager will notify you to run the setup command again
+- **After reboot**: The systemd service automatically recreates `/run/opengl-driver`
+- **Zero maintenance**: Just run the setup command when notified
+
+### Nvidia Support
+
+For Nvidia proprietary drivers, add this configuration (must match host driver version exactly):
+
+```nix
+targets.genericLinux.gpu.nvidia = {
   enable = true;
-  package = lib.my.wrapPackage {
-    inherit pkgs config inputs;
-    package = pkgs.myapp;
-  };
+  version = "550.163.01";  # Get from: nvidia-smi
+  sha256 = "sha256-...";   # Get from: nix store prefetch-file https://download.nvidia.com/XFree86/Linux-x86_64/VERSION/NVIDIA-Linux-x86_64-VERSION.run
 };
 ```
 
-### How it Works
-- `lib.my.wrapPackage` wraps ALL binaries in a package with nixGLIntel
-- Only active when `config.my.isStandalone = true`
-- On NixOS/Darwin, returns the unwrapped package (zero overhead)
-- Wraps the package itself, so CLI, desktop files, and all invocations work
+### Benefits Over Previous nixGL Approach
 
-### When to Use
-Wrap packages that need GPU/OpenGL/Vulkan acceleration:
-- Terminal emulators (foot, alacritty, kitty)
-- Web browsers (zen-browser, qutebrowser, firefox)
-- File managers (nautilus, dolphin)
-- Any GUI app that uses graphics acceleration
+- ✅ **No per-package wrapping** - Set up once, works everywhere
+- ✅ **No library conflicts** - No LD_LIBRARY_PATH pollution
+- ✅ **Matches NixOS** - Uses same `/run/opengl-driver` convention
+- ✅ **Automatic notifications** - Never forget to update drivers
+- ✅ **Cleaner codebase** - Less custom abstraction code
+- ✅ **Upstream support** - Maintained by home-manager team
 
-### Examples
+### Package Configuration
+
+No special package wrapping needed! Just use packages normally:
+
 ```nix
-# Terminal with GPU acceleration
-programs.foot.package = lib.my.wrapPackage {
-  inherit pkgs config inputs;
-  package = pkgs.foot;
-};
+# Terminal - works automatically
+programs.foot.enable = true;
 
-# Browser with GPU acceleration
-programs.zen-browser.package = lib.my.wrapPackage {
-  inherit pkgs config inputs;
-  package = inputs.zen-browser.packages.${pkgs.system}.default;
-};
+# Browser - works automatically  
+programs.zen-browser.enable = true;
 
-# Package in home.packages
-home.packages = [
-  (lib.my.wrapPackage {
-    inherit pkgs config inputs;
-    package = pkgs.nautilus;
-  })
-];
+# File manager - works automatically
+home.packages = [ pkgs.nautilus ];
 ```
 
-### Command Wrapping (Alternative)
-For wrapping commands in window manager configs (keybindings):
-```nix
-# In config files (hyprland, niri, etc.)
-wrapCmd = cmd: lib.my.wrapGL config cmd;
+### What targets.genericLinux Also Provides
 
-# Usage
-bind = $mainMod, W, exec, ${wrapCmd "zen"}
-```
+Beyond GPU support, `targets.genericLinux.enable = true` also provides:
 
-Both approaches work together:
-- Package wrapping: Wraps the package itself (CLI + desktop files)
-- Command wrapping: Wraps command strings in configs (keybindings)
+- **XDG data directories** - Adds `/usr/share`, `/usr/local/share`, Nix profile paths
+- **Cursor paths** - Sets `XCURSOR_PATH` for system and Nix cursors
+- **Shell integration** - Sources `nix.sh` and `hm-session-vars.sh` in bash/zsh/fish
+- **Terminfo paths** - Proper terminal database paths for all distros
+- **Zsh completions** - Makes system zsh completions available
+
+This eliminates the need for many custom compatibility hacks and provides better integration with the host system.

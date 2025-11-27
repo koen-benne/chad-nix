@@ -1,17 +1,16 @@
 # Shared Hyprland configuration
 {
   scripts,
-  wrapCmd ? (cmd: cmd),
 }: ''
   monitor = eDP-1, 3024x1890@60, auto, 2
   # monitor = HDMI-A-1, 3440x1440@60, auto, 1
 
   exec-once = wl-paste --watch cliphist store
   exec-once = systemctl --user start hyprpolkitagent
-  exec-once = ${wrapCmd "foot --server"}
-  exec-once = ${wrapCmd "dms run"}
+  exec-once = foot --server
+  exec-once = dms run
   exec-once = corectrl --minimize-systray
-  exec-once = ${wrapCmd "nm-applet"}
+  exec-once = nm-applet
   exec-once = hyprctl setcursor 24
 
   experimental {
@@ -113,7 +112,7 @@
   $mainMod = SUPER
 
   bind = $mainMod, Return, exec, footclient
-  bind = $mainMod, W, exec, ${wrapCmd "zen"}
+  bind = $mainMod, W, exec, zen
   bind = $mainMod, Q, killactive,
   bind = $mainMod CTRL SHIFT, C, exit,
   bind = $mainMod, E, exec, nautilus

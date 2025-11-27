@@ -11,11 +11,7 @@
 # - Sets config.my.isStandalone = true for detection in home.nix modules
 # - Provides sys.* options via compat.nix files
 # - Makes sys available as alias to config for backward compatibility
-#
-# Usage in home.nix modules:
-#   footCommand = if config.my.isStandalone
-#     then "${nixgl}/bin/nixGL foot"
-#     else "foot";
+# - Uses targets.genericLinux for GPU support and XDG integration
 {
   config,
   lib,
@@ -28,13 +24,20 @@
     ++ [
       # Home-manager standalone specific modules
       ./system-setup
-      ./nixgl-desktop
 
       # Special cases that stay manual
       ./kitty.nix # Darwin-specific, no nixos equivalent
     ];
 
   config = {
+    # Enable generic Linux support - provides XDG dirs, paths, nix env, terminfo, etc.
+    targets.genericLinux.enable = true;
+
+    # Enable GPU driver integration (requires sudo to set up via non-nixos-gpu-setup)
+    # This creates /run/opengl-driver symlink via systemd service
+    # Home Manager will notify you to run the setup script after switch
+    targets.genericLinux.gpu.enable = true;
+
     # Detection flag for home-manager standalone mode
     my.isStandalone = true;
 

@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }: let
   inherit (lib) mdDoc mkEnableOption mkIf;
@@ -15,10 +14,7 @@ in {
   config = mkIf cfg.enable {
     programs.qutebrowser = {
       enable = true;
-      package = lib.my.wrapPackage {
-        inherit pkgs config inputs;
-        package = pkgs.qutebrowser;
-      };
+      package = pkgs.qutebrowser;
       settings = {
         tabs.position = "left";
         tabs.mousewheel_switching = false;
