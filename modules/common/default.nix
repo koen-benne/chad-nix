@@ -20,4 +20,5 @@
     sys = config;
   };
   home-manager.useGlobalPkgs = true;
+  home-manager.backupFileExtension = "backup";
 }
