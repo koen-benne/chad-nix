@@ -58,7 +58,7 @@ in {
       package = pkgs.unstable.greetd;
       settings = {
         default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --user-menu --cmd ' ${
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --asterisks --user-menu --cmd ' ${
             if cfg.windowManager == "niri"
             then "niri-session"
             else if cfg.windowManager == "mango"
