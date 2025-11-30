@@ -139,7 +139,7 @@
         ];
         arch = [
           "# Install fonts:"
-          "sudo pacman -S noto-fonts noto-fonts-emoji"
+          "sudo pacman -S noto-fonts noto-fonts-colors-emoji"
           "# Enable font rendering improvements:"
           "sudo ln -sf /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/"
         ];

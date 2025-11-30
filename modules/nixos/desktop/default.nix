@@ -44,7 +44,6 @@ in {
     hm.my.thunderbird.enable = true;
     # hm.my.firefox.enable = true;
     hm.my.zen-browser.enable = true;
-    hm.my.qutebrowser.enable = true;
     hm.my.dankmaterialshell.enable = true;
     environment.sessionVariables = {
       NIXOS_OXONE_WL = "1";

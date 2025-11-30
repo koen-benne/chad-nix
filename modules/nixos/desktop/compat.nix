@@ -27,7 +27,6 @@ in {
     my.foot.enable = true;
     my.thunderbird.enable = true;
     my.zen-browser.enable = true;
-    my.qutebrowser.enable = true;
 
     # Standalone mode packages
     home.packages = [

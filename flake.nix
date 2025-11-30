@@ -1,7 +1,7 @@
 {
   inputs = {
     # Package sources
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
@@ -12,7 +12,7 @@
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
     darwin.url = "github:lnl7/nix-darwin/nix-darwin-25.05";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # TODO: Remove when upgrading to home-manager 25.11 (releases early December 2024)
@@ -41,7 +41,7 @@
     dev-flakes.url = "github:koen-benne/dev-flakes";
     dev-flakes.inputs.nixpkgs.follows = "unstable";
 
-    stylix.url = "github:danth/stylix/release-25.05";
+    stylix.url = "github:danth/stylix/release-25.11";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";

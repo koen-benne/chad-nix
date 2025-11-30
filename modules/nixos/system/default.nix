@@ -29,7 +29,12 @@
     options = "--delete-older-than 30d";
   };
   # nix.settings.allowed-users = [ config.my.user ];
-  programs.ssh.startAgent = true;
+  services.dbus.packages = [pkgs.gcr];
+  services.pcscd.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-gnome3;
+  };
   # CVE-2023-38408
   programs.ssh.agentPKCS11Whitelist = "''";
   security.sudo = {
