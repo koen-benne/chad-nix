@@ -30,10 +30,11 @@ in {
       interactiveShellInit = ''
         set -U Z_CMD "j"
         set -gx DYLD_LIBRARY_PATH ${pkgs.imagemagick}/lib
-        set -g fish_greeting
         # add .local/bin to path using fish's function for adding paths
         fish_add_path $HOME/.local/bin
       '';
+      # Disable fish greeting by default (can be overridden by other modules)
+      functions.fish_greeting = lib.mkDefault "";
       shellAliases = {
         ls = "eza --color=always --git --icons=always";
         la = "eza --color=always --git --long --all --icons=always";
