@@ -24,7 +24,7 @@ in {
 
     programs.spicetify = {
       enable = true;
-      theme = spicePkgs.themes.defaultDynamic;
+      theme = spicePkgs.themes.lucid;
       # colorScheme = "mocha";
       # alwaysEnableDevTools = true;
 
