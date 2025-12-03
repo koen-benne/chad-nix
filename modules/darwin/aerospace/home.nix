@@ -6,7 +6,6 @@
   ...
 }: let
   inherit (lib) mkIf;
-  scripts = ./scripts;
   aerospace = pkgs.unstable.aerospace;
 in {
   config = mkIf (sys.my.desktop.windowManager == "aerospace") {
@@ -127,7 +126,7 @@ in {
         alt-q = 'close'
         alt-f = 'fullscreen'
 
-        alt-r = 'exec-and-forget ${pkgs.scripts}/bin/appfzf'
+        alt-r = 'exec-and-forget appfzf'
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#layout
         alt-slash = 'layout tiles horizontal vertical'
