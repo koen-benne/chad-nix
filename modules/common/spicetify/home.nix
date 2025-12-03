@@ -6,7 +6,7 @@
   ...
 }: let
   inherit (lib) mdDoc mkEnableOption mkIf;
-  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
   cfg = config.my.spicetify;
 in {
   options.my.spicetify = {
@@ -24,8 +24,8 @@ in {
 
     programs.spicetify = {
       enable = true;
-      theme = spicePkgs.themes.catppuccin;
-      colorScheme = "mocha";
+      theme = spicePkgs.themes.defaultDynamic;
+      # colorScheme = "mocha";
       # alwaysEnableDevTools = true;
 
       enabledExtensions = with spicePkgs.extensions; [

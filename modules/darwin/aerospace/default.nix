@@ -17,7 +17,7 @@ in {
       ];
     };
 
-    fonts.packages = [inputs.apple-fonts.packages.${pkgs.system}.sf-pro-nerd pkgs.unstable.sketchybar-app-font];
+    fonts.packages = [inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}.sf-pro-nerd pkgs.unstable.sketchybar-app-font];
 
     # Hide the menu bar to make place for sketchybar
     system.defaults = {

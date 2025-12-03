@@ -10,16 +10,11 @@
     flake-utils.inputs.systems.follows = "systems";
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
-    darwin.url = "github:lnl7/nix-darwin/nix-darwin-25.05";
+    darwin.url = "github:lnl7/nix-darwin/nix-darwin-25.11";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # TODO: Remove when upgrading to home-manager 25.11 (releases early December 2024)
-    # Used for: 
-    # - aerospace (extraConfig, launchd) - Darwin
-    # - quickshell module (for dms) - NixOS/Linux
-    # - targets.genericLinux (GPU support) - standalone home-manager on Linux
     home-manager-unstable.url = "github:nix-community/home-manager/master";
     home-manager-unstable.inputs.nixpkgs.follows = "unstable";
 
@@ -27,16 +22,13 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     mac-app-util.url = "github:hraban/mac-app-util";
 
-    # spicetify-nix.url = "github:Gerg-L/spicetify-nix/for-25.05";
-    # no clue why, but master works just fine
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     spicetify-nix.inputs.nixpkgs.follows = "unstable";
 
     # arkenfox-nix.url = "github:dwarfmaster/arkenfox-nixos";
 
     neovim.url = "github:koen-benne/neovim";
-    # TODO: make it follow again, master was very temporarily used
-    # neovim.inputs.nixpkgs.follows = "unstable";
+    neovim.inputs.nixpkgs.follows = "unstable";
 
     dev-flakes.url = "github:koen-benne/dev-flakes";
     dev-flakes.inputs.nixpkgs.follows = "unstable";
@@ -76,10 +68,11 @@
     niri.url = "github:sodiboo/niri-flake";
     niri.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Mango wayland compositor
     mango.url = "github:DreamMaoMao/mango";
     mango.inputs.nixpkgs.follows = "nixpkgs";
 
-    # DankMaterialShell
+    # DankMaterialShell (bar etc.)
     dms.url = "github:AvengeMedia/DankMaterialShell";
     dms.inputs.nixpkgs.follows = "unstable";
   };

@@ -18,40 +18,42 @@ in {
     # ];
     programs.git = {
       enable = true;
-      userEmail = config.my.email;
       includes = [
         {
           contents.user.email = config.my.workmail;
           condition = "gitdir:~/work/";
         }
       ];
-      userName = config.my.name;
-      aliases = {
-        br = "branch";
-        ci = "commit";
-        co = "checkout";
-        cp = "cherry-pick";
-        di = "diff";
-        st = "status";
-
-        fixup = "!sh -c 'git commit --fixup=$1 && git rebase --interactive --autosquash $1~' -";
-        gch = "!sh -c 'git reflog expire --expire=now --all && git gc --prune=now --aggressive'";
-        lg = "log --abbrev-commit --graph --date=relative --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset'";
-        rewind = "!sh -c 'git update-ref refs/heads/$1 \${2:-HEAD}' -";
-        amend = "commit --amend --no-edit";
-        unstage = "reset HEAD --";
-        last = "log -1 HEAD";
-        graph = "log --graph --oneline --decorate --all";
-        force = "push --force-with-lease";
-        clean-branches = "!git branch --merged | grep -v '\\*\\|main\\|master' | xargs -n 1 git branch -d";
-      };
       ignores = [
         ".*.sw?"
         ".direnv/"
         ".envrc"
         ".stignore"
       ];
-      extraConfig = {
+      settings = {
+        user = {
+          email = config.my.email;
+          name = config.my.name;
+        };
+        aliases = {
+          br = "branch";
+          ci = "commit";
+          co = "checkout";
+          cp = "cherry-pick";
+          di = "diff";
+          st = "status";
+
+          fixup = "!sh -c 'git commit --fixup=$1 && git rebase --interactive --autosquash $1~' -";
+          gch = "!sh -c 'git reflog expire --expire=now --all && git gc --prune=now --aggressive'";
+          lg = "log --abbrev-commit --graph --date=relative --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset'";
+          rewind = "!sh -c 'git update-ref refs/heads/$1 \${2:-HEAD}' -";
+          amend = "commit --amend --no-edit";
+          unstage = "reset HEAD --";
+          last = "log -1 HEAD";
+          graph = "log --graph --oneline --decorate --all";
+          force = "push --force-with-lease";
+          clean-branches = "!git branch --merged | grep -v '\\*\\|main\\|master' | xargs -n 1 git branch -d";
+        };
         core = {
           autocrlf = "input"; # Fuck Windows line endings
           ignorecase = false;

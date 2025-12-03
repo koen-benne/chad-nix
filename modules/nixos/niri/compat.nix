@@ -20,7 +20,7 @@ in {
 
   config = mkIf cfg.enable {
     programs.niri.enable = true;
-    programs.niri.package = inputs.niri.packages.${pkgs.system}.niri-stable;
+    programs.niri.package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri-stable;
 
     # XDG Desktop Portal configuration
     xdg.configFile."xdg-desktop-portal/niri-portals.conf".text = ''

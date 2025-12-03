@@ -30,7 +30,7 @@
     browserpass
     ueberzugpp
     zbar
-    wakatime
+    wakatime-cli
 
     neofetch
     cachix
