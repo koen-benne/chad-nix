@@ -13,13 +13,6 @@ in {
       aerospace
     ];
 
-    # Use trampoline for stable app location (prevents macOS data loss on rebuilds)
-    # Open AeroSpace after rebuild to apply config changes (only if not already running)
-    home.activation.aerospace = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      if ! /usr/bin/pgrep -x "AeroSpace" > /dev/null; then
-        $DRY_RUN_CMD /usr/bin/open "$HOME/Applications/Home Manager Trampolines/AeroSpace.app" 2>/dev/null || true
-      fi
-    '';
     home.file = {
       ".config/sketchybar".source = ./sketchybar-config;
     };
@@ -126,7 +119,7 @@ in {
         alt-q = 'close'
         alt-f = 'fullscreen'
 
-        alt-r = 'exec-and-forget appfzf'
+        alt-r = 'exec-and-forget ${pkgs.scripts}/bin/appfzf'
 
         # See: https://nikitabobko.github.io/AeroSpace/commands#layout
         alt-slash = 'layout tiles horizontal vertical'
