@@ -25,6 +25,8 @@
 
   # Enable desktop features
   my.desktop.enable = true;
+  my.desktop.windowManager = "niri";
+
 
   # Core programs are enabled by common/packages/home.nix
   # - direnv, git, tmux, fish, zsh, etc. all enabled via my.* options
