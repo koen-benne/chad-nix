@@ -20,6 +20,7 @@
           [
             ../modules/nixos
             inputs.nixpkgs.nixosModules.readOnlyPkgs
+            inputs.determinate.nixosModules.default
           ]
           ++ modules;
       });

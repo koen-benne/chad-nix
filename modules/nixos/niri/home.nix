@@ -91,14 +91,14 @@ in {
         "Mod+Shift+Slash".action = show-hotkey-overlay;
 
         # DMS specific
-        "Mod+Ctrl+n".action = spawn "dms" "ipc" "notifications" "toggle";
-        "Mod+Ctrl+v".action = spawn "dms" "ipc" "clipboard" "toggle";
-        "Mod+Ctrl+p".action = spawn "dms" "ipc" "notepad" "toggle";
-        "Mod+Shift+s".action = spawn "dms" "ipc" "lock" "lock";
-        "Mod+x".action = spawn "dms" "ipc" "powermenu" "toggle";
-        "Mod+r".action = spawn "dms" "ipc" "spotlight" "toggle";
-        "Mod+s".action = spawn "dms" "ipc" "dankdash" "media";
-        "Mod+Comma".action = spawn "dms" "ipc" "settings" "toggle";
+        "Mod+Ctrl+n".action = spawn "dms" "ipc" "call" "notifications" "toggle";
+        "Mod+Ctrl+v".action = spawn "dms" "ipc" "call" "clipboard" "toggle";
+        "Mod+Ctrl+p".action = spawn "dms" "ipc" "call" "notepad" "toggle";
+        "Mod+Shift+s".action = spawn "dms" "ipc" "call" "lock" "lock";
+        "Mod+x".action = spawn "dms" "ipc" "call" "powermenu" "toggle";
+        "Mod+r".action = spawn "dms" "ipc" "call" "spotlight" "toggle";
+        "Mod+s".action = spawn "dms" "ipc" "call" "dankdash" "media";
+        "Mod+Comma".action = spawn "dms" "ipc" "call" "settings" "toggle";
 
         # Overview and focus switching
         "Mod+Tab".action = toggle-overview;

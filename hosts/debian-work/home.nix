@@ -20,7 +20,7 @@
     settings = {
       experimental-features = ["nix-command" "flakes"];
     };
-    package = pkgs.nix;
+    package = inputs.determinate.packages.${pkgs.system}.default;
   };
 
   # Enable desktop features

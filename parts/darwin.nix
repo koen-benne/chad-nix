@@ -19,6 +19,7 @@
         modules =
           [
             ../modules/darwin
+            inputs.determinate.darwinModules.default
           ]
           ++ modules;
       });

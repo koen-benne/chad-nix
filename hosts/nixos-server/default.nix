@@ -67,11 +67,6 @@
     lidSwitch = "ignore";
     lidSwitchDocked = "ignore";
     lidSwitchExternalPower = "ignore";
-    extraConfig = ''
-      HandleLidSwitch=ignore
-      HandleLidSwitchDocked=ignore
-      HandleLidSwitchExternalPower=ignore
-    '';
   };
 
   # Auto garbage collection
