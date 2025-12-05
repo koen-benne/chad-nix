@@ -5,7 +5,7 @@
   inputs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf mkDefault;
+  inherit (lib) mdDoc mkEnableOption mkIf mkDefault mkForce;
   cfg = config.my.niri;
 in {
   imports = [
@@ -17,11 +17,12 @@ in {
   };
 
   config = lib.mkMerge [
-    # Override the default package to prevent evaluating niri when disabled
-    # The niri flake module sets a default that always evaluates the niri package
-    {
+    # When disabled, forcefully disable programs.niri and prevent config generation
+    (mkIf (!cfg.enable) {
       programs.niri.package = mkDefault pkgs.emptyDirectory;
-    }
+      hm.programs.niri.settings = mkForce null;
+      hm.programs.niri.config = mkForce null;
+    })
     (mkIf cfg.enable {
       programs.niri.enable = true;
       # Set the actual niri package when enabled
