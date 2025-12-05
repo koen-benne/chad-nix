@@ -17,7 +17,13 @@
   launchd.daemons.activate-system.script = lib.mkOrder 0 ''
     wait4path /nix/store
   '';
-  nix.enable = true;
+  # Let Determinate Nix handle Nix configuration rather than nix-darwin
+  nix.enable = false;
+  # Custom settings written to /etc/nix/nix.custom.conf
+  determinate-nix.customSettings = {
+    flake-registry = "/etc/nix/flake-registry.json";
+  };
+
   # nix profile diff-closures --profile /nix/var/nix/profiles/system
   system.activationScripts.extraActivation.text = ''
     softwareupdate --install-rosetta --agree-to-license
