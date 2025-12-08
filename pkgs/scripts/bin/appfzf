@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 SEARCH_PATHS=(
+    "$HOME/Applications/Home Manager Apps"          # Nix/home-manager apps
     "$HOME/Applications"                            # User-installed apps
     "/Applications"                                 # System-wide apps
     "/System/Applications"                          # macOS built-in apps
