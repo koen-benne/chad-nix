@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
-# Prioritize Trampolines (stable mac-app-util wrappers) over direct Nix store paths
-# This prevents macOS from losing app data on every rebuild
 SEARCH_PATHS=(
-    "$HOME/Applications/Home Manager Trampolines"  # Stable Nix-managed apps (preferred)
     "$HOME/Applications"                            # User-installed apps
     "/Applications"                                 # System-wide apps
     "/System/Applications"                          # macOS built-in apps

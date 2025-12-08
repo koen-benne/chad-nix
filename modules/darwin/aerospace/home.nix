@@ -110,7 +110,7 @@ in {
           then
             ${pkgs.wezterm}/bin/wezterm start --cwd $HOME
           else
-            /usr/bin/open "$HOME/Applications/Home Manager Trampolines/WezTerm.app"
+            /usr/bin/open "${pkgs.wezterm}/Applications/WezTerm.app"
           fi'
         ''''
 
