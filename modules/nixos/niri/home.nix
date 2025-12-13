@@ -207,6 +207,10 @@ in {
         # "Mod+Ctrl+Shift+l".action = spawn "hyprlock";
       };
 
+      gestures = {
+        hot-corners = "off";
+      };
+
       prefer-no-csd = true;
 
       window-rules = [
