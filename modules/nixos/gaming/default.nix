@@ -34,6 +34,7 @@ in {
         protonup-qt
 
         steamtinkerlaunch
+        unstable.gamescope
       ];
 
       programs.nix-ld.enable = true;

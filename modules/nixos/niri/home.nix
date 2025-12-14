@@ -207,9 +207,7 @@ in {
         # "Mod+Ctrl+Shift+l".action = spawn "hyprlock";
       };
 
-      gestures = {
-        hot-corners = "off";
-      };
+      gestures.hot-corners.enable = false;
 
       prefer-no-csd = true;
 

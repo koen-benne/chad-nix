@@ -35,14 +35,10 @@ in {
 
       # All features enabled by default, but can be overridden
       enableSystemMonitoring = true;
-      enableClipboard = true;
       # enableVPN = true;
-      enableBrightnessControl = true;
-      enableColorPicker = true;
       enableDynamicTheming = true;
       enableAudioWavelength = true;
       enableCalendarEvents = true;
-      enableSystemSound = true;
     };
   };
 }

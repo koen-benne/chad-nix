@@ -12,9 +12,20 @@ in {
     home.packages = with pkgs; [
       unstable.lutris
       # MC shit
-      prismlauncher
       unstable.vintagestory
-      jdk8
+
+      (prismlauncher.override {
+        # Add binary required by some mod
+        additionalPrograms = [ ffmpeg ];
+
+        # Change Java runtimes available to Prism Launcher
+        jdks = [
+          graalvm-ce
+          zulu8
+          zulu17
+          zulu
+        ];
+      })
     ];
   };
 }
