@@ -61,8 +61,6 @@
 
   systemd.targets.sleep.enable = false;
 
-  boot.kernelParams = ["consoleblank=120"];
-
   services.logind.settings.Login = {
     HandleLidSwitch = "ignore";
     HandleLidSwitchDocked = "ignore";
