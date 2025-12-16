@@ -51,6 +51,18 @@ in {
     environment.systemPackages = with pkgs; [
       opforjellyfin
     ];
+
+    # Enable AMD graphics drivers and VA-API support
+    hardware.graphics = {
+      enable = true;
+      enable32Bit = true;  # For 32-bit app support
+    };
+
+    # Ensure the jellyfin user has access to GPU devices
+    users.users.jellyfin = {
+      extraGroups = [ "video" "render" ];
+    };
+
     nixarr = {
       enable = true;
       mediaDir = cfg.mediaDir;
