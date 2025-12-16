@@ -24,13 +24,9 @@
 
   networking = {
     hostName = "nixos-server";
-
-    wireless.iwd = {
-      settings = {
-        Settings = {
-          AutoConnect = true;
-        };
-      };
+    interfaces.eno1 = {
+      useDHCP = true;
+      macAddress = null;
     };
 
     nameservers = ["8.8.8.8" "8.8.4.4"];
