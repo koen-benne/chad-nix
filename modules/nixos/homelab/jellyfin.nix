@@ -87,8 +87,6 @@ in {
       sabnzbd.enable = true;
 
       # Media management stack
-      bazarr.enable = true; # Subtitles
-      prowlarr.enable = true; # Indexer management
       radarr.enable = true; # Movies
       sonarr.enable = true; # TV Shows
     };
