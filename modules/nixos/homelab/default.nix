@@ -12,6 +12,7 @@ in {
     ./nginx.nix
     ./nextcloud.nix
     ./jellyfin.nix
+    ./pihole.nix
   ];
 
   options.my.homelab = {
