@@ -36,7 +36,6 @@ in {
       enable = true;
       maxretry = 5;        # Ban after 5 failed attempts
       bantime = "1h";      # Ban for 1 hour (default is 10m)
-      findtime = "10m";    # Count failures within 10 minute window
       ignoreIP = [
         "192.168.68.0/24"  # Whitelist your local network
         "127.0.0.1/8"      # Whitelist localhost

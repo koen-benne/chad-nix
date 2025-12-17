@@ -105,5 +105,6 @@
       subdomain = "jellyfin";
       mediaDir = "/mnt/biggidrive/jellyfin/";
     };
+    pihole.enable = true;
   };
 }
