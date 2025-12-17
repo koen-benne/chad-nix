@@ -32,5 +32,9 @@ in {
         };
       };
     };
+    services.pihole-web = {
+      enable = true;
+      ports = ["8080s"];
+    };
   };
 }
