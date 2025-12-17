@@ -8,7 +8,7 @@
   cfg = config.my.homelab.nextcloud;
   homelabCfg = config.my.homelab;
 in {
-  options.my.homelab.nextcloud = {
+  options.my.homelab.pihole = {
     enable = mkEnableOption (mdDoc "Pi-hole");
   };
 
