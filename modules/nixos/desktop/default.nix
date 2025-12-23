@@ -10,9 +10,7 @@
   inherit (lib) mdDoc mkEnableOption mkIf mkOption types;
   cfg = config.my.desktop;
 in {
-  imports = [
-    inputs.dms.nixosModules.greeter
-  ];
+  imports = [];
   options.my.desktop = {
     windowManager = mkOption {
       type = types.enum ["hyprland" "niri" "mango"];
@@ -69,10 +67,8 @@ in {
       };
     };
 
-    # programs.dankMaterialShell.greeter = mkIf (cfg.greeter == "dankmaterialshell") {
-    #   enable = true;
-    #   compositor.name = cfg.windowManager;
-    # };
+    # Enable DMS greeter when selected
+    my.dms-greeter.enable = cfg.greeter == "dms";
 
     services.pipewire = {
       enable = true;
