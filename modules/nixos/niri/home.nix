@@ -16,6 +16,15 @@ in {
     ];
 
     programs.niri.settings = {
+      outputs."DP-3" = {
+        scale = 1.0;
+        mode = {
+          width = 3440;
+          height = 1440;
+          refresh = 174.962;
+        };
+      };
+
       outputs."eDP-1" = {
         scale = 2.0;
         mode = {
