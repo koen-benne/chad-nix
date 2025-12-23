@@ -21,6 +21,8 @@ in {
     programs.dankMaterialShell.greeter = {
       enable = true;
       compositor.name = desktopCfg.windowManager;
+      # Copy user's DMS config (including wallpaper settings) to greeter
+      configHome = config.my.home;
     };
 
     # Ensure the selected compositor is available
