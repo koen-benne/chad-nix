@@ -29,7 +29,6 @@ in {
         assertion = cfg.enable -> (
           (desktopCfg.windowManager == "niri" && config.programs.niri.enable) ||
           (desktopCfg.windowManager == "hyprland" && config.programs.hyprland.enable) ||
-          (desktopCfg.windowManager == "sway" && config.programs.sway.enable) ||
           (desktopCfg.windowManager == "mango" && config.programs.mango.enable)
         );
         message = ''

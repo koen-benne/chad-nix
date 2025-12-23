@@ -72,7 +72,7 @@
   my.desktop = {
     enable = true;
     windowManager = "niri";
-    greeter = "tuigreet";
+    greeter = "dms";
   };
   hm.my.work.enable = true;
 
