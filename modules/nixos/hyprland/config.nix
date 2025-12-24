@@ -98,10 +98,6 @@
     new_on_top = true
   }
 
-  gestures {
-    workspace_swipe = off
-  }
-
   # Window rules
   windowrule = float, title:(Floorp - Sharing Indicator)
   windowrule = tile, title:^(.*PWA.*)$
@@ -113,7 +109,7 @@
   $mainMod = SUPER
 
   bind = $mainMod, Return, exec, footclient
-  bind = $mainMod, W, exec, zen
+  bind = $mainMod, W, exec, zen-beta --name zen-beta
   bind = $mainMod, Q, killactive,
   bind = $mainMod CTRL SHIFT, C, exit,
   bind = $mainMod, E, exec, nautilus

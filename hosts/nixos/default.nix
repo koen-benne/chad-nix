@@ -71,7 +71,7 @@
   # Everythhing desktop related
   my.desktop = {
     enable = true;
-    windowManager = "niri";
+    windowManager = "hyprland";
     greeter = "dms";
   };
   hm.my.work.enable = true;
