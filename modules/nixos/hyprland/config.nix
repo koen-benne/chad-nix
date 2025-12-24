@@ -129,6 +129,8 @@
   bind = $mainMod CTRL, P, exec, dms ipc notepad toggle
   bind = $mainMod SHIFT, S, exec, dms ipc lock lock
   bind = $mainMod, X, exec, dms ipc powermenu toggle
+  bind = $mainMod, S, exec, dms ipc call dankdash media
+  bind = $mainMod, Comma, exec, dms ipc call settings toggle
 
   # Playerctl binds
   bind = , XF86AudioMedia, exec, playerctl play-pause
@@ -175,7 +177,7 @@
   bind = $mainMod SHIFT, 0, movetoworkspace, 10
 
   # Master-layout specific binds
-  bind = $mainMod, S, layoutmsg, swapwithmaster
+  bind = $mainMod, M, layoutmsg, swapwithmaster
 
   # Move/resize windows with keyboard
   bind = $mainMod SHIFT, H, resizeactive, -200 0
