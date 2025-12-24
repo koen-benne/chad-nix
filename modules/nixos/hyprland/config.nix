@@ -3,7 +3,8 @@
   scripts,
 }: ''
   monitor = eDP-1, 3024x1890@60, auto, 2
-  # monitor = HDMI-A-1, 3440x1440@60, auto, 1
+  # MSI MAG 341CQP QD-OLED - HDR enabled with 10-bit color
+  monitor = DP-3, 3440x1440@174.962, auto, 1, bitdepth, 10, cm, hdr, sdrbrightness, 1.2
 
   exec-once = wl-paste --watch cliphist store
   exec-once = systemctl --user start hyprpolkitagent
