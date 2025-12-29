@@ -28,7 +28,7 @@
   exec-once = wl-paste --watch cliphist store
   exec-once = systemctl --user start hyprpolkitagent
   exec-once = foot --server
-  exec-once = dms run
+  # exec-once = dms run
   exec-once = corectrl --minimize-systray
   exec-once = nm-applet
   exec-once = hyprctl setcursor 24
@@ -87,11 +87,9 @@
     }
 
     blur {
-      enabled = true
+      enabled = false
       size = 8
       passes = 1
-      new_optimizations = true
-      popups = true
     }
   }
 

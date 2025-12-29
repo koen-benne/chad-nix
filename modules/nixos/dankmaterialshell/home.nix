@@ -20,6 +20,7 @@ in {
   config = mkIf cfg.enable {
     programs.dankMaterialShell = {
       enable = true;
+      dgop.package = pkgs.unstable.dgop;
       systemd = {
         enable = true;
         restartIfChanged = true;
