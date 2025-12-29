@@ -10,7 +10,7 @@
   cfg = config.my.dankmaterialshell;
 in {
   imports = [
-    inputs.dms.homeModules.dankMaterialShell.default
+    inputs.dms.homeModules.dank-material-shell
   ];
 
   options.my.dankmaterialshell = {
