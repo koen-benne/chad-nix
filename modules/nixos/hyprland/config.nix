@@ -2,9 +2,28 @@
 {
   scripts,
 }: ''
-  monitor = eDP-1, 3024x1890@60, auto, 2
   # MSI MAG 341CQP QD-OLED - HDR enabled with 10-bit color
-  monitor = DP-3, 3440x1440@174.962, auto, 1, bitdepth, 10, cm, hdr, sdrbrightness, 1.2
+  monitorv2 {
+    output = DP-3
+    mode = 3440x1440@174.962
+    position = auto
+    scale = 1
+
+    # HDR Configuration
+    bitdepth = 10
+    cm = hdr
+    supports_hdr = 1
+    supports_wide_color = 1
+
+    # Luminance Settings Based on Your Monitor's Performance
+    min_luminance = 0.0
+    max_luminance = 1000
+    max_avg_luminance = 254
+
+    # SDR → HDR Mapping
+    sdr_min_luminance = 0.001
+    sdr_max_luminance = 230
+  }
 
   exec-once = wl-paste --watch cliphist store
   exec-once = systemctl --user start hyprpolkitagent
