@@ -17,11 +17,11 @@
 
     # Luminance Settings Based on Your Monitor's Performance
     min_luminance = 0.0
-    max_luminance = 1000
+    max_luminance = 480
     max_avg_luminance = 254
 
     # SDR → HDR Mapping
-    sdr_min_luminance = 0.001
+    sdr_min_luminance = 0.005
     sdr_max_luminance = 230
   }
 
