@@ -18,7 +18,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.dankMaterialShell = {
+    programs.dank-material-shell = {
       enable = true;
       dgop.package = pkgs.unstable.dgop;
       systemd = {
@@ -28,7 +28,8 @@ in {
 
       # Default settings, can be overwritten by GUI settings
       settings = {
-        lockBeforeSuspend = false;  # Disabled - PAM auth broken on non-NixOS
+        lockBeforeSuspend = true;
+        loginctlLockIntegration = false;  # Disable - using custom lock command (gtklock)
         weatherLocation = "Gouda, Zuid-Holland";
         weatherCoordinates = "52.0181194,4.7111221";
         launcherLogoMode = "os";
