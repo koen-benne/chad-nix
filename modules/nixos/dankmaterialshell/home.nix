@@ -27,11 +27,12 @@ in {
       };
 
       # Default settings, can be overwritten by GUI settings
-      default.settings = {
-        lockBeforeSuspend = true;
+      settings = {
+        lockBeforeSuspend = false;  # Disabled - PAM auth broken on non-NixOS
         weatherLocation = "Gouda, Zuid-Holland";
         weatherCoordinates = "52.0181194,4.7111221";
         launcherLogoMode = "os";
+        currentThemeName = "blue";
       };
 
       # All features enabled by default, but can be overridden

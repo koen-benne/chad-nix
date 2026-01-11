@@ -27,6 +27,7 @@
   # Enable desktop features
   my.desktop.enable = true;
   my.desktop.windowManager = "niri";
+  my.opencode.enable = true;
 
 
   # Core programs are enabled by common/packages/home.nix
