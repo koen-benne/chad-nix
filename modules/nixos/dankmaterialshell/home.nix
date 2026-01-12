@@ -29,11 +29,20 @@ in {
       # Default settings, can be overwritten by GUI settings
       settings = {
         lockBeforeSuspend = true;
-        loginctlLockIntegration = false;  # Disable - using custom lock command (gtklock)
         weatherLocation = "Gouda, Zuid-Holland";
         weatherCoordinates = "52.0181194,4.7111221";
         launcherLogoMode = "os";
         currentThemeName = "blue";
+
+        # OSD (On-Screen Display) settings
+        osdVolumeEnabled = true;
+        osdBrightnessEnabled = true;
+        osdMediaVolumeEnabled = true;
+        osdMicMuteEnabled = true;
+        osdCapsLockEnabled = true;
+        osdIdleInhibitorEnabled = true;
+        osdPowerProfileEnabled = true;
+        osdAudioOutputEnabled = true;
       };
 
       # All features enabled by default, but can be overridden

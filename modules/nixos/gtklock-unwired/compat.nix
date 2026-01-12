@@ -159,6 +159,7 @@ in {
     programs.dank-material-shell.settings = lib.mkIf config.my.dankmaterialshell.enable {
       customPowerActionLock = cfg.lockCommand;
       customPowerActionSuspend = cfg.suspendCommand;
+      loginctlLockIntegration = false;  # Disable - using custom lock command (gtklock)
     };
   };
 }
