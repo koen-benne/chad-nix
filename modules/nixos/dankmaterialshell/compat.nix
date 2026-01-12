@@ -10,8 +10,8 @@ in {
   options.my.dankmaterialshell = {
     lockCommand = mkOption {
       type = types.str;
-      default = "/usr/bin/gtklock -d -s ${config.xdg.configHome}/gtklock/style.css -b ${../../../assets/wp-normal.jpg}";
-      description = lib.mdDoc "Command to execute when locking the screen (using system gtklock from apt)";
+      default = "${config.xdg.configHome}/gtklock/lock.sh";
+      description = lib.mdDoc "Command to execute when locking the screen";
     };
 
     suspendCommand = mkOption {
@@ -22,11 +22,20 @@ in {
   };
 
   config = mkIf cfg.enable {
+    # Create lock script
+    xdg.configFile."gtklock/lock.sh" = {
+      text = ''
+        #!/usr/bin/env bash
+        /usr/bin/gtklock -d -s ${config.xdg.configHome}/gtklock/style.css -b ${../../../assets/wp-normal.jpg}
+      '';
+      executable = true;
+    };
+
     # Create lock-and-suspend script
     xdg.configFile."gtklock/lock-and-suspend.sh" = {
       text = ''
         #!/usr/bin/env bash
-        ${cfg.lockCommand} &
+        ${config.xdg.configHome}/gtklock/lock.sh &
         sleep 1
         systemctl suspend
       '';
@@ -40,16 +49,9 @@ in {
     in ''
       /* Gtklock enhanced styling with background overlay */
 
-      /* Main window - background image with dark overlay */
-      window {
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-      }
-
       /* Dark overlay for better contrast */
       #body {
-        background-color: alpha(${colors.base00}, 0.4);
+        background-color: rgba(0, 0, 0, 0.7);
         margin: 0;
         padding: 60px;
       }
@@ -59,9 +61,10 @@ in {
         font-family: "${fonts.sansSerif.name}";
         font-size: 120px;
         font-weight: 300;
-        color: ${colors.base05};
-        text-shadow: 0 4px 12px alpha(${colors.base00}, 0.9),
-                     0 2px 4px alpha(${colors.base00}, 0.9);
+        color: white;
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 20px 40px;
+        border-radius: 16px;
         margin-bottom: 20px;
       }
 
@@ -70,9 +73,11 @@ in {
         font-family: "${fonts.sansSerif.name}";
         font-size: 28px;
         font-weight: 300;
-        color: ${colors.base04};
+        color: white;
         letter-spacing: 2px;
-        text-shadow: 0 2px 8px alpha(${colors.base00}, 0.9);
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 12px 24px;
+        border-radius: 12px;
         margin-bottom: 80px;
       }
 
@@ -122,8 +127,10 @@ in {
         font-family: "${fonts.sansSerif.name}";
         font-size: 20px;
         font-weight: 400;
-        color: ${colors.base05};
-        text-shadow: 0 2px 8px alpha(${colors.base00}, 0.9);
+        color: white;
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 8px 16px;
+        border-radius: 8px;
       }
 
       /* Message/error labels - attention grabbing */

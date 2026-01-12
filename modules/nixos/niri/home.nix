@@ -64,8 +64,12 @@ in {
         ];
         default-column-width = {proportion = 0.5;};
 
-        border = {
+        focus-ring = {
           width = 2;
+        };
+
+        border = {
+          enable = false;
         };
       };
 
