@@ -36,6 +36,12 @@
     # Home Manager will notify you to run the setup script after switch
     targets.genericLinux.gpu.enable = true;
 
+    # Enable fontconfig to generate proper font preference rules
+    # Without this, Stylix's font settings don't take effect and the system
+    # falls back to default fonts (usually DejaVu), causing Nerd Font icons
+    # to not render correctly
+    fonts.fontconfig.enable = true;
+
     # Detection flag for home-manager standalone mode
     my.isStandalone = true;
 
