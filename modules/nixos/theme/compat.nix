@@ -49,5 +49,29 @@ in {
         };
       };
     };
+
+    # Add comprehensive Unicode fallback fonts
+    fonts.fontconfig.defaultFonts = {
+      monospace = [
+        "JetBrainsMonoNL Nerd Font"
+        "Noto Sans Mono"
+        "DejaVu Sans Mono"
+      ];
+      sansSerif = [
+        "Fira Sans"
+        "Noto Sans"
+        "DejaVu Sans"
+      ];
+      emoji = [
+        "Noto Color Emoji"
+      ];
+    };
+
+    # Install fallback fonts with good Unicode coverage
+    home.packages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk-sans
+      dejavu_fonts
+    ];
   };
 }
