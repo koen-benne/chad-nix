@@ -4,36 +4,16 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkIf mkOption types;
+  inherit (lib) mkEnableOption mdDoc mkIf;
   cfg = config.my.desktop;
 in {
   options.my.desktop = {
-    windowManager = mkOption {
-      type = types.enum ["aerospace" "none"];
-      default = "none";
-      description = "window manager";
-    };
-    entries = mkOption {
-      type = types.listOf types.attrs;
-      default = [
-        {
-          path = "${config.my.home}/Downloads";
-          section = "others";
-          options = "--sort name --view grid --display stack";
-        }
-      ];
-      description = "desktop entries";
-    };
+    enable = mkEnableOption (mdDoc "desktop");
   };
 
   config = mkIf cfg.enable {
     # my.kitty.enable = true;
     hm.my.wezterm.enable = true;
     hm.my.theme.enable = true;
-
-    my.dock = {
-      enable = true;
-      entries = cfg.entries;
-    };
   };
 }
