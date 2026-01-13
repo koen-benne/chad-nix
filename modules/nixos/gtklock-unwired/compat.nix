@@ -22,6 +22,12 @@ in {
       description = lib.mdDoc "Command to execute when suspending (locks first, then suspends)";
     };
 
+    hibernateCommand = mkOption {
+      type = types.str;
+      default = "${config.xdg.configHome}/gtklock-unwired/lock-and-hibernate.sh";
+      description = lib.mdDoc "Command to execute when hibernating (locks first, then hibernates)";
+    };
+
     wallpaper = mkOption {
       type = types.path;
       default = ../../../assets/wp-normal.jpg;
@@ -155,10 +161,22 @@ in {
       executable = true;
     };
 
+    # Create lock-and-hibernate script
+    xdg.configFile."gtklock-unwired/lock-and-hibernate.sh" = {
+      text = ''
+        #!/usr/bin/env bash
+        ${cfg.lockCommand} &
+        sleep 1
+        systemctl hibernate
+      '';
+      executable = true;
+    };
+
     # If dankmaterialshell is enabled, override its lock and suspend commands
     programs.dank-material-shell.settings = lib.mkIf config.my.dankmaterialshell.enable {
       customPowerActionLock = cfg.lockCommand;
       customPowerActionSuspend = cfg.suspendCommand;
+      customPowerActionHibernate = cfg.hibernateCommand;
       loginctlLockIntegration = false;  # Disable - using custom lock command (gtklock)
     };
   };
