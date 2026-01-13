@@ -17,8 +17,8 @@ in {
 
   # Provide the actual theme configuration for home-manager standalone mode
   config = mkIf config.my.theme.enable {
-    # TODO: find out why we need this.
-    dconf.enable = false;
+    # Enable dconf for GNOME apps (Nautilus, etc.) to respect dark theme
+    dconf.enable = true;
 
     stylix = {
       enable = true;

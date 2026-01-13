@@ -37,28 +37,10 @@ in {
       pkgs.nautilus
     ];
 
-    # Make sure theming works correctly when stylix cant manage it
-    gtk = {
-      enable = true;
-      colorScheme = "dark";
-    };
-    qt = {
-      enable = true;
-    };
-
-    # dconf settings for GNOME apps
-    dconf.settings = {
-      "org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
-        gtk-theme = "Adwaita-dark";
-      };
-    };
-
-    # Environment variables
+    # Environment variables for Wayland
     home.sessionVariables = {
       QT_QPA_PLATFORM = "wayland";
       MOZ_ENABLE_WAYLAND = "1";
-      GTK_THEME = "Adwaita:dark";
     };
 
     # Enable system setup helper for standalone mode
