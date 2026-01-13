@@ -15,6 +15,8 @@
     trusted-users = ["root" config.my.user];
     # Enable parallel evaluation using all available cores (Determinate Nix feature)
     eval-cores = 0;
+    # Set nix-path to use flake's nixpkgs for <nixpkgs> lookups in nix-shell and legacy commands
+    nix-path = ["nixpkgs=${pkgs.path}"];
   };
   nix.extraOptions = ''
     !include ${config.sops.secrets.github_access_token.path}

@@ -49,6 +49,9 @@
     # This mimics the behavior of extraSpecialArgs = { sys = config; }
     _module.args.sys = config;
 
+    # Set nix-path to use flake's nixpkgs for <nixpkgs> lookups in nix-shell and legacy commands
+    nix.settings.nix-path = ["nixpkgs=${pkgs.path}"];
+
     # Essential packages for home-manager standalone mode
     home.packages = [
       pkgs.home-manager
