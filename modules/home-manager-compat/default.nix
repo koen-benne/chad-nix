@@ -51,6 +51,7 @@
 
     # Set nix-path to use flake's nixpkgs for <nixpkgs> lookups in nix-shell and legacy commands
     nix.settings.nix-path = ["nixpkgs=${pkgs.path}"];
+    home.sessionVariables.NIX_PATH = "nixpkgs=${pkgs.path}";
 
     # Essential packages for home-manager standalone mode
     home.packages = [
