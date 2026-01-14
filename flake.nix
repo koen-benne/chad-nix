@@ -64,8 +64,8 @@
     # Arr
     nixarr.url = "github:rasmus-kirk/nixarr";
 
-    # Niri wayland compositor
-    niri.url = "github:sodiboo/niri-flake";
+    # Niri wayland compositor (using very-refactor branch for v25.11)
+    niri.url = "github:sodiboo/niri-flake/very-refactor";
     niri.inputs.nixpkgs.follows = "nixpkgs";
 
     # Mango wayland compositor

@@ -172,8 +172,8 @@ in {
       executable = true;
     };
 
-    # If dankmaterialshell is enabled, override its lock and suspend commands
-    programs.dank-material-shell.settings = lib.mkIf config.my.dankmaterialshell.enable {
+    # If dankmaterialshell is enabled, provide default settings via the option
+    my.dankmaterialshell.defaultSettings = lib.mkIf config.my.dankmaterialshell.enable {
       customPowerActionLock = cfg.lockCommand;
       customPowerActionSuspend = cfg.suspendCommand;
       customPowerActionHibernate = cfg.hibernateCommand;

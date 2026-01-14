@@ -2,6 +2,7 @@
 
 ## Important Restrictions
 - **Never switch configurations**: Do not run `nixos-rebuild switch`, `home-manager switch`, or similar commands. The user will handle all configuration switching.
+- **Never run builds directly**: Do not run `nix build`, `home-manager build`, or similar commands yourself. Instead, ask the user to run the build and provide the output. Builds can take a very long time and consume significant resources.
 
 ## Build/Lint/Test Commands
 - `nix flake check --all-systems --no-build` - Check flake structure and syntax

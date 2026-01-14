@@ -15,7 +15,21 @@ in {
       pkgs.polkit_gnome
     ];
 
+    # Create DMS directory for dynamic config files
+    xdg.configFile."niri/dms/.keep".text = "";
+
+    # Copy the DMS includes file to the niri config directory
+    # This file contains include statements that reference DMS-managed files
+    xdg.configFile."niri/dms-includes.kdl".source = ./dms-includes.kdl;
+
     programs.niri.settings = {
+      # Include the DMS includes file
+      # This file itself is valid KDL and won't be validated during build
+      # The includes inside it will be evaluated at runtime by niri
+      includes = lib.mkAfter [
+        "dms-includes.kdl"
+      ];
+
       outputs."DP-3" = {
         scale = 1.0;
         mode = {
@@ -220,7 +234,13 @@ in {
         # "Mod+Ctrl+Shift+l".action = spawn "hyprlock";
       };
 
-      gestures.hot-corners.enable = false;
+      # Disable all hot corners
+      gestures.hot-corners = {
+        top-left = false;
+        top-right = false;
+        bottom-left = false;
+        bottom-right = false;
+      };
 
       prefer-no-csd = true;
 
