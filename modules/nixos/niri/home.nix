@@ -18,19 +18,19 @@ in {
     # Create DMS directory for dynamic config files
     xdg.configFile."niri/dms/.keep".text = "";
 
-    # Override the niri config file completely
-    # We take the generated config and append DMS includes
-    xdg.configFile."niri/config.kdl".text = lib.mkForce (
-      config.programs.niri.finalConfig + ''
-        
-        // Include DMS-managed configuration files
-        // outputs: Monitor configuration that changes when switching workplaces
-        // colors: Color scheme managed by DMS
-        include "dms/outputs.kdl"
-        include "dms/colors.kdl"
-      ''
+    # Disable niri-flake's config file management but keep the program enabled
+    programs.niri.config = lib.mkForce null;
+    
+    # Manage the config file ourselves with DMS includes
+    # We use a template to substitute store paths
+    xdg.configFile."niri/config.kdl".text = builtins.readFile (
+      pkgs.replaceVars ./config.kdl {
+        polkit_path = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        xwayland_satellite_path = "${pkgs.xwayland-satellite-unstable}/bin/xwayland-satellite";
+      }
     );
 
+    # Keep settings for documentation, but they won't be used
     programs.niri.settings = {
       outputs."DP-3" = {
         scale = 1.0;

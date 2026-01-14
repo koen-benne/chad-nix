@@ -1,0 +1,216 @@
+// Niri configuration
+// Pure KDL config - not managed by niri-flake
+
+output "DP-3" {
+    mode "3440x1440@174.962"
+    scale 1.0
+}
+
+output "eDP-1" {
+    mode "3024x1890@60.0"
+    scale 2.0
+}
+
+input {
+    keyboard {
+        xkb {
+            layout "us"
+        }
+    }
+    
+    touchpad {
+        natural-scroll true
+        scroll-factor 0.5
+        tap true
+    }
+}
+
+cursor {
+    hide-after-inactive-ms 5000
+}
+
+hotkey-overlay {
+    skip-at-startup true
+}
+
+layout {
+    gaps 10
+    center-focused-column "never"
+    
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+    
+    default-column-width {
+        proportion 0.5
+    }
+    
+    focus-ring {
+        width 2
+    }
+    
+    border {
+        off
+    }
+}
+
+spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
+spawn-at-startup "@polkit_path@"
+spawn-at-startup "foot" "--server"
+
+xwayland-satellite {
+    enable
+    path "@xwayland_satellite_path@"
+}
+
+environment {
+    NIXOS_OZONE_WL "1"
+}
+
+prefer-no-csd
+
+// Window rules
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+    match app-id=r#"^1Password$"#
+    
+    block-out-from "screencast"
+}
+
+window-rule {
+    match is-active=false
+    opacity 0.99
+}
+
+window-rule {
+    match app-id=r#"^org\.gnome\.Nautilus$"#
+    default-column-width { proportion 0.33333 }
+}
+
+window-rule {
+    geometry-corner-radius 8.0
+    clip-to-geometry true
+}
+
+// Keybindings
+binds {
+    Mod+Return { spawn "footclient"; }
+    Mod+W { spawn "zen-beta" "--name" "zen-beta"; }
+    Mod+Q { close-window; }
+    Mod+Ctrl+Shift+C { quit; }
+    Mod+E { spawn "nautilus"; }
+    Mod+V { toggle-window-floating; }
+    Mod+F { fullscreen-window; }
+    Mod+P { spawn "1password" "--quick-access"; }
+    Mod+C { spawn "hyprpicker" "-a"; }
+    Mod+G { screenshot; }
+    Mod+Shift+G { screenshot-screen; }
+    Mod+Shift+Slash { show-hotkey-overlay; }
+    
+    // DMS specific
+    Mod+Ctrl+N { spawn "dms" "ipc" "call" "notifications" "toggle"; }
+    Mod+Ctrl+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
+    Mod+Ctrl+P { spawn "dms" "ipc" "call" "notepad" "toggle"; }
+    Mod+Shift+S { spawn "dms" "ipc" "call" "lock" "lock"; }
+    Mod+X { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
+    Mod+R { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+    Mod+S { spawn "dms" "ipc" "call" "dankdash" "media"; }
+    Mod+Comma { spawn "dms" "ipc" "call" "settings" "toggle"; }
+    
+    // Overview and focus
+    Mod+Tab { toggle-overview; }
+    Mod+Space { switch-focus-between-floating-and-tiling; }
+    
+    // Media keys
+    XF86AudioMedia { spawn "playerctl" "play-pause"; allow-when-locked; }
+    XF86AudioPlay { spawn "playerctl" "play-pause"; allow-when-locked; }
+    XF86AudioPrev { spawn "playerctl" "previous"; allow-when-locked; }
+    XF86AudioNext { spawn "playerctl" "next"; allow-when-locked; }
+    
+    // Volume and brightness (DMS)
+    XF86AudioRaiseVolume { spawn "dms" "ipc" "call" "audio" "increment" "3"; allow-when-locked; }
+    XF86AudioLowerVolume { spawn "dms" "ipc" "call" "audio" "decrement" "3"; allow-when-locked; }
+    XF86AudioMute { spawn "dms" "ipc" "call" "audio" "mute"; allow-when-locked; }
+    XF86AudioMicMute { spawn "dms" "ipc" "call" "audio" "micmute"; allow-when-locked; }
+    XF86MonBrightnessUp { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; allow-when-locked; }
+    XF86MonBrightnessDown { spawn "dms" "ipc" "call" "brightness" "decrement" "5" ""; allow-when-locked; }
+    
+    // Navigation
+    Mod+H { focus-column-left; }
+    Mod+L { focus-column-right; }
+    Mod+J { focus-window-down; }
+    Mod+K { focus-window-up; }
+    
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+L { move-column-right; }
+    Mod+Shift+J { move-window-down; }
+    Mod+Shift+K { move-window-up; }
+    
+    Mod+U { focus-workspace-down; }
+    Mod+I { focus-workspace-up; }
+    Mod+Page_Down { focus-workspace-down; }
+    Mod+Page_Up { focus-workspace-up; }
+    
+    Mod+Shift+U { move-column-to-workspace-down; }
+    Mod+Shift+I { move-column-to-workspace-up; }
+    Mod+Shift+Page_Down { move-column-to-workspace-down; }
+    Mod+Shift+Page_Up { move-column-to-workspace-up; }
+    
+    // Numbered workspaces
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+    
+    Mod+Shift+1 { move-column-to-workspace 1; }
+    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+Shift+3 { move-column-to-workspace 3; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+    Mod+Shift+5 { move-column-to-workspace 5; }
+    Mod+Shift+6 { move-column-to-workspace 6; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
+    
+    // Column management
+    Mod+Ctrl+H { consume-window-into-column; }
+    Mod+Ctrl+L { expel-window-from-column; }
+    
+    // Resizing
+    Mod+N { set-column-width "+10%"; }
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Shift+N { set-window-height "+10%"; }
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    
+    // Maximize
+    Mod+M { maximize-column; }
+    
+    // Mouse wheel
+    Mod+WheelScrollDown { focus-workspace-down; }
+    Mod+WheelScrollUp { focus-workspace-up; }
+    Mod+Shift+WheelScrollDown { move-column-to-workspace-down; }
+    Mod+Shift+WheelScrollUp { move-column-to-workspace-up; }
+}
+
+// Disable hot corners
+gestures {
+    hot-corners {
+        top-left off
+        top-right off
+        bottom-left off
+        bottom-right off
+    }
+}
+
+// Include DMS-managed configuration files
+// These files are created/updated by DMS at runtime
+include "dms/outputs.kdl"
+include "dms/colors.kdl"
