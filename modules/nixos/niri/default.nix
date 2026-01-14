@@ -25,8 +25,8 @@ in {
     })
     (mkIf cfg.enable {
       programs.niri.enable = true;
-      # Use niri-stable (v25.11 on very-refactor branch)
-      programs.niri.package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri-stable;
+      # Use niri-unstable for optional includes support
+      programs.niri.package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
     })
   ];
 }
