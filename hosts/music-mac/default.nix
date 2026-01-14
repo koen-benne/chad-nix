@@ -13,4 +13,6 @@
 
   # Stuff specific to only this machine
   my.openssl.enable = true;
+
+  hm.my.opencode.enable = true;
 }

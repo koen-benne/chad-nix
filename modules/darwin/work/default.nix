@@ -33,6 +33,6 @@ in {
       ];
     };
 
-    my.opencode.enable = true;
+    hm.my.opencode.enable = true;
   };
 }
