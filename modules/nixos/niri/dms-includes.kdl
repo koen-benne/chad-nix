@@ -1,7 +1,0 @@
-// DMS includes configuration
-// This file is included by the main niri config to load DMS-managed files
-// outputs: Monitor configuration that changes when switching workplaces
-// colors: Color scheme managed by DMS
-
-include "dms/outputs.kdl"
-include "dms/colors.kdl"

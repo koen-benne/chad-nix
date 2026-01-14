@@ -18,18 +18,20 @@ in {
     # Create DMS directory for dynamic config files
     xdg.configFile."niri/dms/.keep".text = "";
 
-    # Copy the DMS includes file to the niri config directory
-    # This file contains include statements that reference DMS-managed files
-    xdg.configFile."niri/dms-includes.kdl".source = ./dms-includes.kdl;
+    # Override the niri config file completely
+    # We take the generated config and append DMS includes
+    xdg.configFile."niri/config.kdl".text = lib.mkForce (
+      config.programs.niri.finalConfig + ''
+        
+        // Include DMS-managed configuration files
+        // outputs: Monitor configuration that changes when switching workplaces
+        // colors: Color scheme managed by DMS
+        include "dms/outputs.kdl"
+        include "dms/colors.kdl"
+      ''
+    );
 
     programs.niri.settings = {
-      # Include the DMS includes file
-      # This file itself is valid KDL and won't be validated during build
-      # The includes inside it will be evaluated at runtime by niri
-      includes = lib.mkAfter [
-        "dms-includes.kdl"
-      ];
-
       outputs."DP-3" = {
         scale = 1.0;
         mode = {
