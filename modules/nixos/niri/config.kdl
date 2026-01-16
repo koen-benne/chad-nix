@@ -110,6 +110,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
     
     // DMS specific
+    Mod+B { spawn "dms" "ipc" "call" "bar" "toggle" "index" "0"; }
     Mod+Ctrl+N { spawn "dms" "ipc" "call" "notifications" "toggle"; }
     Mod+Ctrl+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
     Mod+Ctrl+P { spawn "dms" "ipc" "call" "notepad" "toggle"; }

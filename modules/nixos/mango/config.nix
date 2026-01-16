@@ -161,6 +161,7 @@
   bind=SUPER,c,spawn,hyprpicker -a
 
   # DMS specific keybindings
+  bind=SUPER,b,spawn,dms ipc call bar toggle index 0
   bind=SUPER+CTRL,n,spawn,dms ipc notifications toggle
   bind=SUPER+CTRL,v,spawn,dms ipc clipboard toggle
   bind=SUPER+CTRL,p,spawn,dms ipc notepad toggle

@@ -141,6 +141,7 @@
   bind = $mainMod SHIFT, G, exec, grim ~/Images/$(date +%s)_grim.png
 
   # DMS specific keybindings
+  bind = $mainMod, B, exec, dms ipc call bar toggle index 0
   bind = $mainMod CTRL, N, exec, dms ipc notifications toggle
   bind = $mainMod CTRL, V, exec, dms ipc clipboard toggle
   bind = $mainMod CTRL, P, exec, dms ipc notepad toggle
