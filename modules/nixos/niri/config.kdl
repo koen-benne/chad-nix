@@ -17,7 +17,7 @@ input {
             layout "us"
         }
     }
-    
+
     touchpad {
         natural-scroll
         scroll-factor 0.5
@@ -36,21 +36,21 @@ hotkey-overlay {
 layout {
     gaps 10
     center-focused-column "never"
-    
+
     preset-column-widths {
         proportion 0.33333
         proportion 0.5
         proportion 0.66667
     }
-    
+
     default-column-width {
         proportion 0.5
     }
-    
+
     focus-ring {
         width 2
     }
-    
+
     border {
         off
     }
@@ -75,7 +75,7 @@ window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
     match app-id=r#"^1Password$"#
-    
+
     block-out-from "screencast"
 }
 
@@ -108,7 +108,7 @@ binds {
     Mod+G { screenshot; }
     Mod+Shift+G { screenshot-screen; }
     Mod+Shift+Slash { show-hotkey-overlay; }
-    
+
     // DMS specific
     Mod+B { spawn "dms" "ipc" "call" "bar" "toggle" "index" "0"; }
     Mod+Ctrl+N { spawn "dms" "ipc" "call" "notifications" "toggle"; }
@@ -119,17 +119,17 @@ binds {
     Mod+R { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
     Mod+S { spawn "dms" "ipc" "call" "dankdash" "media"; }
     Mod+Comma { spawn "dms" "ipc" "call" "settings" "toggle"; }
-    
+
     // Overview and focus
     Mod+Tab { toggle-overview; }
     Mod+Space { switch-focus-between-floating-and-tiling; }
-    
+
     // Media keys
     XF86AudioMedia allow-when-locked=true { spawn "playerctl" "play-pause"; }
     XF86AudioPlay allow-when-locked=true { spawn "playerctl" "play-pause"; }
     XF86AudioPrev allow-when-locked=true { spawn "playerctl" "previous"; }
     XF86AudioNext allow-when-locked=true { spawn "playerctl" "next"; }
-    
+
     // Volume and brightness (DMS)
     XF86AudioRaiseVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "increment" "3"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "decrement" "3"; }
@@ -137,28 +137,28 @@ binds {
     XF86AudioMicMute allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "micmute"; }
     XF86MonBrightnessUp allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "decrement" "5" ""; }
-    
+
     // Navigation
     Mod+H { focus-column-left; }
     Mod+L { focus-column-right; }
     Mod+J { focus-window-down; }
     Mod+K { focus-window-up; }
-    
+
     Mod+Shift+H { move-column-left; }
     Mod+Shift+L { move-column-right; }
     Mod+Shift+J { move-window-down; }
     Mod+Shift+K { move-window-up; }
-    
+
     Mod+U { focus-workspace-down; }
     Mod+I { focus-workspace-up; }
     Mod+Page_Down { focus-workspace-down; }
     Mod+Page_Up { focus-workspace-up; }
-    
+
     Mod+Shift+U { move-column-to-workspace-down; }
     Mod+Shift+I { move-column-to-workspace-up; }
     Mod+Shift+Page_Down { move-column-to-workspace-down; }
     Mod+Shift+Page_Up { move-column-to-workspace-up; }
-    
+
     // Numbered workspaces
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
@@ -169,7 +169,7 @@ binds {
     Mod+7 { focus-workspace 7; }
     Mod+8 { focus-workspace 8; }
     Mod+9 { focus-workspace 9; }
-    
+
     Mod+Shift+1 { move-column-to-workspace 1; }
     Mod+Shift+2 { move-column-to-workspace 2; }
     Mod+Shift+3 { move-column-to-workspace 3; }
@@ -179,20 +179,20 @@ binds {
     Mod+Shift+7 { move-column-to-workspace 7; }
     Mod+Shift+8 { move-column-to-workspace 8; }
     Mod+Shift+9 { move-column-to-workspace 9; }
-    
+
     // Column management
     Mod+Ctrl+H { consume-window-into-column; }
     Mod+Ctrl+L { expel-window-from-column; }
-    
+
     // Resizing
     Mod+N { set-column-width "+10%"; }
     Mod+Minus { set-column-width "-10%"; }
     Mod+Shift+N { set-window-height "+10%"; }
     Mod+Shift+Minus { set-window-height "-10%"; }
-    
+
     // Maximize
     Mod+M { maximize-column; }
-    
+
     // Mouse wheel
     Mod+WheelScrollDown { focus-workspace-down; }
     Mod+WheelScrollUp { focus-workspace-up; }
