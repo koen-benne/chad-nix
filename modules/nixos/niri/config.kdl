@@ -57,7 +57,7 @@ layout {
 }
 
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
-spawn-at-startup "@polkit_path@"
+// Note: polkit agent is managed by systemd service, not spawned directly
 spawn-at-startup "foot" "--server"
 
 xwayland-satellite {

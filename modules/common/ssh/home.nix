@@ -37,6 +37,11 @@
       User git
       IdentityFile ~/.ssh/bitbucket
 
+    Host ssh.dev.azure.com
+      HostName ssh.dev.azure.com
+      User git
+      IdentityFile ~/.ssh/azure
+
     Host nixos-server
       HostName 82.174.152.170
       User koenbenne

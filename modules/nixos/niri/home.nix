@@ -20,12 +20,12 @@ in {
 
     # Disable niri-flake's config file management but keep the program enabled
     programs.niri.config = lib.mkForce null;
-    
+
     # Manage the config file ourselves with DMS includes
     # We use a template to substitute store paths
     xdg.configFile."niri/config.kdl".text = builtins.readFile (
       pkgs.replaceVars ./config.kdl {
-        polkit_path = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        # polkit_path = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
         xwayland_satellite_path = "${pkgs.xwayland-satellite-unstable}/bin/xwayland-satellite";
       }
     );
@@ -91,7 +91,8 @@ in {
 
       spawn-at-startup = [
         {command = ["wl-paste" "--watch" "cliphist" "store"];}
-        {command = ["${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"];}
+        # Note: polkit agent is managed by systemd service in compat.nix for home-manager mode
+        # and by NixOS configuration in system mode, so we don't spawn it here
         {command = ["foot" "--server"];}
       ];
 
@@ -120,6 +121,7 @@ in {
         "Mod+Shift+Slash".action = show-hotkey-overlay;
 
         # DMS specific
+        "Mod+b".action = spawn "dms" "ipc" "call" "bar" "toggle" "index" "0";
         "Mod+Ctrl+n".action = spawn "dms" "ipc" "call" "notifications" "toggle";
         "Mod+Ctrl+v".action = spawn "dms" "ipc" "call" "clipboard" "toggle";
         "Mod+Ctrl+p".action = spawn "dms" "ipc" "call" "notepad" "toggle";

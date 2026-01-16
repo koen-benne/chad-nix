@@ -64,8 +64,8 @@ in {
             # Import environment variables into systemd user session
             systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
 
-            # Start graphical session target
-            systemctl --user start graphical-session.target
+            # Note: graphical-session.target is started automatically by dependencies
+            # Don't start it manually as it's marked RefuseManualStart=yes
           '';
           RemainAfterExit = true;
         };
