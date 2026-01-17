@@ -9,6 +9,8 @@
   cfg = sys.my.gaming;
 in {
   config = mkIf cfg.enable {
+    my.hytale-launcher.enable = true;
+
     home.packages = with pkgs; [
       unstable.lutris
       # MC shit

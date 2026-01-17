@@ -609,6 +609,27 @@
         "type": "github"
       }
     },
+    "hytale-launcher": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1768587205,
+        "narHash": "sha256-v7ah2f3jcQPRRYojiR9doCEySmEVjcxPP0xWqH0r0GM=",
+        "owner": "JPyke3",
+        "repo": "hytale-launcher-nix",
+        "rev": "7aed53c28c134a8a8454217cebdb15035533f50d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "JPyke3",
+        "repo": "hytale-launcher-nix",
+        "type": "github"
+      }
+    },
     "jovian": {
       "inputs": {
         "nix-github-actions": "nix-github-actions",
@@ -1168,6 +1189,7 @@
         "homebrew-bundle": "homebrew-bundle",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
+        "hytale-launcher": "hytale-launcher",
         "mango": "mango",
         "neovim": "neovim",
         "niri": "niri",
