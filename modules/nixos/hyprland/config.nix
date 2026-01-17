@@ -66,6 +66,7 @@
     gaps_in = 5
     gaps_out = 10
     border_size = 2
+    # Border colors are managed by DMS in dms/colors.conf
     col.active_border = rgba(ca714eee)
     col.inactive_border = rgba(00000000)
 
@@ -215,5 +216,10 @@
   bind = $mainMod, mouse_down, workspace, e+1
   bind = $mainMod, mouse_up, workspace, e-1
 
+  # Include DMS-managed configuration files (optional)
+  # These files are created/updated by DMS at runtime
+  # No outputs because i want to manually be able to set HDR related stuff
+  # source = ~/.config/hypr/dms/outputs.conf
+  source = ~/.config/hypr/dms/colors.conf
 
 ''
