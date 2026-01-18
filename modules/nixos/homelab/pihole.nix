@@ -14,6 +14,11 @@ in {
 
   config = mkIf (homelabCfg.enable && cfg.enable) {
     # Main Pi-hole FTL service
+    networking.firewall = {
+      allowedTCPPorts = [8080];
+    };
+    services.resolved.enable = false;
+
     services.pihole-ftl = {
       enable = true;
       openFirewallDNS = true;  # Automatically opens port 53
