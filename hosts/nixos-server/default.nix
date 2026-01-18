@@ -1,5 +1,6 @@
 # TODO: move some of the firewall config here to their own files
 {
+  inputs,
   config,
   lib,
   pkgs,
@@ -82,6 +83,11 @@
   my.openssl.enable = true;
   # my.mc-servers.enable = true;
   my.theme.enable = true;
+
+  # Hytale dedicated server
+  my.hytale = {
+    enable = true;
+  };
 
   # Enable the services you want
   my.homelab = {

@@ -150,3 +150,12 @@ Beyond GPU support, `targets.genericLinux.enable = true` also provides:
 - **Zsh completions** - Makes system zsh completions available
 
 This eliminates the need for many custom compatibility hacks and provides better integration with the host system.
+
+## Host-Scoped Modules
+- Keep custom modules minimal; expose only `my.<module>.enable` by default.
+- Add options only for settings that are likely to vary per host (e.g., desktop variant); avoid exposing universal settings (e.g., `openFirewall`)—bake those into module defaults.
+- Apply sane defaults internally; tune specifics within the module since we control it.
+- Import upstream modules inside our module; rely on `lib.my.getModules [./.]`.
+- Enable per host in `hosts/<host>/default.nix`.
+- Rely on lazy evaluation so unused modules do not pull dependencies.
+- Ensure `inputs` is passed via `specialArgs` so modules can access flake inputs.

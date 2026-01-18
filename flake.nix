@@ -61,6 +61,10 @@
     # Minecraft servers
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
+    # Hytale server (runtime-auth downloader)
+    nix-hytale-server.url = "github:OsiPog/nix-hytale-server";
+    nix-hytale-server.inputs.nixpkgs.follows = "nixpkgs";
+
     # Arr
     nixarr.url = "github:rasmus-kirk/nixarr";
 
