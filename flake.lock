@@ -94,6 +94,29 @@
         "type": "github"
       }
     },
+    "blueprint": {
+      "inputs": {
+        "nixpkgs": [
+          "nix-hytale-server",
+          "nixpkgs"
+        ],
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1768344359,
+        "narHash": "sha256-N9CKwK9YPholuZHyAHyE61KrTiA0hwrxsGlLKqrZYq4=",
+        "owner": "osipog",
+        "repo": "blueprint",
+        "rev": "6a803c8b39050b028dcc4e02a838448ec0ad9a68",
+        "type": "github"
+      },
+      "original": {
+        "owner": "osipog",
+        "ref": "feat/allow-nixpkgs-package-definitions",
+        "repo": "blueprint",
+        "type": "github"
+      }
+    },
     "brew-src": {
       "flake": false,
       "locked": {
@@ -416,7 +439,7 @@
     },
     "flake-utils": {
       "inputs": {
-        "systems": "systems"
+        "systems": "systems_2"
       },
       "locked": {
         "lastModified": 1731533236,
@@ -792,6 +815,27 @@
         "type": "github"
       }
     },
+    "nix-hytale-server": {
+      "inputs": {
+        "blueprint": "blueprint",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1768388013,
+        "narHash": "sha256-K2PRau278LalXiR33Nd0zDM6DsMcNa7rGAx1hvnCDsY=",
+        "owner": "OsiPog",
+        "repo": "nix-hytale-server",
+        "rev": "c1631815c457a7015ef07b5f1e92aabbd421d2db",
+        "type": "github"
+      },
+      "original": {
+        "owner": "OsiPog",
+        "repo": "nix-hytale-server",
+        "type": "github"
+      }
+    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -1146,6 +1190,7 @@
         "neovim": "neovim",
         "niri": "niri",
         "nix-homebrew": "nix-homebrew",
+        "nix-hytale-server": "nix-hytale-server",
         "nix-index-database": "nix-index-database",
         "nix-minecraft": "nix-minecraft",
         "nixarr": "nixarr",
@@ -1308,7 +1353,7 @@
         "nixpkgs": [
           "unstable"
         ],
-        "systems": "systems_2"
+        "systems": "systems_3"
       },
       "locked": {
         "lastModified": 1768107098,
@@ -1337,7 +1382,7 @@
           "nixpkgs"
         ],
         "nur": "nur",
-        "systems": "systems_3",
+        "systems": "systems_4",
         "tinted-foot": "tinted-foot",
         "tinted-kitty": "tinted-kitty",
         "tinted-schemes": "tinted-schemes",
@@ -1390,6 +1435,21 @@
       }
     },
     "systems_3": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_4": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
@@ -1503,11 +1563,11 @@
     },
     "unstable": {
       "locked": {
-        "lastModified": 1768178648,
-        "narHash": "sha256-kz/F6mhESPvU1diB7tOM3nLcBfQe7GU7GQCymRlTi/s=",
+        "lastModified": 1768783163,
+        "narHash": "sha256-tLj4KcRDLakrlpvboTJDKsrp6z2XLwyQ4Zmo+w8KsY4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "3fbab70c6e69c87ea2b6e48aa6629da2aa6a23b0",
+        "rev": "bde09022887110deb780067364a0818e89258968",
         "type": "github"
       },
       "original": {
