@@ -10,11 +10,6 @@
   cfg = sys.my.niri;
 in {
   config = mkIf cfg.enable {
-    # Polkit agent package for both NixOS and standalone modes
-    home.packages = [
-      pkgs.polkit_gnome
-    ];
-
     # Create DMS directory for dynamic config files
     xdg.configFile."niri/dms/.keep".text = "";
 

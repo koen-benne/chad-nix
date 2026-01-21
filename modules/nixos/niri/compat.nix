@@ -72,22 +72,8 @@ in {
         Install.WantedBy = ["niri.service"];
       };
 
-      # PolicyKit authentication agent
-      polkit-gnome-authentication-agent = {
-        Unit = {
-          Description = "PolicyKit Authentication Agent";
-          After = ["graphical-session.target"];
-          PartOf = ["graphical-session.target"];
-        };
-        Service = {
-          Type = "simple";
-          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-          Restart = "on-failure";
-          RestartSec = 1;
-          TimeoutStopSec = 10;
-        };
-        Install.WantedBy = ["graphical-session.target"];
-      };
+      # Note: PolicyKit authentication agent (mate-polkit) is installed via apt
+      # and started via XDG autostart or manually. No systemd service needed.
     };
 
     # Instructions for non-NixOS system setup
