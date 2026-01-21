@@ -1,0 +1,16 @@
+{
+  "id": "globalprotect-control",
+  "name": "GlobalProtect Control",
+  "version": "1.0.0",
+  "description": "GlobalProtect VPN toggle in Control Center",
+  "author": "koen-benne",
+  "homepage": "https://github.com/koen-benne",
+  "type": "widget",
+  "capabilities": ["control-center", "dankbar-widget"],
+  "permissions": ["settings_write", "process_execute"],
+  "component": "./Main.qml",
+  "ccWidgetTitle": "GlobalProtect",
+  "ccWidgetIcon": "vpn_key",
+  "ccWidgetToggleable": true,
+  "ccWidgetHasDetail": false
+}
