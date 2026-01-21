@@ -84,11 +84,5 @@ in {
         fi
       fi
     '';
-
-    # Install custom plugins
-    xdg.configFile."DankMaterialShell/plugins/globalprotect-control" = {
-      source = ./plugins/globalprotect-control;
-      recursive = true;
-    };
   };
 }

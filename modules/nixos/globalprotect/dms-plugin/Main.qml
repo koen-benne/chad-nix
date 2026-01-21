@@ -71,7 +71,7 @@ PluginComponent {
         console.log("[GlobalProtect] Starting connection process...")
 
         activeProcess = processComponent.createObject(root, {
-            command: ["pkexec", "env", "DISPLAY=:0", "WAYLAND_DISPLAY=wayland-1", "/home/koenbenne/.nix-profile/bin/gpclient", "connect", "gp.iodigital.com", "--as-gateway"],
+            command: ["pkexec", "env", "DISPLAY=:0", "WAYLAND_DISPLAY=wayland-1", "@gpclient@", "connect", "gp.iodigital.com", "--as-gateway"],
             running: true
         })
 
@@ -147,7 +147,7 @@ PluginComponent {
         console.log("[GlobalProtect] Starting disconnection process...")
 
         activeProcess = processComponent.createObject(root, {
-            command: ["pkexec", "/home/koenbenne/.nix-profile/bin/gpclient", "disconnect"],
+            command: ["pkexec", "@gpclient@", "disconnect"],
             running: true
         })
 
