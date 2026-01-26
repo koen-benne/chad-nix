@@ -37,10 +37,6 @@
     # nvim-pkg # Custom neovim build
     comma # for entering shells with packages
 
-    unstable.nodejs
-    # nodePackages.pnpm
-    # nodePackages.yarn
-
     dev-utils # from dev-flakes overlay
 
     unstable._1password-cli
@@ -56,7 +52,6 @@
     zsh.enable = true;
     fish.enable = true;
     tmux.enable = true;
-    yazi.enable = true;
     taskwarrior.enable = true;
     nix-helper.enable = true;
   };

@@ -4,6 +4,7 @@
   inputs,
   ...
 }: {
+  home.file.".hushlogin".text = "";
   home.packages = with pkgs; [
     # (writeScriptBin "bs" ''
     #   #!${runtimeShell}
@@ -27,12 +28,6 @@
     iproute2mac
     pstree
 
-    browserpass
-    ueberzugpp
-    zbar
-    wakatime-cli
-
-    neofetch
     cachix
 
     # MacOS comes with bash from the stone age. This version does not support certain features

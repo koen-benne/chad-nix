@@ -31,6 +31,10 @@ in {
       obsidian
       alsa-scarlett-gui
 
+      unstable.vesktop
+      ripasso-cursive
+      spotify-player
+
       # other
       # teams-for-linux
       # figma-agent

@@ -12,6 +12,7 @@
 in {
   imports = [];
   options.my.desktop = {
+    enable = mkEnableOption (mdDoc "desktop");
     windowManager = mkOption {
       type = types.enum ["hyprland" "niri" "mango"];
       default = "hyprland";
@@ -38,6 +39,7 @@ in {
     my.mango.enable = cfg.windowManager == "mango";
     my.theme.enable = true;
 
+    hm.my.spicetify.enable = lib.mkDefault true;
     hm.my.foot.enable = true;
     hm.my.thunderbird.enable = true;
     # hm.my.firefox.enable = true;
