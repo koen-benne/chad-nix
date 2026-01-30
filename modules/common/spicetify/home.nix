@@ -23,7 +23,7 @@ in {
     ];
 
     programs.spicetify = {
-      enable = false;
+      enable = true;
       theme = spicePkgs.themes.lucid;
       # colorScheme = "mocha";
       # alwaysEnableDevTools = true;
