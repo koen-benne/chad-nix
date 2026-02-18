@@ -14,6 +14,7 @@ in {
         neovim.enable = false;
         fzf.enable = false;
         spicetify.enable = false;
+        zen-browser.enable = false;
         qt = {
           enable = true;
           platform = "adwaita";

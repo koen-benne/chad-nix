@@ -17,6 +17,9 @@ in {
       # globalprotect-openconnect
       teams-for-linux
       slack
+
+      notesnook
+      obsidian
     ];
   };
 }

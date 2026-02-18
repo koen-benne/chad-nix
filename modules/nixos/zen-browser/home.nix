@@ -98,14 +98,8 @@ in {
             id = "1password-x-password-manager";
             pinned = true;
           };
-          "wappalyzer@crunchlabz.com" = mkExtensionEntry {
-            id = "wappalyzer";
-            pinned = true;
-          };
-          "uBlock0@raymondhill.net" = mkExtensionEntry {
-            id = "ublock-origin";
-            pinned = true;
-          };
+          "wappalyzer@crunchlabz.com" = "wappalyzer";
+          "uBlock0@raymondhill.net" = "ublock-origin";
           "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = "vimium-ff";
           "{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}" = "refined-github-";
           "{85860b32-02a8-431a-b2b1-40fbd64c9c69}" = "github-file-icons";
@@ -197,26 +191,6 @@ in {
               icon = "circle";
               id = 1;
               name = "Personal";
-            };
-
-            private = {
-              color = "red";
-              icon = "fingerprint";
-              id = 2;
-              name = "Private";
-            };
-
-            atolls = {
-              color = "blue";
-              icon = "briefcase";
-              id = 3;
-              name = "Atolls";
-            };
-
-            Shopping = {
-              color = "yellow";
-              icon = "dollar";
-              id = 4;
             };
           };
 

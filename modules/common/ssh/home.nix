@@ -43,7 +43,7 @@
       IdentityFile ~/.ssh/azure
 
     Host nixos-server
-      HostName 82.174.152.170
+      HostName 85.144.90.73
       User koenbenne
       IdentityFile ~/.ssh/nixos
 

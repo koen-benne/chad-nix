@@ -116,12 +116,12 @@ binds {
     Mod+Ctrl+P { spawn "dms" "ipc" "call" "notepad" "toggle"; }
     Mod+Shift+S { spawn "dms" "ipc" "call" "lock" "lock"; }
     Mod+X { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
-    Mod+R { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+    Mod+R { spawn "dms" "ipc" "call" "launcher" "toggle"; }
     Mod+S { spawn "dms" "ipc" "call" "dankdash" "media"; }
     Mod+Comma { spawn "dms" "ipc" "call" "settings" "toggle"; }
 
     // Overview and focus
-    Mod+Tab { toggle-overview; }
+    Mod+A { toggle-overview; }
     Mod+Space { switch-focus-between-floating-and-tiling; }
 
     // Media keys
@@ -159,6 +159,14 @@ binds {
     Mod+Shift+Page_Down { move-column-to-workspace-down; }
     Mod+Shift+Page_Up { move-column-to-workspace-up; }
 
+    // Monitor navigation
+    Mod+O { focus-monitor-right; }
+    Mod+Shift+O { focus-monitor-left; }
+
+    // Workspace to monitor
+    Mod+Z { move-workspace-to-monitor-right; }
+    Mod+Shift+Z { move-workspace-to-monitor-left; }
+
     // Numbered workspaces
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
@@ -169,6 +177,7 @@ binds {
     Mod+7 { focus-workspace 7; }
     Mod+8 { focus-workspace 8; }
     Mod+9 { focus-workspace 9; }
+    Mod+0 { focus-workspace 10; }
 
     Mod+Shift+1 { move-column-to-workspace 1; }
     Mod+Shift+2 { move-column-to-workspace 2; }
@@ -179,16 +188,25 @@ binds {
     Mod+Shift+7 { move-column-to-workspace 7; }
     Mod+Shift+8 { move-column-to-workspace 8; }
     Mod+Shift+9 { move-column-to-workspace 9; }
+    Mod+Shift+0 { move-column-to-workspace 10; }
 
     // Column management
     Mod+Ctrl+H { consume-window-into-column; }
     Mod+Ctrl+L { expel-window-from-column; }
+    Mod+T { center-column; }
+    Mod+Ctrl+M { move-column-to-first; }
+    Mod+Shift+T { move-column-to-last; }
 
     // Resizing
-    Mod+N { set-column-width "+10%"; }
-    Mod+Minus { set-column-width "-10%"; }
-    Mod+Shift+N { set-window-height "+10%"; }
-    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Period { set-column-width "+10%"; }
+    Mod+Shift+Comma { set-column-width "-10%"; }
+
+    // Preset widths
+    Mod+Y { switch-preset-column-width; }
+    Mod+Shift+Y { switch-preset-column-width-back; }
+    Mod+D { set-column-width "33.333%"; }
+    Mod+Shift+D { set-column-width "50%"; }
+    Mod+Ctrl+D { set-column-width "66.667%"; }
 
     // Maximize
     Mod+M { maximize-column; }
