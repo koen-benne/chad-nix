@@ -11,6 +11,8 @@ in {
   config = mkIf cfg.enable {
     stylix = {
       targets = {
+        hyprland.enable = false;
+        hyprpaper.enable = false;
         neovim.enable = false;
         fzf.enable = false;
         spicetify.enable = false;
