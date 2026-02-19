@@ -6,12 +6,12 @@
   ...
 }: let
   inherit (lib) mkIf;
-  cfg = config.my.globalprotect;
-  dmsCfg = config.my.dankmaterialshell;
+  cfg = sys.my.globalprotect;
+  dmsCfg = sys.my.dankmaterialshell;
 
   # Determine gpclient path based on whether it's NixOS or standalone
   gpclientPath =
-    if sys.my.globalprotect.enable or false
+    if sys.my.globalprotect.enable
     then "${pkgs.gpclient}/bin/gpclient"  # NixOS: use system package path
     else "${config.home.homeDirectory}/.nix-profile/bin/gpclient";  # Standalone: use home-manager path
 
