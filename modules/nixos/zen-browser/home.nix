@@ -400,17 +400,17 @@ in {
             # };
 
             # KNMI workspace pins
-            "KNMI Website" = {
+            "Extranetten Acceptance" = {
               id = "b1c2d3e4-f5a6-47b8-c9d0-e1f2a3b4c5d6";
               workspace = "d2b9e0f3-5c4e-4d9f-8e3b-2e4f6c8d0a5e"; # KNMI space
-              url = "https://www.knmi.nl";
+              url = "https://mijnknmi.exons2.web.acc.knmi.cloud";
               isEssential = false;
               position = 300;
             };
-            "KNMI Data Platform" = {
+            "Extranetten Production" = {
               id = "c2d3e4f5-a6b7-48c9-d0e1-f2a3b4c5d6e7";
               workspace = "d2b9e0f3-5c4e-4d9f-8e3b-2e4f6c8d0a5e"; # KNMI space
-              url = "https://dataplatform.knmi.nl";
+              url = "https://new.mijn.knmi.nl";
               isEssential = false;
               position = 301;
             };
