@@ -183,9 +183,9 @@ in {
 
           spacesForce = true;
           spaces = {
-            "Communication" = {
+            "Other" = {
               id = "c1a8f9e2-4b3d-4c8e-9f2a-1d3e5b7a9c4f";
-              icon = "💬";
+              icon = "📌";
               position = 1000;
               theme = {
                 type = "gradient";
@@ -382,18 +382,69 @@ in {
 
           pinsForce = true;
           pins = {
+            # Essential pins (appear in all workspaces)
             "Outlook" = {
               id = "a1b2c3d4-e5f6-47a8-b9c0-d1e2f3a4b5c6";
-              workspace = "c1a8f9e2-4b3d-4c8e-9f2a-1d3e5b7a9c4f"; # Communication space
               url = "https://outlook.office365.com";
               isEssential = true;
               position = 100;
             };
-            "GitHub" = {
-              id = "48e8a119-5a14-4826-9545-91c8e8dd3bf6";
-              url = "https://github.com";
-              position = 101;
+
+            # Other workspace pins
+            # "GitHub" = {
+            #   id = "48e8a119-5a14-4826-9545-91c8e8dd3bf6";
+            #   workspace = "c1a8f9e2-4b3d-4c8e-9f2a-1d3e5b7a9c4f"; # Other space
+            #   url = "https://github.com";
+            #   isEssential = false;
+            #   position = 200;
+            # };
+
+            # KNMI workspace pins
+            "KNMI Website" = {
+              id = "b1c2d3e4-f5a6-47b8-c9d0-e1f2a3b4c5d6";
+              workspace = "d2b9e0f3-5c4e-4d9f-8e3b-2e4f6c8d0a5e"; # KNMI space
+              url = "https://www.knmi.nl";
               isEssential = false;
+              position = 300;
+            };
+            "KNMI Data Platform" = {
+              id = "c2d3e4f5-a6b7-48c9-d0e1-f2a3b4c5d6e7";
+              workspace = "d2b9e0f3-5c4e-4d9f-8e3b-2e4f6c8d0a5e"; # KNMI space
+              url = "https://dataplatform.knmi.nl";
+              isEssential = false;
+              position = 301;
+            };
+
+            # StayOkay workspace pins
+            "StayOkay Portal" = {
+              id = "d3e4f5a6-b7c8-49d0-e1f2-a3b4c5d6e7f8";
+              workspace = "e3c0f1d4-6d5f-4e0g-9f4c-3f5g7d9e1b6f"; # StayOkay space
+              url = "https://www.stayokay.com";
+              isEssential = false;
+              position = 400;
+            };
+            "StayOkay Dashboard" = {
+              id = "e4f5a6b7-c8d9-40e1-f2a3-b4c5d6e7f8a9";
+              workspace = "e3c0f1d4-6d5f-4e0g-9f4c-3f5g7d9e1b6f"; # StayOkay space
+              url = "https://example.com/stayokay-dashboard";
+              isEssential = false;
+              position = 401;
+            };
+
+            # Zadkine workspace pins
+            "Zadkine Portal" = {
+              id = "f5a6b7c8-d9e0-41f2-a3b4-c5d6e7f8a9b0";
+              workspace = "f4d1e2c5-7e6g-5f1h-0g5d-4g6h8e0f2c7g"; # Zadkine space
+              url = "https://www.zadkine.nl";
+              isEssential = false;
+              position = 500;
+            };
+            "Zadkine Student" = {
+              id = "a6b7c8d9-e0f1-42a3-b4c5-d6e7f8a9b0c1";
+              workspace = "f4d1e2c5-7e6g-5f1h-0g5d-4g6h8e0f2c7g"; # Zadkine space
+              url = "https://example.com/zadkine-student";
+              isEssential = false;
+              position = 501;
             };
           };
 
