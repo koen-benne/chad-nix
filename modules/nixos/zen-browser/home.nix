@@ -17,6 +17,10 @@ in {
   };
 
   config = mkIf cfg.enable {
+    # Required for home-manager's Firefox/Zen module to work properly
+    # This forces the legacy profile system that home-manager expects
+    home.sessionVariables.MOZ_LEGACY_PROFILES = "1";
+
     xdg.mimeApps = let
       associations = builtins.listToAttrs (map (name: {
           inherit name;
@@ -143,6 +147,9 @@ in {
 
       profiles = {
         default = {
+          id = 0; # Profile IDs must be sequential starting from 0
+          isDefault = true; # Mark as default profile
+
           settings = {
             "zen.workspaces.continue-where-left-off" = true;
             "zen.workspaces.natural-scroll" = true;
@@ -174,8 +181,111 @@ in {
             ];
           };
 
+          spacesForce = true;
+          spaces = {
+            "Communication" = {
+              id = "c1a8f9e2-4b3d-4c8e-9f2a-1d3e5b7a9c4f";
+              icon = "💬";
+              position = 1000;
+              theme = {
+                type = "gradient";
+                colors = [
+                  {
+                    algorithm = "floating";
+                    type = "explicit-lightness";
+                    red = 0;
+                    green = 120;
+                    blue = 215;
+                    lightness = 50;
+                    position = {
+                      x = 50;
+                      y = 50;
+                    };
+                  }
+                ];
+                opacity = 0.5;
+              };
+            };
+            "KNMI" = {
+              id = "d2b9e0f3-5c4e-4d9f-8e3b-2e4f6c8d0a5e";
+              icon = "🌤️";
+              position = 2000;
+              theme = {
+                type = "gradient";
+                colors = [
+                  {
+                    algorithm = "floating";
+                    type = "explicit-lightness";
+                    red = 0;
+                    green = 180;
+                    blue = 220;
+                    lightness = 55;
+                    position = {
+                      x = 50;
+                      y = 50;
+                    };
+                  }
+                ];
+                opacity = 0.5;
+              };
+            };
+            "StayOkay" = {
+              id = "e3c0f1d4-6d5f-4e0g-9f4c-3f5g7d9e1b6f";
+              icon = "🏨";
+              position = 3000;
+              theme = {
+                type = "gradient";
+                colors = [
+                  {
+                    algorithm = "floating";
+                    type = "explicit-lightness";
+                    red = 255;
+                    green = 140;
+                    blue = 0;
+                    lightness = 50;
+                    position = {
+                      x = 50;
+                      y = 50;
+                    };
+                  }
+                ];
+                opacity = 0.5;
+              };
+            };
+            "Zadkine" = {
+              id = "f4d1e2c5-7e6g-5f1h-0g5d-4g6h8e0f2c7g";
+              icon = "🎓";
+              position = 4000;
+              theme = {
+                type = "gradient";
+                colors = [
+                  {
+                    algorithm = "floating";
+                    type = "explicit-lightness";
+                    red = 0;
+                    green = 150;
+                    blue = 136;
+                    lightness = 50;
+                    position = {
+                      x = 50;
+                      y = 50;
+                    };
+                  }
+                ];
+                opacity = 0.5;
+              };
+            };
+          };
+
           pinsForce = true;
           pins = {
+            "Outlook" = {
+              id = "a1b2c3d4-e5f6-47a8-b9c0-d1e2f3a4b5c6";
+              workspace = "c1a8f9e2-4b3d-4c8e-9f2a-1d3e5b7a9c4f"; # Communication space
+              url = "https://outlook.office365.com";
+              isEssential = true;
+              position = 100;
+            };
             "GitHub" = {
               id = "48e8a119-5a14-4826-9545-91c8e8dd3bf6";
               url = "https://github.com";
