@@ -191,19 +191,35 @@ in {
                 type = "gradient";
                 colors = [
                   {
+                    red = 30;
+                    green = 90;
+                    blue = 200;
                     algorithm = "floating";
-                    type = "explicit-lightness";
-                    red = 0;
-                    green = 120;
-                    blue = 215;
+                    primary = true;
                     lightness = 50;
                     position = {
-                      x = 50;
-                      y = 50;
+                      x = 20;
+                      y = 20;
                     };
+                    type = "explicit-lightness";
+                  }
+                  {
+                    red = 100;
+                    green = 160;
+                    blue = 255;
+                    algorithm = "floating";
+                    primary = false;
+                    lightness = 60;
+                    position = {
+                      x = 80;
+                      y = 80;
+                    };
+                    type = "explicit-lightness";
                   }
                 ];
-                opacity = 0.5;
+                opacity = 0.6;
+                rotation = 135;
+                texture = 0.3;
               };
             };
             "KNMI" = {
@@ -214,19 +230,48 @@ in {
                 type = "gradient";
                 colors = [
                   {
+                    red = 135;
+                    green = 206;
+                    blue = 235;
                     algorithm = "floating";
+                    primary = true;
+                    lightness = 65;
+                    position = {
+                      x = 50;
+                      y = 10;
+                    };
                     type = "explicit-lightness";
+                  }
+                  {
                     red = 0;
-                    green = 180;
-                    blue = 220;
-                    lightness = 55;
+                    green = 150;
+                    blue = 200;
+                    algorithm = "floating";
+                    primary = false;
+                    lightness = 50;
                     position = {
                       x = 50;
                       y = 50;
                     };
+                    type = "explicit-lightness";
+                  }
+                  {
+                    red = 255;
+                    green = 180;
+                    blue = 100;
+                    algorithm = "complementary";
+                    primary = false;
+                    lightness = 55;
+                    position = {
+                      x = 50;
+                      y = 90;
+                    };
+                    type = "explicit-lightness";
                   }
                 ];
-                opacity = 0.5;
+                opacity = 0.55;
+                rotation = 180;
+                texture = 0.15;
               };
             };
             "StayOkay" = {
@@ -237,19 +282,48 @@ in {
                 type = "gradient";
                 colors = [
                   {
-                    algorithm = "floating";
-                    type = "explicit-lightness";
                     red = 255;
-                    green = 140;
+                    green = 120;
                     blue = 0;
-                    lightness = 50;
+                    algorithm = "analogous";
+                    primary = true;
+                    lightness = 55;
                     position = {
                       x = 50;
                       y = 50;
                     };
+                    type = "explicit-lightness";
+                  }
+                  {
+                    red = 230;
+                    green = 70;
+                    blue = 50;
+                    algorithm = "analogous";
+                    primary = false;
+                    lightness = 50;
+                    position = {
+                      x = 10;
+                      y = 50;
+                    };
+                    type = "explicit-lightness";
+                  }
+                  {
+                    red = 255;
+                    green = 200;
+                    blue = 80;
+                    algorithm = "analogous";
+                    primary = false;
+                    lightness = 60;
+                    position = {
+                      x = 90;
+                      y = 50;
+                    };
+                    type = "explicit-lightness";
                   }
                 ];
-                opacity = 0.5;
+                opacity = 0.65;
+                rotation = 90;
+                texture = 0.5;
               };
             };
             "Zadkine" = {
@@ -260,19 +334,48 @@ in {
                 type = "gradient";
                 colors = [
                   {
-                    algorithm = "floating";
+                    red = 34;
+                    green = 139;
+                    blue = 87;
+                    algorithm = "analogous";
+                    primary = true;
+                    lightness = 45;
+                    position = {
+                      x = 20;
+                      y = 80;
+                    };
                     type = "explicit-lightness";
+                  }
+                  {
                     red = 0;
-                    green = 150;
-                    blue = 136;
+                    green = 170;
+                    blue = 160;
+                    algorithm = "analogous";
+                    primary = false;
                     lightness = 50;
                     position = {
                       x = 50;
                       y = 50;
                     };
+                    type = "explicit-lightness";
+                  }
+                  {
+                    red = 120;
+                    green = 200;
+                    blue = 180;
+                    algorithm = "analogous";
+                    primary = false;
+                    lightness = 65;
+                    position = {
+                      x = 80;
+                      y = 20;
+                    };
+                    type = "explicit-lightness";
                   }
                 ];
-                opacity = 0.5;
+                opacity = 0.6;
+                rotation = 45;
+                texture = 0.35;
               };
             };
           };
