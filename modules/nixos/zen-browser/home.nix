@@ -334,9 +334,9 @@ in {
                 type = "gradient";
                 colors = [
                   {
-                    red = 34;
-                    green = 139;
-                    blue = 87;
+                    red = 215;
+                    green = 3;
+                    blue = 145;
                     algorithm = "analogous";
                     primary = true;
                     lightness = 45;
@@ -347,9 +347,9 @@ in {
                     type = "explicit-lightness";
                   }
                   {
-                    red = 0;
-                    green = 170;
-                    blue = 160;
+                    red = 150;
+                    green = 0;
+                    blue = 100;
                     algorithm = "analogous";
                     primary = false;
                     lightness = 50;
