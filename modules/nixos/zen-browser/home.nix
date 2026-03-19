@@ -27,7 +27,7 @@ in {
           value = let
             zen-browser = config.programs.zen-browser.package;
           in
-            zen-browser.meta.desktopFileName;
+            "${zen-browser.pname}.desktop";
         }) [
           "application/x-extension-shtml"
           "application/x-extension-xhtml"

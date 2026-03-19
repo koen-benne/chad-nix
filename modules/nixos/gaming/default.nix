@@ -28,7 +28,7 @@ in {
       boot.kernelPackages = pkgs.linuxPackages_zen;
 
       environment.systemPackages = with pkgs; [
-        steamcmd
+        # steamcmd # Temporarily disabled due to download failures from Steam CDN
         mangohud
         xdg-user-dirs
         protonup-qt
