@@ -18,6 +18,8 @@ in {
       teams-for-linux
       slack
 
+      tableplus
+
       notesnook
       obsidian
     ];
