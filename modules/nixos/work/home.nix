@@ -18,7 +18,7 @@ in {
       teams-for-linux
       slack
 
-      tableplus
+      unstable.tableplus
 
       notesnook
       obsidian
