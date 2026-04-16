@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "bonzai/claude-4-sonnet",
+  "model": "bedrock/eu.anthropic.claude-sonnet-4-6",
   "lsp": {
     "nil": {
       "command": ["nil"],
@@ -8,22 +8,31 @@
     }
   },
   "provider": {
-    "bonzai": {
-      "name": "Bonzai",
-      "npm": "@ai-sdk/openai-compatible",
+    "bedrock": {
+      "name": "Bonzai Bedrock",
+      "npm": "@ai-sdk/amazon-bedrock",
       "options": {
-        "baseURL": "https://api-v2.bonzai.iodigital.com",
+        "region": "eu-central-1",
         "apiKey": "{file:__BONZAI_SECRET_PATH__}",
-        "includeUsage": true
+        "baseURL": "https://api-v2.bonzai.iodigital.com/bedrock",
+        "headers": {
+          "anthropic-beta": "claude-code-20250219,interleaved-thinking-2025-05-14,fine-grained-tool-streaming-2025-05-14"
+        },
+        "litellmProxy": true
       },
       "models": {
-        "claude-4-5-sonnet": {
-          "name": "Claude Sonnet 4.5",
-          "release_date": "2025-09-29",
+        "eu.anthropic.claude-sonnet-4-6": {
+          "name": "Claude Sonnet 4.6",
+          "release_date": "2026-02-17",
           "attachment": true,
           "reasoning": true,
           "temperature": true,
           "tool_call": true,
+          "family": "claude-sonnet",
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"]
+          },
           "limit": {
             "context": 200000,
             "output": 64000
@@ -33,153 +42,52 @@
             "output": 15.0,
             "cache_read": 0.3,
             "cache_write": 3.75
-          },
+          }
         },
-        "gpt-5": {
-          "name": "OpenAI GPT-5",
-          "release_date": "2025-08-07",
+        "eu.anthropic.claude-opus-4-6-v1": {
+          "name": "Claude Opus 4.6",
+          "release_date": "2026-02-05",
           "attachment": true,
           "reasoning": true,
-          "temperature": false,
+          "temperature": true,
           "tool_call": true,
+          "family": "claude-opus",
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"]
+          },
           "limit": {
-            "context": 272000,
+            "context": 1000000,
             "output": 128000
           },
           "cost": {
-            "input": 1.25,
-            "output": 10.0,
-            "cache_read": 0.13,
-            "cache_write": 0
-          },
-          "options": {
-            // "reasoningEffort": "minimal",
-          }
-        },
-        "gpt-5-mini": {
-          "name": "OpenAI GPT-5 mini",
-          "release_date": "2025-08-07",
-          "attachment": true,
-          "reasoning": true,
-          "temperature": false,
-          "tool_call": true,
-          "limit": {
-            "context": 272000,
-            "output": 128000
-          },
-          "cost": {
-            "input": 0.25,
-            "output": 2.0,
-            "cache_read": 0.03,
-            "cache_write": 0
-          }
-        },
-        "gpt-5-nano": {
-          "name": "OpenAI GPT-5 nano",
-          "release_date": "2025-08-07",
-          "attachment": true,
-          "reasoning": true,
-          "temperature": false,
-          "tool_call": true,
-          "limit": {
-            "context": 272000,
-            "output": 128000
-          },
-          "cost": {
-            "input": 0.05,
-            "output": 0.4,
-            "cache_read": 0.01,
-            "cache_write": 0
-          }
-        },
-        "o3": {
-          "name": "OpenAI o3",
-          "release_date": "2025-04-16",
-          "attachment": true,
-          "reasoning": true,
-          "temperature": false,
-          "tool_call": true,
-          "limit": {
-            "context": 200000,
-            "output": 100000
-          },
-          "cost": {
-            "input": 2.0,
-            "output": 8.0,
+            "input": 5.0,
+            "output": 25.0,
             "cache_read": 0.5,
-            "cache_write": 0
+            "cache_write": 6.25
           }
         },
-        "o3-mini": {
-          "name": "OpenAI o3 mini",
-          "release_date": "2024-12-20",
-          "attachment": false,
-          "reasoning": true,
-          "temperature": false,
-          "tool_call": true,
-          "limit": {
-            "context": 200000,
-            "output": 100000
-          },
-          "cost": {
-            "input": 1.1,
-            "output": 4.4,
-            "cache_read": 0.55,
-            "cache_write": 0
-          }
-        },
-        "o4-mini": {
-          "name": "OpenAI o4 mini",
-          "release_date": "2025-04-16",
-          "attachment": true,
-          "reasoning": true,
-          "temperature": false,
-          "tool_call": true,
-          "limit": {
-            "context": 200000,
-            "output": 100000
-          },
-          "cost": {
-            "input": 1.1,
-            "output": 4.4,
-            "cache_read": 0.28,
-            "cache_write": 0
-          }
-        },
-        "gemini-2.5-pro": {
-          "name": "Google Gemini 2.5 Pro",
-          "release_date": "2025-03-20",
+        "eu.anthropic.claude-haiku-4-5-20251001-v1:0": {
+          "name": "Claude Haiku 4.5",
+          "release_date": "2025-10-15",
           "attachment": true,
           "reasoning": true,
           "temperature": true,
           "tool_call": true,
+          "family": "claude-haiku",
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"]
+          },
           "limit": {
-            "context": 104876,
-            "output": 65536
+            "context": 200000,
+            "output": 64000
           },
           "cost": {
-            "input": 1.25,
-            "output": 10.0,
-            "cache_read": 0.31,
-            "cache_write": 0
-          }
-        },
-        "gemini-2.5-flash": {
-          "name": "Google Gemini 2.5 Flash",
-          "release_date": "2025-05-20",
-          "attachment": true,
-          "reasoning": true,
-          "temperature": true,
-          "tool_call": true,
-          "limit": {
-            "context": 104876,
-            "output": 65536
-          },
-          "cost": {
-            "input": 0.15,
-            "output": 0.6,
-            "cache_read": 0.04,
-            "cache_write": 0
+            "input": 1.0,
+            "output": 5.0,
+            "cache_read": 0.1,
+            "cache_write": 1.25
           }
         }
       }
