@@ -166,6 +166,31 @@ in {
         };
       };
 
+      dconf-profile = {
+        name = "dconf Profile";
+        description = "Required for GTK apps to read the dconf user database (dark mode, fonts, theme)";
+        priority = "critical";
+        checkCommands = [];
+        setupInstructions = {
+          ubuntu = [
+            "sudo mkdir -p /etc/dconf/profile"
+            "echo 'user-db:user' | sudo tee /etc/dconf/profile/user"
+          ];
+          fedora = [
+            "sudo mkdir -p /etc/dconf/profile"
+            "echo 'user-db:user' | sudo tee /etc/dconf/profile/user"
+          ];
+          arch = [
+            "sudo mkdir -p /etc/dconf/profile"
+            "echo 'user-db:user' | sudo tee /etc/dconf/profile/user"
+          ];
+          generic = [
+            "sudo mkdir -p /etc/dconf/profile"
+            "echo 'user-db:user' | sudo tee /etc/dconf/profile/user"
+          ];
+        };
+      };
+
       display-manager = {
         name = "Display Manager (greetd + tuigreet)";
         description = "Login manager for graphical sessions - follow Arch Wiki for setup";
