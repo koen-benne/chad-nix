@@ -103,7 +103,7 @@
     animation = windowsOut, 1, 3, default, popin 80%
     animation = border, 1, 5, default
     animation = fade, 1, 3, default
-    animation = workspaces, 1, 4, default
+    animation = workspaces, 1, 4, default, slide_vertical
   }
 
   dwindle {
@@ -200,18 +200,20 @@
   bind = $mainMod SHIFT, 0, movetoworkspace, 10
 
   # Scrolling-layout specific binds
-  bind = $mainMod, M, layoutmsg, swapcol l
-  bind = $mainMod SHIFT, M, layoutmsg, swapcol r
+  # SUPER A = overview (hyprexpo)
+  bind = $mainMod SHIFT, A, exec, hyprctl keyword general:layout scrolling
+  bind = $mainMod, A, hyprexpo:expo, toggle
+  bind = $mainMod, M, layoutmsg, colresize 1.0
+  bind = $mainMod SHIFT, H, layoutmsg, swapcol l
+  bind = $mainMod SHIFT, L, layoutmsg, swapcol r
 
-  # Move/resize windows with keyboard
-  bind = $mainMod SHIFT, H, resizeactive, -200 0
-  bind = $mainMod SHIFT, L, resizeactive, 200 0
-  bind = $mainMod SHIFT, K, resizeactive, 0 -100
-  bind = $mainMod SHIFT, J, resizeactive, 0 100
-  bind = $mainMod CTRL, H, moveactive, -200 0
-  bind = $mainMod CTRL, L, moveactive, 200 0
-  bind = $mainMod CTRL, K, moveactive, 0 -100
-  bind = $mainMod CTRL, J, moveactive, 0 100
+  # Column width (matching niri Shift+Comma / Shift+Period)
+  bind = $mainMod SHIFT, comma, layoutmsg, colresize -0.1
+  bind = $mainMod SHIFT, period, layoutmsg, colresize +0.1
+
+  # Vertical resize (no niri equivalent)
+  bind = $mainMod SHIFT, D, resizeactive, 0 -100
+  bind = $mainMod CTRL, D, resizeactive, 0 100
 
   # Move/resize windows with mainMod + LMB/RMB and dragging
   bindm = $mainMod, mouse:272, movewindow
@@ -226,5 +228,19 @@
   # No outputs because i want to manually be able to set HDR related stuff
   # source = ~/.config/hypr/dms/outputs.conf
   source = ~/.config/hypr/dms/colors.conf
+
+  plugin {
+    hyprexpo {
+      columns = 3
+      gap_size = 10
+      bg_col = rgb(111111)
+      workspace_method = center current
+
+      enable_gesture = true
+      gesture_fingers = 4
+      gesture_distance = 300
+      gesture_positive = true
+    }
+  }
 
 ''

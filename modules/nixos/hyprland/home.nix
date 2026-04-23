@@ -27,6 +27,9 @@ in {
       enable = true;
       package = pkgs.hyprland;
       xwayland.enable = true;
+      plugins = [
+        pkgs.hyprlandPlugins.hyprexpo
+      ];
       extraConfig = ''
         ${sharedConfig {inherit scripts;}}
       '';
