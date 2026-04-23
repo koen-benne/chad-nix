@@ -131,15 +131,15 @@
 
   # layout support:
   # tile,scroller,grid,deck,monocle,center_tile,vertical_tile,vertical_scroller
-  tagrule=id:1,layout_name:tile
-  tagrule=id:2,layout_name:tile
-  tagrule=id:3,layout_name:tile
-  tagrule=id:4,layout_name:tile
-  tagrule=id:5,layout_name:tile
-  tagrule=id:6,layout_name:tile
-  tagrule=id:7,layout_name:tile
-  tagrule=id:8,layout_name:tile
-  tagrule=id:9,layout_name:tile
+  tagrule=id:1,layout_name:scroller
+  tagrule=id:2,layout_name:scroller
+  tagrule=id:3,layout_name:scroller
+  tagrule=id:4,layout_name:scroller
+  tagrule=id:5,layout_name:scroller
+  tagrule=id:6,layout_name:scroller
+  tagrule=id:7,layout_name:scroller
+  tagrule=id:8,layout_name:scroller
+  tagrule=id:9,layout_name:scroller
 
   # Key Bindings
   # key name refer to `xev` or `wev` command output,
@@ -199,10 +199,9 @@
   bind=SUPER,g,toggleglobal,
   bind=SUPER,space,toggleoverview,
   bind=SUPER,backslash,togglefloating,
-  bind=SUPER,a,togglemaximizescreen,
+  bind=SUPER,m,togglemaximizescreen,
   bind=SUPER,f,togglefullscreen,
   bind=SUPER+SHIFT,f,togglefakefullscreen,
-  bind=SUPER,i,minimized,
   bind=SUPER,o,toggleoverlay,
   bind=SUPER+SHIFT,I,restore_minimized
   bind=SUPER,z,toggle_scratchpad
@@ -211,8 +210,13 @@
   bind=SUPER,n,set_proportion,1.0
   bind=SUPER,minus,switch_proportion_preset,
 
+  # column resize (vertical, no niri equivalent)
+  bind=SUPER+SHIFT,d,resizewin,+0,-50
+  bind=SUPER+CTRL,d,resizewin,+0,+50
+
   # switch layout
-  bind=SUPER,m,switch_layout
+  bind=SUPER,a,toggleoverview,
+  bind=SUPER+SHIFT,a,switch_layout
 
   # tag switch
   bind=SUPER,u,viewtoleft,0
