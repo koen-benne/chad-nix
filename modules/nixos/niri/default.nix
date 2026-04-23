@@ -25,8 +25,8 @@ in {
     })
     (mkIf cfg.enable {
       programs.niri.enable = true;
-      # Use niri-unstable for optional includes support
-      programs.niri.package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
+      # Use niri-unstable from main niri-flake branch for binary cache support
+      programs.niri.package = inputs.niri-pkgs.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
     })
   ];
 }

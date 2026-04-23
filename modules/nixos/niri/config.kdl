@@ -70,7 +70,19 @@ environment {
 
 prefer-no-csd
 
+blur {
+    passes 2
+    offset 3.0
+}
+
 // Window rules
+window-rule {
+    match app-id=r#"^foot"#
+    background-effect {
+        blur true
+    }
+}
+
 window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
@@ -158,6 +170,9 @@ binds {
     Mod+Shift+I { move-column-to-workspace-up; }
     Mod+Shift+Page_Down { move-column-to-workspace-down; }
     Mod+Shift+Page_Up { move-column-to-workspace-up; }
+
+    Mod+Ctrl+U { move-workspace-down; }
+    Mod+Ctrl+I { move-workspace-up; }
 
     // Monitor navigation
     Mod+O { focus-monitor-right; }

@@ -20,7 +20,8 @@ in {
 
   config = mkIf cfg.enable {
     programs.niri.enable = true;
-    programs.niri.package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
+    # Use niri-unstable from main niri-flake branch for binary cache support
+    programs.niri.package = inputs.niri-pkgs.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
 
     # XDG Desktop Portal configuration
     xdg.configFile."xdg-desktop-portal/niri-portals.conf".text = ''

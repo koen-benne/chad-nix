@@ -68,9 +68,13 @@
     # Arr
     nixarr.url = "github:rasmus-kirk/nixarr";
 
-    # Niri wayland compositor (using very-refactor branch for v25.11)
+    # Niri wayland compositor
+    # very-refactor branch provides the NixOS/HM modules compatible with nixpkgs 25.11
     niri.url = "github:sodiboo/niri-flake/very-refactor";
     niri.inputs.nixpkgs.follows = "nixpkgs";
+    # main branch for packages: same niri version but with binary cache support
+    niri-pkgs.url = "github:sodiboo/niri-flake";
+    niri-pkgs.inputs.nixpkgs.follows = "nixpkgs";
 
     # Mango wayland compositor
     mango.url = "github:DreamMaoMao/mango";
