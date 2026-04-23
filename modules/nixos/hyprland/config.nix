@@ -70,7 +70,7 @@
     col.active_border = rgba(ca714eee)
     col.inactive_border = rgba(00000000)
 
-    layout = master
+    layout = scrolling
   }
 
   cursor {
@@ -111,9 +111,11 @@
     preserve_split = yes
   }
 
-  master {
-    new_status = master
-    new_on_top = true
+  scrolling {
+    column_width = 0.5
+    fullscreen_on_one_column = true
+    focus_fit_method = 1
+    follow_focus = true
   }
 
   # Window rules
@@ -163,15 +165,17 @@
   bind = , XF86MonBrightnessUp, exec, dms ipc call brightness increment 5 ""
   bind = , XF86MonBrightnessDown, exec, dms ipc call brightness decrement 5 ""
 
-  # Move focus the river way
-  bind = $mainMod, J, layoutmsg, cyclenext
-  bind = $mainMod, K, layoutmsg, cycleprev
-  bind = $mainMod, H, layoutmsg, orientationleft
-  bind = $mainMod, L, layoutmsg, orientationright
-  bind = $mainMod, U, layoutmsg, orientationup
-  bind = $mainMod, D, layoutmsg, orientationdown
+  # Move focus with vim-style directional keys
+  bind = $mainMod, J, movefocus, d
+  bind = $mainMod, K, movefocus, u
+  bind = $mainMod, H, movefocus, l
+  bind = $mainMod, L, movefocus, r
 
   # Switch workspaces with mainMod + [0-9]
+  bind = $mainMod, U, workspace, e-1
+  bind = $mainMod, I, workspace, e+1
+  bind = $mainMod SHIFT, U, movetoworkspace, e-1
+  bind = $mainMod SHIFT, I, movetoworkspace, e+1
   bind = $mainMod, 1, workspace, 1
   bind = $mainMod, 2, workspace, 2
   bind = $mainMod, 3, workspace, 3
@@ -195,8 +199,9 @@
   bind = $mainMod SHIFT, 9, movetoworkspace, 9
   bind = $mainMod SHIFT, 0, movetoworkspace, 10
 
-  # Master-layout specific binds
-  bind = $mainMod, M, layoutmsg, swapwithmaster
+  # Scrolling-layout specific binds
+  bind = $mainMod, M, layoutmsg, swapcol l
+  bind = $mainMod SHIFT, M, layoutmsg, swapcol r
 
   # Move/resize windows with keyboard
   bind = $mainMod SHIFT, H, resizeactive, -200 0
