@@ -5,7 +5,7 @@
   ...
 }: let
   inherit (lib) mdDoc mkEnableOption mkIf mkOption types;
-  cfg = config.my.homelab.nextcloud;
+  cfg = config.my.homelab.pihole;
   homelabCfg = config.my.homelab;
 in {
   options.my.homelab.pihole = {
@@ -27,6 +27,17 @@ in {
         {
           url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts";
           description = "Steven Black's unified adlist";
+        }
+        {
+          # JW Player CDN domains blocked by Steven Black list but needed for legitimate video players
+          url = "file://${pkgs.writeText "pihole-whitelist" ''
+            assets-jpcust.jwpsrv.com
+            g.jwpsrv.com
+            entitlements.jwplayer.com
+            assets-secure.applicaster.com
+          ''}";
+          type = "allow";
+          description = "JW Player / Applicaster video platform whitelist";
         }
       ];
 
