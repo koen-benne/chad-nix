@@ -84,10 +84,10 @@
   # my.mc-servers.enable = true;
   my.theme.enable = true;
 
-  # Hytale dedicated server
-  my.hytale = {
-    enable = true;
-  };
+  # Hytale dedicated server — disabled until upstream manifest endpoint is fixed
+  # my.hytale = {
+  #   enable = true;
+  # };
 
   # Enable the services you want
   my.homelab = {
