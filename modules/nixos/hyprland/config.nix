@@ -33,8 +33,9 @@
   exec-once = nm-applet
   exec-once = hyprctl setcursor 24
 
-  experimental {
-    xx_color_management_v4 = true
+  render {
+    cm_enabled = true
+    cm_sdr_eotf = gamma22
   }
 
   device {
@@ -106,11 +107,6 @@
     animation = workspaces, 1, 4, default, slide_vertical
   }
 
-  dwindle {
-    pseudotile = yes
-    preserve_split = yes
-  }
-
   scrolling {
     column_width = 0.5
     fullscreen_on_one_column = true
@@ -119,12 +115,11 @@
   }
 
   # Window rules
-  windowrule = float, title:(Floorp - Sharing Indicator)
-  windowrule = tile, title:^(.*PWA.*)$
-  windowrule = tile, title:(Spotify)
-
-  windowrule = workspace 9, title:(Spotify)
-  windowrule = stayfocused, class:^(pinentry-)
+  windowrule = match:title (Floorp - Sharing Indicator), float on
+  windowrule = match:title ^(.*PWA.*)$, tile on
+  windowrule = match:title (Spotify), tile on
+  windowrule = match:title (Spotify), workspace 9
+  windowrule = match:class ^(pinentry-), stay_focused on
 
   $mainMod = SUPER
 
@@ -135,7 +130,6 @@
   bind = $mainMod, E, exec, nautilus
   bind = $mainMod, V, togglefloating,
   bind = $mainMod, R, exec, dms ipc spotlight toggle
-  bind = $mainMod, P, pseudo,
   bind = $mainMod, T, togglesplit,
   bind = $mainMod, F, fullscreen,
   bind = $mainMod, P, exec, 1password --quick-access
@@ -200,9 +194,7 @@
   bind = $mainMod SHIFT, 0, movetoworkspace, 10
 
   # Scrolling-layout specific binds
-  # SUPER A = overview (hyprexpo)
   bind = $mainMod SHIFT, A, exec, hyprctl keyword general:layout scrolling
-  bind = $mainMod, A, hyprexpo:expo, toggle
   bind = $mainMod, M, layoutmsg, colresize 1.0
   bind = $mainMod SHIFT, H, layoutmsg, swapcol l
   bind = $mainMod SHIFT, L, layoutmsg, swapcol r
@@ -228,19 +220,4 @@
   # No outputs because i want to manually be able to set HDR related stuff
   # source = ~/.config/hypr/dms/outputs.conf
   source = ~/.config/hypr/dms/colors.conf
-
-  plugin {
-    hyprexpo {
-      columns = 3
-      gap_size = 10
-      bg_col = rgb(111111)
-      workspace_method = center current
-
-      enable_gesture = true
-      gesture_fingers = 4
-      gesture_distance = 300
-      gesture_positive = true
-    }
-  }
-
 ''

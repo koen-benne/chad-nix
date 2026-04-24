@@ -74,7 +74,6 @@
     windowManager = "hyprland";
     greeter = "dms";
   };
-  hm.my.work.enable = true;
 
   # Stuff specific to only this machine
   my.gaming.enable = true;

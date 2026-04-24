@@ -25,9 +25,6 @@
       });
 in {
   flake.darwinConfigurations = {
-    "RQG5XMDJF4" = mkDarwin {
-      modules = [../hosts/work-mac];
-    };
     "music-mac" = mkDarwin {
       modules = [../hosts/music-mac];
     };
