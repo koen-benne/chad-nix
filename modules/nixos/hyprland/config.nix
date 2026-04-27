@@ -195,7 +195,7 @@
 
   # Scrolling-layout specific binds
   bind = $mainMod SHIFT, A, exec, hyprctl keyword general:layout scrolling
-  bind = $mainMod, M, layoutmsg, colresize 1.0
+  bind = $mainMod, M, exec, bash -c 'f=/tmp/hypr-col-full; if [ -f "$f" ]; then rm "$f"; hyprctl dispatch layoutmsg "colresize 0.5"; else touch "$f"; hyprctl dispatch layoutmsg "colresize 1.0"; fi'
   bind = $mainMod SHIFT, H, layoutmsg, swapcol l
   bind = $mainMod SHIFT, L, layoutmsg, swapcol r
 
