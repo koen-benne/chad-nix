@@ -33,7 +33,8 @@ in {
         xdg-user-dirs
         protonup-qt
 
-        steamtinkerlaunch
+        unstable.steamtinkerlaunch
+        yad # required by steamtinkerlaunch for its GUI menus
         unstable.gamescope
       ];
 
