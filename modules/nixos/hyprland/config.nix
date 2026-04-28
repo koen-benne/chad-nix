@@ -47,12 +47,14 @@
     repeat_delay = 300
     repeat_rate = 50
     kb_layout = us
+    kb_options = caps:ctrl_modifier
 
     follow_mouse = 1
 
     touchpad {
       natural_scroll = true
       scroll_factor = 0.5
+      tap-to-click = false
     }
 
     sensitivity = -0.9 # -1.0 - 1.0, 0 means no modification.

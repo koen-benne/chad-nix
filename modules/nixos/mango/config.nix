@@ -95,12 +95,13 @@
   repeat_delay=600
   numlockon=0
   xkb_rules_layout=us
+  xkb_rules_options=caps:ctrl_modifier
 
   # Trackpad
   # need relogin to make it apply
   disable_trackpad=0
-  tap_to_click=1
-  tap_and_drag=1
+  tap_to_click=0
+  tap_and_drag=0
   drag_lock=1
   trackpad_natural_scrolling=0
   disable_while_typing=1
