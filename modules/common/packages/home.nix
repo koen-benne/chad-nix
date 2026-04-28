@@ -16,6 +16,9 @@
       nix flake lock --update-input neovim
       sudo nixos-rebuild switch --flake .
     '')
+    (writeShellScriptBin "jvim" ''
+      exec ${inputs.jesse.packages.${pkgs.system}.default}/bin/nvim "$@"
+    '')
     age
     manix
     diffutils

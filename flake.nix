@@ -27,6 +27,9 @@
     neovim.url = "github:koen-benne/neovim";
     neovim.inputs.nixpkgs.follows = "unstable";
 
+    jesse.url = "github:jessevdp/personal.nvim-2";
+    jesse.inputs.nixpkgs.follows = "unstable";
+
     dev-flakes.url = "github:koen-benne/dev-flakes";
     dev-flakes.inputs.nixpkgs.follows = "unstable";
 
