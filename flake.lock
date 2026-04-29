@@ -738,19 +738,19 @@
     },
     "neovim": {
       "inputs": {
-        "nixCats": "nixCats",
         "nixpkgs": [
           "unstable"
         ],
-        "nvim-dap-ruby": "nvim-dap-ruby",
-        "ts-error-translator-nvim": "ts-error-translator-nvim"
+        "plugins-nvim-dap-ruby": "plugins-nvim-dap-ruby",
+        "plugins-ts-error-translator-nvim": "plugins-ts-error-translator-nvim",
+        "wrappers": "wrappers_2"
       },
       "locked": {
-        "lastModified": 1777377445,
-        "narHash": "sha256-YkD067XrkESWQuD+SsfAvIJwuuRvivTmLC2NOmEqiJE=",
+        "lastModified": 1777462180,
+        "narHash": "sha256-2MZPl6YJbZ6xUA1ofpI7EDhhwLm+UKp2PbRO8V/i8o0=",
         "owner": "koen-benne",
         "repo": "neovim",
-        "rev": "5fd65cd60786e06240fff805948a11ba58fd8cb2",
+        "rev": "9c3389ef35834270ff550143c2dcc7ec90a3cd79",
         "type": "github"
       },
       "original": {
@@ -1038,21 +1038,6 @@
         "type": "github"
       }
     },
-    "nixCats": {
-      "locked": {
-        "lastModified": 1770584904,
-        "narHash": "sha256-9Zaz8lbKF2W9pwXZEnbiGsicHdBoU+dHt3Wv3mCJoZ8=",
-        "owner": "BirdeeHub",
-        "repo": "nixCats-nvim",
-        "rev": "538fdde784d2909700d97a8ef307783b33a86fb1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "BirdeeHub",
-        "repo": "nixCats-nvim",
-        "type": "github"
-      }
-    },
     "nixarr": {
       "inputs": {
         "nixpkgs": "nixpkgs_6",
@@ -1300,7 +1285,19 @@
         "type": "github"
       }
     },
-    "nvim-dap-ruby": {
+    "ny": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-3257NAH4qlan2YHVLpNRy7x8IJqR2pal3OzFo/ykqXs=",
+        "type": "file",
+        "url": "https://devimages-cdn.apple.com/design/resources/download/NY.dmg"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://devimages-cdn.apple.com/design/resources/download/NY.dmg"
+      }
+    },
+    "plugins-nvim-dap-ruby": {
       "flake": false,
       "locked": {
         "lastModified": 1752006624,
@@ -1316,16 +1313,20 @@
         "type": "github"
       }
     },
-    "ny": {
+    "plugins-ts-error-translator-nvim": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-3257NAH4qlan2YHVLpNRy7x8IJqR2pal3OzFo/ykqXs=",
-        "type": "file",
-        "url": "https://devimages-cdn.apple.com/design/resources/download/NY.dmg"
+        "lastModified": 1767484144,
+        "narHash": "sha256-kjZwfvb0B7GC4dBBSdgC/zRmCUCfCm4H5J+8SFzANJ4=",
+        "owner": "dmmulroy",
+        "repo": "ts-error-translator.nvim",
+        "rev": "558abff11b9e8f4cefc0de09df780c56841c7a4b",
+        "type": "github"
       },
       "original": {
-        "type": "file",
-        "url": "https://devimages-cdn.apple.com/design/resources/download/NY.dmg"
+        "owner": "dmmulroy",
+        "repo": "ts-error-translator.nvim",
+        "type": "github"
       }
     },
     "quickshell": {
@@ -1741,22 +1742,6 @@
         "type": "github"
       }
     },
-    "ts-error-translator-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1767484144,
-        "narHash": "sha256-kjZwfvb0B7GC4dBBSdgC/zRmCUCfCm4H5J+8SFzANJ4=",
-        "owner": "dmmulroy",
-        "repo": "ts-error-translator.nvim",
-        "rev": "558abff11b9e8f4cefc0de09df780c56841c7a4b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dmmulroy",
-        "repo": "ts-error-translator.nvim",
-        "type": "github"
-      }
-    },
     "unstable": {
       "locked": {
         "lastModified": 1775888245,
@@ -1827,6 +1812,27 @@
       "original": {
         "owner": "lassulus",
         "repo": "wrappers",
+        "type": "github"
+      }
+    },
+    "wrappers_2": {
+      "inputs": {
+        "nixpkgs": [
+          "neovim",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1777453571,
+        "narHash": "sha256-PXooKeOxD+7UrN7IxC3Rmqp/2gB1B4mZXeGPd9xeYL4=",
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
+        "rev": "472d261085424d6c359e3f908343c2d354627db3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
         "type": "github"
       }
     },
