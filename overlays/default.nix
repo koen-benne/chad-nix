@@ -2,29 +2,8 @@ final: prev: {
   # Override quickshell from unstable to be available in stable
   quickshell = final.unstable.quickshell;
 
-  # Issue: https://github.com/NixOS/nixpkgs/issues/465676
-  spotify = prev.spotify.overrideAttrs (oldAttrs: {
-    src =
-      if (prev.stdenv.isDarwin && prev.stdenv.isAarch64) then
-        prev.fetchurl {
-          url = "https://web.archive.org/web/20251029235406/https://download.scdn.co/SpotifyARM64.dmg";
-          hash = "sha256-0gwoptqLBJBM0qJQ+dGAZdCD6WXzDJEs0BfOxz7f2nQ=";
-        }
-      else
-        oldAttrs.src;
-  });
-
   # pkgs
   scripts = final.callPackage ../pkgs/scripts {};
-  python3 = prev.python3.override {
-    packageOverrides = python-final: python-prev: {
-      peewee-migrate-1_6_1 = python-final.callPackage ../pkgs/peewee-migrate-1_6_1 {};
-      swagger-ui-py = python-final.callPackage ../pkgs/swagger-ui-py {};
-      json-log-formatter = python-final.callPackage ../pkgs/json-log-formatter {};
-      unmanic = python-final.callPackage ../pkgs/unmanic {};
-    };
-  };
-  python3Packages = final.python3.pkgs;
   jellyfin-web = prev.jellyfin-web.overrideAttrs (finalAttrs: previousAttrs: {
     installPhase = ''
       runHook preInstall
