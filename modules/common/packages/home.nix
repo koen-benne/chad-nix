@@ -37,7 +37,6 @@
     nerd-fonts.jetbrains-mono
     nmap
     rippkgs
-    # nvim-pkg # Custom neovim build
     neovim-personal
     comma # for entering shells with packages
 
