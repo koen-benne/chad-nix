@@ -746,11 +746,11 @@
         "wrappers": "wrappers_2"
       },
       "locked": {
-        "lastModified": 1777464455,
-        "narHash": "sha256-INl28oXI2DKG7ipQog+QPQnQuyD9g7iRynQY3WCxoPk=",
+        "lastModified": 1777884348,
+        "narHash": "sha256-CECWAqQI+B4R6qiIsgBTvMfzFruZdWKRjS0i+Rz+3UI=",
         "owner": "koen-benne",
         "repo": "neovim",
-        "rev": "3cd279d9e264befac3b44179edfa05ed96e61845",
+        "rev": "5c5b94cb688c024663ec6f66f3400bdbccdbd181",
         "type": "github"
       },
       "original": {

@@ -38,6 +38,9 @@
       "opencode/plugin/bonzai-remove-unsupported-params.ts" = {
         source = ./bonzai-remove-unsupported-params.ts;
       };
+      "opencode/skills/spec-tree/SKILL.md" = {
+        source = ./skills/spec-tree/SKILL.md;
+      };
     };
   };
 }
