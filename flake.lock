@@ -243,11 +243,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1774002438,
-        "narHash": "sha256-GhAPKxHidkIjpPCEsUppx3SbIX4FKjJENr94mzI3d84=",
+        "lastModified": 1778154216,
+        "narHash": "sha256-MyXXC+ZrEIBAMe0jRDgsHBwAp7ZpdFNOvsomsU6mNlk=",
         "owner": "koen-benne",
         "repo": "dev-flakes",
-        "rev": "0a0271aaff1152b0b6afae1997b61e8d354095d0",
+        "rev": "f548b7dbf57335a6d4cdd7f18eec9852c3cb4a9c",
         "type": "github"
       },
       "original": {
