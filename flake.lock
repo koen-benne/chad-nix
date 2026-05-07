@@ -679,11 +679,11 @@
         "wrappers": "wrappers"
       },
       "locked": {
-        "lastModified": 1777375864,
-        "narHash": "sha256-Kd0/1UygV+JZxQy2epDLJTCCmuKtAwzvg8DAM7InZB4=",
+        "lastModified": 1777872768,
+        "narHash": "sha256-T3tgVZFc7PRmHPSTU1wTlpXr0wpoAtBp6YXoi0k7gTk=",
         "owner": "jessevdp",
         "repo": "personal.nvim-2",
-        "rev": "b9e1300b08f1f8a4a67d04fb2f4ce3bdd2633f8f",
+        "rev": "2bd9622ebb37efa032957d0544c457a8ea67e18a",
         "type": "github"
       },
       "original": {
@@ -746,11 +746,11 @@
         "wrappers": "wrappers_2"
       },
       "locked": {
-        "lastModified": 1777884348,
-        "narHash": "sha256-CECWAqQI+B4R6qiIsgBTvMfzFruZdWKRjS0i+Rz+3UI=",
+        "lastModified": 1778158915,
+        "narHash": "sha256-XfWMJwECd/rkt5WOQCMcLv5f58Q33sKDmjobrcsfLkk=",
         "owner": "koen-benne",
         "repo": "neovim",
-        "rev": "5c5b94cb688c024663ec6f66f3400bdbccdbd181",
+        "rev": "27323546ae84f12f0ab3193cde7882a006f26e04",
         "type": "github"
       },
       "original": {
