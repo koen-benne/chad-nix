@@ -414,6 +414,13 @@ in {
               isEssential = false;
               position = 301;
             };
+            "KNMI Jobs" = {
+              id = "d3e4f5a6-b7c8-49d0-e1f2-a3b4c5d6e7f9";
+              workspace = "d2b9e0f3-5c4e-4d9f-8e3b-2e4f6c8d0a5e"; # KNMI space
+              url = "https://api.exons2.web.acc.knmi.cloud/jobs";
+              isEssential = false;
+              position = 302;
+            };
 
             # StayOkay workspace pins
             "StayOkay Portal" = {
