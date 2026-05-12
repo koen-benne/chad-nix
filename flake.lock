@@ -393,11 +393,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1775087534,
-        "narHash": "sha256-91qqW8lhL7TLwgQWijoGBbiD4t7/q75KTi8NxjVmSmA=",
+        "lastModified": 1777988971,
+        "narHash": "sha256-qIoWPDs+0/8JecyYgE3gpKQxW/4bLW/gp45vow9ioCQ=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "3107b77cd68437b9a76194f0f7f9c55f2329ca5b",
+        "rev": "0678d8986be1661af6bb555f3489f2fdfc31f6ff",
         "type": "github"
       },
       "original": {
@@ -679,11 +679,11 @@
         "wrappers": "wrappers"
       },
       "locked": {
-        "lastModified": 1777872768,
-        "narHash": "sha256-T3tgVZFc7PRmHPSTU1wTlpXr0wpoAtBp6YXoi0k7gTk=",
+        "lastModified": 1778562682,
+        "narHash": "sha256-RV3Mfe2qLDQRNWKt4rnKrDRQbODGakYqoPMiRY0YNyY=",
         "owner": "jessevdp",
         "repo": "personal.nvim-2",
-        "rev": "2bd9622ebb37efa032957d0544c457a8ea67e18a",
+        "rev": "89f2fca7cb254d14ab446c269ec089677472244b",
         "type": "github"
       },
       "original": {
@@ -746,11 +746,11 @@
         "wrappers": "wrappers_2"
       },
       "locked": {
-        "lastModified": 1778158915,
-        "narHash": "sha256-XfWMJwECd/rkt5WOQCMcLv5f58Q33sKDmjobrcsfLkk=",
+        "lastModified": 1778579132,
+        "narHash": "sha256-pTsTa73qRdR0OqLSj5HkHst2tCI2L11GTpN+L+pm3QY=",
         "owner": "koen-benne",
         "repo": "neovim",
-        "rev": "27323546ae84f12f0ab3193cde7882a006f26e04",
+        "rev": "66bcb7e465b62bc4fe8654f313c8dcde8549e7e0",
         "type": "github"
       },
       "original": {
@@ -769,11 +769,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777361204,
-        "narHash": "sha256-O5ZV2FJ0GfT1OXsbhVtLIRvz9chjhRddH+BHQ8A1C68=",
+        "lastModified": 1778544287,
+        "narHash": "sha256-tC3tWvtDYu3ToKShV0sUA/CgfwANRLGdVltUhqpswbc=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "14adfd1c1a789e471abba7c56d4299f3ffd5ceb5",
+        "rev": "1e7087c03f0fb1935f73bd28ba044714cfab34f4",
         "type": "github"
       },
       "original": {
@@ -785,11 +785,11 @@
     "neovim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1777332043,
-        "narHash": "sha256-nTHh5p4ADW0EohmB7//vcWYr1iUdNy6PVg+LCbOXx5I=",
+        "lastModified": 1778543564,
+        "narHash": "sha256-14IEUOs5RbA1AVeTVmhJTkttLmsxhAkEkv8Q8PESMR0=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "e4458b7f244b28a0f685552a4c20f0696f7e3f6c",
+        "rev": "492b8c9e9c7699a7158db407dfc7c24579fedb1e",
         "type": "github"
       },
       "original": {
@@ -1802,11 +1802,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1776505856,
-        "narHash": "sha256-VbnOijrn4EdYYJwiNQFxQNXECKBa60U66UPxUQAGkBE=",
+        "lastModified": 1778521741,
+        "narHash": "sha256-2tDw4bqspsxLevqOOGjK7u5igHYGQDBWqfSoQYFRT6A=",
         "owner": "lassulus",
         "repo": "wrappers",
-        "rev": "738d4bf81cbf306f6917c540a5b798110e3cf1e8",
+        "rev": "7e4f77dd0afe3453cc41bdb91513784e9ff50d8a",
         "type": "github"
       },
       "original": {
