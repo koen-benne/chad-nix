@@ -43,6 +43,11 @@ in {
       MOZ_ENABLE_WAYLAND = "1";
     };
 
+    # Create XDG trash directories (required by Dolphin and other file managers)
+    home.activation.createTrashDirs = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      mkdir -p "$HOME/.local/share/Trash/files" "$HOME/.local/share/Trash/info"
+    '';
+
     # Enable system setup helper for standalone mode
     my.system-setup.enable = true;
     my.system-setup.checks = {
