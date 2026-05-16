@@ -18,7 +18,7 @@ in {
 
   config = mkIf cfg.enable {
     # Enable greetd with DMS greeter
-    programs.dankMaterialShell.greeter = {
+    programs.dank-material-shell.greeter = {
       enable = true;
       compositor.name = desktopCfg.windowManager;
       # Copy user's DMS config (including wallpaper settings) to greeter
