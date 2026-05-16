@@ -12,7 +12,7 @@ in {
     my.hytale-launcher.enable = true;
 
     home.packages = with pkgs; [
-      unstable.lutris
+      # unstable.lutris # openldap test suite flaky, see nixpkgs issue
       # MC shit
       unstable.vintagestory
 
