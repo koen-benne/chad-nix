@@ -19,6 +19,7 @@ in {
       # packages for my custom DE
       nwg-displays
       obs-studio
+      gpu-screen-recorder
       wl-clipboard
       dunst
       hyprpicker
