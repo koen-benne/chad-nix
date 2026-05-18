@@ -90,6 +90,10 @@
     # Hytale launcher
     hytale-launcher.url = "github:JPyke3/hytale-launcher-nix";
     hytale-launcher.inputs.nixpkgs.follows = "unstable";
+
+    # Hunk - terminal diff viewer
+    hunk.url = "github:modem-dev/hunk";
+    hunk.inputs.nixpkgs.follows = "unstable";
   };
 
   outputs = inputs @ {flake-parts, ...}:
