@@ -26,6 +26,16 @@
             config = sharedConfig; # Same config as main nixpkgs
           };
         })
+        # Pin hyprland to 0.54.3: 0.55 broke borders/blur with HDR (sdr_max_luminance etc.)
+        # Fixes in hyprwm/Hyprland#14574 and #14584 - remove once 0.55.2 lands in nixpkgs unstable
+        (final: prev: {
+          unstable = prev.unstable // {
+            hyprland = (import self.inputs.unstable-hyprland {
+              inherit system;
+              config = sharedConfig;
+            }).hyprland;
+          };
+        })
         self.overlays.default
         self.inputs.dev-flakes.overlays.default
         self.inputs.nix-minecraft.overlay

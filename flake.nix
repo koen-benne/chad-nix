@@ -3,6 +3,8 @@
     # Package sources
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # Pinned to last known good version before 0.55 HDR decoration bug
+    unstable-hyprland.url = "github:NixOS/nixpkgs/6368eda62c9775c38ef7f714b2555a741c20c72d";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
 

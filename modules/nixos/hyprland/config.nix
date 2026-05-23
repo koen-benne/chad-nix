@@ -69,9 +69,7 @@
     gaps_in = 5
     gaps_out = 10
     border_size = 2
-    # Border colors are managed by DMS in dms/colors.conf
-    col.active_border = rgba(ca714eee)
-    col.inactive_border = rgba(00000000)
+    # Border colors managed by DMS at runtime
 
     layout = scrolling
   }
@@ -91,7 +89,7 @@
     }
 
     blur {
-      enabled = false
+      enabled = true
       size = 8
       passes = 1
     }
@@ -132,7 +130,7 @@
   bind = $mainMod, E, exec, nautilus
   bind = $mainMod, V, togglefloating,
   bind = $mainMod, R, exec, dms ipc spotlight toggle
-  bind = $mainMod, T, togglesplit,
+
   bind = $mainMod, F, fullscreen,
   bind = $mainMod, P, exec, 1password --quick-access
   bind = $mainMod, C, exec, hyprpicker -a
