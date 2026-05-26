@@ -4,6 +4,9 @@ final: prev: {
 
   # pkgs
   scripts = final.callPackage ../pkgs/scripts {};
+  gpu-screen-recorder-ui = final.callPackage ../pkgs/gpu-screen-recorder-ui {
+    gpu-screen-recorder = final.unstable.gpu-screen-recorder;
+  };
   jellyfin-web = prev.jellyfin-web.overrideAttrs (finalAttrs: previousAttrs: {
     installPhase = ''
       runHook preInstall
