@@ -41,6 +41,9 @@
       "opencode/skills/spec-tree/SKILL.md" = {
         source = ./skills/spec-tree/SKILL.md;
       };
+      "opencode/skills/hunk-review/SKILL.md" = {
+        source = ./skills/hunk-review/SKILL.md;
+      };
     };
   };
 }
