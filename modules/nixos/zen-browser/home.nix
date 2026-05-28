@@ -42,7 +42,6 @@ in {
           "x-scheme-handler/http"
           "application/xhtml+xml"
           "application/json"
-          "text/plain"
           "text/html"
         ]);
     in {
