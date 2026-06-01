@@ -20,7 +20,7 @@ in {
     # We use a template to substitute store paths
     xdg.configFile."niri/config.kdl".text = builtins.readFile (
       pkgs.replaceVars ./config.kdl {
-        xwayland_satellite_path = "${pkgs.xwayland-satellite-unstable}/bin/xwayland-satellite";
+        xwayland_satellite_path = "${inputs.niri-pkgs.packages.${pkgs.stdenv.hostPlatform.system}.xwayland-satellite-unstable}/bin/xwayland-satellite";
       }
     );
   };
