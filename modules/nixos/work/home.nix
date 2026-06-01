@@ -23,5 +23,38 @@ in {
       notesnook
       obsidian
     ];
+
+    programs.khal = {
+      enable = true;
+      locale = {
+        timeformat = "%H:%M";
+        dateformat = "%d/%m/%Y";
+        longdateformat = "%d/%m/%Y";
+        datetimeformat = "%d/%m/%Y %H:%M";
+        longdatetimeformat = "%d/%m/%Y %H:%M";
+        firstweekday = 0;
+      };
+    };
+
+    accounts.calendar = {
+      basePath = "${config.home.homeDirectory}/.local/share/khal/calendars";
+      accounts = {
+        private = {
+          primary = true;
+          khal = {
+            enable = true;
+            color = "light green";
+          };
+        };
+        work = {
+          khal = {
+            enable = true;
+            color = "light cyan";
+            type = "discover";
+            addresses = [config.my.workmail];
+          };
+        };
+      };
+    };
   };
 }
