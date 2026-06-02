@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.gpu-screen-recorder;
 in {
   options.my.gpu-screen-recorder = {
-    enable = mkEnableOption (mdDoc "gpu-screen-recorder");
+    enable = mkEnableOption "gpu-screen-recorder";
   };
 
   config = mkIf cfg.enable {

@@ -1,0 +1,41 @@
+layout {
+    tab name="editor" focus=true {
+        pane {
+            command "nvim"
+        }
+    }
+    tab name="opencode" {
+        pane {
+            command "opencode"
+        }
+    }
+    tab name="diff" {
+        pane {
+            command "hunk"
+            args "diff"
+        }
+    }
+    tab name="git" {
+        pane {
+            command "lazygit"
+        }
+    }
+    tab name="terminal" {
+        pane
+    }
+    tab name="terminal" {
+        pane
+    }
+    tab name="terminal" {
+        pane
+    }
+    tab name="terminal" {
+        pane
+    }
+    tab name="terminal" {
+        pane
+    }
+    tab name="terminal" {
+        pane
+    }
+}

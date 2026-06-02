@@ -1,9 +1,13 @@
 final: prev: {
+  # Pin zellij to 0.43.1: terminal transparency broken since 0.44 (zellij-org/zellij#5175).
+  # Remove this entry (and pkgs/zellij/) once fixed upstream.
+  zellij = final.callPackage ../pkgs/zellij/package.nix {};
+
   # Override quickshell from unstable to be available in stable
   quickshell = final.unstable.quickshell;
 
   # pkgs
-  scripts = final.callPackage ../pkgs/scripts {};
+  custom-scripts = final.callPackage ../pkgs/scripts {};
   gpu-screen-recorder-ui = final.callPackage ../pkgs/gpu-screen-recorder-ui {
     gpu-screen-recorder = final.unstable.gpu-screen-recorder;
   };

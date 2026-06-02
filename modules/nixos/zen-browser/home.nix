@@ -5,7 +5,7 @@
   config,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.zen-browser;
 in {
   imports = [
@@ -13,7 +13,7 @@ in {
   ];
 
   options.my.zen-browser = {
-    enable = mkEnableOption (mdDoc "zen-browser");
+    enable = mkEnableOption "zen-browser";
   };
 
   config = mkIf cfg.enable {

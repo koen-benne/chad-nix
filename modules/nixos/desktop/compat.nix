@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf mkOption types;
+  inherit (lib) mkEnableOption mkIf mkOption types;
   cfg = config.my.desktop;
 in {
   options.my.desktop = {
@@ -12,7 +12,7 @@ in {
     windowManager = mkOption {
       type = types.enum ["hyprland" "niri"];
       default = "hyprland";
-      description = mdDoc "Window manager to use";
+      description = "Window manager to use";
     };
   };
   options.networking.networkmanager = {

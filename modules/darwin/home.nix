@@ -5,7 +5,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
 in {
   imports =
     [

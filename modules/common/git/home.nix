@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.git;
 in {
   options.my.git = {
-    enable = mkEnableOption (mdDoc "git");
+    enable = mkEnableOption "git";
   };
 
   config = mkIf cfg.enable {

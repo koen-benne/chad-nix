@@ -14,7 +14,7 @@ in {
       # controlls stuff
       playerctl
       pavucontrol
-      helvum
+      crosspipe
 
       # packages for my custom DE
       nwg-displays

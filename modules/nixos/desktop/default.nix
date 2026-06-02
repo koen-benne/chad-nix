@@ -7,21 +7,21 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf mkOption types;
+  inherit (lib) mkEnableOption mkIf mkOption types;
   cfg = config.my.desktop;
 in {
   imports = [];
   options.my.desktop = {
-    enable = mkEnableOption (mdDoc "desktop");
+    enable = mkEnableOption "desktop";
     windowManager = mkOption {
       type = types.enum ["hyprland" "niri" "mango"];
       default = "hyprland";
-      description = mdDoc "Window manager to use";
+      description = "Window manager to use";
     };
     greeter = mkOption {
       type = types.enum ["tuigreet" "dms"];
       default = "tuigreet";
-      description = mdDoc "Greeter/login screen to use";
+      description = "Greeter/login screen to use";
     };
   };
   config = mkIf cfg.enable {

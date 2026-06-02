@@ -5,7 +5,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf mkOption types;
+  inherit (lib) mkEnableOption mkIf mkOption types;
   cfg = config.my.homelab.jellyfin;
   homelabCfg = config.my.homelab;
 in {
@@ -14,36 +14,36 @@ in {
   ];
 
   options.my.homelab.jellyfin = {
-    enable = mkEnableOption (mdDoc "Jellyfin media server via nixarr");
+    enable = mkEnableOption "Jellyfin media server via nixarr";
 
     subdomain = mkOption {
       type = types.str;
       default = "watch";
-      description = mdDoc "Subdomain for Jellyfin";
+      description = "Subdomain for Jellyfin";
     };
 
     requestSubdomain = mkOption {
       type = types.str;
       default = "request";
-      description = mdDoc "Subdomain for Jellyseerr";
+      description = "Subdomain for Jellyseerr";
     };
 
     mediaDir = mkOption {
       type = types.path;
       default = "/mnt/biggidrive/jellyfin";
-      description = mdDoc "Root media directory";
+      description = "Root media directory";
     };
 
     stateDir = mkOption {
       type = types.path;
       default = "/nixarr/.state";
-      description = mdDoc "Nixarr state directory";
+      description = "Nixarr state directory";
     };
 
     transmissionPeerPort = mkOption {
       type = types.port;
       default = 50000;
-      description = mdDoc "Transmission peer port";
+      description = "Transmission peer port";
     };
   };
 

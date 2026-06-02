@@ -5,11 +5,11 @@
   config,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.hytale-launcher;
 in {
   options.my.hytale-launcher = {
-    enable = mkEnableOption (mdDoc "hytale-launcher");
+    enable = mkEnableOption "hytale-launcher";
   };
 
   config = mkIf cfg.enable {

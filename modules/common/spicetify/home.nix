@@ -5,12 +5,12 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
   cfg = config.my.spicetify;
 in {
   options.my.spicetify = {
-    enable = mkEnableOption (mdDoc "spicetify");
+    enable = mkEnableOption "spicetify";
   };
 
   imports = [

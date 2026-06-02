@@ -17,6 +17,7 @@ in {
         fzf.enable = false;
         spicetify.enable = false;
         zen-browser.enable = false;
+        zellij.enable = false;
         qt = {
           enable = true;
           platform = "adwaita";

@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mdDoc;
+  inherit (lib) mkIf mkEnableOption;
   cfg = config.my.dnsmasq;
 in {
   options.my.dnsmasq = {
-    enable = mkEnableOption (mdDoc "dnsmasq");
+    enable = mkEnableOption "dnsmasq";
   };
 
   config = mkIf cfg.enable {

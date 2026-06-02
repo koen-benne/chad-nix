@@ -5,11 +5,11 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.theme;
 in {
   options.my.theme = {
-    enable = mkEnableOption (mdDoc "theme");
+    enable = mkEnableOption "theme";
   };
 
   imports = [

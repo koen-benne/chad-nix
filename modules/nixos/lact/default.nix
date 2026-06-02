@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mdDoc;
+  inherit (lib) mkIf mkEnableOption;
   cfg = config.my.corectrl;
 in {
   options.my.corectrl = {
-    enable = mkEnableOption (mdDoc "Enable CoreCtrl");
+    enable = mkEnableOption "Enable CoreCtrl";
   };
   config = mkIf cfg.enable {
     programs.corectrl = {

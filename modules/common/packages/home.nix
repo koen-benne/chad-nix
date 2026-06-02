@@ -33,7 +33,7 @@
     jq
     cargo
     ripgrep
-    scripts
+    custom-scripts
     nerd-fonts.jetbrains-mono
     nmap
     rippkgs
@@ -56,6 +56,7 @@
     zsh.enable = true;
     fish.enable = true;
     tmux.enable = true;
+    zellij.enable = true;
     taskwarrior.enable = true;
     nix-helper.enable = true;
   };

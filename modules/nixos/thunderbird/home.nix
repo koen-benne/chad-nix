@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mdDoc;
+  inherit (lib) mkIf mkEnableOption;
   cfg = config.my.thunderbird;
 in {
   options.my.thunderbird = {
-    enable = mkEnableOption (mdDoc "thunderbird");
+    enable = mkEnableOption "thunderbird";
   };
   config = mkIf cfg.enable {
     programs.thunderbird = {

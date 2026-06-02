@@ -4,35 +4,35 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf mkOption types;
+  inherit (lib) mkEnableOption mkIf mkOption types;
   cfg = config.my.homelab.nextcloud;
   homelabCfg = config.my.homelab;
 in {
   options.my.homelab.nextcloud = {
-    enable = mkEnableOption (mdDoc "Nextcloud cloud storage");
+    enable = mkEnableOption "Nextcloud cloud storage";
 
     subdomain = mkOption {
       type = types.str;
       default = "cloud";
-      description = mdDoc "Subdomain for Nextcloud";
+      description = "Subdomain for Nextcloud";
     };
 
     adminPassword = mkOption {
       type = types.str;
       default = "PWD";
-      description = mdDoc "Admin password for Nextcloud";
+      description = "Admin password for Nextcloud";
     };
 
     dataDir = mkOption {
       type = types.path;
       default = "/export/1tb/NextCloud/data";
-      description = mdDoc "External data directory for Nextcloud";
+      description = "External data directory for Nextcloud";
     };
 
     extraApps = mkOption {
       type = types.listOf types.str;
       default = ["news" "contacts" "calendar" "tasks" "notes" "mail" "phonetrack"];
-      description = mdDoc "List of extra Nextcloud apps to enable";
+      description = "List of extra Nextcloud apps to enable";
     };
   };
 
@@ -103,6 +103,7 @@ in {
     # Mount external data directory
     fileSystems."/var/lib/nextcloud/data" = {
       device = cfg.dataDir;
+      fsType = "none";
       options = ["bind"];
     };
 

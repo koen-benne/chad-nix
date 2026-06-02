@@ -6,7 +6,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.mc-servers;
 in {
   imports = [
@@ -14,7 +14,7 @@ in {
   ];
 
   options.my.mc-servers = {
-    enable = mkEnableOption (mdDoc "minecraft servers");
+    enable = mkEnableOption "minecraft servers";
   };
 
   config = mkIf cfg.enable {

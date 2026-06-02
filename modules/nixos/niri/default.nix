@@ -5,7 +5,7 @@
   inputs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf mkDefault mkForce;
+  inherit (lib) mkEnableOption mkIf mkDefault mkForce;
   cfg = config.my.niri;
 in {
   imports = [
@@ -13,7 +13,7 @@ in {
   ];
 
   options.my.niri = {
-    enable = mkEnableOption (mdDoc "niri scrollable-tiling wayland compositor");
+    enable = mkEnableOption "niri scrollable-tiling wayland compositor";
   };
 
   config = lib.mkMerge [

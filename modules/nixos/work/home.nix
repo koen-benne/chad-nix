@@ -5,11 +5,11 @@
   sys,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf optional;
+  inherit (lib) mkEnableOption mkIf optional;
   cfg = config.my.work;
 in {
   options.my.work = {
-    enable = mkEnableOption (mdDoc "work");
+    enable = mkEnableOption "work";
   };
 
   config = mkIf cfg.enable {

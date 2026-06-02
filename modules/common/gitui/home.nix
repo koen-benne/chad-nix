@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.gitui;
 in {
   options.my.gitui = {
-    enable = mkEnableOption (mdDoc "gitui");
+    enable = mkEnableOption "gitui";
   };
   config = mkIf cfg.enable {
     programs.gitui = {

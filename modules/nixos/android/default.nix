@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mdDoc;
+  inherit (lib) mkIf mkEnableOption;
   cfg = config.my.android;
 in {
   options.my.android = {
-    enable = mkEnableOption (mdDoc "android");
+    enable = mkEnableOption "android";
   };
 
   config = mkIf cfg.enable {

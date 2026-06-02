@@ -4,12 +4,12 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.virtualisation;
   files = ./files;
 in {
   options.my.virtualisation = {
-    enable = mkEnableOption (mdDoc "virtualisation");
+    enable = mkEnableOption "virtualisation";
   };
 
   config = mkIf cfg.enable {

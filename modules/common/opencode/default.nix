@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.opencode;
 in {
   options.my.opencode = {
-    enable = mkEnableOption (mdDoc "opencode");
+    enable = mkEnableOption "opencode";
   };
 
   config = mkIf cfg.enable {

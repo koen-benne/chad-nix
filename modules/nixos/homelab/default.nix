@@ -5,7 +5,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.homelab;
 in {
   imports = [
@@ -16,18 +16,18 @@ in {
   ];
 
   options.my.homelab = {
-    enable = mkEnableOption (mdDoc "Homelab services");
+    enable = mkEnableOption "Homelab services";
 
     domain = lib.mkOption {
       type = lib.types.str;
       default = config.my.domain;
-      description = mdDoc "Main domain for homelab services";
+      description = "Main domain for homelab services";
     };
 
     email = lib.mkOption {
       type = lib.types.str;
       default = config.my.email;
-      description = mdDoc "Email for ACME/Let's Encrypt certificates";
+      description = "Email for ACME/Let's Encrypt certificates";
     };
   };
 

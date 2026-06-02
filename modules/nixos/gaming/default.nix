@@ -5,12 +5,12 @@
   inputs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf mkMerge;
+  inherit (lib) mkEnableOption mkIf mkMerge;
   cfg = config.my.gaming;
 in {
   options.my.gaming = {
-    enable = mkEnableOption (mdDoc "gaming");
-    enableSunshine = mkEnableOption (mdDoc "sunshine");
+    enable = mkEnableOption "gaming";
+    enableSunshine = mkEnableOption "sunshine";
   };
 
   imports = [

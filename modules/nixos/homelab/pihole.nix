@@ -4,12 +4,12 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf mkOption types;
+  inherit (lib) mkEnableOption mkIf mkOption types;
   cfg = config.my.homelab.pihole;
   homelabCfg = config.my.homelab;
 in {
   options.my.homelab.pihole = {
-    enable = mkEnableOption (mdDoc "Pi-hole");
+    enable = mkEnableOption "Pi-hole";
   };
 
   config = mkIf (homelabCfg.enable && cfg.enable) {

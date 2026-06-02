@@ -1,6 +1,6 @@
 { config, lib, inputs, ... }:
 let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.hytale;
 in {
   imports = [
@@ -8,7 +8,7 @@ in {
   ];
 
   options.my.hytale = {
-    enable = mkEnableOption (mdDoc "Hytale dedicated server");
+    enable = mkEnableOption "Hytale dedicated server";
   };
 
   config = mkIf cfg.enable {

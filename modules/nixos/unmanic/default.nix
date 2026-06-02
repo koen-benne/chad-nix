@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.unmanic;
 in {
   options.my.unmanic = {
-    enable = mkEnableOption (mdDoc "unmanic");
+    enable = mkEnableOption "unmanic";
   };
 
   config = mkIf cfg.enable {

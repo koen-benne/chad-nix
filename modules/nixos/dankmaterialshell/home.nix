@@ -15,16 +15,22 @@ in {
   ];
 
   options.my.dankmaterialshell = {
-    enable = lib.mkEnableOption (lib.mdDoc "DankMaterialShell");
+    enable = lib.mkEnableOption (lib."DankMaterialShell");
 
     defaultSettings = lib.mkOption {
       type = lib.types.attrs;
       default = {};
-      description = lib.mdDoc "Default settings to include in settings-default.json. Will be copied to settings.json on first run.";
+      description = lib."Default settings to include in settings-default.json. Will be copied to settings.json on first run.";
     };
   };
 
   config = let
+    # NOTE: Stylix 26.05+ can manage DMS automatically (colors, fonts, wallpaper).
+    # To go fully declarative, remove the initDmsSettings activation script and
+    # settings-default.json approach below, move your defaults into
+    # programs.dank-material-shell.settings, and enable the stylix target:
+    #   stylix.targets.dank-material-shell.enable = true;
+    # For now we keep manual settings.json so it persists across switches.
     # Merge user-provided defaultSettings with our base defaults
     defaultSettings = {
       lockBeforeSuspend = true;
@@ -47,6 +53,10 @@ in {
     # Generate the settings JSON
     settingsJson = jsonFormat.generate "settings-default.json" defaultSettings;
   in mkIf cfg.enable {
+    # Disable stylix's DMS target so it doesn't manage settings.json/session.json.
+    # See the NOTE above if you want to switch to fully declarative stylix management.
+    stylix.targets.dank-material-shell.enable = false;
+
     programs.dank-material-shell = {
       enable = true;
       dgop.package = pkgs.unstable.dgop;

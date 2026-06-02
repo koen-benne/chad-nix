@@ -5,11 +5,11 @@
   config,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.mango;
 in {
   options.my.mango = {
-    enable = mkEnableOption (mdDoc "mango scrollable-tiling wayland compositor");
+    enable = mkEnableOption "mango scrollable-tiling wayland compositor";
   };
 
   config = mkIf cfg.enable {

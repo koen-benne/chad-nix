@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mdDoc;
+  inherit (lib) mkIf mkEnableOption;
   cfg = config.my.mdns;
 in {
   options.my.mdns = {
-    enable = mkEnableOption (mdDoc "mdns");
+    enable = mkEnableOption "mdns";
   };
 
   config = mkIf cfg.enable {

@@ -5,11 +5,11 @@
   inputs,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mdDoc;
+  inherit (lib) mkIf mkEnableOption;
   cfg = config.my.nix-helper;
 in {
   options.my.nix-helper = {
-    enable = mkEnableOption (mdDoc "nix-helper");
+    enable = mkEnableOption "nix-helper";
   };
 
   config = mkIf cfg.enable {

@@ -4,7 +4,7 @@
   inputs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.dms-greeter;
   desktopCfg = config.my.desktop;
 in {
@@ -13,7 +13,7 @@ in {
   ];
 
   options.my.dms-greeter = {
-    enable = mkEnableOption (mdDoc "DankMaterialShell as greeter/login screen");
+    enable = mkEnableOption "DankMaterialShell as greeter/login screen";
   };
 
   config = mkIf cfg.enable {

@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.tmux;
 in {
   options.my.tmux = {
-    enable = mkEnableOption (mdDoc "tmux");
+    enable = mkEnableOption "tmux";
   };
 
   config = mkIf cfg.enable {

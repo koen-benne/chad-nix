@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.fish;
 in {
   options.my.fish = {
-    enable = mkEnableOption (mdDoc "fish");
+    enable = mkEnableOption "fish";
   };
 
   config = mkIf cfg.enable {

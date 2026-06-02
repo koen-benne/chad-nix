@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mdDoc;
+  inherit (lib) mkIf mkEnableOption;
   cfg = config.my.globalprotect;
 in {
   options.my.globalprotect = {
-    enable = mkEnableOption (mdDoc "GlobalProtect VPN client");
+    enable = mkEnableOption "GlobalProtect VPN client";
   };
 
   config = mkIf cfg.enable {

@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+# fast zellijing
+
+case $1 in
+  open)
+    sessions=$(zellij list-sessions -s 2>/dev/null)
+    if [ -z "$sessions" ]; then
+      echo "No zellij sessions running"
+      exit 0
+    fi
+    sesh=$(echo "$sessions" | fzf)
+    if [ -z "$sesh" ]; then
+      exit 0
+    fi
+    zellij attach "${sesh}"
+    ;;
+
+  close)
+    sessions=$(zellij list-sessions 2>/dev/null | awk '{print $1}')
+    if [ -z "$sessions" ]; then
+      echo "No zellij sessions found"
+      exit 0
+    fi
+    if [ -n "$2" ]; then
+      zellij delete-session --force "${2}"
+    else
+      sesh=$(echo "$sessions" | fzf)
+      if [ -z "$sesh" ]; then
+        exit 0
+      fi
+      zellij delete-session --force "${sesh}"
+    fi
+    ;;
+
+  new)
+    if [ -z "$2" ]; then
+      echo "Please provide a name for the new session"
+      exit 1
+    fi
+    if [ -z "${ZELLIJ}" ]; then
+      exec zellij -s "${2}" -n dev
+    else
+      # Spawn detached so it doesn't nest, then attach to switch
+      (setsid zellij -s "${2}" -n dev >/dev/null 2>&1 &)
+      # Poll until session appears
+      for i in $(seq 1 50); do
+        if zellij list-sessions -s 2>/dev/null | grep -qx "${2}"; then
+          break
+        fi
+        sleep 0.05
+      done
+      zellij attach "${2}"
+    fi
+    ;;
+
+  project)
+    project=$(find ~/work/ ~/personal/ -mindepth 1 -maxdepth 1 -type d 2>/dev/null | fzf)
+    if [ -z "$project" ]; then
+      exit 0
+    fi
+
+    proj_name=$(basename "${project}" | tr . _)
+
+    # Reuse existing session if it exists
+    if zellij list-sessions -s 2>/dev/null | grep -qx "${proj_name}"; then
+      zellij attach "${proj_name}"
+      exit 0
+    fi
+
+    # Create new session with dev layout
+    if [ -z "${ZELLIJ}" ]; then
+      cd "${project}" && exec zellij -s "${proj_name}" -n dev
+    else
+      # Spawn detached so it doesn't nest, then attach to switch
+      (cd "${project}" && setsid zellij -s "${proj_name}" -n dev >/dev/null 2>&1 &)
+      # Poll until session appears
+      for i in $(seq 1 50); do
+        if zellij list-sessions -s 2>/dev/null | grep -qx "${proj_name}"; then
+          break
+        fi
+        sleep 0.05
+      done
+      zellij attach "${proj_name}"
+    fi
+    ;;
+
+  *)
+    echo "Usage: turbozellij [open|close|new|project]"
+    exit 1
+    ;;
+esac
+
+exit 0

@@ -4,19 +4,19 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mdDoc mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.homelab.nginx;
   homelabCfg = config.my.homelab;
 in {
   options.my.homelab.nginx = {
-    enable = mkEnableOption (mdDoc "Nginx web server for homelab");
+    enable = mkEnableOption "Nginx web server for homelab";
 
     mainSite = {
-      enable = mkEnableOption (mdDoc "Main website");
+      enable = mkEnableOption "Main website";
       root = lib.mkOption {
         type = lib.types.path;
         default = "/var/www/main";
-        description = mdDoc "Root directory for main website";
+        description = "Root directory for main website";
       };
     };
   };

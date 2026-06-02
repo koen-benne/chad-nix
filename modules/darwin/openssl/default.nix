@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkIf mkEnableOption mdDoc;
+  inherit (lib) mkIf mkEnableOption;
   cfg = config.my.openssl;
 in {
   options.my.openssl = {
-    enable = mkEnableOption (mdDoc "openssl");
+    enable = mkEnableOption "openssl";
   };
 
   config =

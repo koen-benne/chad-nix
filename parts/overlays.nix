@@ -36,6 +36,15 @@
             }).hyprland;
           };
         })
+        # Pin zellij to 0.43.1: transparency broken since 0.44 (zellij-org/zellij#5175)
+        # Pane backgrounds render opaque black instead of transparent due to PR #4992
+        # which introduced explicit black background padding on empty/trailing cells.
+        (final: prev: {
+          zellij = (import self.inputs.nixpkgs-zellij {
+            inherit system;
+            config = sharedConfig;
+          }).zellij;
+        })
         self.overlays.default
         self.inputs.dev-flakes.overlays.default
         self.inputs.nix-minecraft.overlay

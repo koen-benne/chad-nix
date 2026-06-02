@@ -8,48 +8,48 @@
   cfg = config.my.gtklock-unwired;
 in {
   options.my.gtklock-unwired = {
-    enable = mkEnableOption (lib.mdDoc "gtklock-unwired lockscreen (based on unwiredfromreality's config)");
+    enable = mkEnableOption (lib."gtklock-unwired lockscreen (based on unwiredfromreality's config)");
 
     lockCommand = mkOption {
       type = types.str;
       default = "${config.xdg.configHome}/gtklock-unwired/lock.sh";
-      description = lib.mdDoc "Command to execute when locking the screen with gtklock-unwired";
+      description = lib."Command to execute when locking the screen with gtklock-unwired";
     };
 
     suspendCommand = mkOption {
       type = types.str;
       default = "${config.xdg.configHome}/gtklock-unwired/lock-and-suspend.sh";
-      description = lib.mdDoc "Command to execute when suspending (locks first, then suspends)";
+      description = lib."Command to execute when suspending (locks first, then suspends)";
     };
 
     hibernateCommand = mkOption {
       type = types.str;
       default = "${config.xdg.configHome}/gtklock-unwired/lock-and-hibernate.sh";
-      description = lib.mdDoc "Command to execute when hibernating (locks first, then hibernates)";
+      description = lib."Command to execute when hibernating (locks first, then hibernates)";
     };
 
     wallpaper = mkOption {
       type = types.path;
       default = ../../../assets/wp-normal.jpg;
-      description = lib.mdDoc "Wallpaper to use for the lockscreen background";
+      description = lib."Wallpaper to use for the lockscreen background";
     };
 
     fontFace = mkOption {
       type = types.str;
       default = "Libre Baskerville";
-      description = lib.mdDoc "Font face for the clock display";
+      description = lib."Font face for the clock display";
     };
 
     fontColor = mkOption {
       type = types.str;
       default = "#f2e5bc";
-      description = lib.mdDoc "Font color for the clock display";
+      description = lib."Font color for the clock display";
     };
 
     backgroundColor = mkOption {
       type = types.str;
       default = "#f2e5bc";
-      description = lib.mdDoc "Background color for playerctl module";
+      description = lib."Background color for playerctl module";
     };
 
     modules = mkOption {
@@ -57,7 +57,7 @@ in {
       default = with pkgs; [
         gtklock-playerctl-module
       ];
-      description = lib.mdDoc "Gtklock modules to enable (playerctl, userinfo, powerbar, etc.)";
+      description = lib."Gtklock modules to enable (playerctl, userinfo, powerbar, etc.)";
     };
   };
 
