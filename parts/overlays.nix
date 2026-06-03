@@ -26,16 +26,6 @@
             config = sharedConfig; # Same config as main nixpkgs
           };
         })
-        # Pin hyprland to 0.54.3: 0.55 broke borders/blur with HDR (sdr_max_luminance etc.)
-        # Fixes in hyprwm/Hyprland#14574 and #14584 - remove once 0.55.2 lands in nixpkgs unstable
-        (final: prev: {
-          unstable = prev.unstable // {
-            hyprland = (import self.inputs.unstable-hyprland {
-              inherit system;
-              config = sharedConfig;
-            }).hyprland;
-          };
-        })
         # Pin zellij to 0.43.1: transparency broken since 0.44 (zellij-org/zellij#5175)
         # Pane backgrounds render opaque black instead of transparent due to PR #4992
         # which introduced explicit black background padding on empty/trailing cells.
