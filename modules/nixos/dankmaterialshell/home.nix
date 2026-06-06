@@ -63,6 +63,7 @@ in {
       systemd = {
         enable = true;
         restartIfChanged = true;
+        target = "hyprland-session.target";
       };
 
       # Leave settings empty to prevent DMS module from creating settings.json

@@ -76,6 +76,9 @@
     niri-pkgs.url = "github:sodiboo/niri-flake";
     niri-pkgs.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Hyprland - tracking main for blur+HDR fix (post-0.55.2)
+    hyprland.url = "github:hyprwm/Hyprland";
+
     # Mango wayland compositor
     mango.url = "github:DreamMaoMao/mango";
     mango.inputs.nixpkgs.follows = "nixpkgs";

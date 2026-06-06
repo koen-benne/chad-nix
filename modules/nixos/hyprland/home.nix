@@ -25,7 +25,9 @@ in {
 
     wayland.windowManager.hyprland = {
       enable = true;
-      package = pkgs.unstable.hyprland;
+      package = null;
+      portalPackage = null;
+      configType = "lua";
       xwayland.enable = true;
       plugins = [];
       extraConfig = ''
