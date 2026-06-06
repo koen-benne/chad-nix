@@ -81,7 +81,6 @@
   my.virtualisation.enable = true;
   my.openssl.enable = true;
   # my.bluetooth.enable = true;
-  my.android.enable = true;
   my.corectrl.enable = true;
   my.unmanic.enable = false;
   my.opencode.enable = true;
