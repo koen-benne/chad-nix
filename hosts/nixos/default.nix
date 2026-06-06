@@ -29,7 +29,7 @@
     };
   };
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "26.05";
 
   networking.enableIPv6 = false;
 

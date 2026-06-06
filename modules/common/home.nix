@@ -13,6 +13,6 @@
     ]
     ++ lib.my.getHmModules [./.];
 
-  home.stateVersion = "24.05";
+  home.stateVersion = "26.05";
   systemd.user.startServices = "sd-switch";
 }

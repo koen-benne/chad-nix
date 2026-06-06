@@ -15,7 +15,7 @@
   ];
 
   # Basic home configuration
-  home.stateVersion = "24.05";
+  home.stateVersion = "26.05";
   nix = {
     settings = {
       experimental-features = ["nix-command" "flakes"];
