@@ -18,10 +18,7 @@ in {
         spicetify.enable = false;
         zen-browser.enable = false;
         zellij.enable = false;
-        qt = {
-          enable = true;
-          platform = "adwaita";
-        };
+        qt.enable = false;
       };
       opacity = {
         popups = 0.8;
