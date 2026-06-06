@@ -3,9 +3,6 @@
     # Package sources
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-
-
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
     darwin.url = "github:lnl7/nix-darwin/nix-darwin-26.05";

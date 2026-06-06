@@ -5,7 +5,7 @@
   inputs,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf mkMerge;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.gaming;
 in {
   options.my.gaming = {
@@ -13,18 +13,7 @@ in {
     enableSunshine = mkEnableOption "sunshine";
   };
 
-  imports = [
-    inputs.chaotic.nixosModules.nyx-cache
-    inputs.chaotic.nixosModules.nyx-overlay
-    inputs.chaotic.nixosModules.nyx-registry
-  ];
-
-  config = mkMerge [
-    {
-      # We can never have overlays that are not in parts/overlays.nix (read-only)
-      chaotic.nyx.overlay.enable = false;
-    }
-    (mkIf cfg.enable {
+  config = mkIf cfg.enable {
       boot.kernelPackages = pkgs.linuxPackages_zen;
 
       environment.systemPackages = with pkgs; [
@@ -116,6 +105,5 @@ in {
           ];
         };
       };
-    })
-  ];
+  };
 }
