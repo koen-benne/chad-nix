@@ -12,13 +12,6 @@
     # HDR Configuration
     bitdepth = 10
     cm = hdr
-    supports_hdr = 1
-    supports_wide_color = 1
-
-    # Luminance Settings Based on Your Monitor's Performance
-    min_luminance = 0.0
-    max_luminance = 480
-    max_avg_luminance = 254
 
     # SDR → HDR Mapping
     sdr_min_luminance = 0.005
