@@ -1193,16 +1193,17 @@
         "nixpkgs": [
           "unstable"
         ],
+        "plugins-canola-nvim": "plugins-canola-nvim",
         "plugins-nvim-dap-ruby": "plugins-nvim-dap-ruby",
         "plugins-ts-error-translator-nvim": "plugins-ts-error-translator-nvim",
         "wrappers": "wrappers_2"
       },
       "locked": {
-        "lastModified": 1778679763,
-        "narHash": "sha256-8n27jYUtfpvowLd87f0zX5NVIa5LUBydJ5AYQH9L2Ew=",
+        "lastModified": 1781102074,
+        "narHash": "sha256-wBdWrjMUhjXwLIGhq1cbMnY9ZVCizpCzEIOYm3DbVec=",
         "owner": "koen-benne",
         "repo": "neovim",
-        "rev": "b10d6731a5bafb47c91c4d9c7c9fc7292bcae53f",
+        "rev": "d717f5c15dda55e26ea1c382f72c09ed28d5139d",
         "type": "github"
       },
       "original": {
@@ -1740,6 +1741,23 @@
       "original": {
         "type": "file",
         "url": "https://devimages-cdn.apple.com/design/resources/download/NY.dmg"
+      }
+    },
+    "plugins-canola-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1778344056,
+        "narHash": "sha256-NspywHVDp6c7Zw4b2M41OuULVlhGtGI0tj8LxP3x7SM=",
+        "owner": "barrettruth",
+        "repo": "canola.nvim",
+        "rev": "3838f1380e9aeea0597a80beb6ab28da73e38525",
+        "type": "github"
+      },
+      "original": {
+        "owner": "barrettruth",
+        "ref": "canola",
+        "repo": "canola.nvim",
+        "type": "github"
       }
     },
     "plugins-nvim-dap-ruby": {

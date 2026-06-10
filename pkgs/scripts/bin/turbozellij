@@ -16,19 +16,21 @@ case $1 in
     ;;
 
   close)
-    sessions=$(zellij list-sessions 2>/dev/null | awk '{print $1}')
+    sessions=$(zellij list-sessions 2>/dev/null | sed 's/\x1b\[[0-9;]*m//g' | awk '{print $1}')
     if [ -z "$sessions" ]; then
       echo "No zellij sessions found"
       exit 0
     fi
     if [ -n "$2" ]; then
       zellij delete-session --force "${2}"
+      rm -rf ~/.cache/zellij/*/session_info/"${2}"
     else
       sesh=$(echo "$sessions" | fzf)
       if [ -z "$sesh" ]; then
         exit 0
       fi
       zellij delete-session --force "${sesh}"
+      rm -rf ~/.cache/zellij/*/session_info/"${sesh}"
     fi
     ;;
 
