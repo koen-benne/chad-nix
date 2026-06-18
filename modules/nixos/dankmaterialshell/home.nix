@@ -63,7 +63,10 @@ in {
       systemd = {
         enable = true;
         restartIfChanged = true;
-        target = "hyprland-session.target";
+        target =
+          if sys.my.desktop.windowManager == "hyprland"
+          then "hyprland-session.target"
+          else "graphical-session.target";
       };
 
       # Leave settings empty to prevent DMS module from creating settings.json
