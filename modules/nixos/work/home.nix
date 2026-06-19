@@ -5,13 +5,9 @@
   sys,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf optional;
-  cfg = config.my.work;
+  inherit (lib) mkIf optional;
+  cfg = sys.my.work;
 in {
-  options.my.work = {
-    enable = mkEnableOption "work";
-  };
-
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       # globalprotect-openconnect
@@ -54,6 +50,18 @@ in {
             addresses = [config.my.workmail];
           };
         };
+      };
+    };
+
+    programs.git = {
+      includes = [
+        {
+          contents.user.email = config.my.workmail;
+          condition = "gitdir:~/work/";
+        }
+      ];
+      settings.credential."https://bitbucket.org/mangrove/" = {
+        helper = "!f() { echo username=x-bitbucket-api-token-auth; echo password=$(cat ${sys.sops.secrets.bitbucket_api_token.path}); }; f";
       };
     };
   };

@@ -18,12 +18,6 @@ in {
     # ];
     programs.git = {
       enable = true;
-      includes = [
-        {
-          contents.user.email = config.my.workmail;
-          condition = "gitdir:~/work/";
-        }
-      ];
       ignores = [
         ".*.sw?"
         ".direnv/"
@@ -91,10 +85,6 @@ in {
 
         url = {
           "ssh://git@github.com:22/" = {pushInsteadOf = "https://github.com/";};
-        };
-
-        credential."https://bitbucket.org/mangrove/" = {
-          helper = "!f() { echo username=x-bitbucket-api-token-auth; echo password=$(cat ${config.sops.secrets.bitbucket_api_token.path}); }; f";
         };
       };
     };

@@ -12,11 +12,6 @@
       mode = "0440";
       owner = config.my.user;
     };
-
-    secrets.bitbucket_api_token = {
-      mode = "0400";
-      owner = config.my.user;
-    };
   };
 
   environment.systemPackages = with pkgs; [
