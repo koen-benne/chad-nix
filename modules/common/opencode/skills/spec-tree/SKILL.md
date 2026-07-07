@@ -1,6 +1,6 @@
 ---
 name: spec-tree
-description: Interactively build a decision tree for an RSpec job spec, then render it as a structured spec list
+description: Interactively build a decision tree for an RSpec spec, then render it as a structured spec list
 ---
 
 ## What I do
@@ -11,7 +11,7 @@ Guide the user through building an RSpec spec structure for a job by thinking in
 
 ### Phase 1: understand the domain
 
-Ask the user to describe the job:
+Ask the user to describe the thing to be tested:
 - What does it do at the top level?
 - What external services or APIs does it call?
 - What does it persist?
@@ -49,9 +49,3 @@ Once the tree is agreed on, render it in two forms:
 - One representative domain/case is enough when the code path is identical across variants; call this out explicitly
 - "always happens" tests sit at the outer `describe "#perform"` level, not inside any context
 
-## Questions to ask if unclear
-
-- Is this job parameterized, or does it handle all cases in one run?
-- Is there an idempotency check? What is the unique key?
-- What happens on partial failure — does one failure abort the whole job or just that item?
-- Are there pre-existing records that must not be touched on any error path?
