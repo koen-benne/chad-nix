@@ -11,5 +11,7 @@
   # Stuff specific to only this machine
   my.openssl.enable = true;
 
-  my.opencode.enable = true;
+  # my.opencode.enable = true;
+
+  system.activationScripts.postActivation.text = "";
 }

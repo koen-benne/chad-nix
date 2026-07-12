@@ -20,23 +20,10 @@
   # Let Determinate Nix handle Nix configuration rather than nix-darwin
   nix.enable = false;
   # Custom settings written to /etc/nix/nix.custom.conf
-  determinate-nix.customSettings = {
+  determinateNix.customSettings = {
     flake-registry = "/etc/nix/flake-registry.json";
   };
 
-  # nix profile diff-closures --profile /nix/var/nix/profiles/system
-  system.activationScripts.extraActivation.text = ''
-    softwareupdate --install-rosetta --agree-to-license
-  '';
-  system.activationScripts.postActivation.text = ''
-    # disable spotlight
-    launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist >/dev/null 2>&1 || true
-    # disable fseventsd on /nix volume
-    mkdir -p /nix/.fseventsd
-    test -e /nix/.fseventsd/no_log || touch /nix/.fseventsd/no_log
-    # show upgrade diff
-    ${pkgs.nix}/bin/nix store --experimental-features nix-command diff-closures /run/current-system "$systemConfig"
-  '';
   system.defaults = {
     NSGlobalDomain = {
       AppleMeasurementUnits = "Centimeters";
@@ -66,7 +53,7 @@
       mineffect = "scale";
       minimize-to-application = true;
       mru-spaces = false;
-      orientation = "left";
+      orientation = "bottom";
       show-recents = false;
       wvous-br-corner = 1; # Disabled
     };
