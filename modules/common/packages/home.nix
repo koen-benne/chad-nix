@@ -43,7 +43,7 @@
     dev-utils # from dev-flakes overlay
 
     unstable._1password-cli
-    inputs.hunk.packages.${pkgs.system}.default
+    unstable.hunk
   ];
 
   my = {
