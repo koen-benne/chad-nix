@@ -15,7 +15,7 @@ in {
   config = mkIf (homelabCfg.enable && cfg.enable) {
     # Main Pi-hole FTL service
     networking.firewall = {
-      allowedTCPPorts = [8080];
+      allowedTCPPorts = [8089];
     };
     services.resolved.enable = false;
 
@@ -50,7 +50,7 @@ in {
     };
     services.pihole-web = {
       enable = true;
-      ports = ["8080s"];
+      ports = [ "8089" ];
     };
   };
 }
