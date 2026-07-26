@@ -96,11 +96,19 @@ in {
       #   vpn.enable = false;
       #   peerPort = cfg.transmissionPeerPort;
       # };
-      sabnzbd.enable = true;
+      sabnzbd = {
+        enable = true;
+        whitelistRanges = [ "192.168.68.0/24" ];
+        guiPort = 8080;
+        openFirewall = true;
+      };
 
       # Media management stack
       radarr.enable = true; # Movies
+      radarr.openFirewall = true; # Movies
+
       sonarr.enable = true; # TV Shows
+      sonarr.openFirewall = true; # TV Shows
     };
 
     # Deny jellyfin write acces as that is a terrible idea
