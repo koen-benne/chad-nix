@@ -18,7 +18,14 @@ in {
 
       notesnook
       obsidian
+
+      (writeShellScriptBin "jvim" ''
+        exec ${inputs.jesse.packages.${pkgs.system}.default}/bin/nvim "$@"
+      '')
     ];
+
+    programs.taskwarrior.enable = true;
+    programs.lazydocker.enable = true;
 
     programs.khal = {
       enable = true;

@@ -50,14 +50,12 @@
     direnv.enable = true;
     git.enable = true;
     lazygit.enable = true;
-    lazydocker.enable = true;
     # Disabled due to https://github.com/NixOS/nixpkgs/issues/450861
     # gitui.enable = true;
     zsh.enable = true;
     fish.enable = true;
     tmux.enable = true;
     zellij.enable = true;
-    taskwarrior.enable = true;
     nix-helper.enable = true;
   };
 }
