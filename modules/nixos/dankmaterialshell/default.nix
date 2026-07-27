@@ -9,7 +9,7 @@
   desktopCfg = config.my.desktop;
 in {
   imports = [
-    inputs.dms.nixosModules.greeter
+    inputs.dank-greeter.nixosModules.default
   ];
 
   options.my.dms-greeter = {
@@ -18,7 +18,7 @@ in {
 
   config = mkIf cfg.enable {
     # Enable greetd with DMS greeter
-    programs.dank-material-shell.greeter = {
+    programs.dms-greeter = {
       enable = true;
       compositor.name = desktopCfg.windowManager;
       # Copy user's DMS config (including wallpaper settings) to greeter

@@ -87,6 +87,9 @@
     dms.url = "github:AvengeMedia/DankMaterialShell";
     dms.inputs.nixpkgs.follows = "unstable";
 
+    dank-greeter.url = "github:AvengeMedia/dank-greeter";
+    dank-greeter.inputs.nixpkgs.follows = "unstable";
+
     # Hytale launcher
     hytale-launcher.url = "github:JPyke3/hytale-launcher-nix";
     hytale-launcher.inputs.nixpkgs.follows = "unstable";
