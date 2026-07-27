@@ -36,9 +36,6 @@ in {
       virtualHosts = {
         # Main domain
         "${homelabCfg.domain}" = mkIf cfg.mainSite.enable {
-          enableACME = true; # This enables Let's Encrypt
-          forceSSL = true; # Redirects HTTP to HTTPS
-
           locations."/" = {
             root = cfg.mainSite.root;
             index = "index.html";
@@ -47,9 +44,6 @@ in {
 
         # www subdomain
         "www.${homelabCfg.domain}" = mkIf cfg.mainSite.enable {
-          enableACME = true;
-          forceSSL = true;
-
           # Redirect www to non-www
           globalRedirect = homelabCfg.domain;
         };

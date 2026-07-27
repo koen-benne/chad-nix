@@ -1,8 +1,6 @@
 {
   config,
   lib,
-  inputs,
-  pkgs,
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
@@ -13,6 +11,7 @@ in {
     ./nextcloud.nix
     ./jellyfin.nix
     ./pihole.nix
+    ./cloudflared.nix
   ];
 
   options.my.homelab = {
@@ -42,23 +41,5 @@ in {
         "127.0.0.1/8"      # Whitelist localhost
       ];
     };
-
-    # Configure ACME (Let's Encrypt) - shared by all services
-    security.acme = {
-      acceptTerms = true;
-      defaults.email = cfg.email;
-    };
-
-    # Open firewall ports for web services
-    networking.firewall = {
-      allowedTCPPorts = [80 443];
-    };
-
-    # Ensure required users and groups exist
-    users.users.nextcloud = {
-      isSystemUser = true;
-      group = "nextcloud";
-    };
-    users.groups.nextcloud = {};
   };
 }

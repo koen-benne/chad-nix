@@ -43,7 +43,7 @@ in {
     # Enable and configure Nextcloud
     services.nextcloud = {
       enable = true;
-      package = pkgs.nextcloud32;
+      package = pkgs.nextcloud33;
       configureRedis = true;
 
       # Basic configuration
@@ -91,7 +91,7 @@ in {
 
       # Extra configuration
       settings = {
-        trusted_domains = ["${cfg.subdomain}.${homelabCfg.domain}"];
+        trusted_domains = ["localhost" "${cfg.subdomain}.${homelabCfg.domain}"];
         trusted_proxies = ["127.0.0.1"];
         "overwrite.cli.url" = "https://${cfg.subdomain}.${homelabCfg.domain}";
 
@@ -107,13 +107,11 @@ in {
       options = ["bind"];
     };
 
-    # Add Nextcloud virtual host to nginx if nginx is enabled
-    services.nginx.virtualHosts = mkIf config.my.homelab.nginx.enable {
-      "${cfg.subdomain}.${homelabCfg.domain}" = {
-        enableACME = true;
-        forceSSL = true;
-        # Nextcloud handles its own nginx configuration
-      };
+    # Ensure required users and groups exist
+    users.users.nextcloud = {
+      isSystemUser = true;
+      group = "nextcloud";
     };
+    users.groups.nextcloud = {};
   };
 }

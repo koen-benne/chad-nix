@@ -74,20 +74,10 @@ in {
       # Jellyfin with HTTPS
       jellyfin = {
         enable = true;
-        expose.https = {
-          enable = config.my.homelab.nginx.enable;
-          domainName = "${cfg.subdomain}.${homelabCfg.domain}";
-          acmeMail = homelabCfg.email;
-        };
       };
 
-      jellyseerr = {
+      seerr = {
         enable = true;
-        expose.https = {
-          enable = config.my.homelab.nginx.enable;
-          domainName = "${cfg.requestSubdomain}.${homelabCfg.domain}";
-          acmeMail = homelabCfg.email;
-        };
       };
 
       # Download client (no VPN)
@@ -117,5 +107,20 @@ in {
     ];
 
     # services.flaresolverr.enable = true;
+
+    services.nginx.virtualHosts = mkIf config.my.homelab.nginx.enable {
+      "${cfg.subdomain}.${homelabCfg.domain}" = {
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8096";
+          proxyWebsockets = true;
+        };
+      };
+      "${cfg.requestSubdomain}.${homelabCfg.domain}" = {
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:5055";
+          proxyWebsockets = true;
+        };
+      };
+    };
   };
 }
