@@ -21,6 +21,9 @@ in {
           ingress = {
             "*.${homelabCfg.domain}" = "http://localhost:80";
             "${homelabCfg.domain}" = "http://localhost:80";
+            # Must use { service = ...; } form (not a plain string) so this rule
+            # sorts before the *.domain wildcard above - see cloudflared.nix module.
+            "ssh.${homelabCfg.domain}".service = "tcp://localhost:22";
           };
           default = "http_status:404";
         };

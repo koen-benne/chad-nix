@@ -91,6 +91,7 @@ in {
 
       # Extra configuration
       settings = {
+        overwriteprotocol = "https";
         trusted_domains = ["localhost" "${cfg.subdomain}.${homelabCfg.domain}"];
         trusted_proxies = ["127.0.0.1"];
         "overwrite.cli.url" = "https://${cfg.subdomain}.${homelabCfg.domain}";
