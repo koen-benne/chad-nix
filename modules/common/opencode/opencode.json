@@ -20,7 +20,8 @@
       "model": "bedrock/claude-haiku-4-5-20251001"
     },
     "scout": {
-      "model": "bedrock/claude-haiku-4-5-20251001"
+      "model": "bedrock/claude-haiku-4-5-20251001",
+      "mode": "subagent"
     },
     "general": {
       "model": "bedrock/claude-sonnet-5"
