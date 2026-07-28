@@ -42,7 +42,7 @@
         source = ./skills/spec-tree/SKILL.md;
       };
       "opencode/skills/hunk-review/SKILL.md" = {
-        source = ./skills/hunk-review/SKILL.md;
+        source = "${pkgs.unstable.hunk}/skills/hunk-review/SKILL.md";
       };
     };
   };
