@@ -43,6 +43,8 @@ in {
       localsend
       ungoogled-chromium
       unstable._1password-gui
+
+      nextcloud-client
     ];
 
     # See issue: https://github.com/nix-community/home-manager/issues/1213
