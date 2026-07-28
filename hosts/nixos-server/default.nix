@@ -106,6 +106,10 @@
       adminPassword = "PWD";
       dataDir = "/export/1tb/NextCloud/data"; # Optional, this is the default
     };
+    collabora = {
+      enable = true;
+      subdomain = "office"; # Optional, this is the default
+    };
     jellyfin = {
       enable = true;
       subdomain = "jellyfin";

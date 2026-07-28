@@ -69,6 +69,8 @@ in {
               <ul>
                 ${lib.optionalString config.my.homelab.nextcloud.enable
           ''<li><a href="https://cloud.${homelabCfg.domain}">Nextcloud</a></li>''}
+        ${lib.optionalString config.my.homelab.collabora.enable
+          ''<li><a href="https://${config.my.homelab.collabora.subdomain}.${homelabCfg.domain}">Office</a></li>''}
         ${lib.optionalString config.my.homelab.jellyfin.enable
           ''<li><a href="https://jellyfin.${homelabCfg.domain}">Jellyfin</a></li>''}
               </ul>

@@ -31,7 +31,7 @@ in {
 
     extraApps = mkOption {
       type = types.listOf types.str;
-      default = ["news" "contacts" "calendar" "tasks" "notes" "mail" "phonetrack"];
+      default = ["news" "contacts" "calendar" "tasks" "notes" "mail" "phonetrack" "richdocuments" "music"];
       description = "List of extra Nextcloud apps to enable";
     };
   };
@@ -43,7 +43,7 @@ in {
     # Enable and configure Nextcloud
     services.nextcloud = {
       enable = true;
-      package = pkgs.nextcloud33;
+      package = pkgs.nextcloud34;
       configureRedis = true;
 
       # Basic configuration
