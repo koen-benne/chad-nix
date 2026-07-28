@@ -4,6 +4,8 @@
   pkgs,
   ...
 }: {
+  home.packages = [pkgs.cloudflared];
+
   home.file.".ssh/config".text = ''
 
 
@@ -43,9 +45,10 @@
       IdentityFile ~/.ssh/azure
 
     Host nixos-server
-      HostName 85.144.90.73
+      HostName ssh.dorkoe.nl
       User koenbenne
       IdentityFile ~/.ssh/nixos
+      ProxyCommand cloudflared access ssh --hostname %h
 
     # BEGIN: Upsun certificate configuration
     Host *.platform.sh *.upsun.com
