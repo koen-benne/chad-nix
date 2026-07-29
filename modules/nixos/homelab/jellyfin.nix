@@ -101,6 +101,52 @@ in {
       sonarr.openFirewall = true; # TV Shows
     };
 
+    # sabnzbd's config file is read-only by default on this nixpkgs
+    # version (system.stateVersion >= 26.05), and gets regenerated from
+    # this declarative config on every service restart, so Usenet
+    # server credentials and category setup can no longer be persisted
+    # via the web UI wizard. They must be declared here instead. See:
+    # https://github.com/nix-media-server/nixarr/pull/132
+    sops.secrets.sabnzbd_servers_ini = {
+      owner = "sabnzbd";
+      group = "media";
+      mode = "0400";
+    };
+
+    services.sabnzbd = {
+      secretFiles = [ config.sops.secrets.sabnzbd_servers_ini.path ];
+
+      settings.servers.easyusenet = {
+        name = "easyusenet";
+        displayname = "EasyUsenet";
+        host = "reader.easyusenet.nl";
+        port = 563;
+        ssl = true;
+        connections = 100;
+      };
+
+      settings.categories = {
+        radarr = {
+          dir = "${cfg.mediaDir}/usenet/radarr";
+          pp = "3";
+          script = "None";
+          priority = "0";
+        };
+        sonarr = {
+          dir = "${cfg.mediaDir}/usenet/sonarr";
+          pp = "3";
+          script = "None";
+          priority = "0";
+        };
+        lidarr = {
+          dir = "${cfg.mediaDir}/usenet/lidarr";
+          pp = "3";
+          script = "None";
+          priority = "0";
+        };
+      };
+    };
+
     # Deny jellyfin write acces as that is a terrible idea
     systemd.services.jellyfin.serviceConfig.ReadOnlyPaths = [
       "/mnt/biggidrive/jellyfin/library"
