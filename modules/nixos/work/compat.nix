@@ -14,5 +14,7 @@ in {
     sops.secrets.bitbucket_api_token = {
       mode = "0400";
     };
+
+    my.rails-dev.enable = true;
   };
 }
