@@ -388,6 +388,12 @@ in {
               isEssential = true;
               position = 100;
             };
+            "iO Digital" = {
+              id = "95b6b154-365f-4c5f-9e60-1c11bc922124";
+              url = "https://iodigital.awsapps.com";
+              isEssential = true;
+              position = 101;
+            };
 
             # Other workspace pins
             # "GitHub" = {
