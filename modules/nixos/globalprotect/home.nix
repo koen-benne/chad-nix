@@ -23,7 +23,7 @@
     mkdir -p $out
     cp -r ${./dms-plugin}/* $out/
     chmod -R +w $out
-    substituteInPlace $out/Main.qml \
+    substituteInPlace $out/Daemon.qml \
       --replace "@gpclient@" "$gpclient"
   '';
 in {
