@@ -12,6 +12,8 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # Due to AMDGPU regression
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_6_12;
 
   system.stateVersion = "26.05";
 
