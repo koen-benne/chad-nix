@@ -2,6 +2,7 @@ final: prev: {
   # Pin zellij to 0.43.1: terminal transparency broken since 0.44 (zellij-org/zellij#5175).
   # Remove this entry (and pkgs/zellij/) once fixed upstream.
   zellij = final.callPackage ../pkgs/zellij {};
+  spotweb = final.callPackage ../pkgs/spotweb {};
 
   # Override quickshell from unstable to be available in stable
   quickshell = final.unstable.quickshell;

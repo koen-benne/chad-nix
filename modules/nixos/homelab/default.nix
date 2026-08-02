@@ -13,6 +13,7 @@ in {
     ./jellyfin.nix
     ./pihole.nix
     ./cloudflared.nix
+    ./spotweb
   ];
 
   options.my.homelab = {

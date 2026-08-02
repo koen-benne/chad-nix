@@ -99,6 +99,9 @@ in {
 
       sonarr.enable = true; # TV Shows
       sonarr.openFirewall = true; # TV Shows
+
+      prowlarr.enable = true;
+      prowlarr.openFirewall = true;
     };
 
     # sabnzbd's config file is read-only by default on this nixpkgs
@@ -146,6 +149,8 @@ in {
         };
       };
     };
+
+    my.homelab.spotweb.enable = true;
 
     # Deny jellyfin write acces as that is a terrible idea
     systemd.services.jellyfin.serviceConfig.ReadOnlyPaths = [
