@@ -102,6 +102,37 @@ in {
 
       prowlarr.enable = true;
       prowlarr.openFirewall = true;
+
+      recyclarr = {
+        enable = true;
+
+        schedule = "weekly";
+
+        configuration = {
+          radarr.movies = {
+            base_url = "http://127.0.0.1:7878";
+            api_key = "!env_var RADARR_API_KEY";
+
+            include = [
+              { template = "radarr-quality-definition-movie"; }
+              { template = "radarr-quality-profile-hd-bluray-web"; }
+              { template = "radarr-custom-formats-hd-bluray-web"; }
+            ];
+          };
+
+          sonarr.series = {
+            base_url = "http://127.0.0.1:8989";
+            api_key = "!env_var SONARR_API_KEY";
+
+            include = [
+              { template = "sonarr-quality-definition-series"; }
+              { template = "sonarr-v4-quality-profile-web-1080p"; }
+              { template = "sonarr-v4-custom-formats-web-1080p"; }
+            ];
+          };
+        };
+      };
+
     };
 
     # sabnzbd's config file is read-only by default on this nixpkgs
