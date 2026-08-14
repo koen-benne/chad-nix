@@ -29,7 +29,6 @@
   my.desktop.windowManager = "niri";
   my.opencode.enable = true;
   my.work.enable = true;
-  my.globalprotect.enable = true;
 
   # Core programs are enabled by common/packages/home.nix
   # - direnv, git, tmux, fish, zsh, etc. all enabled via my.* options

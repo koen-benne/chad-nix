@@ -20,11 +20,15 @@ in {
       notesnook
       obsidian
 
+      # F5 (KNMI) VPN stuff
+      openconnect
+
       (writeShellScriptBin "jvim" ''
         exec ${inputs.jesse.packages.${pkgs.system}.default}/bin/nvim "$@"
       '')
     ];
 
+    my.globalprotect.enable = true;
     programs.taskwarrior.enable = true;
     programs.lazydocker.enable = true;
 
