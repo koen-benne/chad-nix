@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+#
+# knmi-vpn  – simple CLI for KNMI BIG-IP VPN
+# Usage:  knmi-vpn connect   # start and background
+#         knmi-vpn disconnect  # stop
+#
+
+# ---------- adjustable settings ----------
+BIN="$(command -v openconnect)"             # path to openconnect
+PIDFILE="$HOME/.cache/knmi-vpn.pid"         # where to store PID
+GATEWAY="https://connect.knmi.nl"           # KNMI portal
+GROUP="KNMI VPN"                            # auth-group
+USER="koen.benne@knmi.nl"                   # username
+EXTRA="--no-dtls --timestamp"               # any extra flags
+# -----------------------------------------
+
+die() { echo "knmi-vpn: $*" >&2; exit 1; }
+
+case "$1" in
+  connect)
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+      die "VPN already running (PID $(cat "$PIDFILE"))."
+    fi
+    sudo "$BIN" \
+      --protocol=f5 \
+      --authgroup="$GROUP" \
+      --user="$USER" \
+      $EXTRA \
+      --background \
+      --pid-file="$PIDFILE" \
+      "$GATEWAY" || die "openconnect failed"
+    echo "VPN started (PID $(cat "$PIDFILE"))."
+    ;;
+  disconnect)
+    [ -f "$PIDFILE" ] || die "No PID file; VPN not running?"
+    sudo pkill -F "$PIDFILE" || die "Could not kill VPN process"
+    rm -f "$PIDFILE"
+    echo "VPN disconnected."
+    ;;
+  *)
+    echo "Usage: knmi-vpn {connect|disconnect}" >&2
+    exit 1
+    ;;
+esac
