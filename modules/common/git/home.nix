@@ -16,6 +16,17 @@ in {
     #   git-crypt
     #   git-remote-gcrypt
     # ];
+    programs.delta = {
+      enable = true;
+      enableGitIntegration = true;
+      options = {
+        navigate = true; # Use n/N to jump between diff sections
+        light = false;
+        line-numbers = true;
+        side-by-side = true;
+      };
+    };
+
     programs.git = {
       enable = true;
       ignores = [

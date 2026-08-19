@@ -19,6 +19,9 @@ in {
           inactiveBorderColor = ["white"];
           optionsTextColor = ["blue"];
         };
+        git.pagers = [
+          {pager = "delta --dark --paging=never --line-numbers";}
+        ];
       };
     };
   };
