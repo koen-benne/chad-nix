@@ -8,7 +8,7 @@
     }
   },
   "model": "bedrock/claude-sonnet-5",
-  "small_model": "bedrock/claude-haiku-4-5-20251001",
+  "small_model": "bonzai/gpt-4.1-mini",
   "agent": {
     "build": {
       "model": "bedrock/claude-sonnet-5"
@@ -17,10 +17,10 @@
       "model": "bedrock/claude-sonnet-5"
     },
     "explore": {
-      "model": "bedrock/claude-haiku-4-5-20251001"
+      "model": "bonzai/gpt-4.1-mini"
     },
     "scout": {
-      "model": "bedrock/claude-haiku-4-5-20251001",
+      "model": "bonzai/gpt-4.1-mini",
       "mode": "subagent"
     },
     "general": {
