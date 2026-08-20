@@ -7,6 +7,7 @@ layout {
     tab name="opencode" {
         pane {
             command "opencode"
+            args "--port"
         }
     }
     tab name="diff" {
