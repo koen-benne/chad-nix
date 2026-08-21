@@ -1,6 +1,19 @@
 #!/usr/bin/env bash
 # fast zellijing
 
+# If a resurrectable (EXITED) session with this name exists, delete it and its
+# cache so we always land on a fresh, correct layout instead of resurrecting a
+# possibly-degraded one (e.g. missing tabs from a previous crash/close).
+cleanup_if_exited() {
+  local name="$1"
+  local status_line
+  status_line=$(zellij list-sessions --no-formatting 2>/dev/null | grep -E "^${name}[[:space:]]")
+  if [ -n "$status_line" ] && echo "$status_line" | grep -q "EXITED"; then
+    zellij delete-session --force "${name}" 2>/dev/null
+    rm -rf ~/.cache/zellij/*/session_info/"${name}"
+  fi
+}
+
 case $1 in
   open)
     sessions=$(zellij list-sessions -s 2>/dev/null)
@@ -16,7 +29,7 @@ case $1 in
     ;;
 
   close)
-    sessions=$(zellij list-sessions 2>/dev/null | sed 's/\x1b\[[0-9;]*m//g' | awk '{print $1}')
+    sessions=$(zellij list-sessions --no-formatting 2>/dev/null | awk '{print $1}')
     if [ -z "$sessions" ]; then
       echo "No zellij sessions found"
       exit 0
@@ -39,20 +52,8 @@ case $1 in
       echo "Please provide a name for the new session"
       exit 1
     fi
-    if [ -z "${ZELLIJ}" ]; then
-      exec zellij -s "${2}" -n dev
-    else
-      # Spawn detached so it doesn't nest, then attach to switch
-      (setsid zellij -s "${2}" -n dev >/dev/null 2>&1 &)
-      # Poll until session appears
-      for i in $(seq 1 50); do
-        if zellij list-sessions -s 2>/dev/null | grep -qx "${2}"; then
-          break
-        fi
-        sleep 0.05
-      done
-      zellij attach "${2}"
-    fi
+    cleanup_if_exited "${2}"
+    exec zellij attach --create "${2}" options --default-layout dev
     ;;
 
   project)
@@ -63,27 +64,8 @@ case $1 in
 
     proj_name=$(basename "${project}" | tr . _)
 
-    # Reuse existing session if it exists
-    if zellij list-sessions -s 2>/dev/null | grep -qx "${proj_name}"; then
-      zellij attach "${proj_name}"
-      exit 0
-    fi
-
-    # Create new session with dev layout
-    if [ -z "${ZELLIJ}" ]; then
-      cd "${project}" && exec zellij -s "${proj_name}" -n dev
-    else
-      # Spawn detached so it doesn't nest, then attach to switch
-      (cd "${project}" && setsid zellij -s "${proj_name}" -n dev >/dev/null 2>&1 &)
-      # Poll until session appears
-      for i in $(seq 1 50); do
-        if zellij list-sessions -s 2>/dev/null | grep -qx "${proj_name}"; then
-          break
-        fi
-        sleep 0.05
-      done
-      zellij attach "${proj_name}"
-    fi
+    cleanup_if_exited "${proj_name}"
+    exec zellij attach --create "${proj_name}" options --default-layout dev --default-cwd "${project}"
     ;;
 
   *)
