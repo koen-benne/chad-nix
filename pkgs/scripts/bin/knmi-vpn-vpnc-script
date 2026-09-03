@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+#
+# knmi-vpn-vpnc-script — openconnect --script wrapper for the KNMI F5 VPN.
+#
+# Delegates interface/route setup to openconnect's bundled default
+# vpnc-script (which works fine), but fixes DNS handling: the bundled
+# script calls the Nix-provided openresolv `resolvconf`, which stores its
+# state under a directory layout (/run/resolvconf/keys/...) that Debian's
+# own resolvconf (/usr/sbin/resolvconf, /run/resolvconf/interface/...)
+# doesn't understand. That mismatch meant DNS servers pushed by the VPN
+# were registered correctly on the openresolv side, but never actually
+# merged into /etc/resolv.conf.
+#
+# This script re-registers DNS directly with Debian's resolvconf so it
+# gets merged into /etc/resolv.conf (alongside NetworkManager's entries),
+# and cleans it up again on disconnect.
+
+set -u
+
+REAL_RESOLVCONF=/usr/sbin/resolvconf
+RC_INTERFACE="${TUNDEV:-tun0}.openconnect"
+
+# The path to openconnect's bundled default vpnc-script is passed in as
+# $1 by knmi-vpn (resolved there, as the normal user, since this script
+# runs as root and can't reliably re-discover "openconnect" on root's
+# PATH). It does the interface/routing work it's actually good at (this
+# also attempts DNS via the mismatched openresolv resolvconf; that part
+# harmlessly no-ops/warns, we fix DNS ourselves below).
+DEFAULT_SCRIPT="${1:-}"
+if [ -n "$DEFAULT_SCRIPT" ] && [ -x "$DEFAULT_SCRIPT" ]; then
+  "$DEFAULT_SCRIPT"
+fi
+
+apply_dns() {
+  [ -x "$REAL_RESOLVCONF" ] || return 0
+
+  domains="${CISCO_DEF_DOMAIN:-}"
+  if [ -n "${CISCO_SPLIT_DNS:-}" ]; then
+    domains="$domains $(echo "$CISCO_SPLIT_DNS" | tr ',' ' ')"
+  fi
+  domains="$(echo "$domains" | tr -s ' ')"
+  domains="${domains# }"
+  domains="${domains% }"
+
+  {
+    for ns in ${INTERNAL_IP4_DNS:-}; do
+      echo "nameserver $ns"
+    done
+    for ns in ${INTERNAL_IP6_DNS:-}; do
+      [ "$ns" = "::" ] && continue
+      echo "nameserver $ns"
+    done
+    [ -n "$domains" ] && echo "search $domains"
+  } | "$REAL_RESOLVCONF" -a "$RC_INTERFACE"
+
+  "$REAL_RESOLVCONF" -u
+}
+
+remove_dns() {
+  [ -x "$REAL_RESOLVCONF" ] || return 0
+  "$REAL_RESOLVCONF" -d "$RC_INTERFACE" 2>/dev/null
+  "$REAL_RESOLVCONF" -u
+}
+
+case "${reason:-}" in
+  connect | reconnect)
+    apply_dns
+    ;;
+  disconnect)
+    remove_dns
+    ;;
+esac

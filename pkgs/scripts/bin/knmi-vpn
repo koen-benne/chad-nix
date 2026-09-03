@@ -7,6 +7,7 @@
 
 # ---------- adjustable settings ----------
 BIN="$(command -v openconnect)"             # path to openconnect
+WRAPPER="$(command -v knmi-vpn-vpnc-script)" # our --script (fixes DNS)
 PIDFILE="$HOME/.cache/knmi-vpn.pid"         # where to store PID
 GATEWAY="https://connect.knmi.nl"           # KNMI portal
 GROUP="KNMI VPN"                            # auth-group
@@ -16,15 +17,23 @@ EXTRA="--no-dtls --timestamp"               # any extra flags
 
 die() { echo "knmi-vpn: $*" >&2; exit 1; }
 
+# openconnect's own bundled vpnc-script (does the actual route setup);
+# resolved here, as the normal user, so knmi-vpn-vpnc-script (which runs
+# as root, spawned by openconnect) doesn't need to find "openconnect" on
+# root's PATH just to look this path up again.
+DEFAULT_SCRIPT="$("$BIN" --version 2>&1 | sed -n 's/^Default vpnc-script.*: //p')"
+
 case "$1" in
   connect)
     if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
       die "VPN already running (PID $(cat "$PIDFILE"))."
     fi
+    [ -n "$WRAPPER" ] || die "knmi-vpn-vpnc-script not found on PATH"
     sudo "$BIN" \
       --protocol=f5 \
       --authgroup="$GROUP" \
       --user="$USER" \
+      --script="$WRAPPER $DEFAULT_SCRIPT" \
       $EXTRA \
       --background \
       --pid-file="$PIDFILE" \
@@ -35,6 +44,11 @@ case "$1" in
     [ -f "$PIDFILE" ] || die "No PID file; VPN not running?"
     sudo pkill -F "$PIDFILE" || die "Could not kill VPN process"
     rm -f "$PIDFILE"
+    # Fallback cleanup in case the disconnect hook in knmi-vpn-vpnc-script
+    # didn't get to run (e.g. process was killed harder than SIGTERM).
+    sudo ip link delete tun0 2>/dev/null || true
+    sudo resolvconf -d tun0.openconnect 2>/dev/null || true
+    sudo resolvconf -u 2>/dev/null || true
     echo "VPN disconnected."
     ;;
   *)
