@@ -59,7 +59,6 @@ in {
 
     programs.dank-material-shell = {
       enable = true;
-      dgop.package = pkgs.unstable.dgop;
       systemd = {
         enable = true;
         restartIfChanged = true;
