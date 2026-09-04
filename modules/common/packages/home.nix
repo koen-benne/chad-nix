@@ -41,6 +41,8 @@
 
     unstable._1password-cli
     unstable.hunk
+
+    unstable.devenv
   ];
 
   my = {
