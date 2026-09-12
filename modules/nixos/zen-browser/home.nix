@@ -26,8 +26,7 @@ in {
           inherit name;
           value = let
             zen-browser = config.programs.zen-browser.package;
-          in
-            "${zen-browser.pname}.desktop";
+          in "${zen-browser.pname}.desktop";
         }) [
           "application/x-extension-shtml"
           "application/x-extension-xhtml"
@@ -221,7 +220,7 @@ in {
                 texture = 0.3;
               };
             };
-            "KNMI" = {
+            "Mijn KNMI" = {
               id = "d2b9e0f3-5c4e-4d9f-8e3b-2e4f6c8d0a5e";
               icon = "🌤️";
               position = 2000;
@@ -261,6 +260,58 @@ in {
                     algorithm = "complementary";
                     primary = false;
                     lightness = 55;
+                    position = {
+                      x = 50;
+                      y = 90;
+                    };
+                    type = "explicit-lightness";
+                  }
+                ];
+                opacity = 0.55;
+                rotation = 180;
+                texture = 0.15;
+              };
+            };
+            "KNMI.nl" = {
+              id = "e9e22ec8-c349-494c-aa13-a0fc7703b712";
+              icon = "☔";
+              position = 2500;
+              theme = {
+                type = "gradient";
+                colors = [
+                  {
+                    red = 0;
+                    green = 100;
+                    blue = 160;
+                    algorithm = "floating";
+                    primary = true;
+                    lightness = 45;
+                    position = {
+                      x = 50;
+                      y = 10;
+                    };
+                    type = "explicit-lightness";
+                  }
+                  {
+                    red = 30;
+                    green = 60;
+                    blue = 120;
+                    algorithm = "floating";
+                    primary = false;
+                    lightness = 40;
+                    position = {
+                      x = 50;
+                      y = 50;
+                    };
+                    type = "explicit-lightness";
+                  }
+                  {
+                    red = 180;
+                    green = 210;
+                    blue = 230;
+                    algorithm = "complementary";
+                    primary = false;
+                    lightness = 70;
                     position = {
                       x = 50;
                       y = 90;
@@ -404,27 +455,36 @@ in {
             #   position = 200;
             # };
 
-            # KNMI workspace pins
+            # Mijn KNMI workspace pins
             "Extranetten Acceptance" = {
               id = "b1c2d3e4-f5a6-47b8-c9d0-e1f2a3b4c5d6";
-              workspace = "d2b9e0f3-5c4e-4d9f-8e3b-2e4f6c8d0a5e"; # KNMI space
+              workspace = "d2b9e0f3-5c4e-4d9f-8e3b-2e4f6c8d0a5e"; # Mijn KNMI space
               url = "https://mijnknmi.exons2.web.acc.knmi.cloud";
               isEssential = false;
               position = 300;
             };
             "Extranetten Production" = {
               id = "c2d3e4f5-a6b7-48c9-d0e1-f2a3b4c5d6e7";
-              workspace = "d2b9e0f3-5c4e-4d9f-8e3b-2e4f6c8d0a5e"; # KNMI space
+              workspace = "d2b9e0f3-5c4e-4d9f-8e3b-2e4f6c8d0a5e"; # Mijn KNMI space
               url = "https://new.mijn.knmi.nl";
               isEssential = false;
               position = 301;
             };
             "KNMI Jobs" = {
               id = "d3e4f5a6-b7c8-49d0-e1f2-a3b4c5d6e7f9";
-              workspace = "d2b9e0f3-5c4e-4d9f-8e3b-2e4f6c8d0a5e"; # KNMI space
+              workspace = "d2b9e0f3-5c4e-4d9f-8e3b-2e4f6c8d0a5e"; # Mijn KNMI space
               url = "https://api.exons2.web.acc.knmi.cloud/jobs";
               isEssential = false;
               position = 302;
+            };
+
+            # KNMI.nl workspace pins
+            "KNMI.nl" = {
+              id = "c049553f-c4ef-48d5-8195-3ef32872de9b";
+              workspace = "e9e22ec8-c349-494c-aa13-a0fc7703b712"; # KNMI.nl space
+              url = "https://www.knmi.nl/";
+              isEssential = false;
+              position = 310;
             };
 
             # StayOkay workspace pins
