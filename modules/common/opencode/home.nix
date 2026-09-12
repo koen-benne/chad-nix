@@ -3,10 +3,40 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  bonzaiProfiles = sys.my.opencode.bonzaiProfiles;
+  defaultBonzaiProfile = lib.head bonzaiProfiles;
+
+  bonzaiProfileCases =
+    lib.concatMapStringsSep "\n" (profile: ''
+      ${profile}) key_file=${sys.sops.secrets."bonzai_api_key/${profile}".path} ;;
+    '')
+    bonzaiProfiles;
+
+  # Wraps opencode so BONZAI_API_KEY_PROFILE picks which sops-managed
+  # Bonzai API key gets exported as BONZAI_API_KEY. Defaults to the first
+  # entry in `my.opencode.bonzaiProfiles`. Set BONZAI_API_KEY_PROFILE via
+  # direnv/devenv per project to switch.
+  opencode-wrapped = pkgs.writeShellScriptBin "opencode" ''
+    set -euo pipefail
+
+    profile="''${BONZAI_API_KEY_PROFILE:-${defaultBonzaiProfile}}"
+
+    case "$profile" in
+      ${bonzaiProfileCases}
+      *)
+        echo "opencode: unknown BONZAI_API_KEY_PROFILE '$profile' (expected one of: ${lib.concatStringsSep ", " bonzaiProfiles})" >&2
+        exit 1
+        ;;
+    esac
+
+    export BONZAI_API_KEY="$(cat "$key_file")"
+    exec ${pkgs.unstable.opencode}/bin/opencode "$@"
+  '';
+in {
   config = lib.mkIf sys.my.opencode.enable {
     home.packages = [
-      pkgs.unstable.opencode
+      opencode-wrapped
       pkgs.jq
     ];
 
@@ -31,8 +61,8 @@
       "opencode/opencode.json" = {
         text =
           lib.replaceStrings
-          ["__BONZAI_SECRET_PATH__" "\"nil\""]
-          [sys.sops.secrets.bonzai_api_key.path "\"${pkgs.nil}/bin/nil\""]
+          ["\"nil\""]
+          ["\"${pkgs.nil}/bin/nil\""]
           (builtins.readFile ./opencode.json);
       };
       "opencode/plugin/bonzai-remove-unsupported-params.ts" = {

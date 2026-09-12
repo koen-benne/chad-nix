@@ -33,7 +33,7 @@
       "npm": "@ai-sdk/openai-compatible",
       "options": {
         "baseURL": "https://api-v2.bonzai.iodigital.com/v1",
-        "apiKey": "{file:__BONZAI_SECRET_PATH__}"
+        "apiKey": "{env:BONZAI_API_KEY}"
       },
       "models": {
         "gpt-4.1": {
@@ -164,7 +164,7 @@
       "npm": "@ai-sdk/amazon-bedrock",
       "options": {
         "region": "eu-central-1",
-        "apiKey": "{file:__BONZAI_SECRET_PATH__}",
+        "apiKey": "{env:BONZAI_API_KEY}",
         "baseURL": "https://api-v2.bonzai.iodigital.com/bedrock",
         "litellmProxy": true
       },
