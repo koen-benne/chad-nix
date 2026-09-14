@@ -11,6 +11,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    my.globalprotect.enable = true;
+
     sops.secrets.bitbucket_api_token = {
       mode = "0400";
       owner = config.my.user;

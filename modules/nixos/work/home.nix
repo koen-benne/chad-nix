@@ -28,7 +28,6 @@ in {
       '')
     ];
 
-    my.globalprotect.enable = true;
     programs.taskwarrior.enable = true;
     programs.lazydocker.enable = true;
 
