@@ -7,7 +7,6 @@
 }: let
   inherit (lib) mkEnableOption mkIf mkForce;
   cfg = config.my.hyprland;
-  hyprlandPkgs = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
 in {
   options.my.hyprland = {
     enable = mkEnableOption "hyprland";
@@ -16,7 +15,7 @@ in {
   config = mkIf cfg.enable {
     # In standalone home-manager mode there is no NixOS module to provide the
     # package, so we set it explicitly from the flake here.
-    wayland.windowManager.hyprland.package = mkForce hyprlandPkgs.hyprland;
+    wayland.windowManager.hyprland.package = mkForce pkgs.hyprland;
 
     # XDG desktop portal for standalone home-manager mode
     xdg.portal = {
