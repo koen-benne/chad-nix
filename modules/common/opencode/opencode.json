@@ -11,10 +11,10 @@
   "small_model": "bonzai/gpt-4.1-mini",
   "agent": {
     "build": {
-      "model": "bedrock/claude-sonnet-5"
+      "model": "bonzai/gpt-5.6-sol"
     },
     "plan": {
-      "model": "bedrock/claude-sonnet-5"
+      "model": "bonzai/gpt-5.6-sol"
     },
     "explore": {
       "model": "bonzai/gpt-4.1-mini"
@@ -24,7 +24,7 @@
       "mode": "subagent"
     },
     "general": {
-      "model": "bedrock/claude-sonnet-5"
+      "model": "bonzai/gpt-5.6-sol"
     }
   },
   "provider": {
