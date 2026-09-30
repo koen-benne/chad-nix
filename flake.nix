@@ -30,6 +30,8 @@
     dev-flakes.url = "github:koen-benne/dev-flakes";
     dev-flakes.inputs.nixpkgs.follows = "unstable";
 
+    opencode-config.url = "github:koen-benne/opencode-config";
+
     stylix.url = "github:danth/stylix/release-26.05";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
 

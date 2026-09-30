@@ -83,5 +83,4 @@
   # my.bluetooth.enable = true;
   my.corectrl.enable = true;
   my.unmanic.enable = false;
-  my.opencode.enable = true;
 }

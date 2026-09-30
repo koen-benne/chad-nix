@@ -10,6 +10,7 @@
     [
       inputs.nix-index-database.homeModules.nix-index
       ./my/default.nix
+      inputs.opencode-config.homeManagerModules.default
     ]
     ++ lib.my.getHmModules [./.];
 
