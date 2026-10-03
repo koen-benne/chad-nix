@@ -91,7 +91,8 @@
   #   enable = true;
   # };
 
-  # Enable the services you want
+  my.logic-backup.enable = true;
+
   my.homelab = {
     enable = true;
     # domain = "dorkoe.nl";  # Optional, this is the default
