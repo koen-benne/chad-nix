@@ -18,6 +18,12 @@ in {
   };
 
   config = mkIf cfg.enable {
+
+    # Required for simple voice chat mod
+    networking.firewall.allowedUDPPorts = [24454];
+
+    users.users.${config.my.user}.extraGroups = ["minecraft"];
+
     services.minecraft-servers = {
       enable = true;
       eula = true;
@@ -28,7 +34,9 @@ in {
       servers = {
         tnauwiecraft = {
           enable = true;
-          package = pkgs.fabric-server;
+          package = pkgs.fabricServers.fabric-26_3.override {
+            jre_headless = pkgs.openjdk25_headless;
+          };
 
           serverProperties = {
             motd = "Tnauwiecraft";
@@ -45,44 +53,73 @@ in {
           whitelist = {
             YerBoyCone = "ef4f6857-d513-4dd5-8595-cd9711743a55";
             RWDLegend = "df9e46f9-d8a3-4092-a970-ff0bce9e6aef";
-            MR_REY = "815687a1-0a07-447b-bc3e-4ea3f423e7d0";
+            DoreeAgrien = "1ee9f756-8ff7-4d82-8255-61989653f753";
+            CertifiedAsian = "acdc9485-f538-4dd6-b0ab-0aa80e8155ab";
+            Lil_Noodle74 = "8ea88e86-89f1-4399-b236-0a81c783bf7b";
           };
 
           jvmOpts = "-Xmx8G -Xms6G";
           symlinks = {
             "mods" = pkgs.linkFarmFromDrvs "mods" (builtins.attrValues {
+
+              # Shift break trees with axe
               TreeHarvester = pkgs.fetchurl {
-                url = "https://cdn.modrinth.com/data/abooMhox/versions/aROMAonE/treeharvester-1.21.3-9.0.jar";
-                sha512 = "b8d5c699d6bf4b26225454302f25a874c2dae078016db33398afb753e32ae23337c3c527467389c795408d894f34159a3f18c4f34ac20aaad299ff97f5685055";
+                url = "https://cdn.modrinth.com/data/abooMhox/versions/Aem5iZWT/treeharvester-26.3.0-10.3.jar";
+                hash = "sha512-xL+0Nl6MraKCazJOdhXrk0lRqYu3sfAVE8BuczlBY+wy5fYe7usYZHVALVTGyBft0GKmm29eZVCSeKq+8vLiIA==";
               };
+
+              # Libraries
               Collective = pkgs.fetchurl {
-                url = "https://cdn.modrinth.com/data/e0M1UDsY/versions/UqTBXnWC/collective-1.21.3-7.89.jar";
-                sha512 = "f8eace73d57e858330e2e15e76767512964c7b4b6aa592a61c29e641d2fda46d548dfc18c67a824c0a16a3da8ae9e1b585de3846e39306789eda98c02bcf7aad";
+                url = "https://cdn.modrinth.com/data/e0M1UDsY/versions/94WEkZry/collective-26.3.0-8.60.jar";
+                hash = "sha512-Mwm1zDlIanfTEVUjGuVMkQDNkXBUFmI/zz/sn2mIeMIuigOOuPg4eHjHMYSWgmaTldx3mnUW7Maf9fIl+JX0Zg==";
               };
               FabricAPI = pkgs.fetchurl {
-                url = "https://cdn.modrinth.com/data/P7dR8mSH/versions/FjU3tsgY/fabric-api-0.107.0%2B1.21.3.jar";
-                sha512 = "f02d4a11e39075333141936816310dbc6131a5c335ea34760bcd69937c3effc20401da5a61c49beaf5ee522330db9fd87beb3d952cea84124eb1691f909fca00";
+                url = "https://cdn.modrinth.com/data/P7dR8mSH/versions/LEklt8GT/fabric-api-0.164.0%2B26.3.jar";
+                hash = "sha512-LOewgm91gBpW6BUOtc7KRnzfi0tE4WC1pTgeVBJWfQJPRqFsZ58pxKk0ayaH+hdA+R7WAmoxsu0fPUtQNZaNaQ==";
               };
-              Noisium = pkgs.fetchurl {
-                url = "https://cdn.modrinth.com/data/KuNKN7d2/versions/M4c8aGZ4/noisium-fabric-2.4.0%2Bmc1.21.2-1.21.3.jar";
-                sha512 = "cc049b37fce73ea4d12b42753a0abecc8f29104bb0b397e3b79fab2f6c957794a8e704c339d87789e3217d0371e31c49d71eff5ca31d1a042e5b5ab869aca844";
+              zconfig = pkgs.fetchurl {
+                url = "https://cdn.modrinth.com/data/4qmvXRB9/versions/tsgt79sG/zconfig-1.0.0%2B26.x.jar";
+                hash = "sha512-uvh6wCP9Apf1MYl/Dc3Kw7CzWWBoMJCtszUKIoGiEcUTSlNzcwoQYoMAyvVxG5EnBfFrM6HRpzo6hvNGvNfG9Q==";
               };
-              # TODO: One of these two is causing issues
-              # FerriteCore = pkgs.fetchurl {
-              #   url = "https://cdn.modrinth.com/data/uXXizFIs/versions/a3QXXGz2/ferritecore-7.1.0-hotfix-fabric.jar";
-              #   sha512 = "ae1ab30beb5938643cf2ae7b8220769f2c917e3f5441e46e9bc900295348c0a541a325c30b8dfc38039205620d872c27809acdc6741351f08e4c8edc36ae2bcc";
-              # };
-              # Lithium = pkgs.fetchurl {
-              #   url = "https://cdn.modrinth.com/data/gvQqBUqZ/versions/9x0igjLz/lithium-fabric-mc1.21.1-0.13.1.jar";
-              #   sha512 = "4250a630d43492da35c4c197ae43082186938fdcb42bafcb6ccad925b79f583abdfdc17ce792c6c6686883f7f109219baecb4906a65d524026d4e288bfbaf146";
-              # };
-              # Krypton = pkgs.fetchurl {
-              #   url = "https://cdn.modrinth.com/data/fQEb0iXm/versions/Acz3ttTp/krypton-0.2.8.jar";
-              #   sha512 = "5f8cf96c79bfd4d893f1d70da582e62026bed36af49a7fa7b1e00fb6efb28d9ad6a1eec147020496b4fe38693d33fe6bfcd1eebbd93475612ee44290c2483784";
-              # };
-              Spark = pkgs.fetchurl {
-                url = "https://cdn.modrinth.com/data/l6YH9Als/versions/D4nCQOay/spark-1.10.115-fabric.jar";
-                sha512 = "07c760c460f50e31758171151d57f459a020c8b480d326f45a019242956f36572d05cebd36daa03f7c104239d805c5716082aef0a51465cc593dd39a9bd8712f";
+
+              # Performance mods
+              FastNoise = pkgs.fetchurl {
+                url = "https://cdn.modrinth.com/data/OnlVIpq5/versions/cCGI5KLE/zfastnoise-1.1.1%2B26.3.jar";
+                hash = "sha512-geniBj+sMyk7FHAbfHK5Iv69per1x8Yxq59YjJa6g13339FNysZ2P0FOgzZsckRf365NdLp/eptzcHRGomTIfw==";
+              };
+              FerriteCore = pkgs.fetchurl {
+                url = "https://cdn.modrinth.com/data/uXXizFIs/versions/d5ddUdiB/ferritecore-9.0.0-fabric.jar";
+                hash = "sha512-2B+pfhF4TBnUL4nC9DODHQB2A91xk87kX6F35KapxSs4SxmFhuBKD39jzZlv7XEzIleL3pqNtX4RiIVK5cvlhA==";
+              };
+              Lithium = pkgs.fetchurl {
+                url = "https://cdn.modrinth.com/data/gvQqBUqZ/versions/xS0Q8LSi/lithium-fabric-0.26.2%2Bmc26.3.jar";
+                hash = "sha512-TX/uZhMu7ccf6rk5C5LJXXBY7b2tD+z6wdg2opULl6fKRjr77eYcfvNhzmXh+Sernond5b8uDgzkhq+1xdvuQA==";
+              };
+              Krypton = pkgs.fetchurl {
+                url = "https://cdn.modrinth.com/data/fQEb0iXm/versions/UugdIYJw/krypton-0.3.2.jar";
+                hash = "sha512-0dV+vUE5W3WwHxMM2VA+uNIIISQko5n/nzZ/UL6PvBxkckQrM8aG53fDFI9qYJUg6PtzLHVRV8NYyyB/1NESOg==";
+              };
+
+              # For Voxy
+              Chunksmith = pkgs.fetchurl {
+                url = "https://cdn.modrinth.com/data/4BeAEBIb/versions/Sun3j32A/chunksmith-4.6.0%2B26.3.jar";
+                hash = "sha512-ah2STbmi8JyYOwRj/C58c3TiUYWmMmBdrvn3H0GnGCpoBPuLdE+xf3UTsQQSaDbee3eaUmxlYN5bUGMJ+kBVwg==";
+              };
+
+              # Map stuff
+              XaerosMinimap = pkgs.fetchurl {
+                url = "https://cdn.modrinth.com/data/1bokaNcj/versions/eUEhnw8G/xaerominimap-fabric-26.3-26.6.1.jar";
+                hash = "sha512-qSR/bh28OUacaP56F9Siq1fBgS9KWGshzaPX0hspN3Elhkz8mFY2AGpvz1Pxsx8fq7dbpISDasBpOcRbAF8NgQ==";
+              };
+              XaerosWorldMap = pkgs.fetchurl {
+                url = "https://cdn.modrinth.com/data/NcUtCpym/versions/IEtfiHVq/xaeroworldmap-fabric-26.3-1.47.1.jar";
+                hash = "sha512-o+EDnKRoBPXzK4tlq0V1C0OEGRmwRzvJTxLyvjaI86GzUe4LJeRVlt7crr0oEap2D4SFqYWhkrCiVb5hfy2KbA==";
+              };
+
+              # Proximity chat
+              SimpleVoiceChat = pkgs.fetchurl {
+                url = "https://cdn.modrinth.com/data/9eGKb6K1/versions/cZm965sW/voicechat-fabric-2.6.26%2B26.3.jar";
+                hash = "sha512-c4q1fwStFBr5QHSEJWdytPf16V/fjt9vE09qBXCF6y3fS1x9qIcU4+lKbkroaouYUHGkwzNIUEfuUqlwaEWhAA==";
               };
             });
           };

@@ -83,9 +83,9 @@
   };
 
   my.openssl.enable = true;
-  # my.mc-servers.enable = true;
   my.theme.enable = true;
 
+  my.mc-servers.enable = true;
   # Hytale dedicated server — disabled until upstream manifest endpoint is fixed
   # my.hytale = {
   #   enable = true;
