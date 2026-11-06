@@ -121,6 +121,10 @@ in {
                 url = "https://cdn.modrinth.com/data/9eGKb6K1/versions/cZm965sW/voicechat-fabric-2.6.26%2B26.3.jar";
                 hash = "sha512-c4q1fwStFBr5QHSEJWdytPf16V/fjt9vE09qBXCF6y3fS1x9qIcU4+lKbkroaouYUHGkwzNIUEfuUqlwaEWhAA==";
               };
+              SVCEnhancedGroups = pkgs.fetchurl {
+                url = "https://cdn.modrinth.com/data/1LE7mid6/versions/bxfWYs0a/enhancedgroups-fabric-1.8.0%2B26.3.jar";
+                hash = "sha512-YIACbv+X/2wPSfCle2mBfTEA5+qbHvZ/QdWIHqoGrKQu8GpOdTGlZvXFeeB8OC/UJkK+sz/gQnDpMD2LM3IOpQ==";
+              };
             });
           };
         };
