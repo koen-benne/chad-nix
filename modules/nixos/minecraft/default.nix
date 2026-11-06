@@ -56,6 +56,7 @@ in {
             DoreeAgrien = "1ee9f756-8ff7-4d82-8255-61989653f753";
             CertifiedAsian = "acdc9485-f538-4dd6-b0ab-0aa80e8155ab";
             Lil_Noodle74 = "8ea88e86-89f1-4399-b236-0a81c783bf7b";
+            pappiecx = "2818d794-a46b-4809-a8f5-fb6011255a2a";
           };
 
           jvmOpts = "-Xmx8G -Xms6G";
