@@ -60,7 +60,14 @@ in {
           };
 
           jvmOpts = "-Xmx8G -Xms6G";
+
           symlinks = {
+            "datapacks" = pkgs.linkFarmFromDrvs "datapacks" (builtins.attrValues {
+              XaerosMapServerUtils = pkgs.fetchurl {
+                url = "https://cdn.modrinth.com/data/YJgkgKMm/versions/E7slFfkn/xaeros-map-server-utils-1.1.0.jar";
+                hash = "sha512-0GGcGO0gMsC7+6gmjdAoS0pLhY0VczCFUM+VyB53TcCIvfRx/RR123der/P7AvwNQDF4GYYzY9kwnwyjiqFIKQ==";
+              };
+            });
             "mods" = pkgs.linkFarmFromDrvs "mods" (builtins.attrValues {
 
               # Shift break trees with axe
@@ -81,6 +88,14 @@ in {
               zconfig = pkgs.fetchurl {
                 url = "https://cdn.modrinth.com/data/4qmvXRB9/versions/tsgt79sG/zconfig-1.0.0%2B26.x.jar";
                 hash = "sha512-uvh6wCP9Apf1MYl/Dc3Kw7CzWWBoMJCtszUKIoGiEcUTSlNzcwoQYoMAyvVxG5EnBfFrM6HRpzo6hvNGvNfG9Q==";
+              };
+              FabricLanguageKotlin = pkgs.fetchurl {
+                url = "https://cdn.modrinth.com/data/Ha28R6CL/versions/SKW1BTL3/fabric-language-kotlin-1.14.2%2Bkotlin.2.4.21.jar";
+                hash = "sha512-f7R1xKfnvfjQrKS1eYpYo1TFFEPVsfvePozzTfv3GR70I4tfB9COyUkOwYCzcWJFIzJsOtRdTtKyvlQd6UB+XQ==";
+              };
+              YetAnotherConfigLib = pkgs.fetchurl {
+                url = "https://cdn.modrinth.com/data/1eAoo2KR/versions/s9SjoFu1/yet_another_config_lib_v3-3.9.7%2B26.3-fabric.jar";
+                hash = "sha512-85VwKN0xyuePCK7j52j2G9EsTIQjJX01e8PBohcgR8dp03kB+Zd1x///Hl7nlAJdxyc4soacqwbxwoEYQdaLJA==";
               };
 
               # Performance mods
@@ -115,6 +130,10 @@ in {
               XaerosWorldMap = pkgs.fetchurl {
                 url = "https://cdn.modrinth.com/data/NcUtCpym/versions/IEtfiHVq/xaeroworldmap-fabric-26.3-1.47.1.jar";
                 hash = "sha512-o+EDnKRoBPXzK4tlq0V1C0OEGRmwRzvJTxLyvjaI86GzUe4LJeRVlt7crr0oEap2D4SFqYWhkrCiVb5hfy2KbA==";
+              };
+              XaerosMapsMultiplayerPlus = pkgs.fetchurl {
+                url = "https://cdn.modrinth.com/data/stTaMuWa/versions/Nt0Yoefe/xmmp-1.2.4%2B26.2-fabric.jar";
+                hash = "sha512-kJSmV7X6Vj9KdwrHm3W6++Ib5v2YO7l450EqUGoS0mYKpog3QRIC+iCoFxu7sFm368MBy+a0wpgSGz7+hDpYqw==";
               };
 
               # Proximity chat
