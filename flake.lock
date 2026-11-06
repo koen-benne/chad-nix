@@ -1337,11 +1337,11 @@
     },
     "opencode-config": {
       "locked": {
-        "lastModified": 1793455228,
-        "narHash": "sha256-HWJI/edIe5W7TBF5WrEBy6QGDmTqirz8j6A/PWY4e2Q=",
+        "lastModified": 1793984539,
+        "narHash": "sha256-rQmGAl7ZAB7KV4++9O4y5TtLLm+5K8UG01HFSAEOrhM=",
         "owner": "koen-benne",
         "repo": "opencode-config",
-        "rev": "6cb304feb01734e40eafd17e93d7c444ca472258",
+        "rev": "d4c152da98834011c1fad981c5dc037ced423e3d",
         "type": "github"
       },
       "original": {

@@ -2,6 +2,7 @@
 # There should not be anything in here that I don't want in every one of my linux systems with a desktop environment
 # There should also not be anything in here that I would also like to have on my servers
 {
+  config,
   lib,
   pkgs,
   sys,
@@ -10,6 +11,8 @@
   inherit (lib) mkIf optionals;
 in {
   config = mkIf sys.my.desktop.enable {
+    programs.opencodeConfig.desktop.enable = mkIf config.programs.opencodeConfig.enable true;
+
     home.packages = with pkgs; [
       # controlls stuff
       playerctl

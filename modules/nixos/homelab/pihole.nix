@@ -21,7 +21,7 @@ in {
 
     services.pihole-ftl = {
       enable = true;
-      openFirewallDNS = true;  # Automatically opens port 53
+      openFirewallDNS = true; # Automatically opens port 53
 
       lists = [
         {
@@ -43,14 +43,20 @@ in {
 
       settings = {
         dns = {
-          upstreams = [ "1.1.1.1" "8.8.8.8" ];
+          upstreams = ["1.1.1.1" "8.8.8.8"];
           # ... other DNS settings
         };
       };
     };
     services.pihole-web = {
       enable = true;
-      ports = [ "8089" ];
+      ports = ["8089"];
     };
+
+    # TODO: Remove this override and vendored file once nixos-26.05 includes nixpkgs commit b7d1324109a26bb1a6534e39efb689f3ac06d8c6.
+    systemd.services.pihole-ftl-setup.script = lib.mkForce (import ./pihole-ftl-setup-script.nix {
+      cfg = config.services.pihole-ftl;
+      inherit config lib pkgs;
+    });
   };
 }
