@@ -749,7 +749,7 @@
     "hytale-launcher": {
       "inputs": {
         "nixpkgs": [
-          "unstable"
+          "nixpkgs"
         ]
       },
       "locked": {

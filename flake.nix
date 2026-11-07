@@ -91,7 +91,7 @@
 
     # Hytale launcher
     hytale-launcher.url = "github:JPyke3/hytale-launcher-nix";
-    hytale-launcher.inputs.nixpkgs.follows = "unstable";
+    hytale-launcher.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {flake-parts, ...}:
