@@ -45,7 +45,7 @@ in {
             server-port = 25565;
             difficulty = "normal";
             gamemode = "survival";
-            max-players = 3;
+            max-players = 10;
             max-tick-time = 60000;
             online-mode = true;
             reduced-debug-info = false;
