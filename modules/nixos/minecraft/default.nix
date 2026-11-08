@@ -20,7 +20,8 @@ in {
   config = mkIf cfg.enable {
 
     # Required for simple voice chat mod
-    networking.firewall.allowedUDPPorts = [24454];
+    networking.firewall.allowedUDPPorts = [24454]; # SimpleVoiceChat
+    networking.firewall.allowedTCPPorts = [25566]; # Chunksmith
 
     users.users.${config.my.user}.extraGroups = ["minecraft"];
 
