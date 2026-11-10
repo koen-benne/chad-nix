@@ -18,7 +18,7 @@
         specialArgs = {inherit inputs lib;};
         modules =
           [
-            ../modules/nixos
+            ../modules/nixos.nix
             inputs.nixpkgs.nixosModules.readOnlyPkgs
             inputs.determinate.nixosModules.default
           ]

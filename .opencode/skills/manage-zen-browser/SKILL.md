@@ -1,12 +1,12 @@
 ---
 name: Manage Zen Browser
-description: Manage the declarative Zen Browser configuration in modules/nixos/zen-browser/home.nix, including project bundles, spaces, pins, containers, extensions, policies, preferences, search, bookmarks, and compatibility with pinned upstream versions.
+description: Manage the declarative Zen Browser configuration in modules/zen-browser/home.nix, including project bundles, spaces, pins, containers, extensions, policies, preferences, search, bookmarks, and compatibility with pinned upstream versions.
 ---
 
 # Manage Zen Browser
 
 Use this skill for changes to the declarative Zen Browser setup. Its primary
-target is `modules/nixos/zen-browser/home.nix`.
+target is `modules/zen-browser/home.nix`.
 
 ## Safety and scope
 

@@ -1,5 +1,5 @@
 # Entry point when using home-manager switch
-# This is only for systems that can't use NixOS/nix-darwin system management
+# This is only for systems that can't use NixOS system management
 {
   inputs,
   withSystem,
@@ -28,12 +28,8 @@
           [
             {
               home.username = username;
-              home.homeDirectory =
-                if pkgs.stdenv.isDarwin
-                then "/Users/${username}"
-                else "/home/${username}";
+              home.homeDirectory = "/home/${username}";
             }
-            ../modules/home-manager-compat
           ]
           ++ modules;
       });

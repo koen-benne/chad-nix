@@ -5,8 +5,6 @@
     unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
-    darwin.url = "github:lnl7/nix-darwin/nix-darwin-26.05";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -35,14 +33,6 @@
     stylix.url = "github:danth/stylix/release-26.05";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
 
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-    homebrew-core.url = "github:homebrew/homebrew-core";
-    homebrew-core.flake = false;
-    homebrew-cask.url = "github:homebrew/homebrew-cask";
-    homebrew-cask.flake = false;
-    homebrew-bundle.url = "github:homebrew/homebrew-bundle";
-    homebrew-bundle.flake = false;
-
     # Determinate Nix
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
@@ -56,9 +46,6 @@
       inputs.nixpkgs.follows = "unstable";
       inputs.home-manager.follows = "home-manager-unstable";
     };
-
-    # Apple fonts flake
-    apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
 
     # Minecraft servers
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
@@ -96,11 +83,10 @@
 
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["aarch64-darwin" "x86_64-linux"];
+      systems = ["x86_64-linux"];
       imports = [
         ./parts/lib.nix
         ./parts/overlays.nix
-        ./parts/darwin.nix
         ./parts/nixos.nix
         ./parts/home-manager.nix
       ];

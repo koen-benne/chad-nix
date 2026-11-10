@@ -6,12 +6,7 @@
   ...
 }: {
   imports = [
-    # Home-manager compatibility layer (provides sys.* options)
-    ../../modules/home-manager-compat
-
-    # Auto-discover all home.nix modules
-    ../../modules/common/home.nix
-    ../../modules/nixos/home.nix
+    ../../modules/home-manager-standalone.nix
   ];
 
   # Basic home configuration
@@ -29,6 +24,6 @@
   my.desktop.windowManager = "niri";
   my.work.enable = true;
 
-  # Core programs are enabled by common/packages/home.nix
+  # Core programs are enabled by the shared packages home module
   # - direnv, git, tmux, fish, zsh, etc. all enabled via my.* options
 }
