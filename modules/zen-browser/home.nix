@@ -428,6 +428,45 @@ in {
                 texture = 0.35;
               };
             };
+            "TCR" = {
+              id = "71db8092-6cdc-4870-b9cc-e83575c14aa0";
+              icon = "🏫";
+              position = 5000;
+              theme = {
+                type = "gradient";
+                colors = [
+                  {
+                    red = 27;
+                    green = 41;
+                    blue = 35;
+                    algorithm = "floating";
+                    primary = true;
+                    lightness = 30;
+                    position = {
+                      x = 20;
+                      y = 20;
+                    };
+                    type = "explicit-lightness";
+                  }
+                  {
+                    red = 56;
+                    green = 96;
+                    blue = 73;
+                    algorithm = "floating";
+                    primary = false;
+                    lightness = 50;
+                    position = {
+                      x = 80;
+                      y = 80;
+                    };
+                    type = "explicit-lightness";
+                  }
+                ];
+                opacity = 0.6;
+                rotation = 0;
+                texture = 0.2;
+              };
+            };
           };
 
           pinsForce = true;
@@ -488,19 +527,65 @@ in {
             };
 
             # StayOkay workspace pins
-            "StayOkay Portal" = {
+            "StayOkay Website" = {
               id = "d3e4f5a6-b7c8-49d0-e1f2-a3b4c5d6e7f8";
               workspace = "e3c0f1d4-6d5f-4e0g-9f4c-3f5g7d9e1b6f"; # StayOkay space
               url = "https://www.stayokay.com";
               isEssential = false;
               position = 400;
             };
-            "StayOkay Dashboard" = {
+            "StayOkay CMS" = {
               id = "e4f5a6b7-c8d9-40e1-f2a3-b4c5d6e7f8a9";
               workspace = "e3c0f1d4-6d5f-4e0g-9f4c-3f5g7d9e1b6f"; # StayOkay space
-              url = "https://example.com/stayokay-dashboard";
+              url = "https://cm.stayokay.com/admin";
               isEssential = false;
               position = 401;
+            };
+
+            # TCR workspace pins
+            "TCR Website" = {
+              id = "c5493be7-2855-4a74-bfb8-829f7d31c666";
+              workspace = "71db8092-6cdc-4870-b9cc-e83575c14aa0"; # TCR space
+              url = "https://www.techniekcollegerotterdam.nl";
+              isEssential = false;
+              position = 600;
+            };
+            "TCR CMS" = {
+              id = "e46de996-99c6-45f2-8909-07ba4708e2f2";
+              workspace = "71db8092-6cdc-4870-b9cc-e83575c14aa0"; # TCR space
+              url = "https://cms.techniekcollegerotterdam.nl/admin";
+              isEssential = false;
+              position = 601;
+            };
+            "TCR Acceptance" = {
+              id = "cca6ea34-ff55-479f-a572-92964b53459c";
+              workspace = "71db8092-6cdc-4870-b9cc-e83575c14aa0"; # TCR space
+              url = "https://acc.techniekcollegerotterdam.nl/";
+              isEssential = false;
+              position = 602;
+            };
+            "TCR Acceptance CMS" = {
+              id = "66b2c95f-666e-4b29-8b9d-012724afb87d";
+              workspace = "71db8092-6cdc-4870-b9cc-e83575c14aa0"; # TCR space
+              url = "https://acc-cms.techniekcollegerotterdam.nl/admin";
+              isEssential = false;
+              position = 603;
+            };
+
+            # StayOkay staging workspace pins
+            "StayOkay Staging" = {
+              id = "cbc00f4b-85be-4c65-9041-31d7d765ec81";
+              workspace = "e3c0f1d4-6d5f-4e0g-9f4c-3f5g7d9e1b6f"; # StayOkay space
+              url = "https://staging.stayokay.com";
+              isEssential = false;
+              position = 402;
+            };
+            "StayOkay Staging CMS" = {
+              id = "ef0fadf2-fbac-43bd-8020-c7de67caa649";
+              workspace = "e3c0f1d4-6d5f-4e0g-9f4c-3f5g7d9e1b6f"; # StayOkay space
+              url = "https://staging.stayokay.com/admin";
+              isEssential = false;
+              position = 403;
             };
 
             # Zadkine workspace pins
