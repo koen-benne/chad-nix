@@ -35,6 +35,10 @@ in {
     xdg.configFile = {
       "systemd/user/niri.service".source = "${config.programs.niri.package}/lib/systemd/user/niri.service";
       "systemd/user/niri-shutdown.target".source = "${config.programs.niri.package}/lib/systemd/user/niri-shutdown.target";
+      "systemd/user/niri.service.d/overrides.conf".text = ''
+        [Unit]
+        X-SwitchMethod=keep-old
+      '';
     };
 
     # Session environment variables
