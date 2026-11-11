@@ -1,161 +1,157 @@
-# AGENTS.md - NixOS/Darwin Configuration
+# Agent instructions
 
-## Important Restrictions
-- **Never switch configurations**: Do not run `nixos-rebuild switch`, `home-manager switch`, or similar commands. The user will handle all configuration switching.
-- **Never run builds directly**: Do not run `nix build`, `home-manager build`, or similar commands yourself. Instead, ask the user to run the build and provide the output. Builds can take a very long time and consume significant resources.
+This repository is a personal Linux configuration. The supported modes are:
 
-## Build/Lint/Test Commands
-- `nix flake check --all-systems --no-build` - Check flake structure and syntax
-- `nix develop --command format` - Format all Nix files with alejandra
-- `nix develop --command check` - Run full flake check
-- `git ls-files '*.nix' | xargs nix develop --command alejandra --check` - Check formatting
-- `nix build .#nixosConfigurations.<hostname>` - Build specific host configuration
-- `nix develop` - Enter development shell with formatting tools
+- NixOS with Home Manager integrated into the system configuration.
+- Standalone Home Manager on non-NixOS Linux.
 
-## Code Style Guidelines
-- **Language**: Nix expressions with some TypeScript for plugins
-- **Formatting**: Use alejandra formatter for all .nix files (2-space indentation)
-- **Imports**: Follow `{ inputs, config, lib, pkgs, ... }:` pattern consistently
-- **Module Structure**: Use `lib.my.getModules [./.]` for automatic module discovery
-- **Options**: Define with `mkEnableOption (mdDoc "description")` pattern
-- **Config Guards**: Wrap config in `mkIf cfg.enable` blocks
-- **Naming**: Use `my.<module>` namespace for custom options (e.g., `my.desktop.enable`)
-- **Comments**: Use `# TODO:` for known issues, minimal inline comments
-- **File Organization**: Separate `default.nix` (system) and `home.nix` (user) configs
-- **Secrets**: Use sops-nix with proper ownership/permissions (mode "0400")
+Darwin is outside the supported scope.
 
-## Home-Manager Compatibility Architecture (Linux Only)
+## Non-negotiable restrictions
 
-### Module Structure Pattern
-For modules that need standalone home-manager support on Linux systems:
-```
-modules/{common,nixos}/<module>/
-├── default.nix      # System-level configuration (NixOS only)
-├── home.nix         # User-level configuration (works everywhere)
-└── compat.nix       # Option definitions for home-manager-only mode
-```
+- Never run `nixos-rebuild switch`, `home-manager switch`, or any other switch,
+  activation, or system-changing command. The human performs activations.
+- Never run builds such as `nix build`, `nixos-rebuild build`, or
+  `home-manager build`. Ask the human to run required builds and provide their
+  output.
+- Preserve unrelated staged, unstaged, and untracked work. Do not reset,
+  restore, clean, or otherwise discard it.
+- Never inspect, decrypt, or print secrets, credentials, or secret-bearing
+  files.
+- Do not edit generated hardware configuration without the human's explicit
+  confirmation.
 
-### Usage Modes
-1. **NixOS System**: Uses `default.nix` (defines options) + `home.nix` (uses sys.* options)
-2. **Home-Manager Standalone**: Uses `compat.nix` (defines options) + `home.nix` (uses sys.* options)
+Do not install dependencies globally or mutate the host toolchain to bypass the
+repository's declared environment. Do not run system activation commands.
 
-### Discovery Functions
-- `lib.my.getModules [./.]` - Discovers `default.nix` files (system mode)
-- `lib.my.getCompatModules [./.]` - Discovers `compat.nix` files (home-manager-only mode)
-- `lib.my.getHmModules [./.]` - Discovers `home.nix` files (both modes)
+## Authority and discovery
 
-### Implementation Rules
-- **compat.nix**: Only define `options.my.*` - no system-level config
-- **Darwin**: No compat.nix needed (no standalone home-manager support)
-- **Auto-Discovery**: home-manager-compat uses `getCompatModules` for automatic discovery
-- **Selective**: Only modules requiring system options need `compat.nix`
+`flake.nix` defines inputs and supported systems and imports the `parts/`
+modules. The active outputs are defined by:
 
-## GPU Support for Standalone Home-Manager (Linux Only)
+- `parts/nixos.nix` for `nixosConfigurations`.
+- `parts/home-manager.nix` for `homeConfigurations`.
 
-For standalone home-manager on non-NixOS Linux systems, GPU support is provided through home-manager's built-in `targets.genericLinux.gpu` module. This creates a system-level integration that makes GPU acceleration work for all Nix packages automatically.
+When tracing a configuration, start there and inspect only the host entrypoints
+referenced by those files. The existence of a directory under `hosts/` does not
+make it active.
 
-**Note:** This module is not available in home-manager 25.05, so we import it from `home-manager-unstable`. When upgrading to 25.11+, the import can be removed.
+Enumerate the names declared by those parts with:
 
-### How It Works
-
-1. **System-Level Integration**: Creates `/run/opengl-driver` symlink pointing to Nix-managed GPU libraries (Mesa, optionally Nvidia)
-2. **Systemd Service**: Installs a service that maintains the symlink across reboots
-3. **Automatic Notifications**: Home Manager checks and warns you when setup/updates are needed
-4. **No Per-Package Wrapping**: Once set up, ALL GUI applications automatically get GPU access
-
-### Setup
-
-The GPU module is automatically enabled in `modules/home-manager-compat/default.nix`:
-
-```nix
-config = {
-  # Provides XDG dirs, shell integration, terminfo, cursor paths, etc.
-  targets.genericLinux.enable = true;
-  
-  # Enables GPU driver integration (Mesa by default)
-  targets.genericLinux.gpu.enable = true;
-}
+```bash
+nix --option allow-import-from-derivation false eval --json .#nixosConfigurations --apply builtins.attrNames
+nix --option allow-import-from-derivation false eval --json .#homeConfigurations --apply builtins.attrNames
 ```
 
-### First-Time Setup Process
+The mode entrypoints are:
 
-1. **Install host graphics drivers** first (via your distro's package manager)
-2. **Run home-manager switch**:
-   ```bash
-   home-manager switch
-   ```
-3. **Home Manager will notify you**:
-   ```
-   Activating checkExistingGpuDrivers
-   This non-NixOS system is not yet set up to use the GPU
-   with Nix packages. To set up GPU drivers, run
-     sudo /nix/store/HASH-non-nixos-gpu/bin/non-nixos-gpu-setup
-   ```
-4. **Run the setup command** (requires sudo):
-   ```bash
-   sudo /nix/store/HASH-non-nixos-gpu/bin/non-nixos-gpu-setup
-   ```
-5. **All GPU applications now work!** No per-package configuration needed.
+- `modules/nixos.nix`: NixOS and its integrated Home Manager setup.
+- `modules/home.nix`: shared Home Manager configuration.
+- `modules/home-manager-standalone.nix`: standalone Home Manager compatibility
+  and Linux integration.
 
-### Ongoing Maintenance
+Features use the following optional file layout:
 
-- **Automatic updates**: When nixpkgs updates change driver versions, Home Manager will notify you to run the setup command again
-- **After reboot**: The systemd service automatically recreates `/run/opengl-driver`
-- **Zero maintenance**: Just run the setup command when notified
-
-### Nvidia Support
-
-For Nvidia proprietary drivers, add this configuration (must match host driver version exactly):
-
-```nix
-targets.genericLinux.gpu.nvidia = {
-  enable = true;
-  version = "550.163.01";  # Get from: nvidia-smi
-  sha256 = "sha256-...";   # Get from: nix store prefetch-file https://download.nvidia.com/XFree86/Linux-x86_64/VERSION/NVIDIA-Linux-x86_64-VERSION.run
-};
+```
+modules/<feature>/{default.nix,home.nix,compat.nix}
 ```
 
-### Benefits Over Previous nixGL Approach
+`default.nix` is for NixOS options/system configuration, while `home.nix` is
+shared user configuration. Shared `home.nix` modules read feature state through
+`sys`: integrated mode supplies the NixOS configuration, and standalone mode
+aliases the Home Manager configuration. `compat.nix` is imported only in
+standalone mode; it declares compatibility options required by shared home
+modules and may provide standalone-only Home Manager configuration replacing
+NixOS behavior. It must not contain NixOS-only configuration. A feature only
+needs the files required by its responsibility.
 
-- ✅ **No per-package wrapping** - Set up once, works everywhere
-- ✅ **No library conflicts** - No LD_LIBRARY_PATH pollution
-- ✅ **Matches NixOS** - Uses same `/run/opengl-driver` convention
-- ✅ **Automatic notifications** - Never forget to update drivers
-- ✅ **Cleaner codebase** - Less custom abstraction code
-- ✅ **Upstream support** - Maintained by home-manager team
+`lib.my.getModules`, `lib.my.getHmModules`, and `lib.my.getCompatModules` in
+`lib/my.nix` scan the immediate feature subdirectories of their supplied root
+for the exact filenames `default.nix`, `home.nix`, and `compat.nix`,
+respectively. They return existing paths; imported modules are evaluated. Do
+not assume that an undisplayed or unused feature is lazy merely because it was
+found by discovery.
 
-### Package Configuration
+GPU support for standalone Home Manager is part of
+`modules/home-manager-standalone.nix` through the generic Linux target. Keep
+that integration there rather than adding per-package GPU workarounds.
 
-No special package wrapping needed! Just use packages normally:
+## Task-to-file routing
 
-```nix
-# Terminal - works automatically
-programs.foot.enable = true;
+| Task | Location |
+| --- | --- |
+| Inputs, systems, and imported flake parts | `flake.nix` |
+| Active NixOS outputs and their host wiring | `parts/nixos.nix`, then its referenced `hosts/<host>/` entrypoint |
+| Active standalone HM outputs and their host wiring | `parts/home-manager.nix`, then its referenced host home entrypoint |
+| Shared NixOS/HM module composition | `modules/nixos.nix`, `modules/home.nix` |
+| Standalone HM compatibility | `modules/home-manager-standalone.nix` and feature `compat.nix` files |
+| Feature implementation | `modules/<feature>/default.nix`, `home.nix`, or `compat.nix` as applicable |
+| Reusable discovery helpers | `lib/my.nix` |
+| Host-specific settings | The active host entrypoint under `hosts/` |
+| Generated hardware settings | The active host's `hardware.nix`, only with confirmation |
 
-# Browser - works automatically  
-programs.zen-browser.enable = true;
+## Module conventions
 
-# File manager - works automatically
-home.packages = [ pkgs.nautilus ];
+- Accept only module arguments that the module needs.
+- Use `my.*` for repository feature state; define enable options with
+  `mkEnableOption` and guard feature configuration with `mkIf` where
+  appropriate. Compatibility modules may declare additional options required
+  by shared home modules.
+- Import upstream modules from the relevant module and use the repository's
+  discovery helpers for local feature modules.
+- Enable host-specific features in the active host entrypoint, not by
+  duplicating host facts in shared modules.
+- Keep volatile facts (versions, package details, and machine-specific values)
+  in their authoritative source; do not duplicate them in documentation or
+  across modules.
+- Keep changes focused and preserve unrelated work.
+
+## Validation
+
+Choose checks based on the files changed:
+
+| Change | Agent-safe checks | Human-only build check |
+| --- | --- | --- |
+| Documentation or non-Nix metadata | `git diff --check` | None |
+| Nix syntax or formatting | `git diff --check`; use direct `alejandra --check` only if `alejandra` is already in `PATH`, plus the parser below | None |
+| Flake, parts, modules, or host wiring (parse/no-build evaluation) | `nix --option allow-import-from-derivation false flake check --all-systems --no-build` | Build the affected output below |
+| Standalone HM derivation evaluation | `nix --option allow-import-from-derivation false eval --raw .#homeConfigurations.<name>.activationPackage.drvPath` (derivation instantiation, without building the output) | `nix build .#homeConfigurations.<name>.activationPackage` |
+| NixOS output behavior | The no-build check above | `nix build .#nixosConfigurations.<name>.config.system.build.toplevel` |
+
+`nix --option allow-import-from-derivation false flake check --all-systems
+--no-build` skips output builds and disables evaluation-time IFD. `--no-build`
+alone does not prevent IFD. If the IFD-disabled command errors, evaluation is
+incomplete; ask the human to run the ordinary evaluation or build. The
+`nix develop --command check` helper does not disable IFD and may build during
+evaluation, so agents must not use it. It also does not validate arbitrary or
+unrecognized `homeConfigurations` outputs; use the direct HM derivation
+evaluation above. Git-backed flake evaluations and the dev shell see only
+tracked files, so a new feature's discovery and evaluation are incomplete until
+its intended files are tracked. Directly parse and format new Nix files, report
+the incomplete flake evaluation, and ask the human to rerun evaluation after
+the files are tracked. Agents must not stage files merely for validation.
+
+The dev-shell `format` helper uses `./**/*.nix`, which can miss files. First
+list and review all tracked and untracked, nonignored Nix filenames:
+
+```bash
+git ls-files --cached --others --exclude-standard -- '*.nix'
 ```
 
-### What targets.genericLinux Also Provides
+If any secret-bearing path appears, do not run the bulk pipelines. Instead pass
+only explicitly reviewed safe paths to the formatter and parser. Otherwise,
+these pipelines cover the repository, including overlays, packages, and
+documentation. Use the formatter pipeline only when `command -v alejandra`
+succeeds; otherwise report formatting validation as unavailable and ask the
+human to run it. Do not use `nix develop`, `nix shell`, or another environment
+realization as an agent substitute:
 
-Beyond GPU support, `targets.genericLinux.enable = true` also provides:
+```bash
+git ls-files -z --cached --others --exclude-standard -- '*.nix' |
+  xargs -0 -r alejandra --check
+git ls-files -z --cached --others --exclude-standard -- '*.nix' |
+  xargs -0 -r -n1 nix-instantiate --parse >/dev/null
+```
 
-- **XDG data directories** - Adds `/usr/share`, `/usr/local/share`, Nix profile paths
-- **Cursor paths** - Sets `XCURSOR_PATH` for system and Nix cursors
-- **Shell integration** - Sources `nix.sh` and `hm-session-vars.sh` in bash/zsh/fish
-- **Terminfo paths** - Proper terminal database paths for all distros
-- **Zsh completions** - Makes system zsh completions available
-
-This eliminates the need for many custom compatibility hacks and provides better integration with the host system.
-
-## Host-Scoped Modules
-- Keep custom modules minimal; expose only `my.<module>.enable` by default.
-- Add options only for settings that are likely to vary per host (e.g., desktop variant); avoid exposing universal settings (e.g., `openFirewall`)—bake those into module defaults.
-- Apply sane defaults internally; tune specifics within the module since we control it.
-- Import upstream modules inside our module; rely on `lib.my.getModules [./.]`.
-- Enable per host in `hosts/<host>/default.nix`.
-- Rely on lazy evaluation so unused modules do not pull dependencies.
-- Ensure `inputs` is passed via `specialArgs` so modules can access flake inputs.
+Use the reviewed path set for both commands. Agents must not run the human-only
+build commands. Report them to the human and request the output when needed.
