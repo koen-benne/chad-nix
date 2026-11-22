@@ -110,7 +110,8 @@
       dataDir = "/export/1tb/NextCloud/data"; # Optional, this is the default
     };
     collabora = {
-      enable = true;
+      # NOTE: Put back to true later, libreoffice got CVE's
+      enable = false;
       subdomain = "office"; # Optional, this is the default
     };
     jellyfin = {
